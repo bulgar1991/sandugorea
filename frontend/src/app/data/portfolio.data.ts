@@ -76,7 +76,7 @@ export const TESTIMONIALS = ['t1', 't2', 't3', 't4', 't5'].map((id, i) => ({
 export const BRAND = {
   name: 'Sandugorea',
   /** Shown in the hero: "Hi, I'm <owner>". */
-  owner: 'Sandu',
+  owner: 'Sandu Gorea',
   email: 'hello@sandugorea.ch',
   phone: '+40 700 000 000',
   instagram: 'https://instagram.com/',
