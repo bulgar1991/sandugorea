@@ -1,0 +1,45 @@
+// Typography: titles, eyebrows and body text. Sizes respond to the screen width.
+
+.title {
+  @apply font-title font-normal;
+
+  &--xl {
+    @apply text-5xl leading-display sm:text-7xl lg:text-8xl;
+  }
+  &--lg {
+    @apply text-4xl leading-tight sm:text-5xl lg:text-6xl;
+  }
+  &--md {
+    @apply text-3xl leading-snug sm:text-4xl;
+  }
+  &--sm {
+    @apply text-2xl;
+  }
+
+  // Gold highlighted words: handwritten, a touch larger to match the title's weight.
+  em {
+    @apply font-accent text-[1.12em] not-italic text-accent;
+  }
+}
+
+.eyebrow {
+  @apply text-xs font-semibold uppercase tracking-caps-xl text-accent;
+
+  &--muted {
+    @apply text-ink-muted;
+  }
+}
+
+.text {
+  @apply leading-relaxed text-ink-muted;
+
+  &--lead {
+    @apply text-lg;
+  }
+  &--small {
+    @apply text-sm;
+  }
+  &--subtle {
+    @apply text-xs text-ink-subtle;
+  }
+}

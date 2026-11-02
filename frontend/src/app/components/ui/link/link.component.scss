@@ -1,0 +1,32 @@
+.link {
+  @apply text-accent transition-colors duration-300 hover:text-accent-light;
+
+  &--muted {
+    @apply text-ink-muted hover:text-ink;
+  }
+
+  &--caps {
+    @apply inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-caps-lg;
+  }
+
+  &--underline {
+    @apply relative inline-block;
+
+    &::after {
+      content: '';
+      @apply absolute -bottom-0.5 left-0 h-px w-full origin-right scale-x-0 bg-current transition-transform duration-600 ease-out-expo;
+    }
+    &:hover::after,
+    &.link--active::after {
+      @apply origin-left scale-x-100;
+    }
+  }
+
+  &--caps.link--underline {
+    @apply inline-flex;
+  }
+
+  &--active {
+    @apply text-ink;
+  }
+}

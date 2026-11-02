@@ -1,0 +1,7 @@
+.spinner {
+  @apply inline-block h-4 w-4 animate-spin-fast rounded-full border-2 border-black/30 border-t-black;
+
+  &--light {
+    @apply border-white/20 border-t-accent;
+  }
+}

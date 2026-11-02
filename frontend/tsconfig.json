@@ -15,6 +15,7 @@
     "module": "preserve",
     "paths": {
       "@components/*": ["./src/app/components/*"],
+      "@ui/*": ["./src/app/components/ui/*"],
       "@services/*": ["./src/app/services/*"],
       "@guards/*": ["./src/app/guards/*"],
       "@directives/*": ["./src/app/directives/*"],

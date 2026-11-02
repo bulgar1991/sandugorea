@@ -1,0 +1,7 @@
+.page-head {
+  @apply flex flex-col justify-between gap-6 sm:flex-row sm:items-end;
+
+  &__title {
+    @apply mt-3 font-title text-4xl sm:text-5xl;
+  }
+}

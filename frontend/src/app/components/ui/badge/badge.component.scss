@@ -1,0 +1,16 @@
+.badge {
+  @apply inline-flex items-center whitespace-nowrap rounded-full border px-2.5 py-0.5 text-2xs font-semibold uppercase tracking-[0.1em];
+
+  &--success {
+    @apply border-success/30 text-success;
+  }
+  &--accent {
+    @apply border-accent/30 text-accent;
+  }
+  &--danger {
+    @apply border-danger/30 text-danger;
+  }
+  &--muted {
+    @apply border-line text-ink-subtle;
+  }
+}

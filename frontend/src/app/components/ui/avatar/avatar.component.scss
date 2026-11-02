@@ -1,0 +1,7 @@
+.avatar {
+  @apply flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-surface-light font-display text-lg text-accent;
+
+  &--lg {
+    @apply h-14 w-14 bg-accent/10 text-2xl;
+  }
+}

@@ -1,0 +1,51 @@
+// Form field and every form control style (inputs, textareas, selects).
+.field {
+  @apply flex flex-col gap-2;
+
+  &__label {
+    @apply text-label font-semibold uppercase tracking-caps-md text-ink-muted;
+  }
+
+  &__control {
+    @apply w-full rounded-none border-0 border-b border-line bg-transparent px-0 py-3 text-ink placeholder:text-ink-subtle;
+    @apply transition-colors duration-300 focus:border-accent focus:outline-none;
+
+    &--boxed {
+      @apply rounded-xl border border-line bg-surface px-4 text-sm;
+    }
+    &--mono {
+      @apply font-mono;
+    }
+    &--code {
+      @apply text-center font-mono text-2xl tracking-[0.6em];
+    }
+    &--date {
+      color-scheme: dark;
+    }
+  }
+
+  // Native selects: dark dropdown list.
+  select.field__control {
+    @apply cursor-pointer bg-black;
+  }
+
+  textarea.field__control {
+    @apply min-h-32 resize-y;
+  }
+
+  &__wrap {
+    @apply relative flex gap-2;
+  }
+
+  &__toggle {
+    @apply absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer p-1 text-ink-subtle hover:text-accent;
+  }
+
+  &__error {
+    @apply text-xs text-danger;
+  }
+
+  &__hint {
+    @apply text-xs text-ink-subtle;
+  }
+}

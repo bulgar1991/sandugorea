@@ -1,0 +1,10 @@
+.card {
+  @apply rounded-2xl border border-line bg-surface;
+
+  &--padded {
+    @apply p-6 sm:p-8;
+  }
+  &--hover {
+    @apply transition-colors duration-600 hover:border-accent/40;
+  }
+}
