@@ -51,6 +51,18 @@ if [ ! -f /etc/sandugorea/sandugorea.env ]; then
 fi
 chmod 600 /etc/sandugorea/sandugorea.env
 
+# No admin password set yet and no database yet: generate one. It's only written to a root-only file,
+# never printed, so it doesn't end up in terminal logs.
+if grep -q '^Admin__Password=$' /etc/sandugorea/sandugorea.env && [ ! -f /var/lib/sandugorea/sandugorea.db ]; then
+  ADMIN_PW="$(openssl rand -base64 18 | tr -d '/+=' | cut -c1-16)Aa1!"
+  sed -i "s|^Admin__Password=$|Admin__Password=${ADMIN_PW}|" /etc/sandugorea/sandugorea.env
+  install -m 600 /dev/null /root/sandugorea-admin-password.txt
+  printf 'Admin: https://%s/admin/login\nUsername: %s\nPassword: %s\n' "$DOMAIN" \
+    "$(sed -n 's/^Admin__Username=//p' /etc/sandugorea/sandugorea.env)" "$ADMIN_PW" > /root/sandugorea-admin-password.txt
+  unset ADMIN_PW
+  GENERATED_PW=1
+fi
+
 step "systemd service"
 cp "$HERE/sandugorea.service" /etc/systemd/system/sandugorea.service
 systemctl daemon-reload
@@ -88,8 +100,12 @@ else
 fi
 
 step "Done"
+if [ "${GENERATED_PW:-0}" = 1 ]; then
+  echo "ADMIN: a strong admin password was generated. Read it in your own terminal:"
+  echo "       ssh root@$DOMAIN cat /root/sandugorea-admin-password.txt"
+fi
 if [ "${NEED_ENV:-0}" = 1 ]; then
-  echo "NEXT: edit /etc/sandugorea/sandugorea.env (admin password, SMTP):  nano /etc/sandugorea/sandugorea.env"
+  echo "SMTP: add your mail settings when ready:  nano /etc/sandugorea/sandugorea.env  (then: systemctl restart sandugorea)"
 fi
 if [ "${NEED_BACKUP:-0}" = 1 ] || ! rclone listremotes 2>/dev/null | grep -q '^sgbackup:'; then
   echo "BACKUP: set up the encrypted off-site storage - see deploy/BACKUP.md (until then the nightly backup fails on purpose)."
