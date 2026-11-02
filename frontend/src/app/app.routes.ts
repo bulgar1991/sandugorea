@@ -1,5 +1,4 @@
-import { inject } from '@angular/core';
-import { Router, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { adminGuard, adminGuestGuard, customerGuard, customerGuestGuard } from '@guards/auth.guard';
 import { seoResolver } from './resolvers/seo.resolver';
 
@@ -8,9 +7,6 @@ import { seoResolver } from './resolvers/seo.resolver';
 
 /** Private pages must never show up in search engines. */
 const NOINDEX = [{ name: 'robots', content: 'noindex, nofollow' }];
-
-/** Old multi-page URLs now live as sections of the one-page site. */
-const toSection = (fragment: string) => () => inject(Router).createUrlTree(['/'], { fragment });
 
 const mainLayoutRoutes: Routes = [
   {
@@ -24,9 +20,34 @@ const mainLayoutRoutes: Routes = [
       },
     },
   },
-  { path: 'about', redirectTo: toSection('about') },
-  { path: 'portfolio', redirectTo: toSection('works') },
-  { path: 'contact', redirectTo: toSection('booking') },
+  {
+    path: 'about',
+    loadComponent: () =>
+      import('./pages/about/about-page.component').then((m) => m.AboutPageComponent),
+    resolve: { seo: seoResolver },
+    data: { seo: { title: 'seo.about.title', description: 'seo.about.description' } },
+  },
+  {
+    path: 'services',
+    loadComponent: () =>
+      import('./pages/services/services-page.component').then((m) => m.ServicesPageComponent),
+    resolve: { seo: seoResolver },
+    data: { seo: { title: 'seo.services.title', description: 'seo.services.description' } },
+  },
+  {
+    path: 'portfolio',
+    loadComponent: () =>
+      import('./pages/portfolio/portfolio-page.component').then((m) => m.PortfolioPageComponent),
+    resolve: { seo: seoResolver },
+    data: { seo: { title: 'seo.portfolio.title', description: 'seo.portfolio.description' } },
+  },
+  {
+    path: 'booking',
+    loadComponent: () =>
+      import('./pages/booking/booking-page.component').then((m) => m.BookingPageComponent),
+    resolve: { seo: seoResolver },
+    data: { seo: { title: 'seo.booking.title', description: 'seo.booking.description' } },
+  },
   {
     path: '**',
     loadComponent: () =>

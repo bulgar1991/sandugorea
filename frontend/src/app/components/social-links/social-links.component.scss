@@ -1,0 +1,73 @@
+:host {
+  @apply block;
+}
+
+.social {
+  @apply border-y border-line bg-surface py-24 lg:py-32;
+
+  &__inner {
+    @apply mx-auto grid w-full max-w-site gap-14 px-5 sm:px-8 lg:grid-cols-12 lg:items-center lg:px-12;
+  }
+
+  &__head {
+    @apply lg:col-span-5;
+  }
+
+  &__title {
+    @apply mt-6;
+  }
+
+  &__text {
+    @apply mt-6 max-w-md;
+  }
+
+  &__grid {
+    @apply grid grid-cols-2 gap-3 sm:grid-cols-4 lg:col-span-7;
+  }
+
+  // Tile: the icon disc fills with gold from below, the arrow turns.
+  &__tile {
+    @apply relative flex aspect-square flex-col items-center justify-center gap-4 overflow-hidden rounded-2xl border border-line bg-black transition-colors duration-600 hover:border-accent/50;
+
+    &::before {
+      content: '';
+      @apply absolute inset-0 translate-y-full bg-gradient-to-t from-accent/15 to-transparent transition-transform duration-800 ease-out-expo;
+    }
+    &:hover::before {
+      @apply translate-y-0;
+    }
+  }
+
+  &__glyph {
+    @apply relative flex h-16 w-16 items-center justify-center rounded-full border border-line text-ink transition duration-600 ease-out-expo;
+  }
+
+  &__tile:hover &__glyph {
+    @apply -translate-y-1 scale-110 border-accent bg-accent text-black;
+  }
+
+  &__label {
+    @apply relative text-xs font-semibold uppercase tracking-caps text-ink-muted transition-colors;
+  }
+
+  &__tile:hover &__label {
+    @apply text-ink;
+  }
+
+  &__arrow {
+    @apply absolute right-4 top-4 text-ink-subtle transition duration-600 ease-out-expo;
+  }
+
+  &__tile:hover &__arrow {
+    @apply rotate-45 text-accent;
+  }
+
+  // ---------- Inline (footer) ----------
+  &--inline {
+    @apply flex flex-wrap gap-3 border-0 bg-transparent p-0;
+  }
+
+  &__icon {
+    @apply flex h-11 w-11 items-center justify-center rounded-full border border-line text-ink-muted transition duration-300 hover:-translate-y-0.5 hover:border-accent hover:bg-accent hover:text-black;
+  }
+}

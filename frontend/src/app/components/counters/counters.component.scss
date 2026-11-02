@@ -1,0 +1,19 @@
+:host {
+  @apply block;
+}
+
+.counters {
+  @apply mx-auto grid w-full max-w-site px-5 sm:px-8 lg:px-12 grid-cols-2 gap-y-12 lg:grid-cols-4;
+
+  &__item {
+    @apply flex flex-col items-center text-center;
+  }
+
+  &__value {
+    @apply font-display text-6xl font-light tabular-nums text-accent sm:text-7xl;
+  }
+
+  &__label {
+    @apply mt-3 text-xs uppercase tracking-caps-md text-ink-muted;
+  }
+}

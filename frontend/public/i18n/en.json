@@ -28,13 +28,13 @@
   "nav": {
     "home": "Home",
     "about": "About",
-    "works": "Works",
-    "testimonials": "Testimonials",
-    "booking": "Booking",
+    "booking": "Book a date",
     "clientArea": "Client area",
     "menu": "Menu",
     "main": "Main navigation",
-    "skipToContent": "Skip to content"
+    "skipToContent": "Skip to content",
+    "services": "Services",
+    "portfolio": "Portfolio"
   },
   "categories": {
     "weddings": {
@@ -71,7 +71,7 @@
     },
     "text": "I capture honest light and quiet moments - weddings, portraits and families, photographed calmly and edited by hand, so you can feel the day again every time you look.",
     "imageAlt": "Portrait of the photographer",
-    "cta": "Book a session",
+    "cta": "Book a date",
     "works": "See my work"
   },
   "about": {
@@ -88,7 +88,8 @@
       "h1": "Natural, documentary style",
       "h2": "Hand-edited, timeless colour",
       "h3": "Private online delivery"
-    }
+    },
+    "more": "More about me"
   },
   "showcase": {
     "eyebrow": "What I capture",
@@ -100,7 +101,8 @@
       "sessions": "Sessions photographed",
       "weddings": "Weddings",
       "countries": "Countries"
-    }
+    },
+    "all": "All services"
   },
   "works": {
     "eyebrow": "Portfolio",
@@ -109,7 +111,8 @@
     "loadMore": "Load more",
     "showing": "Showing {{shown}} of {{total}}",
     "allLoaded": "You've seen everything - for now.",
-    "open": "Open photo"
+    "open": "Open photo",
+    "viewAll": "View full portfolio"
   },
   "testimonials": {
     "eyebrow": "Kind words",
@@ -164,13 +167,15 @@
       "email": "Please enter a valid email.",
       "message": "Tell me a little more (at least 10 characters).",
       "consent": "Please accept to continue.",
-      "send": "Your request couldn't be sent. Please try again or email me directly."
+      "send": "Your request couldn't be sent. Please try again or email me directly.",
+      "date": "Please pick a date."
     },
     "send": "Send request",
     "sending": "Sending…",
     "successTitle": "Thank you!",
     "successText": "Your request is on its way. I'll be in touch very soon.",
-    "again": "Send another request"
+    "again": "Send another request",
+    "pickDate": "Pick a date in the calendar"
   },
   "footer": {
     "about": "Fine art, portrait and wedding photography - calm, cinematic and made to last.",
@@ -420,6 +425,108 @@
       "projects": "Projects · Admin",
       "project": "Project · Admin",
       "security": "Security · Admin"
+    },
+    "about": {
+      "title": "About Sandu Gorea — Photographer",
+      "description": "Meet Sandu Gorea: calm, cinematic wedding, portrait and family photography."
+    },
+    "services": {
+      "title": "Services — Sandugorea",
+      "description": "Weddings, portraits, family, events and fine-art landscapes - what's included in every session."
+    },
+    "portfolio": {
+      "title": "Portfolio — Sandugorea",
+      "description": "A selection of recent weddings, portraits, families and places by Sandu Gorea."
+    },
+    "booking": {
+      "title": "Book a date — Sandugorea",
+      "description": "Pick a date and tell me about your plans - I reply within 48 hours."
+    }
+  },
+  "social": {
+    "eyebrow": "Follow me",
+    "titleStart": "Moments, shared",
+    "titleAccent": "every day",
+    "text": "New sessions, behind the scenes and little stories from the road - follow along wherever you like."
+  },
+  "cta": {
+    "eyebrow": "Now booking 2027",
+    "titleStart": "Let's tell",
+    "titleAccent": "your story",
+    "button": "Book a date"
+  },
+  "pages": {
+    "about": {
+      "eyebrow": "About me",
+      "title": "Behind the lens",
+      "subtitle": "Photographer, observer, collector of quiet moments."
+    },
+    "services": {
+      "eyebrow": "Services",
+      "title": "What I photograph",
+      "subtitle": "Every session is unhurried, personal and delivered in your own private folder."
+    },
+    "portfolio": {
+      "eyebrow": "Portfolio",
+      "title": "A collection of moments",
+      "subtitle": "Weddings, portraits, families and places - a selection of recent work."
+    },
+    "booking": {
+      "eyebrow": "Booking",
+      "title": "Book your date",
+      "subtitle": "Choose a day, tell me a little about your plans, and I'll get back to you within 48 hours."
+    }
+  },
+  "services": {
+    "label": "Service",
+    "book": "Book this session",
+    "items": {
+      "weddings": {
+        "text": "From the quiet getting-ready moments to the last dance - documented calmly, so you can simply be present on your day.",
+        "i1": "Full-day or partial coverage",
+        "i2": "500+ hand-edited photographs",
+        "i3": "Private online folder for you and your guests"
+      },
+      "portraits": {
+        "text": "Relaxed sessions in the studio or outdoors, with gentle guidance and honest light - portraits that feel like you.",
+        "i1": "60–90 minute session",
+        "i2": "30+ hand-edited photographs",
+        "i3": "Help with outfits and locations"
+      },
+      "family": {
+        "text": "Real moments at home, in the park or by the sea - the small everyday things that later mean everything.",
+        "i1": "Session at a place you love",
+        "i2": "Natural, unposed photographs",
+        "i3": "Prints and albums on request"
+      },
+      "events": {
+        "text": "Corporate events, birthdays and celebrations, documented discreetly - atmosphere, people and details.",
+        "i1": "Coverage by the hour",
+        "i2": "Fast delivery within a week",
+        "i3": "Images ready for web and print"
+      },
+      "landscapes": {
+        "text": "Fine-art landscapes and places for your walls, your brand or your project - available as prints or licences.",
+        "i1": "Limited fine-art prints",
+        "i2": "Commercial licences",
+        "i3": "Commissioned location shoots"
+      }
+    },
+    "process": {
+      "eyebrow": "How it works",
+      "title": "From the first hello to your private folder",
+      "s1": {
+        "title": "We talk",
+        "text": "A relaxed conversation about you, your plans and the feeling you want to keep."
+      },
+      "s2": {
+        "title": "We create",
+        "text": "An unhurried session with gentle guidance and room for real moments."
+      },
+      "s3": {
+        "title": "You receive",
+        "text": "Your hand-edited photographs in a private folder, opened only with your own login."
+      }
     }
   }
 }

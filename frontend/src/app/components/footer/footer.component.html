@@ -1,7 +1,7 @@
 <footer class="footer">
   <div app-container class="footer__grid">
     <div class="footer__about" appReveal>
-      <a routerLink="/" fragment="home" class="footer__logo">
+      <a routerLink="/" class="footer__logo">
         <span class="footer__name">{{ brand.owner }}</span>
         <span class="footer__tagline">{{ 'brand.tagline' | translate }}</span>
       </a>
@@ -12,10 +12,8 @@
     <div class="footer__column" appReveal [revealDelay]="100">
       <p class="footer__heading">{{ 'footer.explore' | translate }}</p>
       <nav class="footer__list" [attr.aria-label]="'footer.explore' | translate">
-        @for (link of links; track link.fragment) {
-          <a routerLink="/" [fragment]="link.fragment" class="footer__link">{{
-            link.key | translate
-          }}</a>
+        @for (link of links; track link.path) {
+          <a [routerLink]="link.path" class="footer__link">{{ link.key | translate }}</a>
         }
         <a routerLink="/client/login" class="footer__link">{{ 'nav.clientArea' | translate }}</a>
       </nav>
@@ -32,20 +30,7 @@
 
     <div class="footer__column" appReveal [revealDelay]="300">
       <p class="footer__heading">{{ 'footer.follow' | translate }}</p>
-      <div class="footer__social">
-        <a
-          [href]="brand.instagram"
-          target="_blank"
-          rel="noopener"
-          aria-label="Instagram"
-          class="footer__icon"
-        >
-          <app-icon name="instagram" />
-        </a>
-        <a [href]="'mailto:' + brand.email" aria-label="Email" class="footer__icon">
-          <app-icon name="mail" />
-        </a>
-      </div>
+      <app-social-links variant="inline" />
     </div>
   </div>
 

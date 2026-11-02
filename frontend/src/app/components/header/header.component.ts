@@ -7,29 +7,29 @@ import {
   signal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NavigationEnd, Router, RouterLink } from '@angular/router';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { filter } from 'rxjs';
 import { IconComponent } from '@components/icon/icon.component';
 import { LanguageSwitcherComponent } from '@components/language-switcher/language-switcher.component';
-import { ActiveSectionService } from '@services/active-section.service';
 import { BRAND } from '@/data/portfolio.data';
 import { ButtonComponent } from '@ui/button/button.component';
 import { LinkComponent } from '@ui/link/link.component';
 import { ContainerComponent } from '@ui/container/container.component';
 
-/** One-page sections, in page order. */
+/** Site pages, in menu order. */
 export const NAV_LINKS = [
-  { fragment: 'home', key: 'nav.home' },
-  { fragment: 'about', key: 'nav.about' },
-  { fragment: 'works', key: 'nav.works' },
-  { fragment: 'testimonials', key: 'nav.testimonials' },
-  { fragment: 'booking', key: 'nav.booking' },
+  { path: '/', key: 'nav.home', exact: true },
+  { path: '/about', key: 'nav.about', exact: false },
+  { path: '/services', key: 'nav.services', exact: false },
+  { path: '/portfolio', key: 'nav.portfolio', exact: false },
+  { path: '/booking', key: 'nav.booking', exact: false },
 ];
 
 @Component({
   selector: 'app-header',
   imports: [
+    RouterLinkActive,
     ButtonComponent,
     LinkComponent,
     ContainerComponent,
@@ -46,7 +46,6 @@ export const NAV_LINKS = [
 export class HeaderComponent {
   protected readonly links = NAV_LINKS;
   protected readonly brand = BRAND;
-  protected readonly section = inject(ActiveSectionService).id;
   protected readonly scrolled = signal(false);
   protected readonly hidden = signal(false);
   protected readonly menuOpen = signal(false);

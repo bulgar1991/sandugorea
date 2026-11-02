@@ -42,7 +42,7 @@
           <label app-field>
             <span class="field__label">{{ 'common.username' | translate }}</span>
             <input
-              app-input
+              appInput
               boxed
               formControlName="username"
               autocomplete="username"
@@ -54,7 +54,7 @@
             <span class="field__label">{{ 'common.password' | translate }}</span>
             <div class="field__wrap">
               <input
-                app-input
+                appInput
                 boxed
                 [type]="showPassword() ? 'text' : 'password'"
                 formControlName="password"
@@ -114,7 +114,7 @@
               (useRecoveryCode() ? 'admin.login.recoveryCode' : 'admin.login.code') | translate
             }}</span>
             <input
-              app-input
+              appInput
               boxed
               #codeInput
               [class.field__control--code]="!useRecoveryCode()"

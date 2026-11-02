@@ -2,7 +2,8 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { IconComponent } from '@components/icon/icon.component';
-import { CountUpDirective } from '@directives/count-up.directive';
+import { CountersComponent } from '@components/counters/counters.component';
+import { ButtonComponent } from '@ui/button/button.component';
 import { RevealDirective } from '@directives/reveal.directive';
 import { CATEGORIES } from '@/data/portfolio.data';
 import { EyebrowComponent, TitleComponent } from '@ui/typography/typography.component';
@@ -21,7 +22,8 @@ import { ContainerComponent } from '@ui/container/container.component';
     RouterLink,
     TranslatePipe,
     IconComponent,
-    CountUpDirective,
+    CountersComponent,
+    ButtonComponent,
     RevealDirective,
   ],
   templateUrl: './showcase.component.html',
@@ -31,11 +33,4 @@ import { ContainerComponent } from '@ui/container/container.component';
 export class ShowcaseComponent {
   protected readonly categories = CATEGORIES;
   protected readonly active = signal(0);
-
-  protected readonly stats = [
-    { value: 12, suffix: '', key: 'showcase.stats.years' },
-    { value: 480, suffix: '+', key: 'showcase.stats.sessions' },
-    { value: 160, suffix: '', key: 'showcase.stats.weddings' },
-    { value: 14, suffix: '', key: 'showcase.stats.countries' },
-  ];
 }

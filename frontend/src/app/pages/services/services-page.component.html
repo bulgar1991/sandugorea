@@ -1,0 +1,80 @@
+<app-page-banner
+  [image]="image"
+  eyebrow="pages.services.eyebrow"
+  title="pages.services.title"
+  subtitle="pages.services.subtitle"
+  crumb="nav.services"
+/>
+
+<div app-container class="services">
+  @for (s of services; track s.id; let i = $index) {
+    <article class="service" [class.service--reverse]="i % 2 === 1">
+      <div class="service__media" appReveal="clip">
+        <div class="service__frame">
+          <img
+            [src]="s.image"
+            [alt]="'categories.' + s.id + '.label' | translate"
+            class="service__image"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <span class="service__number" aria-hidden="true">0{{ i + 1 }}</span>
+      </div>
+
+      <div class="service__body">
+        <p app-eyebrow appReveal>{{ 'services.label' | translate }} 0{{ i + 1 }}</p>
+        <h2 app-title size="lg" class="service__title" appReveal [revealDelay]="100">
+          {{ 'categories.' + s.id + '.label' | translate }}
+        </h2>
+        <p app-text size="lead" class="service__text" appReveal [revealDelay]="150">
+          {{ 'services.items.' + s.id + '.text' | translate }}
+        </p>
+        <ul class="service__includes">
+          @for (key of includes; track key; let j = $index) {
+            <li class="service__include" appReveal [revealDelay]="200 + j * 80">
+              <span class="service__check"><app-icon name="check" [size]="14" /></span>
+              {{ 'services.items.' + s.id + '.' + key | translate }}
+            </li>
+          }
+        </ul>
+        <a
+          app-button
+          variant="outline"
+          routerLink="/booking"
+          [queryParams]="{ type: s.id }"
+          class="service__button"
+          appReveal
+          [revealDelay]="450"
+        >
+          <app-icon name="calendar" [size]="16" />
+          {{ 'services.book' | translate }}
+        </a>
+      </div>
+    </article>
+  }
+</div>
+
+<section class="process">
+  <div app-container>
+    <p app-eyebrow appReveal>{{ 'services.process.eyebrow' | translate }}</p>
+    <h2 app-title size="lg" class="process__title" appReveal [revealDelay]="100">
+      {{ 'services.process.title' | translate }}
+    </h2>
+    <ol class="process__steps">
+      @for (key of steps; track key; let i = $index) {
+        <li class="process__step" appReveal [revealDelay]="i * 150">
+          <span class="process__number">0{{ i + 1 }}</span>
+          <h3 app-title size="sm" class="process__step-title">
+            {{ 'services.process.' + key + '.title' | translate }}
+          </h3>
+          <p app-text class="process__step-text">
+            {{ 'services.process.' + key + '.text' | translate }}
+          </p>
+        </li>
+      }
+    </ol>
+  </div>
+</section>
+
+<app-cta-band />

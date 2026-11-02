@@ -12,7 +12,7 @@
       <label app-field>
         <span class="field__label">{{ 'admin.security.current' | translate }}</span>
         <input
-          app-input
+          appInput
           boxed
           type="password"
           formControlName="current"
@@ -21,7 +21,7 @@
       </label>
       <label app-field>
         <span class="field__label">{{ 'admin.security.new' | translate }}</span>
-        <input app-input boxed type="password" formControlName="next" autocomplete="new-password" />
+        <input appInput boxed type="password" formControlName="next" autocomplete="new-password" />
         <div class="strength">
           @for (i of [0, 1, 2, 3]; track i) {
             <span
@@ -38,7 +38,7 @@
       <label app-field>
         <span class="field__label">{{ 'admin.security.confirm' | translate }}</span>
         <input
-          app-input
+          appInput
           boxed
           type="password"
           formControlName="confirm"

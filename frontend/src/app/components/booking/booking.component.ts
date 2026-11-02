@@ -1,18 +1,15 @@
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, input, signal } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
 import { IconComponent, IconName } from '@components/icon/icon.component';
 import { RevealDirective } from '@directives/reveal.directive';
 import { LanguageService } from '@services/language.service';
+import { DatePickerComponent } from '@components/date-picker/date-picker.component';
 import { BRAND, CATEGORY_IDS } from '@/data/portfolio.data';
 import { ButtonComponent } from '@ui/button/button.component';
-import {
-  EyebrowComponent,
-  TextComponent,
-  TitleComponent,
-} from '@ui/typography/typography.component';
+import { TextComponent, TitleComponent } from '@ui/typography/typography.component';
 import { FormFieldComponent, InputDirective } from '@ui/form-field/form-field.component';
 import { AlertComponent } from '@ui/alert/alert.component';
 import { SpinnerComponent } from '@ui/spinner/spinner.component';
@@ -22,10 +19,10 @@ import { ContainerComponent } from '@ui/container/container.component';
 @Component({
   selector: 'app-booking',
   imports: [
+    DatePickerComponent,
     ButtonComponent,
-    TitleComponent,
-    EyebrowComponent,
     TextComponent,
+    TitleComponent,
     FormFieldComponent,
     InputDirective,
     AlertComponent,
@@ -41,11 +38,13 @@ import { ContainerComponent } from '@ui/container/container.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BookingComponent {
+  /** Session type to preselect (e.g. from a service's "Book this session" button). */
+  readonly presetType = input<string | undefined>(undefined);
+
   protected readonly types = [...CATEGORY_IDS, 'other'];
   private readonly http = inject(HttpClient);
   private readonly language = inject(LanguageService);
   protected readonly state = signal<'idle' | 'sending' | 'sent' | 'error'>('idle');
-  protected readonly minDate = new Date().toISOString().slice(0, 10);
 
   protected readonly contacts: { icon: IconName; value: string; href: string }[] = [
     { icon: 'mail', value: BRAND.email, href: `mailto:${BRAND.email}` },
@@ -58,7 +57,7 @@ export class BookingComponent {
     email: ['', [Validators.required, Validators.email]],
     phone: ['', Validators.maxLength(30)],
     type: ['weddings'],
-    date: [''],
+    date: ['', Validators.required],
     location: ['', Validators.maxLength(120)],
     message: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(4000)]],
     consent: [false, Validators.requiredTrue],
@@ -89,5 +88,12 @@ export class BookingComponent {
     } catch {
       this.state.set('error');
     }
+  }
+
+  constructor() {
+    effect(() => {
+      const type = this.presetType();
+      if (type && this.types.includes(type)) this.form.controls.type.setValue(type);
+    });
   }
 }

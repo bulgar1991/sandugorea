@@ -28,13 +28,13 @@
   "nav": {
     "home": "Start",
     "about": "Über mich",
-    "works": "Arbeiten",
-    "testimonials": "Stimmen",
-    "booking": "Buchung",
+    "booking": "Termin buchen",
     "clientArea": "Kundenbereich",
     "menu": "Menü",
     "main": "Hauptnavigation",
-    "skipToContent": "Zum Inhalt springen"
+    "skipToContent": "Zum Inhalt springen",
+    "services": "Leistungen",
+    "portfolio": "Portfolio"
   },
   "categories": {
     "weddings": {
@@ -71,7 +71,7 @@
     },
     "text": "Ich fange ehrliches Licht und stille Momente ein – Hochzeiten, Porträts und Familien, ruhig fotografiert und von Hand bearbeitet, damit du den Tag bei jedem Blick neu fühlst.",
     "imageAlt": "Porträt des Fotografen",
-    "cta": "Shooting buchen",
+    "cta": "Termin buchen",
     "works": "Meine Arbeiten"
   },
   "about": {
@@ -88,7 +88,8 @@
       "h1": "Natürlicher, dokumentarischer Stil",
       "h2": "Handbearbeitete, zeitlose Farben",
       "h3": "Private Online-Übergabe"
-    }
+    },
+    "more": "Mehr über mich"
   },
   "showcase": {
     "eyebrow": "Was ich fotografiere",
@@ -100,7 +101,8 @@
       "sessions": "Fotoshootings",
       "weddings": "Hochzeiten",
       "countries": "Länder"
-    }
+    },
+    "all": "Alle Leistungen"
   },
   "works": {
     "eyebrow": "Portfolio",
@@ -109,7 +111,8 @@
     "loadMore": "Mehr laden",
     "showing": "{{shown}} von {{total}}",
     "allLoaded": "Du hast alles gesehen – fürs Erste.",
-    "open": "Foto öffnen"
+    "open": "Foto öffnen",
+    "viewAll": "Ganzes Portfolio ansehen"
   },
   "testimonials": {
     "eyebrow": "Liebe Worte",
@@ -164,13 +167,15 @@
       "email": "Bitte gib eine gültige E-Mail-Adresse ein.",
       "message": "Erzähl mir etwas mehr (mindestens 10 Zeichen).",
       "consent": "Bitte stimme zu, um fortzufahren.",
-      "send": "Deine Anfrage konnte nicht gesendet werden. Bitte versuche es erneut oder schreib mir direkt."
+      "send": "Deine Anfrage konnte nicht gesendet werden. Bitte versuche es erneut oder schreib mir direkt.",
+      "date": "Bitte wähle ein Datum."
     },
     "send": "Anfrage senden",
     "sending": "Wird gesendet…",
     "successTitle": "Vielen Dank!",
     "successText": "Deine Anfrage ist unterwegs. Ich melde mich sehr bald.",
-    "again": "Weitere Anfrage senden"
+    "again": "Weitere Anfrage senden",
+    "pickDate": "Wähle einen Tag im Kalender"
   },
   "footer": {
     "about": "Fine-Art-, Porträt- und Hochzeitsfotografie – ruhig, filmisch und für die Ewigkeit gemacht.",
@@ -420,6 +425,108 @@
       "projects": "Projekte · Admin",
       "project": "Projekt · Admin",
       "security": "Sicherheit · Admin"
+    },
+    "about": {
+      "title": "Über Sandu Gorea — Fotograf",
+      "description": "Lerne Sandu Gorea kennen: ruhige, filmische Hochzeits-, Porträt- und Familienfotografie."
+    },
+    "services": {
+      "title": "Leistungen — Sandugorea",
+      "description": "Hochzeiten, Porträts, Familie, Events und Fine-Art-Landschaften – was in jedem Shooting enthalten ist."
+    },
+    "portfolio": {
+      "title": "Portfolio — Sandugorea",
+      "description": "Eine Auswahl aktueller Hochzeiten, Porträts, Familien und Orte von Sandu Gorea."
+    },
+    "booking": {
+      "title": "Termin buchen — Sandugorea",
+      "description": "Wähle ein Datum und erzähl mir von deinen Plänen – ich antworte innerhalb von 48 Stunden."
+    }
+  },
+  "social": {
+    "eyebrow": "Folge mir",
+    "titleStart": "Momente, geteilt",
+    "titleAccent": "jeden Tag",
+    "text": "Neue Shootings, Blicke hinter die Kulissen und kleine Geschichten von unterwegs – folge mir, wo du magst."
+  },
+  "cta": {
+    "eyebrow": "Jetzt für 2027 buchbar",
+    "titleStart": "Lass uns",
+    "titleAccent": "deine Geschichte erzählen",
+    "button": "Termin buchen"
+  },
+  "pages": {
+    "about": {
+      "eyebrow": "Über mich",
+      "title": "Hinter der Kamera",
+      "subtitle": "Fotograf, Beobachter, Sammler stiller Momente."
+    },
+    "services": {
+      "eyebrow": "Leistungen",
+      "title": "Was ich fotografiere",
+      "subtitle": "Jedes Shooting ist entspannt, persönlich und wird in deinem eigenen privaten Ordner übergeben."
+    },
+    "portfolio": {
+      "eyebrow": "Portfolio",
+      "title": "Eine Sammlung von Momenten",
+      "subtitle": "Hochzeiten, Porträts, Familien und Orte – eine Auswahl aktueller Arbeiten."
+    },
+    "booking": {
+      "eyebrow": "Buchung",
+      "title": "Buche deinen Termin",
+      "subtitle": "Wähle einen Tag, erzähl mir ein wenig von deinen Plänen, und ich melde mich innerhalb von 48 Stunden."
+    }
+  },
+  "services": {
+    "label": "Leistung",
+    "book": "Dieses Shooting buchen",
+    "items": {
+      "weddings": {
+        "text": "Von den stillen Momenten beim Fertigmachen bis zum letzten Tanz – ruhig begleitet, damit du an deinem Tag einfach da sein kannst.",
+        "i1": "Ganztägige oder teilweise Begleitung",
+        "i2": "Über 500 handbearbeitete Fotos",
+        "i3": "Privater Online-Ordner für dich und deine Gäste"
+      },
+      "portraits": {
+        "text": "Entspannte Shootings im Studio oder draußen, mit sanfter Anleitung und ehrlichem Licht – Porträts, die sich nach dir anfühlen.",
+        "i1": "Shooting von 60–90 Minuten",
+        "i2": "Über 30 handbearbeitete Fotos",
+        "i3": "Hilfe bei Outfits und Locations"
+      },
+      "family": {
+        "text": "Echte Momente zu Hause, im Park oder am Meer – die kleinen Alltagsdinge, die später alles bedeuten.",
+        "i1": "Shooting an deinem Lieblingsort",
+        "i2": "Natürliche, ungestellte Fotos",
+        "i3": "Abzüge und Alben auf Wunsch"
+      },
+      "events": {
+        "text": "Firmenevents, Geburtstage und Feiern, diskret festgehalten – Atmosphäre, Menschen und Details.",
+        "i1": "Begleitung nach Stunden",
+        "i2": "Schnelle Lieferung innerhalb einer Woche",
+        "i3": "Bilder fertig für Web und Druck"
+      },
+      "landscapes": {
+        "text": "Fine-Art-Landschaften und Orte für deine Wände, deine Marke oder dein Projekt – als Prints oder Lizenzen.",
+        "i1": "Limitierte Fine-Art-Prints",
+        "i2": "Kommerzielle Lizenzen",
+        "i3": "Auftrags-Shootings vor Ort"
+      }
+    },
+    "process": {
+      "eyebrow": "So läuft es ab",
+      "title": "Vom ersten Hallo bis zu deinem privaten Ordner",
+      "s1": {
+        "title": "Wir sprechen",
+        "text": "Ein entspanntes Gespräch über dich, deine Pläne und das Gefühl, das du festhalten möchtest."
+      },
+      "s2": {
+        "title": "Wir gestalten",
+        "text": "Ein ruhiges Shooting mit sanfter Anleitung und Raum für echte Momente."
+      },
+      "s3": {
+        "title": "Du erhältst",
+        "text": "Deine handbearbeiteten Fotos in einem privaten Ordner, nur mit deinem eigenen Login."
+      }
     }
   }
 }

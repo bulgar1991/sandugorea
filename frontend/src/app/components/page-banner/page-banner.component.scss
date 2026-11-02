@@ -1,0 +1,88 @@
+:host {
+  @apply block;
+}
+
+:host(:not(.page-banner--ready)) {
+  .page-banner__word,
+  .page-banner__appear,
+  .page-banner__media {
+    animation-play-state: paused;
+  }
+}
+
+.page-banner {
+  @apply relative flex min-h-[70svh] w-full items-end overflow-hidden bg-black pb-16 pt-40 lg:min-h-[75svh] lg:pb-24;
+
+  &__media {
+    @apply absolute -inset-y-[10%] inset-x-0 animate-ken-burns;
+    animation-duration: 3s;
+  }
+
+  &__image {
+    @apply block h-full w-full object-cover;
+  }
+
+  &__shade {
+    @apply pointer-events-none absolute inset-0;
+    background:
+      linear-gradient(to top, #000 0%, rgb(0 0 0 / 0.55) 45%, rgb(0 0 0 / 0.35) 100%),
+      linear-gradient(90deg, rgb(0 0 0 / 0.6), transparent 70%);
+  }
+
+  &__content {
+    @apply relative z-10 mx-auto w-full max-w-site px-5 sm:px-8 lg:px-12;
+  }
+
+  &__crumbs {
+    @apply flex items-center gap-2 text-xs uppercase tracking-caps text-ink-muted;
+  }
+
+  &__crumb {
+    @apply transition-colors hover:text-accent;
+
+    &--current {
+      @apply text-accent hover:text-accent;
+    }
+  }
+
+  &__eyebrow {
+    @apply mt-8;
+  }
+
+  &__title {
+    @apply mt-4 max-w-4xl font-title text-5xl leading-[1.1] sm:text-6xl lg:text-7xl;
+  }
+
+  &__mask {
+    @apply inline-block overflow-hidden pb-[0.08em] align-top;
+  }
+
+  &__word {
+    @apply inline-block animate-rise;
+    animation-delay: var(--d);
+  }
+
+  &__subtitle {
+    @apply mt-6 max-w-xl;
+  }
+
+  &__appear {
+    @apply animate-fade-up;
+    animation-delay: var(--d);
+  }
+}
+
+// Scroll parallax: the photo drifts slower than the page.
+@supports (animation-timeline: view()) {
+  .page-banner__image {
+    animation: page-banner-drift linear both;
+    animation-timeline: view();
+    animation-range: exit;
+  }
+}
+
+@keyframes page-banner-drift {
+  to {
+    transform: translate3d(0, 18%, 0);
+  }
+}

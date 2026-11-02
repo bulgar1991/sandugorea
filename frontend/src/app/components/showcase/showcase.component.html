@@ -10,8 +10,7 @@
     <div class="panels" appReveal="up" [revealDelay]="150">
       @for (cat of categories; track cat.id; let i = $index) {
         <a
-          routerLink="/"
-          fragment="works"
+          routerLink="/services"
           class="panel"
           [class.panel--active]="active() === i"
           (mouseenter)="active.set(i)"
@@ -39,12 +38,12 @@
     </div>
   </div>
 
-  <div app-container class="counters">
-    @for (s of stats; track s.key; let i = $index) {
-      <div class="counters__item" appReveal [revealDelay]="i * 100">
-        <span class="counters__value" [appCountUp]="s.value" [suffix]="s.suffix"></span>
-        <span class="counters__label">{{ s.key | translate }}</span>
-      </div>
-    }
+  <div class="showcase__more" appReveal>
+    <a app-button variant="outline" routerLink="/services">
+      {{ 'showcase.all' | translate }}
+      <app-icon name="arrow-right" [size]="16" />
+    </a>
   </div>
+
+  <app-counters class="showcase__counters" />
 </div>

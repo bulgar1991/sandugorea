@@ -1,3 +1,4 @@
+import { IconName } from '@models/icon-names.generated';
 import { PhotoCategory, PortfolioPhoto } from '@models/photo.models';
 
 /**
@@ -78,8 +79,34 @@ export const BRAND = {
   /** Shown in the hero: "Hi, I'm <owner>". */
   owner: 'Sandu Gorea',
   email: 'hello@sandugorea.ch',
-  phone: '+40 700 000 000',
-  instagram: 'https://instagram.com/',
+  phone: '+41 00 000 00 00',
+  instagram: 'https://instagram.com/sandugorea',
 };
+
+/** Social profiles shown in the social block and footer. Replace the placeholder URLs. */
+export const SOCIAL_LINKS: { id: IconName; label: string; url: string }[] = [
+  { id: 'instagram', label: 'Instagram', url: 'https://instagram.com/sandugorea' },
+  { id: 'facebook', label: 'Facebook', url: 'https://facebook.com/sandugorea' },
+  { id: 'tiktok', label: 'TikTok', url: 'https://tiktok.com/@sandugorea' },
+  { id: 'youtube', label: 'YouTube', url: 'https://youtube.com/@sandugorea' },
+  { id: 'pinterest', label: 'Pinterest', url: 'https://pinterest.com/sandugorea' },
+  { id: 'whatsapp', label: 'WhatsApp', url: 'https://wa.me/41000000000' },
+];
+
+/** Full-width banner images (placeholders - replace with the photographer's own work). */
+export const BANNER_IMAGES = {
+  home: img('sg-banner-home', 2400, 1500),
+  about: img('sg-banner-about', 2400, 1200),
+  services: img('sg-banner-services', 2400, 1200),
+  portfolio: img('sg-banner-portfolio', 2400, 1200),
+  booking: img('sg-banner-booking', 2400, 1200),
+  cta: img('sg-cta', 2400, 1400),
+};
+
+/** Services page: one row per category; texts in i18n under services.items.<id>. */
+export const SERVICES = CATEGORY_IDS.map((id) => ({
+  id,
+  image: img(`sg-service-${id}`, 1200, 1500),
+}));
 
 export const imageUrl = img;

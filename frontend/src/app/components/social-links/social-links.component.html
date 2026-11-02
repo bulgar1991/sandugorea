@@ -1,0 +1,42 @@
+@if (variant() === 'inline') {
+  <ul class="social social--inline">
+    @for (l of links; track l.id) {
+      <li>
+        <a
+          [href]="l.url"
+          target="_blank"
+          rel="noopener"
+          class="social__icon"
+          [attr.aria-label]="l.label"
+        >
+          <app-icon [name]="l.id" [size]="18" />
+        </a>
+      </li>
+    }
+  </ul>
+} @else {
+  <section class="social">
+    <div class="social__inner">
+      <div class="social__head">
+        <p app-eyebrow appReveal>{{ 'social.eyebrow' | translate }}</p>
+        <h2 app-title size="lg" class="social__title" appReveal [revealDelay]="100">
+          {{ 'social.titleStart' | translate }} <em>{{ 'social.titleAccent' | translate }}</em>
+        </h2>
+        <p app-text class="social__text" appReveal [revealDelay]="150">
+          {{ 'social.text' | translate }}
+        </p>
+      </div>
+      <ul class="social__grid">
+        @for (l of links; track l.id; let i = $index) {
+          <li appReveal="up" [revealDelay]="i * 70">
+            <a [href]="l.url" target="_blank" rel="noopener" class="social__tile">
+              <span class="social__glyph"><app-icon [name]="l.id" [size]="28" /></span>
+              <span class="social__label">{{ l.label }}</span>
+              <app-icon name="arrow-up-right" [size]="14" class="social__arrow" />
+            </a>
+          </li>
+        }
+      </ul>
+    </div>
+  </section>
+}

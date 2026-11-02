@@ -1,0 +1,35 @@
+<section class="page-banner">
+  <div class="page-banner__media" aria-hidden="true">
+    <img [src]="image()" alt="" class="page-banner__image" fetchpriority="high" decoding="async" />
+  </div>
+  <div class="page-banner__shade" aria-hidden="true"></div>
+
+  <div class="page-banner__content">
+    <nav class="page-banner__crumbs page-banner__appear" style="--d: 0ms" aria-label="Breadcrumb">
+      <a routerLink="/" class="page-banner__crumb">{{ 'nav.home' | translate }}</a>
+      <app-icon name="chevron-right" [size]="12" />
+      <span class="page-banner__crumb page-banner__crumb--current" aria-current="page">{{
+        crumb() | translate
+      }}</span>
+    </nav>
+    @if (eyebrow()) {
+      <p app-eyebrow class="page-banner__eyebrow page-banner__appear" style="--d: 100ms">
+        {{ eyebrow() | translate }}
+      </p>
+    }
+    <h1 class="page-banner__title">
+      @for (word of (title() | translate).split(' '); track $index) {
+        <span class="page-banner__mask"
+          ><span class="page-banner__word" [style.--d]="180 + $index * 90 + 'ms'">{{
+            word
+          }}</span></span
+        >{{ ' ' }}
+      }
+    </h1>
+    @if (subtitle()) {
+      <p app-text size="lead" class="page-banner__subtitle page-banner__appear" style="--d: 500ms">
+        {{ subtitle() | translate }}
+      </p>
+    }
+  </div>
+</section>

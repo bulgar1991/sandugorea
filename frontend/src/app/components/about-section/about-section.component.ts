@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, input, viewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { IconComponent } from '@components/icon/icon.component';
@@ -34,6 +34,9 @@ const MAX_TILT = 8;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AboutSectionComponent {
+  /** On the home page the button leads to the About page, on the About page to booking. */
+  readonly mode = input<'teaser' | 'full'>('teaser');
+
   protected readonly portrait = imageUrl('sg-portrait', 1000, 1300);
   protected readonly detail = imageUrl('sg-detail', 700, 900);
   protected readonly highlights = [

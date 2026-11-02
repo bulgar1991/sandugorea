@@ -28,13 +28,13 @@
   "nav": {
     "home": "Acasă",
     "about": "Despre mine",
-    "works": "Lucrări",
-    "testimonials": "Recenzii",
-    "booking": "Rezervare",
+    "booking": "Rezervă o dată",
     "clientArea": "Zona clienților",
     "menu": "Meniu",
     "main": "Navigare principală",
-    "skipToContent": "Sari la conținut"
+    "skipToContent": "Sari la conținut",
+    "services": "Servicii",
+    "portfolio": "Portofoliu"
   },
   "categories": {
     "weddings": {
@@ -71,7 +71,7 @@
     },
     "text": "Surprind lumina sinceră și momentele liniștite: nunți, portrete și familii, fotografiate cu calm și editate manual, ca să retrăiești ziua de fiecare dată când le privești.",
     "imageAlt": "Portretul fotografului",
-    "cta": "Rezervă o ședință",
+    "cta": "Rezervă o dată",
     "works": "Vezi lucrările"
   },
   "about": {
@@ -88,7 +88,8 @@
       "h1": "Stil natural, documentar",
       "h2": "Culori atemporale, editate manual",
       "h3": "Livrare online privată"
-    }
+    },
+    "more": "Mai multe despre mine"
   },
   "showcase": {
     "eyebrow": "Ce fotografiez",
@@ -100,7 +101,8 @@
       "sessions": "Ședințe foto",
       "weddings": "Nunți",
       "countries": "Țări"
-    }
+    },
+    "all": "Toate serviciile"
   },
   "works": {
     "eyebrow": "Portofoliu",
@@ -109,7 +111,8 @@
     "loadMore": "Încarcă mai multe",
     "showing": "{{shown}} din {{total}}",
     "allLoaded": "Ai văzut tot, deocamdată.",
-    "open": "Deschide fotografia"
+    "open": "Deschide fotografia",
+    "viewAll": "Vezi tot portofoliul"
   },
   "testimonials": {
     "eyebrow": "Vorbe frumoase",
@@ -164,13 +167,15 @@
       "email": "Te rog introdu un email valid.",
       "message": "Spune-mi puțin mai mult (cel puțin 10 caractere).",
       "consent": "Te rog acceptă pentru a continua.",
-      "send": "Cererea nu a putut fi trimisă. Încearcă din nou sau scrie-mi direct."
+      "send": "Cererea nu a putut fi trimisă. Încearcă din nou sau scrie-mi direct.",
+      "date": "Te rog alege o dată."
     },
     "send": "Trimite cererea",
     "sending": "Se trimite…",
     "successTitle": "Mulțumesc!",
     "successText": "Cererea ta a fost trimisă. Revin foarte curând.",
-    "again": "Trimite altă cerere"
+    "again": "Trimite altă cerere",
+    "pickDate": "Alege o zi în calendar"
   },
   "footer": {
     "about": "Fotografie fine art, de portret și de nuntă: calmă, cinematică și făcută să dureze.",
@@ -420,6 +425,108 @@
       "projects": "Proiecte · Admin",
       "project": "Proiect · Admin",
       "security": "Securitate · Admin"
+    },
+    "about": {
+      "title": "Despre Sandu Gorea — Fotograf",
+      "description": "Cunoaște-l pe Sandu Gorea: fotografie de nuntă, portret și familie, calmă și cinematică."
+    },
+    "services": {
+      "title": "Servicii — Sandugorea",
+      "description": "Nunți, portrete, familie, evenimente și peisaje fine art – ce include fiecare ședință."
+    },
+    "portfolio": {
+      "title": "Portofoliu — Sandugorea",
+      "description": "O selecție de nunți, portrete, familii și locuri recente de Sandu Gorea."
+    },
+    "booking": {
+      "title": "Rezervă o dată — Sandugorea",
+      "description": "Alege o dată și spune-mi despre planurile tale – răspund în 48 de ore."
+    }
+  },
+  "social": {
+    "eyebrow": "Urmărește-mă",
+    "titleStart": "Momente împărtășite,",
+    "titleAccent": "în fiecare zi",
+    "text": "Ședințe noi, culise și mici povești de drum – urmărește-mă unde îți place."
+  },
+  "cta": {
+    "eyebrow": "Rezervări deschise pentru 2027",
+    "titleStart": "Să spunem",
+    "titleAccent": "povestea ta",
+    "button": "Rezervă o dată"
+  },
+  "pages": {
+    "about": {
+      "eyebrow": "Despre mine",
+      "title": "În spatele obiectivului",
+      "subtitle": "Fotograf, observator, colecționar de momente liniștite."
+    },
+    "services": {
+      "eyebrow": "Servicii",
+      "title": "Ce fotografiez",
+      "subtitle": "Fiecare ședință e fără grabă, personală și livrată în dosarul tău privat."
+    },
+    "portfolio": {
+      "eyebrow": "Portofoliu",
+      "title": "O colecție de momente",
+      "subtitle": "Nunți, portrete, familii și locuri – o selecție de lucrări recente."
+    },
+    "booking": {
+      "eyebrow": "Rezervare",
+      "title": "Rezervă-ți data",
+      "subtitle": "Alege o zi, spune-mi câte ceva despre planurile tale și îți răspund în 48 de ore."
+    }
+  },
+  "services": {
+    "label": "Serviciu",
+    "book": "Rezervă această ședință",
+    "items": {
+      "weddings": {
+        "text": "De la momentele liniștite ale pregătirilor până la ultimul dans – documentate cu calm, ca tu să poți trăi pur și simplu ziua ta.",
+        "i1": "Acoperire pe toată ziua sau parțială",
+        "i2": "Peste 500 de fotografii editate manual",
+        "i3": "Dosar online privat pentru tine și invitați"
+      },
+      "portraits": {
+        "text": "Ședințe relaxate în studio sau în aer liber, cu îndrumare blândă și lumină sinceră – portrete care îți seamănă.",
+        "i1": "Ședință de 60–90 de minute",
+        "i2": "Peste 30 de fotografii editate manual",
+        "i3": "Ajutor cu ținutele și locațiile"
+      },
+      "family": {
+        "text": "Momente reale acasă, în parc sau la mare – lucrurile mici de zi cu zi care mai târziu înseamnă totul.",
+        "i1": "Ședință într-un loc pe care îl iubești",
+        "i2": "Fotografii naturale, nepozate",
+        "i3": "Printuri și albume la cerere"
+      },
+      "events": {
+        "text": "Evenimente corporate, zile de naștere și petreceri, documentate discret – atmosferă, oameni și detalii.",
+        "i1": "Acoperire pe ore",
+        "i2": "Livrare rapidă într-o săptămână",
+        "i3": "Imagini gata pentru web și print"
+      },
+      "landscapes": {
+        "text": "Peisaje fine art și locuri pentru pereții tăi, brandul sau proiectul tău – ca printuri sau licențe.",
+        "i1": "Printuri fine art în ediție limitată",
+        "i2": "Licențe comerciale",
+        "i3": "Ședințe la comandă în locații"
+      }
+    },
+    "process": {
+      "eyebrow": "Cum funcționează",
+      "title": "De la primul salut până la dosarul tău privat",
+      "s1": {
+        "title": "Vorbim",
+        "text": "O discuție relaxată despre tine, planurile tale și emoția pe care vrei s-o păstrezi."
+      },
+      "s2": {
+        "title": "Creăm",
+        "text": "O ședință fără grabă, cu îndrumare blândă și loc pentru momente reale."
+      },
+      "s3": {
+        "title": "Primești",
+        "text": "Fotografiile tale editate manual într-un dosar privat, deschis doar cu datele tale de autentificare."
+      }
     }
   }
 }

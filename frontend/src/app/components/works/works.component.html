@@ -38,22 +38,29 @@
   </div>
 
   <div class="works__footer">
-    <p class="works__count">
-      {{ 'works.showing' | translate: { shown: works().length, total: total } }}
-    </p>
-    <div class="works__progress">
-      <span
-        class="works__progress-bar"
-        [style.transform]="'scaleX(' + works().length / total + ')'"
-      ></span>
-    </div>
-    @if (hasMore()) {
-      <button app-button variant="outline" type="button" (click)="loadMore()">
-        {{ 'works.loadMore' | translate }}
-        <app-icon name="plus" [size]="16" />
-      </button>
+    @if (mode() === 'teaser') {
+      <a app-button variant="outline" routerLink="/portfolio">
+        {{ 'works.viewAll' | translate }}
+        <app-icon name="arrow-right" [size]="16" />
+      </a>
     } @else {
-      <p class="works__done">{{ 'works.allLoaded' | translate }}</p>
+      <p class="works__count">
+        {{ 'works.showing' | translate: { shown: works().length, total: total } }}
+      </p>
+      <div class="works__progress">
+        <span
+          class="works__progress-bar"
+          [style.transform]="'scaleX(' + works().length / total + ')'"
+        ></span>
+      </div>
+      @if (hasMore()) {
+        <button app-button variant="outline" type="button" (click)="loadMore()">
+          {{ 'works.loadMore' | translate }}
+          <app-icon name="plus" [size]="16" />
+        </button>
+      } @else {
+        <p class="works__done">{{ 'works.allLoaded' | translate }}</p>
+      }
     }
   </div>
 </div>

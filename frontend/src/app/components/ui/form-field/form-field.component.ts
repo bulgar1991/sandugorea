@@ -11,7 +11,7 @@ import {
  * A form field: label, control, hint/error. Owns ALL form-control styles.
  *   <label app-field>
  *     <span class="field__label">Email</span>
- *     <input app-input boxed formControlName="email" />
+ *     <input appInput boxed formControlName="email" />
  *     <small class="field__error">…</small>
  *   </label>
  * Parts: field__label · field__wrap (control + button) · field__toggle (show password) ·
@@ -33,7 +33,7 @@ export class FormFieldComponent {}
  *   boxed - framed instead of underlined · mono - monospace · code - big spaced digits · date - dark picker
  */
 @Directive({
-  selector: 'input[app-input], textarea[app-input], select[app-input]',
+  selector: 'input[appInput], textarea[appInput], select[appInput]',
   host: {
     class: 'field__control',
     '[class.field__control--boxed]': 'boxed()',

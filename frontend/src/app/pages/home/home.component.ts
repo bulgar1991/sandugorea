@@ -1,22 +1,15 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  OnDestroy,
-  afterNextRender,
-  inject,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AboutSectionComponent } from '@components/about-section/about-section.component';
-import { BookingComponent } from '@components/booking/booking.component';
+import { CtaBandComponent } from '@components/cta-band/cta-band.component';
 import { HeroComponent } from '@components/hero/hero.component';
 import { MarqueeComponent } from '@components/marquee/marquee.component';
 import { ShowcaseComponent } from '@components/showcase/showcase.component';
+import { SocialLinksComponent } from '@components/social-links/social-links.component';
 import { TestimonialsComponent } from '@components/testimonials/testimonials.component';
 import { WorksComponent } from '@components/works/works.component';
-import { ActiveSectionService } from '@services/active-section.service';
 import { CATEGORIES } from '@/data/portfolio.data';
 
-/** One-page site: banner, about, showcase, works, testimonials, booking (footer is in the layout). */
+/** Home: banner, about teaser, services showcase, latest works, testimonials, social, booking CTA. */
 @Component({
   selector: 'app-home',
   imports: [
@@ -26,31 +19,21 @@ import { CATEGORIES } from '@/data/portfolio.data';
     ShowcaseComponent,
     WorksComponent,
     TestimonialsComponent,
-    BookingComponent,
+    SocialLinksComponent,
+    CtaBandComponent,
   ],
-  templateUrl: './home.component.html',
-  styles: `
-    .home__section {
-      @apply block scroll-mt-header;
-    }
-    #home {
-      @apply scroll-mt-0;
-    }
+  template: `
+    <app-hero />
+    <app-about-section mode="teaser" />
+    <app-marquee [items]="marqueeKeys" />
+    <app-showcase />
+    <app-works mode="teaser" />
+    <app-testimonials />
+    <app-social-links />
+    <app-cta-band />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent implements OnDestroy {
-  private readonly sections = inject(ActiveSectionService);
-  private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
+export class HomeComponent {
   protected readonly marqueeKeys = CATEGORIES.map((c) => c.labelKey);
-
-  constructor() {
-    afterNextRender(() =>
-      this.sections.watch(Array.from(this.host.nativeElement.querySelectorAll('[id]'))),
-    );
-  }
-
-  ngOnDestroy() {
-    this.sections.stop();
-  }
 }

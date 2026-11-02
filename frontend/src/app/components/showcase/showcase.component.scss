@@ -12,6 +12,14 @@
   &__title {
     @apply mx-auto mt-6 max-w-3xl;
   }
+
+  &__more {
+    @apply mt-12 flex justify-center;
+  }
+
+  &__counters {
+    @apply mt-20;
+  }
 }
 
 // Expanding panels. Mobile: stacked cards. Desktop: a row where the active panel grows.
@@ -92,21 +100,5 @@
 
   &:hover &__image {
     @apply scale-105;
-  }
-}
-
-.counters {
-  @apply mt-20 grid grid-cols-2 gap-y-12 lg:grid-cols-4;
-
-  &__item {
-    @apply flex flex-col items-center text-center;
-  }
-
-  &__value {
-    @apply font-display text-6xl font-light tabular-nums text-accent sm:text-7xl;
-  }
-
-  &__label {
-    @apply mt-3 text-xs uppercase tracking-caps-md text-ink-muted;
   }
 }

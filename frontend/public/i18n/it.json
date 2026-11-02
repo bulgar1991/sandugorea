@@ -28,13 +28,13 @@
   "nav": {
     "home": "Home",
     "about": "Chi sono",
-    "works": "Lavori",
-    "testimonials": "Recensioni",
-    "booking": "Prenota",
+    "booking": "Prenota una data",
     "clientArea": "Area clienti",
     "menu": "Menu",
     "main": "Navigazione principale",
-    "skipToContent": "Vai al contenuto"
+    "skipToContent": "Vai al contenuto",
+    "services": "Servizi",
+    "portfolio": "Portfolio"
   },
   "categories": {
     "weddings": {
@@ -71,7 +71,7 @@
     },
     "text": "Catturo luce sincera e momenti silenziosi: matrimoni, ritratti e famiglie, fotografati con calma e ritoccati a mano, per rivivere quel giorno ogni volta che li guardi.",
     "imageAlt": "Ritratto del fotografo",
-    "cta": "Prenota una sessione",
+    "cta": "Prenota una data",
     "works": "Guarda i miei lavori"
   },
   "about": {
@@ -88,7 +88,8 @@
       "h1": "Stile naturale e documentaristico",
       "h2": "Colori senza tempo, ritoccati a mano",
       "h3": "Consegna online privata"
-    }
+    },
+    "more": "Scopri di più su di me"
   },
   "showcase": {
     "eyebrow": "Cosa fotografo",
@@ -100,7 +101,8 @@
       "sessions": "Sessioni fotografiche",
       "weddings": "Matrimoni",
       "countries": "Paesi"
-    }
+    },
+    "all": "Tutti i servizi"
   },
   "works": {
     "eyebrow": "Portfolio",
@@ -109,7 +111,8 @@
     "loadMore": "Carica altri",
     "showing": "{{shown}} di {{total}}",
     "allLoaded": "Hai visto tutto, per ora.",
-    "open": "Apri foto"
+    "open": "Apri foto",
+    "viewAll": "Vedi tutto il portfolio"
   },
   "testimonials": {
     "eyebrow": "Parole gentili",
@@ -164,13 +167,15 @@
       "email": "Inserisci un'email valida.",
       "message": "Raccontami qualcosa in più (almeno 10 caratteri).",
       "consent": "Accetta per continuare.",
-      "send": "Impossibile inviare la richiesta. Riprova o scrivimi direttamente."
+      "send": "Impossibile inviare la richiesta. Riprova o scrivimi direttamente.",
+      "date": "Scegli una data."
     },
     "send": "Invia richiesta",
     "sending": "Invio in corso…",
     "successTitle": "Grazie!",
     "successText": "La tua richiesta è in viaggio. Ti risponderò molto presto.",
-    "again": "Invia un'altra richiesta"
+    "again": "Invia un'altra richiesta",
+    "pickDate": "Scegli un giorno nel calendario"
   },
   "footer": {
     "about": "Fotografia fine art, di ritratto e di matrimonio: calma, cinematografica e fatta per durare.",
@@ -420,6 +425,108 @@
       "projects": "Progetti · Admin",
       "project": "Progetto · Admin",
       "security": "Sicurezza · Admin"
+    },
+    "about": {
+      "title": "Chi è Sandu Gorea — Fotografo",
+      "description": "Conosci Sandu Gorea: fotografia di matrimonio, ritratto e famiglia, calma e cinematografica."
+    },
+    "services": {
+      "title": "Servizi — Sandugorea",
+      "description": "Matrimoni, ritratti, famiglie, eventi e paesaggi fine art: cosa è incluso in ogni sessione."
+    },
+    "portfolio": {
+      "title": "Portfolio — Sandugorea",
+      "description": "Una selezione di matrimoni, ritratti, famiglie e luoghi recenti di Sandu Gorea."
+    },
+    "booking": {
+      "title": "Prenota una data — Sandugorea",
+      "description": "Scegli una data e raccontami i tuoi progetti: rispondo entro 48 ore."
+    }
+  },
+  "social": {
+    "eyebrow": "Seguimi",
+    "titleStart": "Momenti condivisi,",
+    "titleAccent": "ogni giorno",
+    "text": "Nuove sessioni, dietro le quinte e piccole storie di viaggio: seguimi dove preferisci."
+  },
+  "cta": {
+    "eyebrow": "Prenotazioni aperte per il 2027",
+    "titleStart": "Raccontiamo",
+    "titleAccent": "la tua storia",
+    "button": "Prenota una data"
+  },
+  "pages": {
+    "about": {
+      "eyebrow": "Chi sono",
+      "title": "Dietro l'obiettivo",
+      "subtitle": "Fotografo, osservatore, collezionista di momenti silenziosi."
+    },
+    "services": {
+      "eyebrow": "Servizi",
+      "title": "Cosa fotografo",
+      "subtitle": "Ogni sessione è senza fretta, personale e consegnata nella tua cartella privata."
+    },
+    "portfolio": {
+      "eyebrow": "Portfolio",
+      "title": "Una collezione di momenti",
+      "subtitle": "Matrimoni, ritratti, famiglie e luoghi: una selezione di lavori recenti."
+    },
+    "booking": {
+      "eyebrow": "Prenotazione",
+      "title": "Prenota la tua data",
+      "subtitle": "Scegli un giorno, raccontami i tuoi progetti e ti risponderò entro 48 ore."
+    }
+  },
+  "services": {
+    "label": "Servizio",
+    "book": "Prenota questa sessione",
+    "items": {
+      "weddings": {
+        "text": "Dai momenti tranquilli dei preparativi all'ultimo ballo, raccontati con calma perché tu possa vivere davvero la tua giornata.",
+        "i1": "Servizio di un'intera giornata o parziale",
+        "i2": "Oltre 500 foto ritoccate a mano",
+        "i3": "Cartella online privata per te e i tuoi ospiti"
+      },
+      "portraits": {
+        "text": "Sessioni rilassate in studio o all'aperto, con una guida delicata e luce sincera: ritratti che ti somigliano.",
+        "i1": "Sessione di 60–90 minuti",
+        "i2": "Oltre 30 foto ritoccate a mano",
+        "i3": "Consigli su abiti e location"
+      },
+      "family": {
+        "text": "Momenti veri a casa, al parco o al mare: le piccole cose quotidiane che un giorno significheranno tutto.",
+        "i1": "Sessione in un luogo che ami",
+        "i2": "Foto naturali, non in posa",
+        "i3": "Stampe e album su richiesta"
+      },
+      "events": {
+        "text": "Eventi aziendali, compleanni e feste raccontati con discrezione: atmosfera, persone e dettagli.",
+        "i1": "Servizio a ore",
+        "i2": "Consegna rapida entro una settimana",
+        "i3": "Immagini pronte per web e stampa"
+      },
+      "landscapes": {
+        "text": "Paesaggi fine art e luoghi per le tue pareti, il tuo brand o il tuo progetto, come stampe o licenze.",
+        "i1": "Stampe fine art in edizione limitata",
+        "i2": "Licenze commerciali",
+        "i3": "Servizi su commissione in location"
+      }
+    },
+    "process": {
+      "eyebrow": "Come funziona",
+      "title": "Dal primo saluto alla tua cartella privata",
+      "s1": {
+        "title": "Parliamo",
+        "text": "Una conversazione rilassata su di te, sui tuoi progetti e sull'emozione che vuoi conservare."
+      },
+      "s2": {
+        "title": "Creiamo",
+        "text": "Una sessione senza fretta, con una guida delicata e spazio per momenti veri."
+      },
+      "s3": {
+        "title": "Ricevi",
+        "text": "Le tue foto ritoccate a mano in una cartella privata, accessibile solo con il tuo login."
+      }
     }
   }
 }

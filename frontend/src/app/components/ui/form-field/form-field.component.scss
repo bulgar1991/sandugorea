@@ -25,8 +25,13 @@
   }
 
   // Native selects: dark dropdown list.
+  // Native selects look like the other controls; the opened list stays dark.
   select.field__control {
-    @apply cursor-pointer bg-black;
+    @apply cursor-pointer bg-transparent;
+
+    option {
+      @apply bg-black text-ink;
+    }
   }
 
   textarea.field__control {

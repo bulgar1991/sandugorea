@@ -63,10 +63,17 @@
         <p class="about__signature">{{ 'about.signature' | translate }}</p>
         <p class="about__role">{{ 'about.role' | translate }}</p>
       </div>
-      <a app-button variant="outline" routerLink="/" fragment="booking">
-        {{ 'about.cta' | translate }}
-        <app-icon name="arrow-right" [size]="16" />
-      </a>
+      @if (mode() === 'teaser') {
+        <a app-button variant="outline" routerLink="/about">
+          {{ 'about.more' | translate }}
+          <app-icon name="arrow-right" [size]="16" />
+        </a>
+      } @else {
+        <a app-button variant="outline" routerLink="/booking">
+          <app-icon name="calendar" [size]="16" />
+          {{ 'about.cta' | translate }}
+        </a>
+      }
     </div>
   </div>
 </div>

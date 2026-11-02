@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   DestroyRef,
+  ElementRef,
   computed,
   effect,
   inject,
@@ -12,49 +13,66 @@ import { RouterLink } from '@angular/router';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { IconComponent } from '@components/icon/icon.component';
 import { PageLoaderState } from '@services/page-loader.service';
-import { BRAND, HERO_PORTRAIT } from '@/data/portfolio.data';
 import { ButtonComponent } from '@ui/button/button.component';
 import { LinkComponent } from '@ui/link/link.component';
-import { TextComponent } from '@ui/typography/typography.component';
-import { ContainerComponent } from '@ui/container/container.component';
+import { EyebrowComponent, TextComponent } from '@ui/typography/typography.component';
+import { BANNER_IMAGES, BRAND } from '@/data/portfolio.data';
 
 const ROLE_KEYS = ['hero.roles.r1', 'hero.roles.r2', 'hero.roles.r3'];
 const TYPE_MS = 70;
 const DELETE_MS = 35;
 const HOLD_MS = 2000;
 
+/** Floating specks of gold light: fixed positions so every visit looks the same. */
+const SPECKS = Array.from({ length: 14 }, (_, i) => ({
+  left: (i * 37 + 11) % 100,
+  top: (i * 53 + 23) % 100,
+  size: 4 + ((i * 7) % 10),
+  duration: 9 + ((i * 5) % 9),
+  delay: -((i * 3) % 12),
+}));
+
 /**
- * Banner: greeting with a typing line on the left, the photographer's portrait stepping
- * out of a frame on the right.
+ * Full-width home banner with layered parallax:
+ *  - the photo drifts with the scroll (CSS scroll timeline - no JS) and with the mouse,
+ *  - gold light specks float on a nearer layer (moves more with the mouse = depth),
+ *  - a soft light sweep passes over it, and the text lifts away as you scroll.
+ * Only transform / opacity are animated, so it stays on the GPU.
  */
 @Component({
   selector: 'app-hero',
   imports: [
-    ButtonComponent,
-    LinkComponent,
-    TextComponent,
-    ContainerComponent,
     RouterLink,
     TranslatePipe,
     IconComponent,
+    ButtonComponent,
+    LinkComponent,
+    EyebrowComponent,
+    TextComponent,
   ],
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  // The intro animations stay paused until the page loader has gone.
-  host: { '[class.hero--ready]': 'ready()', '[style.--intro]': '"150ms"' },
+  host: { '[class.hero--ready]': 'ready()', '(mousemove)': 'onMove($event)' },
 })
 export class HeroComponent {
   private readonly translate = inject(TranslateService);
+  private readonly loader = inject(PageLoaderState);
+  private readonly host = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
   protected readonly owner = BRAND.owner;
-  protected readonly portrait = HERO_PORTRAIT;
-  private readonly loader = inject(PageLoaderState);
-  protected readonly ready = computed(() => !this.loader.visible());
+  protected readonly image = BANNER_IMAGES.home;
+  protected readonly specks = SPECKS;
   protected readonly roleKeys = ROLE_KEYS;
-
-  /** The part of the current role typed so far. */
+  /** Intro animations stay paused until the page loader has gone. */
+  protected readonly ready = computed(() => !this.loader.visible());
   protected readonly typed = signal('');
+
+  private readonly canTrack =
+    typeof matchMedia !== 'undefined' &&
+    matchMedia('(hover: hover) and (pointer: fine)').matches &&
+    !matchMedia('(prefers-reduced-motion: reduce)').matches;
+  private frame = 0;
 
   constructor() {
     const destroyRef = inject(DestroyRef);
@@ -63,6 +81,18 @@ export class HeroComponent {
       if (!this.ready() || started) return;
       started = true;
       untracked(() => this.startTyping(destroyRef));
+    });
+    destroyRef.onDestroy(() => cancelAnimationFrame(this.frame));
+  }
+
+  /** Mouse position as -0.5…0.5 in CSS variables, once per frame (no change detection). */
+  protected onMove(e: MouseEvent) {
+    if (!this.canTrack) return;
+    cancelAnimationFrame(this.frame);
+    this.frame = requestAnimationFrame(() => {
+      const r = this.host.getBoundingClientRect();
+      this.host.style.setProperty('--mx', ((e.clientX - r.left) / r.width - 0.5).toFixed(3));
+      this.host.style.setProperty('--my', ((e.clientY - r.top) / r.height - 0.5).toFixed(3));
     });
   }
 

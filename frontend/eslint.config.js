@@ -25,10 +25,12 @@ module.exports = defineConfig([
           style: 'camelCase',
         },
       ],
+      // Elements (<app-card>) and attributes on native elements (<button app-button>), which keep
+      // native semantics such as routerLink, type and disabled.
       '@angular-eslint/component-selector': [
         'error',
         {
-          type: 'element',
+          type: ['element', 'attribute'],
           prefix: 'app',
           style: 'kebab-case',
         },

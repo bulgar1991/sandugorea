@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { IconComponent } from '@components/icon/icon.component';
 import { LightboxComponent } from '@components/lightbox/lightbox.component';
@@ -19,6 +20,7 @@ const PAGE_SIZE = 8;
 @Component({
   selector: 'app-works',
   imports: [
+    RouterLink,
     ButtonComponent,
     TitleComponent,
     EyebrowComponent,
@@ -35,6 +37,9 @@ const PAGE_SIZE = 8;
 })
 export class WorksComponent {
   private readonly translate = inject(TranslateService);
+
+  /** "teaser" (home): first photos + link to the portfolio · "full" (portfolio page): Load more. */
+  readonly mode = input<'teaser' | 'full'>('full');
 
   protected readonly total = PORTFOLIO.length;
   protected readonly shown = signal(PAGE_SIZE);

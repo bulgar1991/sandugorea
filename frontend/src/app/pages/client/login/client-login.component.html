@@ -29,7 +29,7 @@
         <label app-field class="sign-in__step" style="--i: 3">
           <span class="field__label">{{ 'common.username' | translate }}</span>
           <input
-            app-input
+            appInput
             formControlName="username"
             autocomplete="username"
             autocapitalize="none"
@@ -41,7 +41,7 @@
           <span class="field__label">{{ 'common.password' | translate }}</span>
           <div class="field__wrap">
             <input
-              app-input
+              appInput
               [type]="showPassword() ? 'text' : 'password'"
               formControlName="password"
               autocomplete="current-password"
@@ -83,7 +83,7 @@
 
       <p class="sign-in__help sign-in__step" style="--i: 6">
         {{ 'client.login.lost' | translate }}
-        <a app-link routerLink="/" fragment="booking">{{ 'client.login.contact' | translate }}</a
+        <a app-link routerLink="/booking">{{ 'client.login.contact' | translate }}</a
         >.
       </p>
     </div>

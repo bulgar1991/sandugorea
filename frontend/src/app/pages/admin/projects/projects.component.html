@@ -14,7 +14,7 @@
   <div app-field class="toolbar__search">
     <span class="toolbar__search-icon"><app-icon name="search" [size]="16" /></span>
     <input
-      app-input
+      appInput
       boxed
       class="toolbar__input"
       [placeholder]="'admin.projects.search' | translate"
@@ -144,7 +144,7 @@
       <label app-field>
         <span class="field__label">{{ 'admin.projects.form.title' | translate }}</span>
         <input
-          app-input
+          appInput
           boxed
           formControlName="title"
           [placeholder]="'admin.projects.form.titlePlaceholder' | translate"
@@ -156,14 +156,14 @@
       </label>
       <label app-field>
         <span class="field__label">{{ 'admin.projects.form.date' | translate }}</span>
-        <input app-input boxed date type="date" formControlName="date" />
+        <input appInput boxed date type="date" formControlName="date" />
       </label>
 
       <p class="project-form__section">{{ 'admin.projects.form.customer' | translate }}</p>
       <label app-field>
         <span class="field__label">{{ 'admin.projects.form.name' | translate }}</span>
         <input
-          app-input
+          appInput
           boxed
           formControlName="customerName"
           [placeholder]="'admin.projects.form.namePlaceholder' | translate"
@@ -176,7 +176,7 @@
       <label app-field>
         <span class="field__label">{{ 'admin.projects.form.email' | translate }}</span>
         <input
-          app-input
+          appInput
           boxed
           type="email"
           formControlName="customerEmail"
@@ -189,7 +189,7 @@
 
       <label app-field>
         <span class="field__label">{{ 'admin.projects.form.language' | translate }}</span>
-        <select app-input boxed formControlName="language">
+        <select appInput boxed formControlName="language">
           @for (l of languages; track l.code) {
             <option [value]="l.code">{{ l.name }}</option>
           }
@@ -200,7 +200,7 @@
       <label app-field>
         <span class="field__label">{{ 'common.username' | translate }}</span>
         <input
-          app-input
+          appInput
           boxed
           mono
           formControlName="username"
@@ -221,7 +221,7 @@
       <label app-field>
         <span class="field__label">{{ 'common.password' | translate }}</span>
         <div class="field__wrap">
-          <input app-input boxed mono formControlName="password" autocomplete="new-password" />
+          <input appInput boxed mono formControlName="password" autocomplete="new-password" />
           <button
             app-button
             variant="ghost"

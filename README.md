@@ -48,7 +48,7 @@ or download those photos.
 
 | Area | URLs | Notes |
 | --- | --- | --- |
-| Public | `/` (one page: `#home`, `#about`, `#works`, `#testimonials`, `#booking`) | Images come from `frontend/src/app/data/portfolio.data.ts` (placeholders for now) |
+| Public | `/`, `/about`, `/services`, `/portfolio`, `/booking` | Images come from `frontend/src/app/data/portfolio.data.ts` (placeholders for now) |
 | Customer | `/client/login`, `/client` | Opens only after the project was sent and while access is enabled |
 | Admin | `/admin/login`, `/admin`, `/admin/projects`, `/admin/projects/:id`, `/admin/security` | Not linked from the site; password + 2FA; 15-min idle sign-out |
 
@@ -64,12 +64,22 @@ When adding text, add the key to **all five** files.
 
 ## Styling: Tailwind CSS v3 + SCSS + BEM
 
-- `frontend/tailwind.config.js` — **all** design tokens: colours, fonts, font sizes, letter-spacing,
-  spacing, z-index, easing, gradients, keyframes and animations.
-- `frontend/src/styles.scss` — `@tailwind` directives plus shared BEM blocks (`.btn`, `.field`,
-  `.card`, `.badge`, `.title`, `.wrapper`, …).
-- Each component has its own BEM block in its `.scss`, built with `@apply`
-  (e.g. `.hero`, `.hero__title`, `.hero__slide--active`). Templates use BEM class names only.
+- `frontend/tailwind.config.js` — **all** design tokens (colours, fonts, spacing, animations…).
+- `frontend/src/styles.scss` — **imports only** (`app/styles/_tailwind`, `_base`, `_reveal`, `_parallax`,
+  `_view-transitions`, `_reduced-motion`, `_page-loader`).
+- Every other style lives in the component that owns it, as a BEM block built with `@apply`.
+- Shared UI is made of components in `src/app/components/ui` (alias `@ui/…`):
+  `<button app-button variant="outline" size="sm">`, `<a app-link caps underline>`,
+  `<h2 app-title size="lg">` (gold words in `<em>`), `<p app-eyebrow>`, `<p app-text size="small">`,
+  `<label app-field>` + `<input appInput boxed>`, `app-card`, `app-badge`, `app-alert`, `app-spinner`,
+  `app-avatar`, `app-container`, `app-page-head`, `app-credentials`.
+
+## Icons
+
+Icon font generated like driver-platform: SVG sources (24×24, stroke 1.5) in
+`frontend/src/assets/icons/src/` → `npm run generate-fonts` (oslllo-svg-fixer → fantasticon) →
+`src/assets/fonts/icons.css` (font embedded) + `src/app/models/icon-names.generated.ts`.
+Use `<app-icon name="calendar" [size]="16" />`; a wrong name is a compile error.
 
 ## Production — sandugorea.ch (VPS 66.29.142.5, Ubuntu 24.04, 1 GB RAM)
 

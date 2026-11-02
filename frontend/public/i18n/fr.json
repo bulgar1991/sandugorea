@@ -28,13 +28,13 @@
   "nav": {
     "home": "Accueil",
     "about": "À propos",
-    "works": "Travaux",
-    "testimonials": "Témoignages",
-    "booking": "Réservation",
+    "booking": "Réserver une date",
     "clientArea": "Espace client",
     "menu": "Menu",
     "main": "Navigation principale",
-    "skipToContent": "Aller au contenu"
+    "skipToContent": "Aller au contenu",
+    "services": "Services",
+    "portfolio": "Portfolio"
   },
   "categories": {
     "weddings": {
@@ -71,7 +71,7 @@
     },
     "text": "Je capture la lumière sincère et les instants silencieux : mariages, portraits et familles, photographiés avec calme et retouchés à la main, pour revivre la journée à chaque regard.",
     "imageAlt": "Portrait du photographe",
-    "cta": "Réserver une séance",
+    "cta": "Réserver une date",
     "works": "Voir mon travail"
   },
   "about": {
@@ -88,7 +88,8 @@
       "h1": "Style naturel et documentaire",
       "h2": "Couleurs intemporelles, retouchées à la main",
       "h3": "Livraison en ligne privée"
-    }
+    },
+    "more": "En savoir plus sur moi"
   },
   "showcase": {
     "eyebrow": "Ce que je photographie",
@@ -100,7 +101,8 @@
       "sessions": "Séances photo",
       "weddings": "Mariages",
       "countries": "Pays"
-    }
+    },
+    "all": "Tous les services"
   },
   "works": {
     "eyebrow": "Portfolio",
@@ -109,7 +111,8 @@
     "loadMore": "Voir plus",
     "showing": "{{shown}} sur {{total}}",
     "allLoaded": "Vous avez tout vu, pour l'instant.",
-    "open": "Ouvrir la photo"
+    "open": "Ouvrir la photo",
+    "viewAll": "Voir tout le portfolio"
   },
   "testimonials": {
     "eyebrow": "Mots doux",
@@ -164,13 +167,15 @@
       "email": "Veuillez saisir un e-mail valide.",
       "message": "Dites-m'en un peu plus (au moins 10 caractères).",
       "consent": "Veuillez accepter pour continuer.",
-      "send": "Votre demande n'a pas pu être envoyée. Réessayez ou écrivez-moi directement."
+      "send": "Votre demande n'a pas pu être envoyée. Réessayez ou écrivez-moi directement.",
+      "date": "Veuillez choisir une date."
     },
     "send": "Envoyer la demande",
     "sending": "Envoi en cours…",
     "successTitle": "Merci !",
     "successText": "Votre demande est en route. Je vous réponds très bientôt.",
-    "again": "Envoyer une autre demande"
+    "again": "Envoyer une autre demande",
+    "pickDate": "Choisissez un jour dans le calendrier"
   },
   "footer": {
     "about": "Photographie fine art, portrait et mariage : calme, cinématographique et faite pour durer.",
@@ -420,6 +425,108 @@
       "projects": "Projets · Admin",
       "project": "Projet · Admin",
       "security": "Sécurité · Admin"
+    },
+    "about": {
+      "title": "À propos de Sandu Gorea — Photographe",
+      "description": "Découvrez Sandu Gorea : photographie de mariage, de portrait et de famille, calme et cinématographique."
+    },
+    "services": {
+      "title": "Services — Sandugorea",
+      "description": "Mariages, portraits, famille, événements et paysages fine art : ce qui est inclus dans chaque séance."
+    },
+    "portfolio": {
+      "title": "Portfolio — Sandugorea",
+      "description": "Une sélection de mariages, portraits, familles et lieux récents par Sandu Gorea."
+    },
+    "booking": {
+      "title": "Réserver une date — Sandugorea",
+      "description": "Choisissez une date et parlez-moi de vos projets : je réponds sous 48 heures."
+    }
+  },
+  "social": {
+    "eyebrow": "Suivez-moi",
+    "titleStart": "Des moments partagés,",
+    "titleAccent": "chaque jour",
+    "text": "Nouvelles séances, coulisses et petites histoires de voyage : suivez-moi où vous voulez."
+  },
+  "cta": {
+    "eyebrow": "Réservations ouvertes pour 2027",
+    "titleStart": "Racontons",
+    "titleAccent": "votre histoire",
+    "button": "Réserver une date"
+  },
+  "pages": {
+    "about": {
+      "eyebrow": "À propos",
+      "title": "Derrière l'objectif",
+      "subtitle": "Photographe, observateur, collectionneur d'instants silencieux."
+    },
+    "services": {
+      "eyebrow": "Services",
+      "title": "Ce que je photographie",
+      "subtitle": "Chaque séance prend son temps, reste personnelle et est livrée dans votre dossier privé."
+    },
+    "portfolio": {
+      "eyebrow": "Portfolio",
+      "title": "Une collection d'instants",
+      "subtitle": "Mariages, portraits, familles et lieux : une sélection de travaux récents."
+    },
+    "booking": {
+      "eyebrow": "Réservation",
+      "title": "Réservez votre date",
+      "subtitle": "Choisissez un jour, parlez-moi un peu de vos projets, je vous réponds sous 48 heures."
+    }
+  },
+  "services": {
+    "label": "Service",
+    "book": "Réserver cette séance",
+    "items": {
+      "weddings": {
+        "text": "Des préparatifs tranquilles à la dernière danse, racontés avec calme pour que vous puissiez simplement vivre votre journée.",
+        "i1": "Reportage sur la journée entière ou partielle",
+        "i2": "Plus de 500 photos retouchées à la main",
+        "i3": "Dossier en ligne privé pour vous et vos invités"
+      },
+      "portraits": {
+        "text": "Des séances détendues en studio ou en extérieur, avec une direction douce et une lumière sincère : des portraits qui vous ressemblent.",
+        "i1": "Séance de 60 à 90 minutes",
+        "i2": "Plus de 30 photos retouchées à la main",
+        "i3": "Conseils pour les tenues et les lieux"
+      },
+      "family": {
+        "text": "De vrais moments à la maison, au parc ou au bord de la mer : les petites choses du quotidien qui deviendront tout.",
+        "i1": "Séance dans un lieu que vous aimez",
+        "i2": "Photos naturelles, sans pose",
+        "i3": "Tirages et albums sur demande"
+      },
+      "events": {
+        "text": "Événements d'entreprise, anniversaires et fêtes, photographiés avec discrétion : ambiance, personnes et détails.",
+        "i1": "Couverture à l'heure",
+        "i2": "Livraison rapide en une semaine",
+        "i3": "Images prêtes pour le web et l'impression"
+      },
+      "landscapes": {
+        "text": "Paysages fine art et lieux pour vos murs, votre marque ou votre projet, en tirages ou sous licence.",
+        "i1": "Tirages fine art en édition limitée",
+        "i2": "Licences commerciales",
+        "i3": "Prises de vue sur commande"
+      }
+    },
+    "process": {
+      "eyebrow": "Comment ça se passe",
+      "title": "Du premier bonjour à votre dossier privé",
+      "s1": {
+        "title": "On discute",
+        "text": "Une conversation détendue sur vous, vos projets et l'émotion que vous voulez garder."
+      },
+      "s2": {
+        "title": "On crée",
+        "text": "Une séance sans précipitation, avec une direction douce et de la place pour les vrais moments."
+      },
+      "s3": {
+        "title": "Vous recevez",
+        "text": "Vos photos retouchées à la main dans un dossier privé, accessible uniquement avec vos identifiants."
+      }
     }
   }
 }

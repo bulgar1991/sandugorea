@@ -4,26 +4,20 @@
   [class.header--hidden]="hidden() && !menuOpen()"
 >
   <div app-container class="header__bar">
-    <a
-      routerLink="/"
-      fragment="home"
-      class="header__logo"
-      [attr.aria-label]="'nav.home' | translate"
-    >
+    <a routerLink="/" class="header__logo" [attr.aria-label]="'nav.home' | translate">
       <span class="header__name">{{ brand.owner }}</span>
       <span class="header__tagline">{{ 'brand.tagline' | translate }}</span>
     </a>
 
     <nav class="header__nav" [attr.aria-label]="'nav.main' | translate">
-      @for (link of links; track link.fragment) {
+      @for (link of links; track link.path) {
         <a
           app-link
           underline
-          routerLink="/"
-          [fragment]="link.fragment"
+          [routerLink]="link.path"
+          routerLinkActive="link--active header__link--active"
+          [routerLinkActiveOptions]="{ exact: link.exact }"
           class="header__link"
-          [class.header__link--active]="section() === link.fragment"
-          [class.link--active]="section() === link.fragment"
         >
           {{ link.key | translate }}
         </a>
@@ -54,12 +48,12 @@
 @if (menuOpen()) {
   <div class="menu" animate.enter="menu--entering" animate.leave="menu--leaving">
     <nav app-container class="menu__nav" [attr.aria-label]="'nav.main' | translate">
-      @for (link of links; track link.fragment; let i = $index) {
+      @for (link of links; track link.path; let i = $index) {
         <a
-          routerLink="/"
-          [fragment]="link.fragment"
+          [routerLink]="link.path"
+          routerLinkActive="menu__link--active"
+          [routerLinkActiveOptions]="{ exact: link.exact }"
           class="menu__link"
-          [class.menu__link--active]="section() === link.fragment"
           [style.animation-delay.ms]="150 + i * 70"
           (click)="menuOpen.set(false)"
         >

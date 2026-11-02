@@ -1,9 +1,32 @@
-<div class="hero">
-  <div class="hero__glow" aria-hidden="true"></div>
+<section class="hero">
+  <!-- Far layer: the photo (mouse depth + scroll drift + intro zoom) -->
+  <div class="hero__far" aria-hidden="true">
+    <div class="hero__zoom">
+      <img [src]="image" alt="" class="hero__image" fetchpriority="high" decoding="async" />
+    </div>
+  </div>
 
-  <div app-container class="hero__inner">
-    <div class="hero__text">
-      <p class="hero__welcome hero__appear" style="--d: 0ms">{{ 'hero.welcome' | translate }}</p>
+  <div class="hero__shade" aria-hidden="true"></div>
+  <div class="hero__sweep" aria-hidden="true"></div>
+
+  <!-- Near layer: floating light specks (move more with the mouse) -->
+  <div class="hero__near" aria-hidden="true">
+    @for (s of specks; track $index) {
+      <span
+        class="hero__speck"
+        [style.left.%]="s.left"
+        [style.top.%]="s.top"
+        [style.width.px]="s.size"
+        [style.height.px]="s.size"
+        [style.animation-duration.s]="s.duration"
+        [style.animation-delay.s]="s.delay"
+      ></span>
+    }
+  </div>
+
+  <div class="hero__content">
+    <div class="hero__inner">
+      <p app-eyebrow class="hero__appear" style="--d: 0ms">{{ 'hero.welcome' | translate }}</p>
 
       <h1 class="hero__title">
         <span class="hero__line"
@@ -24,31 +47,24 @@
         </span>
       </p>
 
-      <p app-text class="hero__description hero__appear" style="--d: 480ms">
+      <p app-text size="lead" class="hero__description hero__appear" style="--d: 480ms">
         {{ 'hero.text' | translate }}
       </p>
 
       <div class="hero__actions hero__appear" style="--d: 640ms">
-        <a app-button routerLink="/" fragment="booking">
+        <a app-button routerLink="/booking">
+          <app-icon name="calendar" [size]="16" />
           {{ 'hero.cta' | translate }}
-          <app-icon name="arrow-right" [size]="16" />
         </a>
-        <a app-link caps underline routerLink="/" fragment="works">
+        <a app-link caps underline routerLink="/portfolio">
           {{ 'hero.works' | translate }}
+          <app-icon name="arrow-right" [size]="14" />
         </a>
       </div>
     </div>
-
-    <div class="hero__visual">
-      <div class="hero__frame" aria-hidden="true"></div>
-      <img
-        [src]="portrait.src"
-        [alt]="'hero.imageAlt' | translate"
-        class="hero__portrait"
-        [class.hero__portrait--photo]="!portrait.cutout"
-        fetchpriority="high"
-        decoding="async"
-      />
-    </div>
   </div>
-</div>
+
+  <div class="hero__scroll hero__appear" style="--d: 900ms" aria-hidden="true">
+    <span class="hero__scroll-line"></span>
+  </div>
+</section>

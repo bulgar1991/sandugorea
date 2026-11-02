@@ -1,0 +1,108 @@
+.services {
+  @apply flex flex-col gap-28 py-28 lg:gap-40 lg:py-40;
+}
+
+.service {
+  @apply grid items-center gap-12 lg:grid-cols-12 lg:gap-16;
+
+  &__media {
+    @apply relative lg:col-span-6;
+  }
+
+  &__frame {
+    @apply relative aspect-portrait overflow-hidden rounded-2xl;
+  }
+
+  // Taller than its frame: drifts with the scroll and zooms on hover.
+  &__image {
+    @apply absolute inset-x-0 -top-[10%] block h-[120%] w-full object-cover transition-transform duration-1400 ease-out-expo;
+  }
+
+  &__media:hover &__image {
+    @apply scale-105;
+  }
+
+  &__number {
+    @apply pointer-events-none absolute -bottom-10 -right-4 font-title text-[7rem] leading-none text-accent/20 sm:text-[9rem];
+  }
+
+  &__body {
+    @apply lg:col-span-5 lg:col-start-8;
+  }
+
+  &--reverse &__media {
+    @apply lg:order-2 lg:col-start-7;
+  }
+
+  &--reverse &__body {
+    @apply lg:order-1 lg:col-span-5 lg:col-start-1;
+  }
+
+  &__title {
+    @apply mt-5;
+  }
+
+  &__text {
+    @apply mt-6;
+  }
+
+  &__includes {
+    @apply mt-8 flex flex-col gap-3;
+  }
+
+  &__include {
+    @apply flex items-center gap-3 text-sm text-ink;
+  }
+
+  &__check {
+    @apply flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-accent/40 text-accent;
+  }
+
+  &__button {
+    @apply mt-10;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  .service__image {
+    animation: service-drift linear both;
+    animation-timeline: view();
+  }
+}
+
+@keyframes service-drift {
+  from {
+    translate: 0 -6%;
+  }
+  to {
+    translate: 0 6%;
+  }
+}
+
+.process {
+  @apply border-y border-line bg-surface py-28 lg:py-36;
+
+  &__title {
+    @apply mt-6 max-w-2xl;
+  }
+
+  &__steps {
+    @apply mt-16 grid gap-12 md:grid-cols-3 md:gap-8;
+  }
+
+  &__step {
+    @apply border-t border-line pt-8;
+  }
+
+  &__number {
+    @apply font-title text-6xl text-accent/30;
+  }
+
+  &__step-title {
+    @apply mt-4;
+  }
+
+  &__step-text {
+    @apply mt-4;
+  }
+}
