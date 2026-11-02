@@ -1,0 +1,52 @@
+@reference '../../../tailwind.css';
+
+.filters {
+  @apply flex flex-wrap gap-x-8 gap-y-5 border-b border-line pb-8;
+}
+
+.filter {
+  @apply relative cursor-pointer text-xs font-medium tracking-[0.3em] text-ink-muted uppercase transition-colors duration-300 hover:text-ink;
+
+  &::after {
+    content: '';
+    @apply absolute -bottom-2 left-0 h-px w-full origin-left scale-x-0 bg-accent;
+    transition: transform 0.6s var(--ease-out-expo);
+  }
+  &.is-active {
+    @apply text-accent;
+    &::after {
+      @apply scale-x-100;
+    }
+  }
+}
+
+.photo {
+  @apply mb-5 break-inside-avoid;
+}
+
+.photo__btn {
+  @apply relative block w-full cursor-zoom-in overflow-hidden bg-surface text-left;
+
+  &:hover .photo__img,
+  &:focus-visible .photo__img {
+    transform: scale(1.05);
+  }
+  &:hover .photo__caption,
+  &:focus-visible .photo__caption {
+    @apply opacity-100;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.photo__img {
+  @apply block w-full object-cover;
+  transition: transform 1.2s var(--ease-out-expo);
+}
+
+.photo__caption {
+  @apply absolute inset-0 flex flex-col justify-end gap-1 bg-gradient-to-t from-black/80 via-transparent to-transparent p-6 opacity-0;
+  transform: translate3d(0, 10px, 0);
+  transition:
+    opacity 0.5s ease,
+    transform 0.7s var(--ease-out-expo);
+}

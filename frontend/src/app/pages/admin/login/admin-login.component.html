@@ -1,0 +1,144 @@
+<div class="admin-login">
+  <div class="admin-login__glow" aria-hidden="true"></div>
+
+  <div class="relative w-full max-w-md">
+    <div class="mb-10 flex flex-col items-center text-center">
+      <span class="shield">
+        <app-icon name="shield" [size]="26" />
+      </span>
+      <h1 class="mt-6 font-display text-4xl font-light">Restricted area</h1>
+      <p class="mt-2 text-sm text-ink-muted">Authorised personnel only. All access is logged.</p>
+    </div>
+
+    <div class="card overflow-hidden p-8">
+      <!-- Step indicator -->
+      <div class="mb-8 flex items-center gap-3 text-[0.65rem] tracking-[0.25em] uppercase">
+        <span [class]="step() === 'credentials' ? 'text-accent' : 'text-ink-subtle'"
+          >1 · Password</span
+        >
+        <span class="h-px flex-1 bg-line">
+          <span
+            class="block h-px origin-left bg-accent transition-transform duration-700 ease-(--ease-out-expo)"
+            [class]="step() === 'code' ? 'scale-x-100' : 'scale-x-0'"
+          ></span>
+        </span>
+        <span [class]="step() === 'code' ? 'text-accent' : 'text-ink-subtle'">2 · Verify</span>
+      </div>
+
+      @if (step() === 'credentials') {
+        <form
+          [formGroup]="credentials"
+          (ngSubmit)="submitCredentials()"
+          class="flex flex-col gap-5"
+          animate.enter="step-in"
+          novalidate
+        >
+          <label class="field">
+            <span>Username</span>
+            <input
+              class="input-box"
+              formControlName="username"
+              autocomplete="username"
+              autocapitalize="none"
+              spellcheck="false"
+            />
+          </label>
+          <label class="field">
+            <span>Password</span>
+            <div class="relative">
+              <input
+                class="input-box pr-12"
+                [type]="showPassword() ? 'text' : 'password'"
+                formControlName="password"
+                autocomplete="current-password"
+              />
+              <button
+                type="button"
+                class="absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer p-1 text-ink-subtle hover:text-accent"
+                (click)="showPassword.update((v) => !v)"
+                [attr.aria-label]="showPassword() ? 'Hide password' : 'Show password'"
+              >
+                <app-icon [name]="showPassword() ? 'eye-off' : 'eye'" [size]="18" />
+              </button>
+            </div>
+          </label>
+
+          @if (error()) {
+            <p class="alert" role="alert">
+              {{ error() }}
+              @if (lockSeconds() > 0) {
+                ({{ lockSeconds() }}s)
+              }
+            </p>
+          }
+
+          <button
+            type="submit"
+            class="btn btn-primary mt-2 w-full"
+            [disabled]="loading() || lockSeconds() > 0"
+          >
+            @if (loading()) {
+              <span class="spinner"></span> Verifying…
+            } @else {
+              Continue <app-icon name="arrow-right" [size]="16" />
+            }
+          </button>
+        </form>
+      } @else {
+        <form
+          (ngSubmit)="submitCode()"
+          class="flex flex-col gap-5"
+          animate.enter="step-in"
+          novalidate
+        >
+          <div
+            class="flex items-start gap-3 rounded-xl border border-line bg-black/40 p-4 text-sm text-ink-muted"
+          >
+            <app-icon name="key" [size]="18" class="mt-0.5 text-accent" />
+            Enter the 6-digit code from your authenticator app.
+          </div>
+          <label class="field">
+            <span>Authentication code</span>
+            <input
+              #codeInput
+              class="input-box text-center font-mono !text-2xl tracking-[0.6em]"
+              [formControl]="code"
+              (input)="onCodeInput()"
+              inputmode="numeric"
+              autocomplete="one-time-code"
+              maxlength="6"
+              placeholder="······"
+            />
+          </label>
+
+          @if (error()) {
+            <p class="alert" role="alert">{{ error() }}</p>
+          }
+
+          <button
+            type="submit"
+            class="btn btn-primary w-full"
+            [disabled]="loading() || code.invalid"
+          >
+            @if (loading()) {
+              <span class="spinner"></span> Checking…
+            } @else {
+              Sign in <app-icon name="lock" [size]="14" />
+            }
+          </button>
+          <button
+            type="button"
+            class="cursor-pointer text-xs tracking-[0.2em] text-ink-subtle uppercase hover:text-ink"
+            (click)="back()"
+          >
+            ← Use a different account
+          </button>
+        </form>
+      }
+    </div>
+
+    <p class="mt-8 text-center text-xs text-ink-subtle">
+      Sessions expire after 15 minutes of inactivity.
+    </p>
+  </div>
+</div>

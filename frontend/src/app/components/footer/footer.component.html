@@ -1,0 +1,57 @@
+<footer class="border-t border-line bg-black">
+  <div class="container-x py-24 lg:py-32">
+    <p class="eyebrow" appReveal>Let's talk</p>
+    <h2 class="heading-xl mt-6 max-w-4xl" appReveal [revealDelay]="100">
+      Let's create something <em class="text-accent">timeless</em>.
+    </h2>
+    <div
+      class="mt-12 flex flex-col gap-8 sm:flex-row sm:items-center"
+      appReveal
+      [revealDelay]="200"
+    >
+      <a
+        [href]="'mailto:' + brand.email"
+        class="link-underline font-display text-2xl text-accent hover:text-accent-light sm:text-3xl"
+      >
+        {{ brand.email }}
+      </a>
+      <a routerLink="/contact" class="btn btn-primary w-fit">
+        Book a session
+        <app-icon name="arrow-right" [size]="16" />
+      </a>
+    </div>
+  </div>
+
+  <div
+    class="container-x flex flex-col gap-8 border-t border-line py-10 lg:flex-row lg:items-center lg:justify-between"
+  >
+    <a routerLink="/" class="font-display text-xl tracking-[0.25em] uppercase">{{ brand.name }}</a>
+
+    <nav class="flex flex-wrap gap-x-8 gap-y-3" aria-label="Footer">
+      @for (link of links; track link.path) {
+        <a
+          [routerLink]="link.path"
+          class="text-[0.7rem] tracking-[0.3em] text-ink-muted uppercase hover:text-accent"
+        >
+          {{ link.label }}
+        </a>
+      }
+    </nav>
+
+    <div class="flex items-center gap-5 text-ink-muted">
+      <a
+        [href]="brand.instagram"
+        target="_blank"
+        rel="noopener"
+        aria-label="Instagram"
+        class="hover:text-accent"
+      >
+        <app-icon name="instagram" />
+      </a>
+      <a [href]="'mailto:' + brand.email" aria-label="Email" class="hover:text-accent">
+        <app-icon name="mail" />
+      </a>
+      <span class="text-xs text-ink-subtle">© {{ year }} {{ brand.name }}</span>
+    </div>
+  </div>
+</footer>

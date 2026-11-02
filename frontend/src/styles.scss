@@ -1,2 +1,63 @@
 // Global SCSS. Tailwind setup and theme tokens live in tailwind.css.
 // Component styles live in each component's .scss file.
+
+html {
+  scroll-behavior: smooth;
+}
+
+// Scroll-reveal states, toggled by the [appReveal] directive.
+// Only opacity/transform/clip-path are animated, so it stays on the GPU and never janks.
+[data-reveal] {
+  --reveal-delay: 0ms;
+  transition:
+    opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    clip-path 1.4s cubic-bezier(0.76, 0, 0.24, 1);
+  transition-delay: var(--reveal-delay);
+
+  &:not(.is-revealed) {
+    opacity: 0;
+  }
+  &[data-reveal='up']:not(.is-revealed) {
+    transform: translate3d(0, 48px, 0);
+  }
+  &[data-reveal='scale']:not(.is-revealed) {
+    transform: scale(0.94);
+  }
+  &[data-reveal='clip'] {
+    opacity: 1;
+    &:not(.is-revealed) {
+      clip-path: inset(100% 0 0 0);
+    }
+    &.is-revealed {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+}
+
+// Gentle parallax driven by scroll position on the compositor (no JS, no scroll listeners).
+@supports (animation-timeline: view()) {
+  .parallax-img {
+    animation: parallax linear both;
+    animation-timeline: view();
+  }
+  @keyframes parallax {
+    from {
+      transform: translate3d(0, -8%, 0) scale(1.16);
+    }
+    to {
+      transform: translate3d(0, 8%, 0) scale(1.16);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+  .parallax-img {
+    animation: none !important;
+  }
+}

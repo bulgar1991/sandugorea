@@ -1,0 +1,58 @@
+<app-page-hero
+  eyebrow="Portfolio"
+  title="A collection of moments"
+  subtitle="Weddings, portraits, families and places - each photograph a small piece of someone's story."
+/>
+
+<section class="container-x pb-32">
+  <div class="filters" role="tablist" aria-label="Categories">
+    @for (f of filters; track f.id) {
+      <button
+        type="button"
+        role="tab"
+        class="filter"
+        [class.is-active]="active() === f.id"
+        [attr.aria-selected]="active() === f.id"
+        (click)="select(f.id)"
+      >
+        {{ f.label }}
+      </button>
+    }
+  </div>
+
+  <div class="mt-12 columns-1 gap-5 sm:columns-2 lg:columns-3">
+    @for (photo of photos(); track photo.id; let i = $index) {
+      <figure class="photo" appReveal="up" [revealDelay]="(i % 3) * 100">
+        <button
+          type="button"
+          class="photo__btn"
+          (click)="openIndex.set(i)"
+          [attr.aria-label]="'Open ' + photo.title"
+        >
+          <img
+            [src]="photo.thumb"
+            [alt]="photo.title"
+            class="photo__img"
+            [class]="
+              photo.orientation === 'portrait'
+                ? 'aspect-[8/11]'
+                : photo.orientation === 'square'
+                  ? 'aspect-square'
+                  : 'aspect-[3/2]'
+            "
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption class="photo__caption">
+            <span class="font-display text-2xl italic">{{ photo.title }}</span>
+            <span class="text-[0.65rem] tracking-[0.3em] text-accent uppercase">{{
+              photo.category
+            }}</span>
+          </figcaption>
+        </button>
+      </figure>
+    }
+  </div>
+</section>
+
+<app-lightbox [items]="lightboxItems()" [(index)]="openIndex" />

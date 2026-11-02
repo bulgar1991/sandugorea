@@ -1,0 +1,81 @@
+<div class="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
+  <div>
+    <p class="eyebrow" appReveal>{{ today | date: 'EEEE, d MMMM' }}</p>
+    <h1 class="mt-3 font-display text-5xl font-light" appReveal [revealDelay]="80">
+      Good to see you.
+    </h1>
+  </div>
+  <a
+    routerLink="/admin/clients"
+    [queryParams]="{ new: 1 }"
+    class="btn btn-primary w-fit"
+    appReveal
+    [revealDelay]="160"
+  >
+    <app-icon name="plus" [size]="16" /> New client
+  </a>
+</div>
+
+<div class="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+  @for (c of cards(); track c.label; let i = $index) {
+    <div
+      class="card group p-6 transition-colors duration-500 hover:border-accent/40"
+      appReveal
+      [revealDelay]="i * 80"
+    >
+      <div class="flex items-center justify-between text-ink-muted">
+        <span class="text-xs tracking-[0.2em] uppercase">{{ c.label }}</span>
+        <span
+          class="flex h-9 w-9 items-center justify-center rounded-lg bg-black/40 text-accent transition-transform duration-500 group-hover:scale-110"
+        >
+          <app-icon [name]="c.icon" [size]="16" />
+        </span>
+      </div>
+      <p class="mt-4 font-display text-5xl font-light">{{ c.value }}</p>
+      <p class="mt-1 text-xs text-ink-subtle">{{ c.hint }}</p>
+    </div>
+  }
+</div>
+
+<div class="card mt-8 overflow-hidden" appReveal [revealDelay]="200">
+  <div class="flex items-center justify-between border-b border-line px-6 py-5">
+    <h2 class="font-display text-2xl">Recent galleries</h2>
+    <a
+      routerLink="/admin/clients"
+      class="text-xs tracking-[0.2em] text-accent uppercase hover:text-accent-light"
+      >All clients →</a
+    >
+  </div>
+  <ul class="divide-y divide-line">
+    @for (g of recent(); track g.id) {
+      <li>
+        <a
+          [routerLink]="['/admin/clients', g.clientId]"
+          [queryParams]="{ gallery: g.id }"
+          class="flex items-center gap-4 px-6 py-4 transition-colors hover:bg-white/[0.03]"
+        >
+          <img
+            [src]="g.photos[0]?.thumbUrl"
+            alt=""
+            class="h-12 w-12 shrink-0 rounded-lg bg-surface-2 object-cover"
+            loading="lazy"
+          />
+          <div class="min-w-0 flex-1">
+            <p class="truncate">{{ g.title }}</p>
+            <p class="truncate text-xs text-ink-subtle">
+              {{ g.client?.name }} · {{ g.photos.length }} photos
+            </p>
+          </div>
+          <span class="hidden text-xs text-ink-subtle sm:block">{{
+            g.date | date: 'd MMM y'
+          }}</span>
+          @if (g.sentAt) {
+            <span class="badge border-success/30 text-success">Delivered</span>
+          } @else {
+            <span class="badge border-accent/30 text-accent">Draft</span>
+          }
+        </a>
+      </li>
+    }
+  </ul>
+</div>

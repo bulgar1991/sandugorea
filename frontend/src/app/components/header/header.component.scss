@@ -1,0 +1,84 @@
+@reference '../../../tailwind.css';
+
+.header {
+  @apply fixed inset-x-0 top-0 z-50 border-b border-transparent;
+  transition:
+    transform 0.6s var(--ease-out-expo),
+    background-color 0.5s ease,
+    border-color 0.5s ease;
+
+  &.is-scrolled {
+    @apply border-line/60 bg-black/85 backdrop-blur-md;
+  }
+  &.is-hidden {
+    transform: translate3d(0, -100%, 0);
+  }
+}
+
+.logo {
+  @apply flex flex-col leading-none;
+}
+.logo__name {
+  @apply font-display text-2xl tracking-[0.25em] text-ink uppercase;
+}
+.logo__tag {
+  @apply mt-1 text-[0.55rem] tracking-[0.55em] text-accent uppercase;
+}
+
+.burger {
+  @apply relative flex h-10 w-10 cursor-pointer flex-col items-center justify-center gap-2;
+
+  span {
+    @apply block h-px w-7 bg-ink;
+    transition: transform 0.5s var(--ease-out-expo);
+  }
+  &.is-open span:first-child {
+    transform: translate3d(0, 4.5px, 0) rotate(45deg);
+  }
+  &.is-open span:last-child {
+    transform: translate3d(0, -4.5px, 0) rotate(-45deg);
+  }
+
+  // Component styles beat Tailwind's layered utilities, so `lg:hidden` must live here.
+  @media (width >= 64rem) {
+    display: none;
+  }
+}
+
+.mobile-menu {
+  @apply fixed inset-0 z-40 flex flex-col bg-black pt-32;
+}
+
+.mobile-menu__link {
+  @apply flex items-baseline gap-4 border-b border-line py-4 font-display text-5xl font-light text-ink;
+  opacity: 0;
+  transform: translate3d(0, 30px, 0);
+  animation: link-in 0.8s var(--ease-out-expo) forwards;
+}
+
+.menu-enter {
+  animation: menu-in 0.6s var(--ease-in-out-quart);
+}
+.menu-leave {
+  animation: menu-out 0.5s var(--ease-in-out-quart) forwards;
+}
+
+@keyframes menu-in {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes menu-out {
+  to {
+    clip-path: inset(0 0 100% 0);
+  }
+}
+@keyframes link-in {
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}

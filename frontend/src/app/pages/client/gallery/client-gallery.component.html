@@ -1,0 +1,76 @@
+@if (gallery(); as g) {
+  <section class="container-x py-12 lg:py-16">
+    <a
+      routerLink="/client"
+      class="inline-flex items-center gap-2 text-xs tracking-[0.3em] text-ink-muted uppercase hover:text-accent"
+    >
+      <app-icon name="arrow-left" [size]="14" />
+      All galleries
+    </a>
+
+    <div class="mt-8 flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
+      <div>
+        <p class="eyebrow" appReveal>{{ g.date | date: 'd MMMM y' }}</p>
+        <h1 class="heading-lg mt-4" appReveal [revealDelay]="100">{{ g.title }}</h1>
+        <p class="mt-3 text-sm text-ink-muted" appReveal [revealDelay]="150">
+          {{ g.photos.length }} photographs · {{ totalSize() }}
+        </p>
+      </div>
+      <button
+        type="button"
+        class="btn btn-primary w-fit"
+        (click)="downloadAll()"
+        [disabled]="zipState() === 'preparing'"
+        appReveal
+        [revealDelay]="200"
+      >
+        <app-icon name="download" [size]="16" />
+        {{ zipState() === 'preparing' ? 'Preparing download…' : 'Download all' }}
+      </button>
+    </div>
+
+    <div class="mt-12 columns-2 gap-3 sm:gap-4 lg:columns-3 xl:columns-4">
+      @for (p of g.photos; track p.id; let i = $index) {
+        <figure
+          class="group relative mb-3 break-inside-avoid overflow-hidden bg-surface sm:mb-4"
+          appReveal="fade"
+          [revealDelay]="(i % 4) * 80"
+        >
+          <button
+            type="button"
+            class="block w-full cursor-zoom-in"
+            (click)="openIndex.set(i)"
+            [attr.aria-label]="'Open ' + p.name"
+          >
+            <img
+              [src]="p.thumbUrl"
+              [alt]="p.name"
+              class="block w-full transition-transform duration-[1200ms] ease-(--ease-out-expo) group-hover:scale-105"
+              loading="lazy"
+              decoding="async"
+            />
+          </button>
+          <a
+            [href]="p.url"
+            [attr.download]="p.name"
+            target="_blank"
+            rel="noopener"
+            class="absolute top-3 right-3 flex h-10 w-10 items-center justify-center rounded-full bg-black/70 text-ink opacity-0 transition-opacity duration-300 group-hover:opacity-100 hover:text-accent focus-visible:opacity-100"
+            [attr.aria-label]="'Download ' + p.name"
+          >
+            <app-icon name="download" [size]="16" />
+          </a>
+        </figure>
+      }
+    </div>
+  </section>
+
+  <app-lightbox [items]="items()" [(index)]="openIndex" [allowDownload]="true" />
+} @else {
+  <section
+    class="container-x flex min-h-[60vh] flex-col items-center justify-center gap-6 text-center"
+  >
+    <h1 class="heading-lg">Gallery not found</h1>
+    <a routerLink="/client" class="btn btn-outline">Back to my galleries</a>
+  </section>
+}

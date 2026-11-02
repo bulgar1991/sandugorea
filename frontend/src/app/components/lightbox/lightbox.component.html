@@ -1,0 +1,66 @@
+@if (current(); as item) {
+  <div
+    class="lightbox"
+    role="dialog"
+    aria-modal="true"
+    animate.enter="lb-enter"
+    animate.leave="lb-leave"
+    (touchstart)="onTouchStart($event)"
+    (touchend)="onTouchEnd($event)"
+  >
+    <div class="absolute inset-0" (click)="close()" aria-hidden="true"></div>
+
+    <div class="lightbox__bar">
+      <span class="text-xs tracking-[0.3em] text-ink-muted">
+        {{ (index() ?? 0) + 1 }} / {{ items().length }}
+      </span>
+      <div class="flex items-center gap-2">
+        @if (allowDownload()) {
+          <a
+            class="lightbox__btn"
+            [href]="item.src"
+            [attr.download]="item.downloadName || ''"
+            target="_blank"
+            rel="noopener"
+            aria-label="Download"
+          >
+            <app-icon name="download" />
+          </a>
+        }
+        <button type="button" class="lightbox__btn" (click)="close()" aria-label="Close">
+          <app-icon name="close" />
+        </button>
+      </div>
+    </div>
+
+    @for (it of [item]; track index()) {
+      <figure class="lightbox__figure" animate.enter="lb-img-enter">
+        <img [src]="it.src" [alt]="it.title || ''" class="lightbox__img" decoding="async" />
+        @if (it.title) {
+          <figcaption class="mt-4 text-center font-display text-xl italic text-ink-muted">
+            {{ it.title }}
+          </figcaption>
+        }
+      </figure>
+    }
+
+    @if (items().length > 1) {
+      <button
+        type="button"
+        class="lightbox__nav left-3 sm:left-6"
+        (click)="step(-1)"
+        aria-label="Previous"
+      >
+        <app-icon name="chevron-left" [size]="28" [stroke]="1" />
+      </button>
+      <button
+        type="button"
+        class="lightbox__nav right-3 sm:right-6"
+        (click)="step(1)"
+        aria-label="Next"
+      >
+        <app-icon name="chevron-right" [size]="28" [stroke]="1" />
+      </button>
+    }
+  </div>
+}

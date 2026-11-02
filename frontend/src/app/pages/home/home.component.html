@@ -1,18 +1,212 @@
-<main class="mx-auto flex min-h-screen max-w-3xl flex-col items-center justify-center gap-6 px-4">
-  <h1 class="text-4xl font-bold">Sandugorea</h1>
-  <p class="text-ink-muted">Angular + .NET 10</p>
+<!-- HERO -->
+<section class="hero">
+  @for (slide of slides; track slide.src; let i = $index) {
+    <div class="hero__slide" [class.is-active]="activeSlide() === i" aria-hidden="true">
+      <img
+        [src]="slide.src"
+        alt=""
+        class="img-cover"
+        [class.animate-ken-burns]="activeSlide() === i"
+        [attr.fetchpriority]="i === 0 ? 'high' : null"
+        [attr.loading]="i === 0 ? null : 'lazy'"
+        decoding="async"
+      />
+    </div>
+  }
+  <div class="hero__shade"></div>
 
-  <div class="card">
-    @switch (health()) {
-      @case (undefined) {
-        <span>Checking API…</span>
-      }
-      @case (null) {
-        <span class="text-danger">API unreachable</span>
-      }
-      @default {
-        <span class="text-success">API: {{ health()?.status }}</span>
-      }
+  <div class="container-x relative z-10 flex h-full flex-col justify-end pb-28 lg:pb-32">
+    <p class="eyebrow hero-in" style="--d: 0ms">Fine art · Portrait · Wedding</p>
+    <h1 class="heading-xl mt-6 !text-6xl sm:!text-8xl lg:!text-[9.5rem]">
+      <span class="line"><span class="hero-up" style="--d: 100ms">Light,</span></span>
+      <span class="line"
+        ><span class="hero-up italic text-accent" style="--d: 220ms">emotion,</span></span
+      >
+      <span class="line"><span class="hero-up" style="--d: 340ms">forever.</span></span>
+    </h1>
+    <div class="hero-in mt-10 flex flex-wrap items-center gap-4" style="--d: 700ms">
+      <a routerLink="/portfolio" class="btn btn-primary">
+        View portfolio
+        <app-icon name="arrow-right" [size]="16" />
+      </a>
+      <a routerLink="/contact" class="btn btn-ghost !text-ink">Book a session</a>
+    </div>
+  </div>
+
+  <!-- Slide progress -->
+  <div
+    class="hero-in absolute right-5 bottom-10 z-10 flex items-center gap-3 sm:right-8 lg:right-12"
+    style="--d: 900ms"
+  >
+    <span class="hidden text-xs tracking-[0.25em] text-ink-muted sm:inline">
+      {{ slides[activeSlide()].caption }}
+    </span>
+    @for (slide of slides; track slide.src; let i = $index) {
+      <button
+        type="button"
+        class="hero__dot"
+        [class.is-active]="activeSlide() === i"
+        (click)="activeSlide.set(i)"
+        [attr.aria-label]="'Slide ' + (i + 1)"
+      >
+        <span></span>
+      </button>
     }
   </div>
-</main>
+
+  <div
+    class="hero-in absolute bottom-10 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-3 md:flex"
+    style="--d: 1100ms"
+  >
+    <span class="text-[0.6rem] tracking-[0.4em] text-ink-muted uppercase">Scroll</span>
+    <span class="h-12 w-px bg-accent animate-scroll-hint"></span>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="container-x grid items-center gap-16 py-28 lg:grid-cols-12 lg:py-40">
+  <div class="relative overflow-hidden lg:col-span-5" appReveal="clip">
+    <img
+      [src]="introImage"
+      alt="The photographer at work"
+      class="img-cover parallax-img aspect-[4/5]"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+  <div class="lg:col-span-6 lg:col-start-7">
+    <p class="eyebrow" appReveal>Hello, I'm Sandu</p>
+    <h2 class="heading-lg mt-6" appReveal [revealDelay]="100">
+      I photograph people the way they feel, <em class="text-accent">not just how they look</em>.
+    </h2>
+    <p class="mt-8 max-w-lg leading-relaxed text-ink-muted" appReveal [revealDelay]="200">
+      For more than a decade I have been chasing honest light and quiet moments: the breath before a
+      vow, a child's hand reaching for yours, a face in perfect window light. My work is calm,
+      cinematic and made to be looked at for a lifetime.
+    </p>
+    <a
+      routerLink="/about"
+      class="link-underline mt-10 inline-flex items-center gap-3 text-xs font-semibold tracking-[0.3em] text-accent uppercase"
+      appReveal
+      [revealDelay]="300"
+    >
+      More about me
+      <app-icon name="arrow-right" [size]="14" />
+    </a>
+  </div>
+</section>
+
+<app-marquee [items]="marqueeItems" />
+
+<!-- FEATURED CATEGORIES -->
+<section class="container-x py-28 lg:py-40">
+  <div class="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
+    <div>
+      <p class="eyebrow" appReveal>Selected work</p>
+      <h2 class="heading-lg mt-6 max-w-2xl" appReveal [revealDelay]="100">
+        Stories told in light and shadow
+      </h2>
+    </div>
+    <a routerLink="/portfolio" class="btn btn-outline w-fit" appReveal [revealDelay]="200">
+      All work
+      <app-icon name="arrow-up-right" [size]="16" />
+    </a>
+  </div>
+
+  <div class="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-12">
+    @for (cat of categories; track cat.id; let i = $index) {
+      <a
+        routerLink="/portfolio"
+        [queryParams]="{ category: cat.id }"
+        class="category-card"
+        [class]="cardSpans[i]"
+        appReveal="scale"
+        [revealDelay]="(i % 3) * 120"
+      >
+        <img
+          [src]="cat.cover"
+          [alt]="cat.label"
+          class="img-cover category-card__img"
+          loading="lazy"
+          decoding="async"
+        />
+        <div class="category-card__shade"></div>
+        <div class="category-card__body">
+          <span class="text-xs tracking-[0.3em] text-accent">0{{ i + 1 }}</span>
+          <h3 class="mt-2 font-display text-4xl font-light">{{ cat.label }}</h3>
+          <p class="category-card__blurb">{{ cat.blurb }}</p>
+        </div>
+        <span class="category-card__arrow"><app-icon name="arrow-up-right" [size]="18" /></span>
+      </a>
+    }
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="border-y border-line bg-surface">
+  <div class="container-x py-28 lg:py-36">
+    <p class="eyebrow" appReveal>How it works</p>
+    <h2 class="heading-lg mt-6 max-w-2xl" appReveal [revealDelay]="100">
+      From first hello to your private gallery
+    </h2>
+    <div class="mt-16 grid gap-12 md:grid-cols-3 md:gap-8">
+      @for (step of steps; track step.title; let i = $index) {
+        <div class="step" appReveal [revealDelay]="i * 150">
+          <span class="font-display text-7xl font-light text-accent/30">0{{ i + 1 }}</span>
+          <h3 class="mt-4 font-display text-3xl">{{ step.title }}</h3>
+          <p class="mt-4 leading-relaxed text-ink-muted">{{ step.text }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="container-x py-28 text-center lg:py-40">
+  <p class="eyebrow" appReveal>Kind words</p>
+  <div class="relative mx-auto mt-10 grid max-w-4xl" appReveal [revealDelay]="100">
+    @for (t of [testimonials[activeQuote()]]; track activeQuote()) {
+      <blockquote class="quote" animate.enter="quote-enter">
+        <p class="font-display text-3xl leading-snug font-light italic sm:text-5xl">
+          “{{ t.quote }}”
+        </p>
+        <footer class="mt-10 text-xs tracking-[0.3em] text-ink-muted uppercase">
+          <span class="text-accent">{{ t.author }}</span> · {{ t.detail }}
+        </footer>
+      </blockquote>
+    }
+  </div>
+  <div class="mt-10 flex justify-center gap-3">
+    @for (t of testimonials; track t.author; let i = $index) {
+      <button
+        type="button"
+        class="h-1.5 w-8 cursor-pointer rounded-full transition-colors duration-500"
+        [class]="activeQuote() === i ? 'bg-accent' : 'bg-line hover:bg-ink-subtle'"
+        (click)="activeQuote.set(i)"
+        [attr.aria-label]="'Testimonial ' + (i + 1)"
+      ></button>
+    }
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="relative h-[80vh] min-h-[32rem] overflow-hidden">
+  <img
+    [src]="ctaImage"
+    alt=""
+    class="img-cover parallax-img absolute inset-0"
+    loading="lazy"
+    decoding="async"
+  />
+  <div class="absolute inset-0 bg-black/60"></div>
+  <div class="container-x relative flex h-full flex-col items-center justify-center text-center">
+    <p class="eyebrow" appReveal>Now booking 2027</p>
+    <h2 class="heading-xl mt-6 max-w-4xl" appReveal [revealDelay]="100">
+      Let's tell <em class="text-accent">your</em> story
+    </h2>
+    <a routerLink="/contact" class="btn btn-primary mt-12" appReveal [revealDelay]="200">
+      Get in touch
+      <app-icon name="arrow-right" [size]="16" />
+    </a>
+  </div>
+</section>

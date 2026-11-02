@@ -1,0 +1,94 @@
+<div class="min-h-svh lg:pl-64">
+  <!-- Sidebar -->
+  <aside
+    class="fixed inset-y-0 left-0 z-50 flex w-64 flex-col border-r border-line bg-surface transition-transform duration-500 ease-(--ease-out-expo) lg:translate-x-0"
+    [class]="navOpen() ? 'translate-x-0' : '-translate-x-full'"
+  >
+    <div class="flex h-20 items-center gap-3 border-b border-line px-6">
+      <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-black">
+        <app-icon name="camera" [size]="18" />
+      </span>
+      <div class="leading-none">
+        <p class="font-display text-lg tracking-[0.2em] uppercase">{{ brand.name }}</p>
+        <p class="mt-1 text-[0.55rem] tracking-[0.4em] text-accent uppercase">Admin</p>
+      </div>
+    </div>
+
+    <nav class="flex flex-1 flex-col gap-1 p-4" aria-label="Admin">
+      @for (item of nav; track item.path) {
+        <a
+          [routerLink]="item.path"
+          routerLinkActive="!bg-accent/10 !text-accent"
+          [routerLinkActiveOptions]="{ exact: item.exact }"
+          class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-ink-muted transition-colors hover:bg-white/5 hover:text-ink"
+        >
+          <app-icon [name]="item.icon" [size]="18" />
+          {{ item.label }}
+        </a>
+      }
+    </nav>
+
+    <div class="border-t border-line p-4">
+      <div
+        class="mb-3 flex items-center gap-2 px-2 text-xs"
+        [class]="expiringSoon() ? 'text-danger' : 'text-ink-subtle'"
+      >
+        <app-icon name="clock" [size]="14" />
+        Auto sign-out in {{ remaining() }}
+      </div>
+      <div class="flex items-center gap-3 rounded-xl bg-black/40 p-3">
+        <span
+          class="flex h-9 w-9 items-center justify-center rounded-full bg-surface-2 text-accent"
+        >
+          <app-icon name="user" [size]="16" />
+        </span>
+        <div class="min-w-0 flex-1">
+          <p class="truncate text-sm">{{ auth.session()?.displayName }}</p>
+          <p class="truncate text-xs text-ink-subtle">{{ auth.session()?.username }}</p>
+        </div>
+        <button
+          type="button"
+          class="cursor-pointer rounded-lg p-2 text-ink-muted hover:bg-white/5 hover:text-danger"
+          (click)="auth.logout()"
+          aria-label="Sign out"
+          title="Sign out"
+        >
+          <app-icon name="logout" [size]="16" />
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  @if (navOpen()) {
+    <div
+      class="fixed inset-0 z-40 bg-black/70 lg:hidden"
+      (click)="navOpen.set(false)"
+      animate.enter="animate-fade-in"
+      aria-hidden="true"
+    ></div>
+  }
+
+  <!-- Mobile top bar -->
+  <header
+    class="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-line bg-black/90 px-4 backdrop-blur-md lg:hidden"
+  >
+    <button
+      type="button"
+      class="cursor-pointer p-2"
+      (click)="navOpen.set(true)"
+      aria-label="Open menu"
+    >
+      <app-icon name="menu" />
+    </button>
+    <span class="font-display tracking-[0.2em] uppercase">{{ brand.name }}</span>
+    <span class="text-xs" [class]="expiringSoon() ? 'text-danger' : 'text-ink-subtle'">{{
+      remaining()
+    }}</span>
+  </header>
+
+  <main class="px-4 py-8 sm:px-8 lg:px-12 lg:py-12">
+    <router-outlet />
+  </main>
+</div>
+
+<app-toasts />

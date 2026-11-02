@@ -13,6 +13,17 @@ dotnet run --project backend/Sandugorea.Api
 cd frontend && npm start
 ```
 
+## Site map
+
+| Area | URLs | Notes |
+| --- | --- | --- |
+| Public | `/`, `/portfolio`, `/about`, `/contact` | Portfolio images come from `frontend/src/app/data/portfolio.data.ts` (placeholders for now) |
+| Client | `/client/login`, `/client`, `/client/galleries/:id` | A client only sees folders that were sent to them |
+| Admin | `/admin/login`, `/admin`, `/admin/clients`, `/admin/clients/:id`, `/admin/security` | Not linked from the site; password + 2FA; 15-min idle sign-out |
+
+**The UI currently runs on mock data** (`gallery-store.service.ts`, `auth.service.ts`) until the API is built.
+Dev credentials — admin: `admin` / `admin123`, 2FA code `123456` · client: `ana.mihai` / `demo1234`.
+
 ## Tailwind v4 + SCSS
 
 - `frontend/src/tailwind.css` — Tailwind import and theme tokens (`@theme`). Plain CSS on purpose: Sass can't process Tailwind v4 directives.

@@ -1,0 +1,358 @@
+@if (client(); as c) {
+  <a
+    routerLink="/admin/clients"
+    class="inline-flex items-center gap-2 text-xs tracking-[0.2em] text-ink-muted uppercase hover:text-accent"
+  >
+    <app-icon name="arrow-left" [size]="14" /> Clients
+  </a>
+
+  <!-- Client header -->
+  <div
+    class="card mt-6 flex flex-col gap-6 p-6 lg:flex-row lg:items-center lg:justify-between animate-fade-in"
+  >
+    <div class="flex items-center gap-4">
+      <span
+        class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-accent/10 font-display text-2xl text-accent"
+        >{{ c.name.charAt(0) }}</span
+      >
+      <div class="min-w-0">
+        <div class="flex flex-wrap items-center gap-3">
+          <h1 class="font-display text-3xl font-light">{{ c.name }}</h1>
+          @if (c.active) {
+            <span class="badge border-success/30 text-success">Active</span>
+          } @else {
+            <span class="badge border-line text-ink-subtle">Disabled</span>
+          }
+        </div>
+        <p class="mt-1 truncate text-sm text-ink-muted">
+          {{ c.email }} · <span class="font-mono text-xs">{{ c.username }}</span> · last sign-in
+          {{ c.lastLoginAt ? (c.lastLoginAt | date: 'd MMM y, HH:mm') : 'never' }}
+        </p>
+      </div>
+    </div>
+    <div class="flex flex-wrap gap-2">
+      <button type="button" class="btn btn-ghost !px-4 !py-2.5" (click)="resetPassword()">
+        <app-icon name="key" [size]="14" /> Reset password
+      </button>
+      <button type="button" class="btn btn-ghost !px-4 !py-2.5" (click)="toggleAccess()">
+        <app-icon [name]="c.active ? 'lock' : 'check'" [size]="14" />
+        {{ c.active ? 'Disable access' : 'Enable access' }}
+      </button>
+      <button
+        type="button"
+        class="btn btn-danger !px-4 !py-2.5"
+        (click)="deleteConfirmText.set(''); confirmDeleteClient.set(true)"
+      >
+        <app-icon name="trash" [size]="14" />
+      </button>
+    </div>
+  </div>
+
+  <div class="mt-8 grid gap-8 xl:grid-cols-[18rem_1fr]">
+    <!-- Folders -->
+    <aside>
+      <div class="mb-4 flex items-center justify-between">
+        <h2 class="text-xs tracking-[0.2em] text-ink-subtle uppercase">Folders</h2>
+        <button
+          type="button"
+          class="flex cursor-pointer items-center gap-1 text-xs tracking-[0.15em] text-accent uppercase hover:text-accent-light"
+          (click)="newGalleryOpen.set(true)"
+        >
+          <app-icon name="plus" [size]="14" /> New
+        </button>
+      </div>
+      <div class="flex gap-3 overflow-x-auto pb-2 xl:flex-col xl:overflow-visible">
+        @for (g of galleries(); track g.id) {
+          <button
+            type="button"
+            class="flex min-w-60 cursor-pointer items-center gap-3 rounded-xl border p-3 text-left transition-colors duration-300 xl:min-w-0"
+            [class]="
+              selectedId() === g.id
+                ? 'border-accent/50 bg-accent/5'
+                : 'border-line bg-surface hover:border-ink-subtle'
+            "
+            (click)="selectedId.set(g.id)"
+          >
+            <span
+              class="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-surface-2 text-ink-subtle"
+            >
+              @if (g.photos[0]; as p) {
+                <img [src]="p.thumbUrl" alt="" class="img-cover" loading="lazy" />
+              } @else {
+                <app-icon name="folder" [size]="18" />
+              }
+            </span>
+            <span class="min-w-0 flex-1">
+              <span class="block truncate text-sm">{{ g.title }}</span>
+              <span class="block text-xs text-ink-subtle"
+                >{{ g.photos.length }} photos · {{ g.sentAt ? 'Delivered' : 'Draft' }}</span
+              >
+            </span>
+          </button>
+        } @empty {
+          <p
+            class="rounded-xl border border-dashed border-line p-6 text-center text-sm text-ink-muted"
+          >
+            No folders yet.
+          </p>
+        }
+      </div>
+    </aside>
+
+    <!-- Selected folder -->
+    <section class="min-w-0">
+      @if (selected(); as g) {
+        @for (key of [g.id]; track key) {
+          <div animate.enter="animate-fade-in">
+            <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+              <div>
+                <p class="text-xs tracking-[0.2em] text-ink-subtle uppercase">
+                  {{ g.date | date: 'd MMMM y' }}
+                </p>
+                <h2 class="mt-2 font-display text-4xl font-light">{{ g.title }}</h2>
+                <p class="mt-1 text-sm text-ink-muted">
+                  {{ g.photos.length }} photos · {{ selectedSize() }}
+                  @if (g.sentAt) {
+                    · <span class="text-success">sent {{ g.sentAt | date: 'd MMM, HH:mm' }}</span>
+                  }
+                </p>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  class="btn btn-primary !px-5 !py-2.5"
+                  (click)="confirmSend.set(true)"
+                  [disabled]="!g.photos.length || !c.active"
+                >
+                  <app-icon name="send" [size]="14" />
+                  {{ g.sentAt ? 'Send again' : 'Send to client' }}
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-danger !px-4 !py-2.5"
+                  (click)="confirmDeleteGallery.set(true)"
+                  aria-label="Delete folder"
+                >
+                  <app-icon name="trash" [size]="14" />
+                </button>
+              </div>
+            </div>
+
+            <!-- Dropzone -->
+            <label
+              class="mt-6 flex cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed px-6 py-12 text-center transition-colors duration-300"
+              [class]="
+                dragging() ? 'border-accent bg-accent/5' : 'border-line hover:border-ink-subtle'
+              "
+              (dragover)="$event.preventDefault(); dragging.set(true)"
+              (dragleave)="dragging.set(false)"
+              (drop)="onDrop($event)"
+            >
+              <span
+                class="flex h-14 w-14 items-center justify-center rounded-full bg-surface-2 text-accent transition-transform duration-500"
+                [class.scale-110]="dragging()"
+              >
+                <app-icon name="upload" />
+              </span>
+              <span class="font-display text-2xl font-light">Drop photos here</span>
+              <span class="text-sm text-ink-muted"
+                >or click to browse · JPG, PNG, WEBP, HEIC up to 50 MB each</span
+              >
+              <input
+                type="file"
+                class="sr-only"
+                accept="image/*"
+                multiple
+                (change)="onFiles($event)"
+              />
+            </label>
+
+            @if (uploads().length) {
+              <ul class="mt-4 flex flex-col gap-2">
+                @for (u of uploads(); track u.id) {
+                  <li class="card px-4 py-3" animate.enter="animate-fade-in">
+                    <div class="flex items-center justify-between gap-4 text-sm">
+                      <span class="truncate">{{ u.name }}</span>
+                      <span class="shrink-0 text-xs text-ink-subtle"
+                        >{{ formatBytes(u.size) }} · {{ u.progress | number: '1.0-0' }}%</span
+                      >
+                    </div>
+                    <div class="mt-2 h-1 overflow-hidden rounded-full bg-line">
+                      <div
+                        class="h-full origin-left rounded-full bg-accent transition-transform duration-150"
+                        [style.transform]="'scaleX(' + u.progress / 100 + ')'"
+                      ></div>
+                    </div>
+                  </li>
+                }
+              </ul>
+            }
+
+            <!-- Photos -->
+            <div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6">
+              @for (p of g.photos; track p.id; let i = $index) {
+                <figure
+                  class="group relative aspect-square overflow-hidden rounded-lg bg-surface"
+                  animate.enter="animate-fade-in"
+                >
+                  <button
+                    type="button"
+                    class="block h-full w-full cursor-zoom-in"
+                    (click)="openIndex.set(i)"
+                    [attr.aria-label]="'Preview ' + p.name"
+                  >
+                    <img
+                      [src]="p.thumbUrl"
+                      [alt]="p.name"
+                      class="img-cover transition-transform duration-700 group-hover:scale-105"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </button>
+                  <figcaption
+                    class="pointer-events-none absolute inset-x-0 bottom-0 truncate bg-gradient-to-t from-black/80 px-2 pt-6 pb-2 text-[0.65rem] text-ink-muted opacity-0 transition-opacity group-hover:opacity-100"
+                  >
+                    {{ p.name }}
+                  </figcaption>
+                  <button
+                    type="button"
+                    class="absolute top-2 right-2 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-black/70 text-ink-muted opacity-0 transition-opacity group-hover:opacity-100 hover:text-danger focus-visible:opacity-100"
+                    (click)="deletePhoto(p.id)"
+                    [attr.aria-label]="'Delete ' + p.name"
+                  >
+                    <app-icon name="trash" [size]="14" />
+                  </button>
+                </figure>
+              }
+            </div>
+          </div>
+        }
+      } @else {
+        <div
+          class="flex flex-col items-center gap-4 rounded-2xl border border-dashed border-line px-6 py-20 text-center"
+        >
+          <app-icon name="folder" [size]="36" class="text-accent" />
+          <p class="font-display text-2xl font-light">Create a folder to start uploading</p>
+          <button type="button" class="btn btn-primary" (click)="newGalleryOpen.set(true)">
+            <app-icon name="plus" [size]="16" /> New folder
+          </button>
+        </div>
+      }
+    </section>
+  </div>
+
+  <app-lightbox [items]="lightboxItems()" [(index)]="openIndex" />
+
+  <!-- New folder -->
+  <app-modal [(open)]="newGalleryOpen" title="New folder">
+    <form
+      [formGroup]="galleryForm"
+      (ngSubmit)="createGallery()"
+      class="flex flex-col gap-5"
+      novalidate
+    >
+      <label class="field">
+        <span>Title</span>
+        <input class="input-box" formControlName="title" placeholder="e.g. Wedding Day" />
+      </label>
+      <label class="field">
+        <span>Session date</span>
+        <input class="input-box [color-scheme:dark]" type="date" formControlName="date" />
+      </label>
+      <div class="flex gap-3">
+        <button type="submit" class="btn btn-primary">Create folder</button>
+        <button type="button" class="btn btn-ghost" (click)="newGalleryOpen.set(false)">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </app-modal>
+
+  <!-- Send -->
+  <app-modal [(open)]="confirmSend" title="Send to client">
+    <p class="text-sm leading-relaxed text-ink-muted">
+      {{ c.name }} will receive an email at <span class="text-ink">{{ c.email }}</span> and the
+      folder <span class="text-ink">“{{ selected()?.title }}”</span> ({{
+        selected()?.photos?.length
+      }}
+      photos) becomes visible in their private gallery.
+    </p>
+    <div class="mt-6 flex gap-3">
+      <button type="button" class="btn btn-primary" (click)="send()">
+        <app-icon name="send" [size]="14" /> Send
+      </button>
+      <button type="button" class="btn btn-ghost" (click)="confirmSend.set(false)">Cancel</button>
+    </div>
+  </app-modal>
+
+  <!-- Delete folder -->
+  <app-modal [(open)]="confirmDeleteGallery" title="Delete folder?">
+    <p class="text-sm text-ink-muted">
+      “{{ selected()?.title }}” and its {{ selected()?.photos?.length }} photos will be permanently
+      deleted. The client will lose access immediately.
+    </p>
+    <div class="mt-6 flex gap-3">
+      <button type="button" class="btn btn-danger" (click)="deleteGallery()">Delete</button>
+      <button type="button" class="btn btn-ghost" (click)="confirmDeleteGallery.set(false)">
+        Cancel
+      </button>
+    </div>
+  </app-modal>
+
+  <!-- New password -->
+  <app-modal
+    [open]="newPassword() !== null"
+    (openChange)="newPassword.set(null)"
+    title="New password"
+  >
+    <p class="text-sm text-ink-muted">
+      The old password no longer works. Send this one to {{ c.name }} - it won't be shown again.
+    </p>
+    <div
+      class="mt-4 flex items-center justify-between gap-3 rounded-xl border border-line bg-black/50 p-4 font-mono"
+    >
+      {{ newPassword() }}
+      <button
+        type="button"
+        class="cursor-pointer text-ink-subtle hover:text-accent"
+        (click)="copy(newPassword() ?? '')"
+        aria-label="Copy password"
+      >
+        <app-icon name="copy" [size]="16" />
+      </button>
+    </div>
+    <button type="button" class="btn btn-primary mt-6" (click)="newPassword.set(null)">Done</button>
+  </app-modal>
+
+  <!-- Delete client -->
+  <app-modal [(open)]="confirmDeleteClient" title="Delete client?">
+    <p class="text-sm text-ink-muted">
+      This permanently deletes {{ c.name }}, all {{ galleries().length }} folders and every photo in
+      them. Type <span class="font-mono text-ink">{{ c.username }}</span> to confirm.
+    </p>
+    <input
+      class="input-box mt-4 font-mono"
+      [value]="deleteConfirmText()"
+      (input)="deleteConfirmText.set($any($event.target).value)"
+      autocapitalize="none"
+    />
+    <div class="mt-6 flex gap-3">
+      <button
+        type="button"
+        class="btn btn-danger"
+        [disabled]="deleteConfirmText() !== c.username"
+        (click)="deleteClient()"
+      >
+        Delete forever
+      </button>
+      <button type="button" class="btn btn-ghost" (click)="confirmDeleteClient.set(false)">
+        Cancel
+      </button>
+    </div>
+  </app-modal>
+} @else {
+  <div class="flex flex-col items-center gap-6 py-24 text-center">
+    <h1 class="font-display text-4xl font-light">Client not found</h1>
+    <a routerLink="/admin/clients" class="btn btn-outline">Back to clients</a>
+  </div>
+}

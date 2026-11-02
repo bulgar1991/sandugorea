@@ -1,0 +1,79 @@
+@reference '../../../../tailwind.css';
+
+.admin-login {
+  @apply relative flex min-h-svh items-center justify-center overflow-hidden px-5 py-12;
+  background-image:
+    linear-gradient(rgb(255 255 255 / 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.admin-login__glow {
+  @apply pointer-events-none absolute top-1/2 left-1/2 h-[40rem] w-[40rem] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-25;
+  background: radial-gradient(circle, var(--color-accent-dark) 0%, transparent 65%);
+  animation: breathe 8s ease-in-out infinite;
+}
+
+.shield {
+  @apply relative flex h-16 w-16 items-center justify-center rounded-2xl border border-accent/40 bg-accent/10 text-accent;
+  &::after {
+    content: '';
+    @apply absolute inset-0 rounded-2xl border border-accent/40;
+    animation: ping 2.4s var(--ease-out-expo) infinite;
+  }
+}
+
+.alert {
+  @apply rounded-lg border border-danger/30 bg-danger/10 px-4 py-3 text-sm text-danger;
+  animation: shake 0.45s ease;
+}
+
+.spinner {
+  @apply h-4 w-4 rounded-full border-2 border-black/30 border-t-black;
+  animation: spin 0.7s linear infinite;
+}
+
+.step-in {
+  animation: step-in 0.6s var(--ease-out-expo);
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.15);
+  }
+}
+@keyframes ping {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+@keyframes shake {
+  20%,
+  60% {
+    transform: translate3d(-6px, 0, 0);
+  }
+  40%,
+  80% {
+    transform: translate3d(6px, 0, 0);
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes step-in {
+  from {
+    opacity: 0;
+    transform: translate3d(24px, 0, 0);
+  }
+}

@@ -8,25 +8,231 @@
 @import 'tailwindcss';
 
 @theme {
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  --font-sans: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
 
-  /* Site palette - use as `bg-primary`, `text-ink`, etc. */
-  --color-primary: #2563eb;
-  --color-ink: #0b1033;
-  --color-ink-muted: #4a5078;
-  --color-background: #ffffff;
-  --color-surface: #f6f7ff;
-  --color-border: #dde1f2;
-  --color-danger: #e0244f;
-  --color-success: #12a86c;
+  /* Black everywhere; warm ivory text; champagne gold for links, buttons, accents. */
+  --color-background: #000000;
+  --color-surface: #0b0b0b;
+  --color-surface-2: #141414;
+  --color-line: #262626;
+
+  --color-ink: #f3ede3;
+  --color-ink-muted: #a39e94;
+  --color-ink-subtle: #6b675f;
+
+  --color-accent: #c9a46a;
+  --color-accent-light: #e6cb9c;
+  --color-accent-dark: #9c7a45;
+
+  --color-danger: #e5484d;
+  --color-success: #4cc38a;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-ken-burns: ken-burns 9s ease-out forwards;
+  --animate-fade-in: fade-in 0.6s var(--ease-out-expo) both;
+  --animate-scroll-hint: scroll-hint 2.2s var(--ease-in-out-quart) infinite;
+
+  @keyframes marquee {
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+  @keyframes ken-burns {
+    from {
+      transform: scale(1.12);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes scroll-hint {
+    0% {
+      transform: scaleY(0);
+      transform-origin: top;
+    }
+    50% {
+      transform: scaleY(1);
+      transform-origin: top;
+    }
+    51% {
+      transform-origin: bottom;
+    }
+    100% {
+      transform: scaleY(0);
+      transform-origin: bottom;
+    }
+  }
 }
 
 @layer base {
   html {
-    @apply scroll-smooth;
+    color-scheme: dark;
+    @apply bg-background;
   }
 
   body {
     @apply min-h-screen bg-background font-sans text-ink antialiased;
+  }
+
+  ::selection {
+    @apply bg-accent text-black;
+  }
+
+  a {
+    @apply transition-colors duration-300;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-4 outline-accent;
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-background;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-line;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12;
+  }
+
+  .eyebrow {
+    @apply text-xs font-semibold tracking-[0.35em] text-accent uppercase;
+  }
+
+  .heading-xl {
+    @apply font-display text-5xl leading-[0.95] font-light sm:text-7xl lg:text-8xl;
+  }
+
+  .heading-lg {
+    @apply font-display text-4xl leading-tight font-light sm:text-5xl lg:text-6xl;
+  }
+
+  .link-underline {
+    @apply relative inline-block;
+    &::after {
+      content: '';
+      @apply absolute -bottom-0.5 left-0 h-px w-full origin-right scale-x-0 bg-current transition-transform duration-500 ease-(--ease-out-expo);
+    }
+    &:hover::after,
+    &.active::after {
+      @apply origin-left scale-x-100;
+    }
+  }
+
+  .btn {
+    @apply relative isolate inline-flex cursor-pointer items-center justify-center gap-3 overflow-hidden rounded-full px-7 py-3.5 text-xs font-semibold tracking-[0.25em] uppercase transition-[color,border-color,transform] duration-500 ease-(--ease-out-expo);
+    @apply disabled:cursor-not-allowed disabled:opacity-50;
+    /* Fill that slides up on hover (transform only - no repaint of layout). */
+    &::before {
+      content: '';
+      @apply absolute inset-0 -z-10 translate-y-full rounded-full transition-transform duration-500 ease-(--ease-out-expo);
+    }
+    &:hover:not(:disabled)::before {
+      @apply translate-y-0;
+    }
+    &:active:not(:disabled) {
+      @apply scale-[0.97];
+    }
+  }
+
+  .btn-primary {
+    @apply bg-accent text-black;
+    &::before {
+      @apply bg-ink;
+    }
+  }
+
+  .btn-outline {
+    @apply border border-accent/60 text-accent;
+    &::before {
+      @apply bg-accent;
+    }
+    &:hover:not(:disabled) {
+      @apply text-black;
+    }
+  }
+
+  .btn-ghost {
+    @apply border border-line text-ink-muted;
+    &::before {
+      @apply bg-surface-2;
+    }
+    &:hover:not(:disabled) {
+      @apply text-ink;
+    }
+  }
+
+  .btn-danger {
+    @apply border border-danger/50 text-danger;
+    &::before {
+      @apply bg-danger;
+    }
+    &:hover:not(:disabled) {
+      @apply text-black;
+    }
+  }
+
+  .field {
+    @apply flex flex-col gap-2;
+    & > span {
+      @apply text-[0.7rem] font-semibold tracking-[0.25em] text-ink-muted uppercase;
+    }
+  }
+
+  .input {
+    @apply w-full rounded-none border-0 border-b border-line bg-transparent px-0 py-3 text-ink transition-colors duration-300 placeholder:text-ink-subtle focus:border-accent focus:outline-none;
+  }
+
+  .input-box {
+    @apply w-full rounded-xl border border-line bg-surface px-4 py-3 text-sm text-ink transition-colors duration-300 placeholder:text-ink-subtle focus:border-accent focus:outline-none;
+  }
+
+  .card {
+    @apply rounded-2xl border border-line bg-surface;
+  }
+
+  .badge {
+    @apply inline-flex items-center rounded-full border px-2.5 py-0.5 text-[0.65rem] font-semibold tracking-[0.1em] whitespace-nowrap uppercase;
+  }
+
+  .img-cover {
+    @apply block h-full w-full object-cover;
+  }
+}
+
+/* Route transitions (View Transitions API): a soft crossfade that runs on the compositor. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 450ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
