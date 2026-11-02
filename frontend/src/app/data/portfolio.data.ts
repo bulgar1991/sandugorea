@@ -55,12 +55,15 @@ export const PORTFOLIO: PortfolioPhoto[] = Array.from({ length: 25 }, (_, i) => 
   };
 });
 
-export const HERO_SLIDES = [
-  { src: img('sg-hero-1', 2400, 1500), captionKey: 'hero.slides.s1' },
-  { src: img('sg-hero-2', 2400, 1500), captionKey: 'hero.slides.s2' },
-  { src: img('sg-hero-3', 2400, 1500), captionKey: 'hero.slides.s3' },
-  { src: img('sg-hero-4', 2400, 1500), captionKey: 'hero.slides.s4' },
-];
+/**
+ * Hero portrait. For the "stepping out of the frame" look use a cut-out photo with a
+ * transparent background: put it in /public/images/hero-portrait.png and set `cutout: true`.
+ */
+export const HERO_PORTRAIT = {
+  // Placeholder: a photographer with a vintage camera (picsum #91).
+  src: 'https://picsum.photos/id/91/900/1200',
+  cutout: false,
+};
 
 export const TESTIMONIALS = ['t1', 't2', 't3', 't4', 't5'].map((id, i) => ({
   id,
@@ -72,6 +75,8 @@ export const TESTIMONIALS = ['t1', 't2', 't3', 't4', 't5'].map((id, i) => ({
 
 export const BRAND = {
   name: 'Sandugorea',
+  /** Shown in the hero: "Hi, I'm <owner>". */
+  owner: 'Sandu',
   email: 'hello@sandugorea.ch',
   phone: '+40 700 000 000',
   instagram: 'https://instagram.com/',

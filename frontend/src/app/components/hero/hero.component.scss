@@ -3,95 +3,88 @@
 }
 
 .hero {
-  @apply relative h-[100svh] min-h-[36rem] overflow-hidden;
+  @apply relative flex min-h-[100svh] items-center overflow-hidden pb-16 pt-28 lg:pb-0 lg:pt-header;
 
-  &__slide {
-    @apply absolute inset-0 overflow-hidden opacity-0 transition-opacity duration-1800;
-
-    &--active {
-      @apply opacity-100;
-    }
+  // Soft gold light behind the portrait.
+  &__glow {
+    @apply pointer-events-none absolute -right-40 top-1/4 h-[40rem] w-[40rem] rounded-full bg-glow-accent opacity-25 blur-3xl;
   }
 
-  &__image {
-    @apply block h-full w-full object-cover;
-
-    &--zoom {
-      @apply animate-ken-burns;
-    }
+  &__inner {
+    @apply relative grid items-center gap-14 lg:grid-cols-12 lg:gap-8;
   }
 
-  &__shade {
-    @apply pointer-events-none absolute inset-0 bg-hero-shade;
+  // ---------- Text ----------
+  &__text {
+    @apply lg:col-span-7;
   }
 
-  &__content {
-    @apply relative z-10 flex h-full flex-col justify-end pb-28 lg:pb-32;
+  &__welcome {
+    @apply text-xs font-medium uppercase tracking-caps-xl text-ink-muted sm:text-sm;
   }
 
   &__title {
-    @apply mt-6 font-display text-6xl font-light leading-display sm:text-8xl lg:text-hero;
+    @apply mt-6 font-display text-5xl font-medium leading-[1.05] sm:text-7xl lg:text-8xl;
   }
 
   &__line {
-    @apply block overflow-hidden pb-[0.06em];
+    @apply block overflow-hidden pb-[0.08em];
   }
 
-  &__word {
+  &__rise {
     @apply inline-block animate-rise;
     animation-duration: 1.3s;
     animation-delay: calc(var(--intro) + var(--d));
-
-    &--accent {
-      @apply italic text-accent;
-    }
   }
 
-  &__appear {
-    @apply animate-fade-in;
-    animation-duration: 1.2s;
-    animation-delay: calc(var(--intro) + var(--d));
+  &__name {
+    @apply italic text-accent;
+  }
+
+  &__role {
+    @apply mt-3 flex min-h-[1.3em] items-center font-display text-3xl font-medium text-ink sm:text-5xl lg:text-6xl;
+  }
+
+  &__caret {
+    @apply ml-1 inline-block h-[0.9em] w-px animate-caret bg-ink-muted;
+  }
+
+  &__description {
+    @apply mt-8 max-w-xl sm:text-lg;
   }
 
   &__actions {
-    @apply mt-10 flex flex-wrap items-center gap-4;
+    @apply mt-10 flex flex-wrap items-center gap-8;
   }
 
-  &__slider {
-    @apply absolute bottom-10 right-5 z-10 flex items-center gap-3 sm:right-8 lg:right-12;
+  &__appear {
+    @apply animate-fade-up;
+    animation-delay: calc(var(--intro) + var(--d));
   }
 
-  &__caption {
-    @apply hidden text-xs tracking-caps-md text-ink-muted sm:inline;
+  // ---------- Portrait stepping out of its frame ----------
+  &__visual {
+    @apply relative mx-auto w-full max-w-sm pt-16 sm:max-w-md lg:col-span-5 lg:max-w-none lg:pt-24;
   }
 
-  &__dot {
-    @apply relative h-5 w-10 cursor-pointer;
+  &__frame {
+    @apply absolute inset-x-0 bottom-0 top-1/4 animate-fade-in rounded-3xl border border-line bg-surface shadow-2xl;
+    animation-duration: 1.2s;
+    animation-delay: calc(var(--intro) + 200ms);
+  }
 
-    &::before {
-      content: '';
-      @apply absolute inset-x-0 top-1/2 h-px bg-white/25;
+  &__portrait {
+    @apply relative z-10 mx-auto block aspect-[3/4] w-[88%] animate-portrait-in object-contain object-bottom;
+    animation-delay: calc(var(--intro) + 350ms);
+
+    // A normal (non cut-out) photo: fill the shape and fade its top and sides into the page,
+    // so it still reads as stepping out of the frame.
+    &--photo {
+      @apply rounded-b-3xl object-cover;
+      mask-image:
+        linear-gradient(to bottom, transparent 0%, #000 22%),
+        linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+      mask-composite: intersect;
     }
-
-    &--active .hero__progress {
-      @apply animate-progress;
-      animation-duration: var(--slide-ms);
-    }
-  }
-
-  &__progress {
-    @apply absolute inset-x-0 top-1/2 h-px origin-left scale-x-0 bg-accent;
-  }
-
-  &__scroll {
-    @apply absolute bottom-10 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-3 md:flex;
-  }
-
-  &__scroll-label {
-    @apply text-2xs uppercase tracking-caps-xl text-ink-muted;
-  }
-
-  &__scroll-line {
-    @apply h-12 w-px animate-scroll-hint bg-accent;
   }
 }

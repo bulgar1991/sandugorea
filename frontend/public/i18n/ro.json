@@ -60,20 +60,17 @@
     }
   },
   "hero": {
-    "eyebrow": "Fine art · Portret · Nuntă",
-    "line1": "Lumină,",
-    "line2": "emoție,",
-    "line3": "pentru totdeauna.",
-    "works": "Vezi lucrările",
-    "book": "Rezervă o ședință",
-    "scroll": "Derulează",
-    "slide": "Imaginea {{n}}",
-    "slides": {
-      "s1": "Nunți — Toscana",
-      "s2": "Portrete — Studio",
-      "s3": "Peisaje — Islanda",
-      "s4": "Familie — Marea Neagră"
-    }
+    "welcome": "Bun venit în lumea mea",
+    "hello": "Bună, sunt",
+    "roles": {
+      "r1": "fotograf de nunți.",
+      "r2": "artist portretist.",
+      "r3": "povestitor vizual."
+    },
+    "text": "Surprind lumina sinceră și momentele liniștite: nunți, portrete și familii, fotografiate cu calm și editate manual, ca să retrăiești ziua de fiecare dată când le privești.",
+    "imageAlt": "Portretul fotografului",
+    "cta": "Rezervă o ședință",
+    "works": "Vezi lucrările"
   },
   "about": {
     "eyebrow": "Despre mine",

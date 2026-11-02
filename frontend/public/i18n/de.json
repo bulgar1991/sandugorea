@@ -60,20 +60,17 @@
     }
   },
   "hero": {
-    "eyebrow": "Fine Art · Porträt · Hochzeit",
-    "line1": "Licht,",
-    "line2": "Gefühl,",
-    "line3": "für immer.",
-    "works": "Meine Arbeiten",
-    "book": "Shooting buchen",
-    "scroll": "Scrollen",
-    "slide": "Bild {{n}}",
-    "slides": {
-      "s1": "Hochzeiten — Toskana",
-      "s2": "Porträts — Studio",
-      "s3": "Landschaften — Island",
-      "s4": "Familie — Schwarzes Meer"
-    }
+    "welcome": "Willkommen in meiner Welt",
+    "hello": "Hallo, ich bin",
+    "roles": {
+      "r1": "Hochzeitsfotograf.",
+      "r2": "Porträtkünstler.",
+      "r3": "visueller Geschichtenerzähler."
+    },
+    "text": "Ich fange ehrliches Licht und stille Momente ein – Hochzeiten, Porträts und Familien, ruhig fotografiert und von Hand bearbeitet, damit du den Tag bei jedem Blick neu fühlst.",
+    "imageAlt": "Porträt des Fotografen",
+    "cta": "Shooting buchen",
+    "works": "Meine Arbeiten"
   },
   "about": {
     "eyebrow": "Über mich",

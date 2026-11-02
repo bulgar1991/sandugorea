@@ -60,20 +60,17 @@
     }
   },
   "hero": {
-    "eyebrow": "Fine art · Ritratto · Matrimonio",
-    "line1": "Luce,",
-    "line2": "emozione,",
-    "line3": "per sempre.",
-    "works": "Guarda i miei lavori",
-    "book": "Prenota una sessione",
-    "scroll": "Scorri",
-    "slide": "Immagine {{n}}",
-    "slides": {
-      "s1": "Matrimoni — Toscana",
-      "s2": "Ritratti — Studio",
-      "s3": "Paesaggi — Islanda",
-      "s4": "Famiglia — Mar Nero"
-    }
+    "welcome": "Benvenuti nel mio mondo",
+    "hello": "Ciao, sono",
+    "roles": {
+      "r1": "un fotografo di matrimoni.",
+      "r2": "un ritrattista.",
+      "r3": "un narratore visivo."
+    },
+    "text": "Catturo luce sincera e momenti silenziosi: matrimoni, ritratti e famiglie, fotografati con calma e ritoccati a mano, per rivivere quel giorno ogni volta che li guardi.",
+    "imageAlt": "Ritratto del fotografo",
+    "cta": "Prenota una sessione",
+    "works": "Guarda i miei lavori"
   },
   "about": {
     "eyebrow": "Chi sono",

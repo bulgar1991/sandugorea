@@ -60,20 +60,17 @@
     }
   },
   "hero": {
-    "eyebrow": "Fine art · Portrait · Mariage",
-    "line1": "Lumière,",
-    "line2": "émotion,",
-    "line3": "pour toujours.",
-    "works": "Voir mon travail",
-    "book": "Réserver une séance",
-    "scroll": "Défiler",
-    "slide": "Image {{n}}",
-    "slides": {
-      "s1": "Mariages — Toscane",
-      "s2": "Portraits — Studio",
-      "s3": "Paysages — Islande",
-      "s4": "Famille — Mer Noire"
-    }
+    "welcome": "Bienvenue dans mon univers",
+    "hello": "Bonjour, je suis",
+    "roles": {
+      "r1": "photographe de mariage.",
+      "r2": "portraitiste.",
+      "r3": "conteur d'images."
+    },
+    "text": "Je capture la lumière sincère et les instants silencieux : mariages, portraits et familles, photographiés avec calme et retouchés à la main, pour revivre la journée à chaque regard.",
+    "imageAlt": "Portrait du photographe",
+    "cta": "Réserver une séance",
+    "works": "Voir mon travail"
   },
   "about": {
     "eyebrow": "À propos",

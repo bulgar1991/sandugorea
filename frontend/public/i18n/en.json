@@ -60,20 +60,17 @@
     }
   },
   "hero": {
-    "eyebrow": "Fine art · Portrait · Wedding",
-    "line1": "Light,",
-    "line2": "emotion,",
-    "line3": "forever.",
-    "works": "See my work",
-    "book": "Book a session",
-    "scroll": "Scroll",
-    "slide": "Slide {{n}}",
-    "slides": {
-      "s1": "Weddings — Tuscany",
-      "s2": "Portraits — Studio",
-      "s3": "Landscapes — Iceland",
-      "s4": "Family — Black Sea"
-    }
+    "welcome": "Welcome to my world",
+    "hello": "Hi, I'm",
+    "roles": {
+      "r1": "a Wedding Photographer.",
+      "r2": "a Portrait Artist.",
+      "r3": "a Visual Storyteller."
+    },
+    "text": "I capture honest light and quiet moments - weddings, portraits and families, photographed calmly and edited by hand, so you can feel the day again every time you look.",
+    "imageAlt": "Portrait of the photographer",
+    "cta": "Book a session",
+    "works": "See my work"
   },
   "about": {
     "eyebrow": "About me",

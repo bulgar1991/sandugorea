@@ -171,6 +171,13 @@ module.exports = {
           from: { transform: 'scale(1)', opacity: '1' },
           to: { transform: 'scale(1.6)', opacity: '0' },
         },
+        // Typing cursor.
+        caret: { '0%, 100%': { opacity: '1' }, '50%': { opacity: '0' } },
+        // Hero portrait rising into its frame.
+        'portrait-in': {
+          from: { opacity: '0', transform: 'translate3d(0, 60px, 0) scale(0.97)' },
+          to: { opacity: '1', transform: 'translate3d(0, 0, 0) scale(1)' },
+        },
       },
 
       animation: {
@@ -194,6 +201,8 @@ module.exports = {
         breathe: 'breathe 8s ease-in-out infinite',
         'ping-soft': 'ping-soft 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite',
         'spin-fast': 'spin 0.7s linear infinite',
+        caret: 'caret 1s steps(1) infinite',
+        'portrait-in': 'portrait-in 1.4s cubic-bezier(0.16, 1, 0.3, 1) both',
       },
     },
   },
