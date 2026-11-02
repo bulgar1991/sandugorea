@@ -45,10 +45,10 @@
       [revealDelay]="(i % 4) * 80"
     >
       <div class="project-card__media">
-        @if (p.photos.length) {
+        @if (p.coverUrls.length) {
           <div class="project-card__mosaic">
-            @for (photo of p.photos.slice(0, 3); track photo.id) {
-              <img [src]="photo.thumbUrl" alt="" class="project-card__image" loading="lazy" />
+            @for (url of p.coverUrls; track url) {
+              <img [src]="url" alt="" class="project-card__image" loading="lazy" />
             }
           </div>
         } @else {
@@ -68,13 +68,13 @@
         <p class="project-card__customer">{{ p.customerName }}</p>
         <p class="project-card__meta">
           <span>{{ p.date | localDate: 'd MMM y' }}</span>
-          <span>{{ 'common.photos' | translate: { count: p.photos.length } }}</span>
+          <span>{{ 'common.photos' | translate: { count: p.photoCount } }}</span>
           <span class="project-card__username">{{ p.username }}</span>
         </p>
       </div>
     </a>
   } @empty {
-    <div class="project-grid__empty">
+    <div class="project-grid__empty" [class.project-grid__empty--loading]="!loaded()">
       <app-icon name="folder" [size]="32" />
       <p>{{ 'admin.projects.empty' | translate }}</p>
     </div>
@@ -185,6 +185,15 @@
         }
       </label>
 
+      <label class="field">
+        <span class="field__label">{{ 'admin.projects.form.language' | translate }}</span>
+        <select class="field__control field__control--boxed" formControlName="language">
+          @for (l of languages; track l.code) {
+            <option [value]="l.code">{{ l.name }}</option>
+          }
+        </select>
+      </label>
+
       <p class="project-form__section">{{ 'admin.projects.form.access' | translate }}</p>
       <label class="field">
         <span class="field__label">{{ 'common.username' | translate }}</span>
@@ -231,7 +240,10 @@
       </label>
 
       <div class="project-form__actions">
-        <button type="submit" class="btn btn--primary">
+        <button type="submit" class="btn btn--primary" [disabled]="saving()">
+          @if (saving()) {
+            <span class="spinner"></span>
+          }
           {{ 'admin.projects.form.create' | translate }}
         </button>
         <button type="button" class="btn btn--ghost" (click)="modalOpen.set(false)">

@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -8,22 +9,17 @@ import {
   signal,
   untracked,
 } from '@angular/core';
-import {
-  AbstractControl,
-  NonNullableFormBuilder,
-  ReactiveFormsModule,
-  ValidationErrors,
-  Validators,
-} from '@angular/forms';
+import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { IconComponent } from '@components/icon/icon.component';
-import { LocalDatePipe } from '@pipes/local-date.pipe';
 import { ModalComponent } from '@components/modal/modal.component';
 import { ToastService } from '@components/toast/toast.service';
 import { RevealDirective } from '@directives/reveal.directive';
-import { ProjectStatus, STATUS_BADGE, projectStatus } from '@models/project.models';
-import { ProjectStore } from '@services/project-store.service';
+import { ProjectStatus, ProjectSummary, STATUS_BADGE, projectStatus } from '@models/project.models';
+import { LocalDatePipe } from '@pipes/local-date.pipe';
+import { LANGUAGES, LanguageService } from '@services/language.service';
+import { ProjectsApi } from '@services/projects-api.service';
 import { generatePassword, slugifyUsername } from '@/utils/format';
 
 type Filter = ProjectStatus | 'all';
@@ -44,7 +40,7 @@ type Filter = ProjectStatus | 'all';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectsComponent {
-  private readonly store = inject(ProjectStore);
+  private readonly api = inject(ProjectsApi);
   private readonly toast = inject(ToastService);
   private readonly router = inject(Router);
   private readonly translate = inject(TranslateService);
@@ -54,15 +50,17 @@ export class ProjectsComponent {
 
   protected readonly status = projectStatus;
   protected readonly badge = STATUS_BADGE;
+  protected readonly languages = LANGUAGES;
   protected readonly filters: Filter[] = ['all', 'draft', 'delivered', 'disabled'];
   protected readonly filter = signal<Filter>('all');
   protected readonly query = signal('');
+  protected readonly loaded = signal(false);
+  private readonly all = signal<ProjectSummary[]>([]);
 
   protected readonly projects = computed(() => {
     const q = this.query().trim().toLowerCase();
     const f = this.filter();
-    return this.store
-      .projects()
+    return this.all()
       .filter((p) => f === 'all' || projectStatus(p) === f)
       .filter(
         (p) =>
@@ -74,6 +72,7 @@ export class ProjectsComponent {
   });
 
   protected readonly modalOpen = signal(false);
+  protected readonly saving = signal(false);
   protected readonly created = signal<{
     id: string;
     customerName: string;
@@ -86,18 +85,13 @@ export class ProjectsComponent {
     date: [today(), Validators.required],
     customerName: ['', [Validators.required, Validators.maxLength(100)]],
     customerEmail: ['', [Validators.required, Validators.email]],
-    username: [
-      '',
-      [
-        Validators.required,
-        Validators.pattern(/^[a-z0-9._-]{3,40}$/),
-        (c: AbstractControl) => this.uniqueUsername(c),
-      ],
-    ],
+    language: [inject(LanguageService).current() as string],
+    username: ['', [Validators.required, Validators.pattern(/^[a-z0-9._-]{3,40}$/)]],
     password: [generatePassword(), [Validators.required, Validators.minLength(10)]],
   });
 
   constructor() {
+    this.reload();
     // ?new=1 (e.g. from the dashboard) opens the dialog, then is removed from the URL.
     effect(() => {
       if (!this.new()) return;
@@ -106,6 +100,11 @@ export class ProjectsComponent {
         this.router.navigate([], { queryParams: { new: null }, replaceUrl: true });
       });
     });
+  }
+
+  private async reload() {
+    this.all.set(await this.api.list());
+    this.loaded.set(true);
   }
 
   protected openNew() {
@@ -127,20 +126,33 @@ export class ProjectsComponent {
     this.form.controls.password.setValue(generatePassword());
   }
 
-  protected create() {
-    if (this.form.invalid) {
+  protected async create() {
+    if (this.form.invalid || this.saving()) {
       this.form.markAllAsTouched();
       return;
     }
     const data = this.form.getRawValue();
-    const project = this.store.create(data);
-    this.created.set({
-      id: project.id,
-      customerName: data.customerName,
-      username: data.username,
-      password: data.password,
-    });
-    this.toast.show('admin.toasts.projectCreated', { title: data.title });
+    this.saving.set(true);
+    try {
+      const project = await this.api.create(data);
+      this.created.set({
+        id: project.id,
+        customerName: data.customerName,
+        username: data.username,
+        password: data.password,
+      });
+      this.toast.show('admin.toasts.projectCreated', { title: data.title });
+      this.reload();
+    } catch (e) {
+      if (e instanceof HttpErrorResponse && e.status === 409) {
+        this.form.controls.username.setErrors({ taken: true });
+        this.form.controls.username.markAsTouched();
+      } else {
+        this.toast.show('common.somethingWrong', undefined, 'error');
+      }
+    } finally {
+      this.saving.set(false);
+    }
   }
 
   protected openCreated() {
@@ -168,10 +180,6 @@ export class ProjectsComponent {
   protected invalid(name: keyof typeof this.form.controls) {
     const c = this.form.controls[name];
     return c.invalid && c.touched;
-  }
-
-  private uniqueUsername(c: AbstractControl): ValidationErrors | null {
-    return c.value && this.store.usernameTaken(c.value) ? { taken: true } : null;
   }
 }
 

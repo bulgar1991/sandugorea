@@ -100,3 +100,7 @@
     }
   }
 }
+
+.codes {
+  @apply grid grid-cols-2 gap-2 rounded-xl border border-line bg-black/50 p-4 text-center font-mono text-sm tracking-wider;
+}

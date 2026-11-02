@@ -1,15 +1,15 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { IconComponent } from '@components/icon/icon.component';
-import { LocalDatePipe } from '@pipes/local-date.pipe';
 import { LightboxComponent } from '@components/lightbox/lightbox.component';
 import { RevealDirective } from '@directives/reveal.directive';
 import { LightboxItem } from '@models/photo.models';
-import { AuthService } from '@services/auth.service';
-import { ProjectStore } from '@services/project-store.service';
+import { CustomerProject } from '@models/project.models';
+import { LocalDatePipe } from '@pipes/local-date.pipe';
+import { ProjectsApi } from '@services/projects-api.service';
 import { formatBytes } from '@/utils/format';
 
-/** The one project the signed-in customer has access to. */
+/** The one project the signed-in customer has access to (the API decides which). */
 @Component({
   selector: 'app-client-project',
   imports: [LocalDatePipe, TranslatePipe, IconComponent, LightboxComponent, RevealDirective],
@@ -18,29 +18,27 @@ import { formatBytes } from '@/utils/format';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ClientProjectComponent {
-  private readonly store = inject(ProjectStore);
-  private readonly session = inject(AuthService).session;
+  protected readonly project = signal<CustomerProject | null>(null);
+  protected readonly loaded = signal(false);
 
-  /** Mock authorisation - the API enforces this server-side. */
-  protected readonly project = computed(() => {
-    const p = this.store.project(this.session()?.projectId ?? '');
-    return p && p.active && p.sentAt ? p : undefined;
-  });
-
-  protected readonly cover = computed(() => this.project()?.photos[0]?.url);
-  protected readonly totalSize = computed(() =>
-    formatBytes(this.project()?.photos.reduce((s, p) => s + p.size, 0) ?? 0),
-  );
+  protected readonly cover = computed(() => this.project()?.photos[0]?.previewUrl);
+  protected readonly totalSize = computed(() => formatBytes(this.project()?.totalBytes ?? 0));
   protected readonly items = computed<LightboxItem[]>(
-    () => this.project()?.photos.map((p) => ({ src: p.url, downloadName: p.name })) ?? [],
+    () =>
+      this.project()?.photos.map((p) => ({
+        src: p.previewUrl,
+        download: `${p.originalUrl}?download=true`,
+        downloadName: p.name,
+      })) ?? [],
   );
 
   protected readonly openIndex = signal<number | null>(null);
-  protected readonly zipState = signal<'idle' | 'preparing'>('idle');
+  protected readonly zipUrl = '/api/customer/project/zip';
 
-  protected downloadAll() {
-    // TODO: GET /api/customer/project/zip (streamed by the backend).
-    this.zipState.set('preparing');
-    setTimeout(() => this.zipState.set('idle'), 2000);
+  constructor() {
+    inject(ProjectsApi)
+      .customerProject()
+      .then((p) => this.project.set(p))
+      .finally(() => this.loaded.set(true));
   }
 }

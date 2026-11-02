@@ -164,7 +164,8 @@
       "name": "Bitte gib deinen Namen ein.",
       "email": "Bitte gib eine gültige E-Mail-Adresse ein.",
       "message": "Erzähl mir etwas mehr (mindestens 10 Zeichen).",
-      "consent": "Bitte stimme zu, um fortzufahren."
+      "consent": "Bitte stimme zu, um fortzufahren.",
+      "send": "Deine Anfrage konnte nicht gesendet werden. Bitte versuche es erneut oder schreib mir direkt."
     },
     "send": "Anfrage senden",
     "sending": "Wird gesendet…",
@@ -202,17 +203,17 @@
       "for": "Für {{name}}",
       "meta": "{{count}} Fotos · {{size}}",
       "downloadAll": "Alle herunterladen",
-      "preparing": "Download wird vorbereitet…",
       "emptyTitle": "Deine Fotos werden vorbereitet",
       "emptyText": "Du erhältst eine E-Mail, sobald sie fertig sind."
     }
   },
   "auth": {
     "invalidCustomer": "Benutzername oder Passwort ist falsch.",
-    "invalidAdmin": "Ungültige Zugangsdaten. Noch {{left}} Versuche.",
+    "invalidAdmin": "Benutzername oder Passwort ist falsch.",
     "locked": "Zu viele Versuche. Bitte später erneut versuchen.",
     "expired": "Sitzung abgelaufen. Bitte erneut anmelden.",
-    "invalidCode": "Ungültiger Code."
+    "invalidCode": "Ungültiger Code.",
+    "tooMany": "Zu viele Anfragen. Bitte warte eine Minute."
   },
   "admin": {
     "nav": {
@@ -234,7 +235,16 @@
       "signIn": "Anmelden",
       "checking": "Wird geprüft…",
       "back": "← Anderes Konto verwenden",
-      "footnote": "Sitzungen enden nach 15 Minuten Inaktivität."
+      "footnote": "Sitzungen enden nach 15 Minuten Inaktivität.",
+      "enrollTitle": "Authenticator einrichten",
+      "enrollText": "Scanne diesen Code mit Google Authenticator, 1Password oder einer ähnlichen App und gib dann den 6-stelligen Code ein.",
+      "enrollManual": "Oder diesen Schlüssel manuell eingeben",
+      "recoveryHint": "Gib einen deiner einmaligen Wiederherstellungscodes ein.",
+      "recoveryCode": "Wiederherstellungscode",
+      "useRecovery": "Handy verloren? Wiederherstellungscode verwenden",
+      "useApp": "Stattdessen die Authenticator-App verwenden",
+      "recoveryText": "Bewahre diese Wiederherstellungscodes sicher auf. Jeder funktioniert einmal, falls du keinen Zugriff auf deine Authenticator-App hast.",
+      "saved": "Ich habe sie gespeichert"
     },
     "status": {
       "draft": "Entwurf",
@@ -295,14 +305,15 @@
           "usernameTaken": "Dieser Benutzername ist vergeben.",
           "usernameFormat": "3–40 Zeichen: Kleinbuchstaben, Zahlen, . _ -",
           "password": "Mindestens 10 Zeichen."
-        }
+        },
+        "language": "Sprache der E-Mail"
       }
     },
     "project": {
       "back": "Projekte",
       "summary": "{{count}} Fotos · {{size}}",
       "drop": "Fotos hier ablegen",
-      "dropHint": "oder klicken zum Auswählen · JPG, PNG, WEBP, HEIC bis 50 MB",
+      "dropHint": "oder klicken zum Auswählen · JPG, PNG, WEBP bis 50 MB",
       "preview": "Vorschau {{name}}",
       "delete": "{{name}} löschen",
       "customer": "Kunde",
@@ -326,7 +337,15 @@
       "passwordText": "Das alte Passwort funktioniert nicht mehr.",
       "deleteTitle": "Projekt löschen?",
       "deleteText": "Dadurch werden „{{title}}“ und alle {{count}} Fotos endgültig gelöscht. Der Kunde verliert sofort den Zugang. Gib {{username}} zur Bestätigung ein.",
-      "deleteForever": "Endgültig löschen"
+      "deleteForever": "Endgültig löschen",
+      "rejected": {
+        "type": "{{name}} ist kein unterstütztes Bild (JPG, PNG oder WEBP).",
+        "size": "{{name}} ist größer als 50 MB.",
+        "dimensions": "{{name}} hat zu viele Pixel.",
+        "failed": "Hochladen von {{name}} fehlgeschlagen. Bitte erneut versuchen."
+      },
+      "includePassword": "Neues Passwort erzeugen und in die E-Mail aufnehmen",
+      "includePasswordHint": "Nicht ankreuzen, wenn der Kunde sein Passwort schon hat."
     },
     "security": {
       "eyebrow": "Sicherheit",
@@ -349,7 +368,7 @@
       "enabled": "Aktiviert",
       "enabledText": "Bei jeder Anmeldung ist die Authenticator-App (TOTP) erforderlich.",
       "rules": {
-        "r1": "Konto wird nach 5 Fehlversuchen für 1 Minute gesperrt",
+        "r1": "Konto wird nach 5 Fehlversuchen für 15 Minuten gesperrt",
         "r2": "Automatische Abmeldung nach 15 Minuten Inaktivität",
         "r3": "Admin-Bereich ist für Suchmaschinen und die Navigation unsichtbar"
       },
@@ -359,7 +378,12 @@
       "thisDevice": "Dieses Gerät",
       "history": "Anmeldeverlauf",
       "success": "Erfolgreich",
-      "blocked": "Blockiert"
+      "blocked": "Blockiert",
+      "codesLeft": "Noch {{n}} Wiederherstellungscodes.",
+      "invalidCurrent": "Das aktuelle Passwort ist falsch.",
+      "weak": "Das neue Passwort ist zu schwach.",
+      "newCodes": "Neue Wiederherstellungscodes",
+      "oldCodesInvalid": "Deine alten Codes funktionieren nicht mehr."
     },
     "toasts": {
       "projectCreated": "Projekt „{{title}}“ erstellt",

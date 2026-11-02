@@ -13,5 +13,7 @@ export interface PortfolioPhoto {
 export interface LightboxItem {
   src: string;
   title?: string;
+  /** Download link (defaults to `src`). */
+  download?: string;
   downloadName?: string;
 }

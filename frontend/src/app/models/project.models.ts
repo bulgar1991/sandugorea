@@ -1,37 +1,87 @@
+// Shapes returned by the .NET API (backend/Sandugorea.Api/Contracts/Dtos.cs).
+
 export interface ProjectPhoto {
   id: string;
   name: string;
-  url: string;
-  thumbUrl: string;
   /** Bytes. */
   size: number;
+  width: number;
+  height: number;
   uploadedAt: string;
+  thumbUrl: string;
+  previewUrl: string;
+  originalUrl: string;
 }
 
-/**
- * A private folder of photos created by the photographer for one customer.
- * Each project has its own username + password; only that customer can open it.
- */
-export interface Project {
+/** A private folder of photos for one customer, with its own username + password. */
+export interface ProjectSummary {
   id: string;
   title: string;
-  /** Session date (ISO yyyy-mm-dd). */
+  /** Session date (yyyy-mm-dd). */
   date: string;
   customerName: string;
   customerEmail: string;
+  language: string;
   username: string;
-  createdAt: string;
-  /** Access can be switched off without deleting anything. */
   active: boolean;
-  /** When it was sent to the customer. Customers can't sign in before that. */
-  sentAt?: string;
-  lastLoginAt?: string;
+  createdAt: string;
+  sentAt: string | null;
+  lastLoginAt: string | null;
+  photoCount: number;
+  totalBytes: number;
+  coverUrls: string[];
+}
+
+export interface ProjectDetail extends Omit<ProjectSummary, 'photoCount' | 'coverUrls'> {
   photos: ProjectPhoto[];
+}
+
+export interface CustomerProject {
+  title: string;
+  date: string;
+  customerName: string;
+  totalBytes: number;
+  photos: ProjectPhoto[];
+}
+
+export interface Stats {
+  projects: number;
+  drafts: number;
+  delivered: number;
+  photos: number;
+  bytes: number;
+}
+
+export interface NewProject {
+  title: string;
+  date: string;
+  customerName: string;
+  customerEmail: string;
+  language: string;
+  username: string;
+  password: string;
+}
+
+export interface AdminSessionInfo {
+  id: string;
+  device: string | null;
+  ip: string | null;
+  createdAt: string;
+  lastSeenAt: string;
+  current: boolean;
+}
+
+export interface LoginEventInfo {
+  at: string;
+  ip: string | null;
+  device: string | null;
+  success: boolean;
+  detail: string | null;
 }
 
 export type ProjectStatus = 'draft' | 'delivered' | 'disabled';
 
-export function projectStatus(p: Project): ProjectStatus {
+export function projectStatus(p: { active: boolean; sentAt: string | null }): ProjectStatus {
   if (!p.active) return 'disabled';
   return p.sentAt ? 'delivered' : 'draft';
 }
@@ -47,7 +97,5 @@ export type Role = 'admin' | 'customer';
 
 export interface Session {
   role: Role;
-  username: string;
   displayName: string;
-  projectId?: string;
 }

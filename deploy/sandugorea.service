@@ -10,10 +10,33 @@ Restart=always
 RestartSec=5
 KillSignal=SIGINT
 SyslogIdentifier=sandugorea
-User=www-data
+User=sandugorea
+Group=sandugorea
+
+# Photos, SQLite database and encryption keys: /var/lib/sandugorea, owned by the service, mode 0700.
+StateDirectory=sandugorea
+StateDirectoryMode=0700
+UMask=0077
+
 Environment=ASPNETCORE_ENVIRONMENT=Production
 Environment=ASPNETCORE_URLS=http://127.0.0.1:5000
 Environment=DOTNET_NOLOGO=true
+Environment=Storage__Root=/var/lib/sandugorea
+# Secrets (admin bootstrap password, SMTP) - see deploy/sandugorea.env.example
+EnvironmentFile=/etc/sandugorea/sandugorea.env
+
+# Sandboxing: the app can only write to its state directory.
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+LockPersonality=true
+ReadWritePaths=/var/lib/sandugorea
 
 [Install]
 WantedBy=multi-user.target

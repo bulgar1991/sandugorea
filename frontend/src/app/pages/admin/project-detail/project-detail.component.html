@@ -27,7 +27,7 @@
         <input
           type="file"
           class="dropzone__input"
-          accept="image/*"
+          [accept]="accept"
           multiple
           (change)="onFiles($event)"
         />
@@ -38,9 +38,9 @@
           @for (u of uploads(); track u.id) {
             <li class="card uploads__item">
               <div class="uploads__row">
-                <span class="uploads__name">{{ u.name }}</span>
+                <span class="uploads__name">{{ u.file.name }}</span>
                 <span class="uploads__meta"
-                  >{{ formatBytes(u.size) }} · {{ u.progress | number: '1.0-0' }}%</span
+                  >{{ formatBytes(u.file.size) }} · {{ u.progress | number: '1.0-0' }}%</span
                 >
               </div>
               <div class="uploads__track">
@@ -197,9 +197,26 @@
               }
       }}
     </p>
+    <label class="send-option">
+      <input
+        type="checkbox"
+        class="send-option__checkbox"
+        [checked]="includePassword()"
+        (change)="includePassword.set($any($event.target).checked)"
+      />
+      <span>
+        <span class="send-option__title">{{ 'admin.project.includePassword' | translate }}</span>
+        <span class="send-option__hint">{{ 'admin.project.includePasswordHint' | translate }}</span>
+      </span>
+    </label>
     <div class="credentials__actions modal-actions">
-      <button type="button" class="btn btn--primary" (click)="send()">
-        <app-icon name="send" [size]="14" /> {{ 'admin.project.sendButton' | translate }}
+      <button type="button" class="btn btn--primary" (click)="send()" [disabled]="sending()">
+        @if (sending()) {
+          <span class="spinner"></span>
+        } @else {
+          <app-icon name="send" [size]="14" />
+        }
+        {{ 'admin.project.sendButton' | translate }}
       </button>
       <button type="button" class="btn btn--ghost" (click)="confirmSend.set(false)">
         {{ 'common.cancel' | translate }}
@@ -265,7 +282,7 @@
       </button>
     </div>
   </app-modal>
-} @else {
+} @else if (notFound()) {
   <div class="not-found-block">
     <h1 class="title title--md">{{ 'admin.project.notFound' | translate }}</h1>
     <a routerLink="/admin/projects" class="btn btn--outline">{{

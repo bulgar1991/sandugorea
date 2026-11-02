@@ -164,7 +164,8 @@
       "name": "Please enter your name.",
       "email": "Please enter a valid email.",
       "message": "Tell me a little more (at least 10 characters).",
-      "consent": "Please accept to continue."
+      "consent": "Please accept to continue.",
+      "send": "Your request couldn't be sent. Please try again or email me directly."
     },
     "send": "Send request",
     "sending": "Sending…",
@@ -202,17 +203,17 @@
       "for": "For {{name}}",
       "meta": "{{count}} photographs · {{size}}",
       "downloadAll": "Download all",
-      "preparing": "Preparing download…",
       "emptyTitle": "Your photographs are being prepared",
       "emptyText": "You'll receive an email as soon as they are ready."
     }
   },
   "auth": {
     "invalidCustomer": "Incorrect username or password.",
-    "invalidAdmin": "Invalid credentials. {{left}} attempts left.",
+    "invalidAdmin": "Invalid username or password.",
     "locked": "Too many attempts. Try again later.",
     "expired": "Session expired. Sign in again.",
-    "invalidCode": "Invalid code."
+    "invalidCode": "Invalid code.",
+    "tooMany": "Too many requests. Please wait a minute."
   },
   "admin": {
     "nav": {
@@ -234,7 +235,16 @@
       "signIn": "Sign in",
       "checking": "Checking…",
       "back": "← Use a different account",
-      "footnote": "Sessions expire after 15 minutes of inactivity."
+      "footnote": "Sessions expire after 15 minutes of inactivity.",
+      "enrollTitle": "Set up your authenticator",
+      "enrollText": "Scan this code with Google Authenticator, 1Password or a similar app, then enter the 6-digit code it shows.",
+      "enrollManual": "Or enter this key manually",
+      "recoveryHint": "Enter one of your one-time recovery codes.",
+      "recoveryCode": "Recovery code",
+      "useRecovery": "Lost your phone? Use a recovery code",
+      "useApp": "Use the authenticator app instead",
+      "recoveryText": "Save these recovery codes somewhere safe. Each works once, if you lose access to your authenticator app.",
+      "saved": "I've saved them"
     },
     "status": {
       "draft": "Draft",
@@ -295,14 +305,15 @@
           "usernameTaken": "This username is taken.",
           "usernameFormat": "3–40 chars: lowercase letters, numbers, . _ -",
           "password": "At least 10 characters."
-        }
+        },
+        "language": "Email language"
       }
     },
     "project": {
       "back": "Projects",
       "summary": "{{count}} photos · {{size}}",
       "drop": "Drop photos here",
-      "dropHint": "or click to browse · JPG, PNG, WEBP, HEIC up to 50 MB each",
+      "dropHint": "or click to browse · JPG, PNG, WEBP up to 50 MB each",
       "preview": "Preview {{name}}",
       "delete": "Delete {{name}}",
       "customer": "Customer",
@@ -326,7 +337,15 @@
       "passwordText": "The old password no longer works.",
       "deleteTitle": "Delete project?",
       "deleteText": "This permanently deletes “{{title}}” and all {{count}} photos. The customer loses access immediately. Type {{username}} to confirm.",
-      "deleteForever": "Delete forever"
+      "deleteForever": "Delete forever",
+      "rejected": {
+        "type": "{{name}} is not a supported image (JPG, PNG or WEBP).",
+        "size": "{{name}} is larger than 50 MB.",
+        "dimensions": "{{name}} has too many pixels.",
+        "failed": "Upload of {{name}} failed. Please try again."
+      },
+      "includePassword": "Generate a new password and include it in the email",
+      "includePasswordHint": "Leave unchecked if you already gave the customer their password."
     },
     "security": {
       "eyebrow": "Security",
@@ -349,7 +368,7 @@
       "enabled": "Enabled",
       "enabledText": "Authenticator app (TOTP) is required at every sign-in.",
       "rules": {
-        "r1": "Account locks for 1 minute after 5 failed attempts",
+        "r1": "Account locks for 15 minutes after 5 failed attempts",
         "r2": "Automatic sign-out after 15 minutes of inactivity",
         "r3": "Admin area hidden from search engines and site navigation"
       },
@@ -359,7 +378,12 @@
       "thisDevice": "This device",
       "history": "Sign-in history",
       "success": "Success",
-      "blocked": "Blocked"
+      "blocked": "Blocked",
+      "codesLeft": "{{n}} recovery codes left.",
+      "invalidCurrent": "The current password is wrong.",
+      "weak": "The new password is too weak.",
+      "newCodes": "New recovery codes",
+      "oldCodesInvalid": "Your old codes no longer work."
     },
     "toasts": {
       "projectCreated": "Project “{{title}}” created",

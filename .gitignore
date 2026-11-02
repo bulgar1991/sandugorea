@@ -13,3 +13,6 @@ frontend/.angular/
 # IDE / OS
 .idea/
 .DS_Store
+
+# Local dev storage (database, photos, outbox, keys)
+.data/

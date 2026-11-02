@@ -17,19 +17,15 @@
         {{ p.date | localDate: 'd MMMM y' }} ·
         {{ 'client.project.meta' | translate: { count: p.photos.length, size: totalSize() } }}
       </p>
-      <button
-        type="button"
+      <a
+        [href]="zipUrl"
+        download
         class="btn btn--primary project-cover__button project-cover__appear"
         style="--d: 600ms"
-        (click)="downloadAll()"
-        [disabled]="zipState() === 'preparing'"
       >
         <app-icon name="download" [size]="16" />
-        {{
-          (zipState() === 'preparing' ? 'client.project.preparing' : 'client.project.downloadAll')
-            | translate
-        }}
-      </button>
+        {{ 'client.project.downloadAll' | translate }}
+      </a>
     </div>
   </section>
 
@@ -51,10 +47,8 @@
           />
         </button>
         <a
-          [href]="photo.url"
+          [href]="photo.originalUrl + '?download=true'"
           [attr.download]="photo.name"
-          target="_blank"
-          rel="noopener"
           class="project-photos__download"
           [attr.aria-label]="('common.download' | translate) + ' ' + photo.name"
         >
@@ -65,7 +59,7 @@
   </section>
 
   <app-lightbox [items]="items()" [(index)]="openIndex" [allowDownload]="true" />
-} @else {
+} @else if (loaded()) {
   <section class="wrapper project-empty">
     <app-icon name="camera" [size]="36" class="project-empty__icon" />
     <h1 class="title title--md">{{ 'client.project.emptyTitle' | translate }}</h1>

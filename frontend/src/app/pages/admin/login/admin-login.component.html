@@ -1,6 +1,7 @@
 <div class="admin-login">
   <div class="admin-login__glow" aria-hidden="true"></div>
   <app-language-switcher class="admin-login__lang" />
+  <app-toasts />
 
   <div class="admin-login__container">
     <div class="admin-login__head">
@@ -24,9 +25,11 @@
             [class.admin-login__fill--done]="step() === 'code'"
           ></span>
         </span>
-        <span class="admin-login__step" [class.admin-login__step--current]="step() === 'code'">{{
-          'admin.login.step2' | translate
-        }}</span>
+        <span
+          class="admin-login__step"
+          [class.admin-login__step--current]="step() !== 'credentials'"
+          >{{ 'admin.login.step2' | translate }}</span
+        >
       </div>
 
       @if (step() === 'credentials') {
@@ -89,34 +92,57 @@
             }
           </button>
         </form>
-      } @else {
+      } @else if (step() === 'code') {
         <form (ngSubmit)="submitCode()" class="admin-login__form" novalidate>
-          <div class="admin-login__notice">
-            <span class="admin-login__notice-icon"><app-icon name="key" [size]="18" /></span>
-            {{ 'admin.login.codeHint' | translate }}
-          </div>
+          @if (enrollment(); as e) {
+            <div class="enroll">
+              <p class="enroll__title">{{ 'admin.login.enrollTitle' | translate }}</p>
+              <p class="text text--small">{{ 'admin.login.enrollText' | translate }}</p>
+              <img [src]="e.qrPng" alt="QR code" class="enroll__qr" width="200" height="200" />
+              <p class="enroll__label">{{ 'admin.login.enrollManual' | translate }}</p>
+              <code class="enroll__secret">{{ e.secret }}</code>
+            </div>
+          } @else {
+            <div class="admin-login__notice">
+              <span class="admin-login__notice-icon"><app-icon name="key" [size]="18" /></span>
+              {{
+                (useRecoveryCode() ? 'admin.login.recoveryHint' : 'admin.login.codeHint')
+                  | translate
+              }}
+            </div>
+          }
           <label class="field">
-            <span class="field__label">{{ 'admin.login.code' | translate }}</span>
+            <span class="field__label">{{
+              (useRecoveryCode() ? 'admin.login.recoveryCode' : 'admin.login.code') | translate
+            }}</span>
             <input
               #codeInput
-              class="field__control field__control--boxed field__control--code"
+              class="field__control field__control--boxed"
+              [class.field__control--code]="!useRecoveryCode()"
               [formControl]="code"
               (input)="onCodeInput()"
-              inputmode="numeric"
+              [attr.inputmode]="useRecoveryCode() ? 'text' : 'numeric'"
               autocomplete="one-time-code"
-              maxlength="6"
-              placeholder="······"
+              [attr.maxlength]="useRecoveryCode() ? 11 : 6"
+              [placeholder]="useRecoveryCode() ? 'xxxxx-xxxxx' : '······'"
+              autocapitalize="none"
+              spellcheck="false"
             />
           </label>
 
           @if (error(); as err) {
-            <p class="alert" role="alert">{{ err.key | translate: err.params }}</p>
+            <p class="alert" role="alert">
+              {{ err.key | translate: err.params }}
+              @if (lockSeconds() > 0) {
+                ({{ lockSeconds() }}s)
+              }
+            </p>
           }
 
           <button
             type="submit"
             class="btn btn--primary btn--block"
-            [disabled]="loading() || code.invalid"
+            [disabled]="loading() || code.invalid || lockSeconds() > 0"
           >
             @if (loading()) {
               <span class="spinner"></span> {{ 'admin.login.checking' | translate }}
@@ -124,10 +150,35 @@
               {{ 'admin.login.signIn' | translate }} <app-icon name="lock" [size]="14" />
             }
           </button>
+          @if (!enrollment()) {
+            <button type="button" class="admin-login__back" (click)="toggleRecovery()">
+              {{
+                (useRecoveryCode() ? 'admin.login.useApp' : 'admin.login.useRecovery') | translate
+              }}
+            </button>
+          }
           <button type="button" class="admin-login__back" (click)="back()">
             {{ 'admin.login.back' | translate }}
           </button>
         </form>
+      } @else {
+        <div class="admin-login__form">
+          <div class="admin-login__notice">
+            <span class="admin-login__notice-icon"><app-icon name="shield" [size]="18" /></span>
+            {{ 'admin.login.recoveryText' | translate }}
+          </div>
+          <ul class="recovery-codes">
+            @for (c of recoveryCodes(); track c) {
+              <li class="recovery-codes__item">{{ c }}</li>
+            }
+          </ul>
+          <button type="button" class="btn btn--ghost btn--block" (click)="copyCodes()">
+            <app-icon name="copy" [size]="14" /> {{ 'common.copy' | translate }}
+          </button>
+          <button type="button" class="btn btn--primary btn--block" (click)="finish()">
+            {{ 'admin.login.saved' | translate }} <app-icon name="arrow-right" [size]="16" />
+          </button>
+        </div>
       }
     </div>
 

@@ -164,7 +164,8 @@
       "name": "Inserisci il tuo nome.",
       "email": "Inserisci un'email valida.",
       "message": "Raccontami qualcosa in più (almeno 10 caratteri).",
-      "consent": "Accetta per continuare."
+      "consent": "Accetta per continuare.",
+      "send": "Impossibile inviare la richiesta. Riprova o scrivimi direttamente."
     },
     "send": "Invia richiesta",
     "sending": "Invio in corso…",
@@ -202,17 +203,17 @@
       "for": "Per {{name}}",
       "meta": "{{count}} fotografie · {{size}}",
       "downloadAll": "Scarica tutto",
-      "preparing": "Preparazione del download…",
       "emptyTitle": "Le tue fotografie sono in preparazione",
       "emptyText": "Riceverai un'email non appena saranno pronte."
     }
   },
   "auth": {
     "invalidCustomer": "Nome utente o password errati.",
-    "invalidAdmin": "Credenziali non valide. Tentativi rimasti: {{left}}.",
+    "invalidAdmin": "Nome utente o password errati.",
     "locked": "Troppi tentativi. Riprova più tardi.",
     "expired": "Sessione scaduta. Accedi di nuovo.",
-    "invalidCode": "Codice non valido."
+    "invalidCode": "Codice non valido.",
+    "tooMany": "Troppe richieste. Attendi un minuto."
   },
   "admin": {
     "nav": {
@@ -234,7 +235,16 @@
       "signIn": "Accedi",
       "checking": "Controllo in corso…",
       "back": "← Usa un altro account",
-      "footnote": "Le sessioni scadono dopo 15 minuti di inattività."
+      "footnote": "Le sessioni scadono dopo 15 minuti di inattività.",
+      "enrollTitle": "Configura l'app di autenticazione",
+      "enrollText": "Scansiona questo codice con Google Authenticator, 1Password o un'app simile, poi inserisci il codice a 6 cifre.",
+      "enrollManual": "Oppure inserisci questa chiave manualmente",
+      "recoveryHint": "Inserisci uno dei tuoi codici di recupero monouso.",
+      "recoveryCode": "Codice di recupero",
+      "useRecovery": "Telefono perso? Usa un codice di recupero",
+      "useApp": "Usa invece l'app di autenticazione",
+      "recoveryText": "Conserva questi codici di recupero in un luogo sicuro. Ognuno funziona una volta, se perdi l'accesso all'app di autenticazione.",
+      "saved": "Li ho salvati"
     },
     "status": {
       "draft": "Bozza",
@@ -295,14 +305,15 @@
           "usernameTaken": "Questo nome utente è già in uso.",
           "usernameFormat": "3–40 caratteri: lettere minuscole, numeri, . _ -",
           "password": "Almeno 10 caratteri."
-        }
+        },
+        "language": "Lingua dell'email"
       }
     },
     "project": {
       "back": "Progetti",
       "summary": "{{count}} foto · {{size}}",
       "drop": "Trascina qui le foto",
-      "dropHint": "o clicca per sfogliare · JPG, PNG, WEBP, HEIC fino a 50 MB",
+      "dropHint": "o clicca per sfogliare · JPG, PNG, WEBP fino a 50 MB",
       "preview": "Anteprima {{name}}",
       "delete": "Elimina {{name}}",
       "customer": "Cliente",
@@ -326,7 +337,15 @@
       "passwordText": "La vecchia password non funziona più.",
       "deleteTitle": "Eliminare il progetto?",
       "deleteText": "Verranno eliminati definitivamente «{{title}}» e tutte le {{count}} foto. Il cliente perderà subito l'accesso. Digita {{username}} per confermare.",
-      "deleteForever": "Elimina definitivamente"
+      "deleteForever": "Elimina definitivamente",
+      "rejected": {
+        "type": "{{name}} non è un'immagine supportata (JPG, PNG o WEBP).",
+        "size": "{{name}} supera i 50 MB.",
+        "dimensions": "{{name}} ha troppi pixel.",
+        "failed": "Caricamento di {{name}} non riuscito. Riprova."
+      },
+      "includePassword": "Genera una nuova password e includila nell'email",
+      "includePasswordHint": "Lascia deselezionato se hai già dato la password al cliente."
     },
     "security": {
       "eyebrow": "Sicurezza",
@@ -349,7 +368,7 @@
       "enabled": "Attiva",
       "enabledText": "L'app di autenticazione (TOTP) è richiesta a ogni accesso.",
       "rules": {
-        "r1": "L'account si blocca per 1 minuto dopo 5 tentativi falliti",
+        "r1": "L'account si blocca per 15 minuti dopo 5 tentativi falliti",
         "r2": "Disconnessione automatica dopo 15 minuti di inattività",
         "r3": "Area admin nascosta ai motori di ricerca e alla navigazione del sito"
       },
@@ -359,7 +378,12 @@
       "thisDevice": "Questo dispositivo",
       "history": "Cronologia accessi",
       "success": "Riuscito",
-      "blocked": "Bloccato"
+      "blocked": "Bloccato",
+      "codesLeft": "Codici di recupero rimasti: {{n}}.",
+      "invalidCurrent": "La password attuale è errata.",
+      "weak": "La nuova password è troppo debole.",
+      "newCodes": "Nuovi codici di recupero",
+      "oldCodesInvalid": "I vecchi codici non funzionano più."
     },
     "toasts": {
       "projectCreated": "Progetto «{{title}}» creato",

@@ -31,6 +31,10 @@
 
   &__empty {
     @apply col-span-full flex flex-col items-center gap-3 rounded-2xl border border-dashed border-line py-20 text-ink-muted;
+
+    &--loading {
+      @apply invisible;
+    }
   }
 }
 

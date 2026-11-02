@@ -51,7 +51,13 @@
           <small class="field__error">{{ 'admin.security.mismatch' | translate }}</small>
         }
       </label>
-      <button type="submit" class="btn btn--primary security__submit">
+      @if (passwordError(); as err) {
+        <p class="alert" role="alert">{{ err | translate }}</p>
+      }
+      <button type="submit" class="btn btn--primary security__submit" [disabled]="saving()">
+        @if (saving()) {
+          <span class="spinner"></span>
+        }
         {{ 'admin.security.update' | translate }}
       </button>
     </form>
@@ -66,6 +72,11 @@
       <div>
         <p>{{ 'admin.security.enabled' | translate }}</p>
         <p class="text text--subtle">{{ 'admin.security.enabledText' | translate }}</p>
+        @if (codesLeft() !== null) {
+          <p class="text text--subtle">
+            {{ 'admin.security.codesLeft' | translate: { n: codesLeft() } }}
+          </p>
+        }
       </div>
     </div>
     <ul class="security__rules">
@@ -95,7 +106,7 @@
           <span class="security__device"><app-icon name="monitor" [size]="16" /></span>
           <div class="security__session-info">
             <p class="security__session-name">
-              {{ s.device }}
+              {{ s.device ?? '—' }}
               @if (s.current) {
                 <span class="badge badge--accent">{{
                   'admin.security.thisDevice' | translate
@@ -103,7 +114,7 @@
               }
             </p>
             <p class="text text--subtle">
-              {{ s.location }} · {{ s.ip }} · {{ s.lastSeen | localDate: 'd MMM, HH:mm' }}
+              {{ s.ip ?? '—' }} · {{ s.lastSeenAt | localDate: 'd MMM, HH:mm' }}
             </p>
           </div>
         </li>
@@ -116,11 +127,11 @@
       <app-icon name="clock" [size]="18" /> {{ 'admin.security.history' | translate }}
     </h2>
     <ul class="security__list">
-      @for (h of history; track h.time) {
+      @for (h of history(); track $index) {
         <li class="security__event">
-          <span class="security__event-time">{{ h.time | localDate: 'd MMM y, HH:mm' }}</span>
-          <span class="security__event-place">{{ h.location }} · {{ h.ip }}</span>
-          @if (h.ok) {
+          <span class="security__event-time">{{ h.at | localDate: 'd MMM y, HH:mm' }}</span>
+          <span class="security__event-place">{{ h.device ?? '—' }} · {{ h.ip ?? '—' }}</span>
+          @if (h.success) {
             <span class="badge badge--success">{{ 'admin.security.success' | translate }}</span>
           } @else {
             <span class="badge badge--danger">{{ 'admin.security.blocked' | translate }}</span>
@@ -130,3 +141,29 @@
     </ul>
   </section>
 </div>
+
+<app-modal
+  [open]="newCodes() !== null"
+  (openChange)="newCodes.set(null)"
+  [title]="'admin.security.newCodes' | translate"
+>
+  <div class="credentials">
+    <p class="text text--small">
+      {{ 'admin.login.recoveryText' | translate }}
+      <span class="credentials__warning">{{ 'admin.security.oldCodesInvalid' | translate }}</span>
+    </p>
+    <ul class="codes">
+      @for (c of newCodes(); track c) {
+        <li>{{ c }}</li>
+      }
+    </ul>
+    <div class="credentials__actions">
+      <button type="button" class="btn btn--ghost" (click)="copyCodes()">
+        <app-icon name="copy" [size]="14" /> {{ 'common.copy' | translate }}
+      </button>
+      <button type="button" class="btn btn--primary" (click)="newCodes.set(null)">
+        {{ 'common.done' | translate }}
+      </button>
+    </div>
+  </div>
+</app-modal>

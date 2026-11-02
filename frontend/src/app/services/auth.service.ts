@@ -1,12 +1,10 @@
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 import { Session } from '@models/project.models';
-import { ProjectStore } from './project-store.service';
 
-const STORAGE_KEY = 'sg.session';
-const MAX_ADMIN_ATTEMPTS = 5;
-const LOCKOUT_MS = 60_000;
-/** Admin is logged out after this long without activity. */
+/** Admin idle sign-out (matches the server's sliding cookie lifetime). */
 export const ADMIN_IDLE_TIMEOUT_MS = 15 * 60_000;
 
 /** `message` is a translation key; `params` fill its {{placeholders}}. */
@@ -20,99 +18,120 @@ export class AuthError extends Error {
   }
 }
 
+export interface AdminLoginStep {
+  /** "totp" = enter the code; "enroll" = scan the QR code first (first sign-in). */
+  next: 'totp' | 'enroll';
+  secret?: string;
+  otpAuthUri?: string;
+  qrPng?: string;
+}
+
 /**
- * UI-only MOCK of authentication so the screens can be built before the API exists.
- *
- * The real implementation (next step, in .NET) will use:
- *  - HttpOnly + Secure + SameSite=Strict session cookies (never tokens in JS storage)
- *  - Argon2/PBKDF2 password hashing, server-side rate limiting and lockout
- *  - TOTP two-factor authentication for the admin
- *  - every photo served through an authorised endpoint, never as a public file
- *
- * Mock credentials — admin: admin / admin123, code 123456 · customer: ana.mihai / demo1234
+ * Sign-in for the admin (password + authenticator code) and customers (project credentials).
+ * Sessions live in HttpOnly cookies set by the API - nothing secret is ever stored in JS.
  */
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly store = inject(ProjectStore);
+  private readonly http = inject(HttpClient);
   private readonly router = inject(Router);
 
-  private readonly _session = signal<Session | null>(readSession());
-  private pendingAdmin: string | null = null;
-  private failedAdminAttempts = 0;
-  private lockedUntil = 0;
-
+  private readonly _session = signal<Session | null>(null);
   readonly session = this._session.asReadonly();
   readonly isAdmin = computed(() => this._session()?.role === 'admin');
   readonly isCustomer = computed(() => this._session()?.role === 'customer');
 
-  /** Step 1 of admin sign-in. Resolves when a 2FA code is required. */
-  async adminLogin(username: string, password: string): Promise<void> {
-    await delay(700);
-    if (Date.now() < this.lockedUntil) {
-      throw new AuthError('auth.locked', undefined, this.lockedUntil);
+  /** Asks the API whether the admin cookie is still valid (used by route guards). */
+  async checkAdmin(): Promise<boolean> {
+    if (this.isAdmin()) return true;
+    try {
+      const me = await firstValueFrom(this.http.get<{ username: string }>('/api/admin/auth/me'));
+      this._session.set({ role: 'admin', displayName: me.username });
+      return true;
+    } catch {
+      return false;
     }
-    if (username !== 'admin' || password !== 'admin123') {
-      this.failedAdminAttempts++;
-      if (this.failedAdminAttempts >= MAX_ADMIN_ATTEMPTS) {
-        this.failedAdminAttempts = 0;
-        this.lockedUntil = Date.now() + LOCKOUT_MS;
-        throw new AuthError('auth.locked', undefined, this.lockedUntil);
-      }
-      // Same message for unknown user and wrong password - don't leak which one was wrong.
-      throw new AuthError('auth.invalidAdmin', {
-        left: MAX_ADMIN_ATTEMPTS - this.failedAdminAttempts,
-      });
-    }
-    this.pendingAdmin = username;
   }
 
-  /** Step 2 of admin sign-in: the 6-digit code from the authenticator app. */
-  async adminVerify(code: string): Promise<void> {
-    await delay(600);
-    if (!this.pendingAdmin) throw new AuthError('auth.expired');
-    if (code !== '123456') throw new AuthError('auth.invalidCode');
-    this.failedAdminAttempts = 0;
-    this.setSession({ role: 'admin', username: this.pendingAdmin, displayName: 'Administrator' });
-    this.pendingAdmin = null;
+  async checkCustomer(): Promise<boolean> {
+    if (this.isCustomer()) return true;
+    try {
+      const me = await firstValueFrom(this.http.get<{ name: string }>('/api/customer/auth/me'));
+      this._session.set({ role: 'customer', displayName: me.name });
+      return true;
+    } catch {
+      return false;
+    }
   }
 
-  /** Customers sign in with the credentials of one project. */
+  /** Step 1 of admin sign-in. */
+  async adminLogin(username: string, password: string): Promise<AdminLoginStep> {
+    try {
+      return await firstValueFrom(
+        this.http.post<AdminLoginStep>('/api/admin/auth/login', { username, password }),
+      );
+    } catch (e) {
+      throw toAuthError(e, 'auth.invalidAdmin');
+    }
+  }
+
+  /** Step 2: authenticator code (or a recovery code). Returns recovery codes after enrolment. */
+  async adminVerify(code: string): Promise<string[] | null> {
+    try {
+      const res = await firstValueFrom(
+        this.http.post<{ username: string; recoveryCodes: string[] | null }>(
+          '/api/admin/auth/verify',
+          { code },
+        ),
+      );
+      this._session.set({ role: 'admin', displayName: res.username });
+      return res.recoveryCodes;
+    } catch (e) {
+      throw toAuthError(e, 'auth.invalidCode');
+    }
+  }
+
   async customerLogin(username: string, password: string): Promise<void> {
-    await delay(700);
-    const project = this.store.verifyCustomer(username.trim().toLowerCase(), password);
-    if (!project) throw new AuthError('auth.invalidCustomer');
-    this.setSession({
-      role: 'customer',
-      username: project.username,
-      displayName: project.customerName,
-      projectId: project.id,
-    });
+    try {
+      const res = await firstValueFrom(
+        this.http.post<{ name: string }>('/api/customer/auth/login', { username, password }),
+      );
+      this._session.set({ role: 'customer', displayName: res.name });
+    } catch (e) {
+      throw toAuthError(e, 'auth.invalidCustomer');
+    }
   }
 
-  logout(redirectTo?: string) {
+  async logout(redirectTo?: string) {
     const role = this._session()?.role;
-    this.setSession(null);
+    const url = role === 'admin' ? '/api/admin/auth/logout' : '/api/customer/auth/logout';
+    try {
+      await firstValueFrom(this.http.post(url, null));
+    } catch {
+      // Signed out locally either way.
+    }
+    this.clear();
     this.router.navigateByUrl(redirectTo ?? (role === 'admin' ? '/admin/login' : '/client/login'));
   }
 
-  private setSession(session: Session | null) {
-    this._session.set(session);
-    try {
-      if (session) sessionStorage.setItem(STORAGE_KEY, JSON.stringify(session));
-      else sessionStorage.removeItem(STORAGE_KEY);
-    } catch {
-      /* storage unavailable - session stays in memory */
+  /** Forget the session locally (e.g. the server answered 401). */
+  clear() {
+    this._session.set(null);
+  }
+}
+
+function toAuthError(e: unknown, invalidKey: string): AuthError {
+  if (e instanceof HttpErrorResponse) {
+    const error = (e.error as { error?: string; retryAfterSeconds?: number } | null) ?? {};
+    if (e.status === 423) {
+      return new AuthError(
+        'auth.locked',
+        undefined,
+        Date.now() + (error.retryAfterSeconds ?? 60) * 1000,
+      );
     }
+    if (e.status === 429) return new AuthError('auth.tooMany');
+    if (error.error === 'expired') return new AuthError('auth.expired');
+    if (e.status === 401 || e.status === 400) return new AuthError(invalidKey);
   }
+  return new AuthError('common.somethingWrong');
 }
-
-function readSession(): Session | null {
-  try {
-    const raw = sessionStorage.getItem(STORAGE_KEY);
-    return raw ? (JSON.parse(raw) as Session) : null;
-  } catch {
-    return null;
-  }
-}
-
-const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));

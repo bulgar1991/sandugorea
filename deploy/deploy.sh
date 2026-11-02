@@ -13,4 +13,4 @@ dotnet publish "$ROOT/backend/Sandugorea.Api/Sandugorea.Api.csproj" \
   -c Release -r linux-x64 --self-contained true -o "$OUT"
 
 rsync -az --delete "$OUT/" "$SERVER:$REMOTE_DIR/"
-ssh "$SERVER" "sudo chown -R www-data:www-data $REMOTE_DIR && sudo systemctl restart sandugorea && systemctl --no-pager status sandugorea | head -5"
+ssh "$SERVER" "sudo chown -R root:root $REMOTE_DIR && sudo chmod -R a+rX $REMOTE_DIR && sudo systemctl restart sandugorea && systemctl --no-pager status sandugorea | head -5"

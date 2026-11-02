@@ -164,7 +164,8 @@
       "name": "Veuillez indiquer votre nom.",
       "email": "Veuillez saisir un e-mail valide.",
       "message": "Dites-m'en un peu plus (au moins 10 caractères).",
-      "consent": "Veuillez accepter pour continuer."
+      "consent": "Veuillez accepter pour continuer.",
+      "send": "Votre demande n'a pas pu être envoyée. Réessayez ou écrivez-moi directement."
     },
     "send": "Envoyer la demande",
     "sending": "Envoi en cours…",
@@ -202,17 +203,17 @@
       "for": "Pour {{name}}",
       "meta": "{{count}} photographies · {{size}}",
       "downloadAll": "Tout télécharger",
-      "preparing": "Préparation du téléchargement…",
       "emptyTitle": "Vos photographies sont en préparation",
       "emptyText": "Vous recevrez un e-mail dès qu'elles seront prêtes."
     }
   },
   "auth": {
     "invalidCustomer": "Identifiant ou mot de passe incorrect.",
-    "invalidAdmin": "Identifiants invalides. Encore {{left}} tentatives.",
+    "invalidAdmin": "Identifiant ou mot de passe incorrect.",
     "locked": "Trop de tentatives. Réessayez plus tard.",
     "expired": "Session expirée. Reconnectez-vous.",
-    "invalidCode": "Code invalide."
+    "invalidCode": "Code invalide.",
+    "tooMany": "Trop de requêtes. Veuillez patienter une minute."
   },
   "admin": {
     "nav": {
@@ -234,7 +235,16 @@
       "signIn": "Se connecter",
       "checking": "Vérification…",
       "back": "← Utiliser un autre compte",
-      "footnote": "Les sessions expirent après 15 minutes d'inactivité."
+      "footnote": "Les sessions expirent après 15 minutes d'inactivité.",
+      "enrollTitle": "Configurez votre authentificateur",
+      "enrollText": "Scannez ce code avec Google Authenticator, 1Password ou une application similaire, puis saisissez le code à 6 chiffres.",
+      "enrollManual": "Ou saisissez cette clé manuellement",
+      "recoveryHint": "Saisissez l'un de vos codes de récupération à usage unique.",
+      "recoveryCode": "Code de récupération",
+      "useRecovery": "Téléphone perdu ? Utiliser un code de récupération",
+      "useApp": "Utiliser plutôt l'application d'authentification",
+      "recoveryText": "Conservez ces codes de récupération en lieu sûr. Chacun fonctionne une fois si vous perdez l'accès à votre application.",
+      "saved": "Je les ai enregistrés"
     },
     "status": {
       "draft": "Brouillon",
@@ -295,14 +305,15 @@
           "usernameTaken": "Cet identifiant est déjà utilisé.",
           "usernameFormat": "3 à 40 caractères : minuscules, chiffres, . _ -",
           "password": "Au moins 10 caractères."
-        }
+        },
+        "language": "Langue de l'e-mail"
       }
     },
     "project": {
       "back": "Projets",
       "summary": "{{count}} photos · {{size}}",
       "drop": "Déposez les photos ici",
-      "dropHint": "ou cliquez pour parcourir · JPG, PNG, WEBP, HEIC jusqu'à 50 Mo",
+      "dropHint": "ou cliquez pour parcourir · JPG, PNG, WEBP jusqu'à 50 Mo",
       "preview": "Aperçu de {{name}}",
       "delete": "Supprimer {{name}}",
       "customer": "Client",
@@ -326,7 +337,15 @@
       "passwordText": "L'ancien mot de passe ne fonctionne plus.",
       "deleteTitle": "Supprimer le projet ?",
       "deleteText": "Cela supprime définitivement « {{title}} » et ses {{count}} photos. Le client perd immédiatement l'accès. Tapez {{username}} pour confirmer.",
-      "deleteForever": "Supprimer définitivement"
+      "deleteForever": "Supprimer définitivement",
+      "rejected": {
+        "type": "{{name}} n'est pas une image prise en charge (JPG, PNG ou WEBP).",
+        "size": "{{name}} dépasse 50 Mo.",
+        "dimensions": "{{name}} contient trop de pixels.",
+        "failed": "L'envoi de {{name}} a échoué. Veuillez réessayer."
+      },
+      "includePassword": "Générer un nouveau mot de passe et l'inclure dans l'e-mail",
+      "includePasswordHint": "Laissez décoché si le client a déjà son mot de passe."
     },
     "security": {
       "eyebrow": "Sécurité",
@@ -349,7 +368,7 @@
       "enabled": "Activée",
       "enabledText": "L'application d'authentification (TOTP) est requise à chaque connexion.",
       "rules": {
-        "r1": "Le compte est bloqué 1 minute après 5 tentatives échouées",
+        "r1": "Le compte est bloqué 15 minutes après 5 tentatives échouées",
         "r2": "Déconnexion automatique après 15 minutes d'inactivité",
         "r3": "Espace admin invisible pour les moteurs de recherche et la navigation"
       },
@@ -359,7 +378,12 @@
       "thisDevice": "Cet appareil",
       "history": "Historique des connexions",
       "success": "Réussie",
-      "blocked": "Bloquée"
+      "blocked": "Bloquée",
+      "codesLeft": "{{n}} codes de récupération restants.",
+      "invalidCurrent": "Le mot de passe actuel est incorrect.",
+      "weak": "Le nouveau mot de passe est trop faible.",
+      "newCodes": "Nouveaux codes de récupération",
+      "oldCodesInvalid": "Vos anciens codes ne fonctionnent plus."
     },
     "toasts": {
       "projectCreated": "Projet « {{title}} » créé",

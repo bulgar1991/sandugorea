@@ -75,6 +75,10 @@
     @apply mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-accent;
   }
 
+  &__trap {
+    @apply absolute -left-[9999px] h-px w-px opacity-0;
+  }
+
   &__success {
     @apply flex animate-fade-up flex-col items-start gap-5 py-10;
   }

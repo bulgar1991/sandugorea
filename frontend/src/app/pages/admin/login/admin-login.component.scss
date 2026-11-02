@@ -78,3 +78,32 @@
     @apply mt-8 text-center text-xs text-ink-subtle;
   }
 }
+
+.enroll {
+  @apply flex flex-col items-center gap-3 rounded-xl border border-line bg-black/40 p-5 text-center;
+
+  &__title {
+    @apply font-display text-xl;
+  }
+
+  // White quiet zone so phone cameras read the code reliably on the dark page.
+  &__qr {
+    @apply my-2 h-48 w-48 rounded-lg bg-white p-2 [image-rendering:pixelated];
+  }
+
+  &__label {
+    @apply text-2xs uppercase tracking-caps text-ink-subtle;
+  }
+
+  &__secret {
+    @apply break-all font-mono text-xs tracking-wider text-accent;
+  }
+}
+
+.recovery-codes {
+  @apply grid grid-cols-2 gap-2 rounded-xl border border-line bg-black/40 p-4 font-mono text-sm;
+
+  &__item {
+    @apply text-center tracking-wider;
+  }
+}

@@ -1,8 +1,11 @@
+import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
 import { IconComponent, IconName } from '@components/icon/icon.component';
 import { RevealDirective } from '@directives/reveal.directive';
+import { LanguageService } from '@services/language.service';
 import { BRAND, CATEGORY_IDS } from '@/data/portfolio.data';
 
 /** Booking request form + contact details. */
@@ -15,7 +18,9 @@ import { BRAND, CATEGORY_IDS } from '@/data/portfolio.data';
 })
 export class BookingComponent {
   protected readonly types = [...CATEGORY_IDS, 'other'];
-  protected readonly state = signal<'idle' | 'sending' | 'sent'>('idle');
+  private readonly http = inject(HttpClient);
+  private readonly language = inject(LanguageService);
+  protected readonly state = signal<'idle' | 'sending' | 'sent' | 'error'>('idle');
   protected readonly minDate = new Date().toISOString().slice(0, 10);
 
   protected readonly contacts: { icon: IconName; value: string; href: string }[] = [
@@ -33,6 +38,8 @@ export class BookingComponent {
     location: ['', Validators.maxLength(120)],
     message: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(4000)]],
     consent: [false, Validators.requiredTrue],
+    /** Honeypot: hidden from people, filled by bots. */
+    website: [''],
   });
 
   protected invalid(name: keyof typeof this.form.controls) {
@@ -46,9 +53,17 @@ export class BookingComponent {
       return;
     }
     this.state.set('sending');
-    // TODO: POST /api/booking once the backend endpoint exists.
-    await new Promise((r) => setTimeout(r, 1200));
-    this.state.set('sent');
-    this.form.reset();
+    try {
+      await firstValueFrom(
+        this.http.post('/api/booking', {
+          ...this.form.getRawValue(),
+          language: this.language.current(),
+        }),
+      );
+      this.state.set('sent');
+      this.form.reset();
+    } catch {
+      this.state.set('error');
+    }
   }
 }

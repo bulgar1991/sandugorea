@@ -109,6 +109,17 @@
               'booking.errors.consent' | translate
             }}</small>
           }
+          <!-- Honeypot for spam bots: invisible and skipped by keyboard/screen readers. -->
+          <input
+            class="booking__trap"
+            formControlName="website"
+            tabindex="-1"
+            autocomplete="off"
+            aria-hidden="true"
+          />
+          @if (state() === 'error') {
+            <p class="alert booking__wide" role="alert">{{ 'booking.errors.send' | translate }}</p>
+          }
           <div class="booking__wide">
             <button type="submit" class="btn btn--primary" [disabled]="state() === 'sending'">
               @if (state() === 'sending') {

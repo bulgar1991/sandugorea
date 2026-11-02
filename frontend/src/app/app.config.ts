@@ -9,7 +9,7 @@ import {
   provideAppInitializer,
   provideBrowserGlobalErrorListeners,
 } from '@angular/core';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import {
   ActivatedRouteSnapshot,
   provideRouter,
@@ -20,6 +20,7 @@ import {
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { DEFAULT_LANGUAGE, LanguageService } from '@services/language.service';
+import { apiInterceptor } from './interceptors/api.interceptor';
 import { routes } from './app.routes';
 
 // Month/day names for the localDate pipe (English is built in).
@@ -48,7 +49,8 @@ export const appConfig: ApplicationConfig = {
         },
       }),
     ),
-    provideHttpClient(withFetch()),
+    // XHR (not fetch) so photo uploads can report progress.
+    provideHttpClient(withInterceptors([apiInterceptor])),
     provideTranslateService({
       loader: provideTranslateHttpLoader({ prefix: 'i18n/', suffix: '.json' }),
       fallbackLang: DEFAULT_LANGUAGE,

@@ -177,3 +177,19 @@
 .not-found-block {
   @apply flex flex-col items-center gap-6 py-24 text-center;
 }
+
+.send-option {
+  @apply mt-5 flex cursor-pointer items-start gap-3 rounded-xl border border-line bg-black/40 p-4;
+
+  &__checkbox {
+    @apply mt-1 h-4 w-4 shrink-0 cursor-pointer accent-accent;
+  }
+
+  &__title {
+    @apply block text-sm;
+  }
+
+  &__hint {
+    @apply mt-1 block text-xs text-ink-subtle;
+  }
+}

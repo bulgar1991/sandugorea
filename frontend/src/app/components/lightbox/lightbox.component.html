@@ -16,10 +16,8 @@
         @if (allowDownload()) {
           <a
             class="lightbox__button"
-            [href]="item.src"
+            [href]="item.download || item.src"
             [attr.download]="item.downloadName || ''"
-            target="_blank"
-            rel="noopener"
             [attr.aria-label]="'common.download' | translate"
           >
             <app-icon name="download" />

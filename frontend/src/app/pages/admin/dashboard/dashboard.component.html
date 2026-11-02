@@ -40,8 +40,8 @@
     @for (p of recent(); track p.id) {
       <li>
         <a [routerLink]="['/admin/projects', p.id]" class="recent__row">
-          @if (p.photos[0]; as first) {
-            <img [src]="first.thumbUrl" alt="" class="recent__thumb" loading="lazy" />
+          @if (p.coverUrls[0]; as cover) {
+            <img [src]="cover" alt="" class="recent__thumb" loading="lazy" />
           } @else {
             <span class="recent__thumb recent__thumb--empty"
               ><app-icon name="folder" [size]="18"
@@ -50,7 +50,7 @@
           <div class="recent__info">
             <p class="recent__title">{{ p.title }}</p>
             <p class="recent__meta">
-              {{ p.customerName }} · {{ 'common.photos' | translate: { count: p.photos.length } }}
+              {{ p.customerName }} · {{ 'common.photos' | translate: { count: p.photoCount } }}
             </p>
           </div>
           <span class="recent__date">{{ p.date | localDate: 'd MMM y' }}</span>

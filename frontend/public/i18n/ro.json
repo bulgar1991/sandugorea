@@ -164,7 +164,8 @@
       "name": "Te rog introdu numele.",
       "email": "Te rog introdu un email valid.",
       "message": "Spune-mi puțin mai mult (cel puțin 10 caractere).",
-      "consent": "Te rog acceptă pentru a continua."
+      "consent": "Te rog acceptă pentru a continua.",
+      "send": "Cererea nu a putut fi trimisă. Încearcă din nou sau scrie-mi direct."
     },
     "send": "Trimite cererea",
     "sending": "Se trimite…",
@@ -202,17 +203,17 @@
       "for": "Pentru {{name}}",
       "meta": "{{count}} fotografii · {{size}}",
       "downloadAll": "Descarcă tot",
-      "preparing": "Se pregătește descărcarea…",
       "emptyTitle": "Fotografiile tale sunt în pregătire",
       "emptyText": "Vei primi un email imediat ce sunt gata."
     }
   },
   "auth": {
     "invalidCustomer": "Utilizator sau parolă incorectă.",
-    "invalidAdmin": "Date de autentificare invalide. Mai ai {{left}} încercări.",
+    "invalidAdmin": "Utilizator sau parolă incorectă.",
     "locked": "Prea multe încercări. Încearcă mai târziu.",
     "expired": "Sesiunea a expirat. Autentifică-te din nou.",
-    "invalidCode": "Cod invalid."
+    "invalidCode": "Cod invalid.",
+    "tooMany": "Prea multe cereri. Te rog așteaptă un minut."
   },
   "admin": {
     "nav": {
@@ -234,7 +235,16 @@
       "signIn": "Autentificare",
       "checking": "Se verifică…",
       "back": "← Folosește alt cont",
-      "footnote": "Sesiunile expiră după 15 minute de inactivitate."
+      "footnote": "Sesiunile expiră după 15 minute de inactivitate.",
+      "enrollTitle": "Configurează aplicația de autentificare",
+      "enrollText": "Scanează acest cod cu Google Authenticator, 1Password sau o aplicație similară, apoi introdu codul de 6 cifre.",
+      "enrollManual": "Sau introdu manual această cheie",
+      "recoveryHint": "Introdu unul dintre codurile tale de recuperare de unică folosință.",
+      "recoveryCode": "Cod de recuperare",
+      "useRecovery": "Ai pierdut telefonul? Folosește un cod de recuperare",
+      "useApp": "Folosește aplicația de autentificare",
+      "recoveryText": "Păstrează aceste coduri de recuperare într-un loc sigur. Fiecare funcționează o singură dată, dacă pierzi accesul la aplicația de autentificare.",
+      "saved": "Le-am salvat"
     },
     "status": {
       "draft": "Ciornă",
@@ -295,14 +305,15 @@
           "usernameTaken": "Acest utilizator este deja folosit.",
           "usernameFormat": "3–40 caractere: litere mici, cifre, . _ -",
           "password": "Cel puțin 10 caractere."
-        }
+        },
+        "language": "Limba emailului"
       }
     },
     "project": {
       "back": "Proiecte",
       "summary": "{{count}} fotografii · {{size}}",
       "drop": "Trage fotografiile aici",
-      "dropHint": "sau apasă pentru a alege · JPG, PNG, WEBP, HEIC până la 50 MB",
+      "dropHint": "sau apasă pentru a alege · JPG, PNG, WEBP până la 50 MB",
       "preview": "Previzualizare {{name}}",
       "delete": "Șterge {{name}}",
       "customer": "Client",
@@ -326,7 +337,15 @@
       "passwordText": "Parola veche nu mai funcționează.",
       "deleteTitle": "Ștergi proiectul?",
       "deleteText": "Se vor șterge definitiv „{{title}}” și toate cele {{count}} fotografii. Clientul pierde accesul imediat. Scrie {{username}} pentru confirmare.",
-      "deleteForever": "Șterge definitiv"
+      "deleteForever": "Șterge definitiv",
+      "rejected": {
+        "type": "{{name}} nu este o imagine acceptată (JPG, PNG sau WEBP).",
+        "size": "{{name}} depășește 50 MB.",
+        "dimensions": "{{name}} are prea mulți pixeli.",
+        "failed": "Încărcarea {{name}} a eșuat. Încearcă din nou."
+      },
+      "includePassword": "Generează o parolă nouă și include-o în email",
+      "includePasswordHint": "Lasă nebifat dacă i-ai dat deja parola clientului."
     },
     "security": {
       "eyebrow": "Securitate",
@@ -349,7 +368,7 @@
       "enabled": "Activată",
       "enabledText": "Aplicația de autentificare (TOTP) este necesară la fiecare conectare.",
       "rules": {
-        "r1": "Contul se blochează 1 minut după 5 încercări eșuate",
+        "r1": "Contul se blochează 15 minute după 5 încercări eșuate",
         "r2": "Deconectare automată după 15 minute de inactivitate",
         "r3": "Zona de administrare este ascunsă motoarelor de căutare și navigării"
       },
@@ -359,7 +378,12 @@
       "thisDevice": "Acest dispozitiv",
       "history": "Istoric autentificări",
       "success": "Reușită",
-      "blocked": "Blocată"
+      "blocked": "Blocată",
+      "codesLeft": "{{n}} coduri de recuperare rămase.",
+      "invalidCurrent": "Parola actuală este greșită.",
+      "weak": "Parola nouă este prea slabă.",
+      "newCodes": "Coduri de recuperare noi",
+      "oldCodesInvalid": "Codurile vechi nu mai funcționează."
     },
     "toasts": {
       "projectCreated": "Proiectul „{{title}}” a fost creat",
