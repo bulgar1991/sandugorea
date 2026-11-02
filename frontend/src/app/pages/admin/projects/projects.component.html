@@ -1,20 +1,22 @@
-<div class="page-head">
+<div app-page-head>
   <div>
-    <p class="eyebrow" appReveal>{{ 'admin.projects.eyebrow' | translate }}</p>
+    <p app-eyebrow appReveal>{{ 'admin.projects.eyebrow' | translate }}</p>
     <h1 class="page-head__title" appReveal [revealDelay]="80">
       {{ 'admin.projects.title' | translate }}
     </h1>
   </div>
-  <button type="button" class="btn btn--primary" (click)="openNew()" appReveal [revealDelay]="160">
+  <button app-button type="button" (click)="openNew()" appReveal [revealDelay]="160">
     <app-icon name="plus" [size]="16" /> {{ 'admin.projects.new' | translate }}
   </button>
 </div>
 
 <div class="toolbar" appReveal [revealDelay]="200">
-  <div class="toolbar__search">
+  <div app-field class="toolbar__search">
     <span class="toolbar__search-icon"><app-icon name="search" [size]="16" /></span>
     <input
-      class="field__control field__control--boxed toolbar__input"
+      app-input
+      boxed
+      class="toolbar__input"
       [placeholder]="'admin.projects.search' | translate"
       [value]="query()"
       (input)="query.set($any($event.target).value)"
@@ -58,9 +60,9 @@
           </div>
         }
         <span class="project-card__status">
-          <span class="badge" [class]="'badge--' + badge[status(p)]">{{
+          <app-badge [tone]="badge[status(p)]">{{
             'admin.status.' + status(p) | translate
-          }}</span>
+          }}</app-badge>
         </span>
       </div>
       <div class="project-card__body">
@@ -87,8 +89,8 @@
   [wide]="!created()"
 >
   @if (created(); as c) {
-    <div class="credentials">
-      <p class="text text--small">
+    <div app-credentials>
+      <p app-text size="small">
         {{ 'admin.projects.createdText' | translate: { name: c.customerName } }}
         <span class="credentials__warning">{{ 'admin.projects.notShownAgain' | translate }}</span>
       </p>
@@ -123,12 +125,13 @@
         </div>
       </div>
       <div class="credentials__actions">
-        <button type="button" class="btn btn--primary" (click)="openCreated()">
+        <button app-button type="button" (click)="openCreated()">
           <app-icon name="upload" [size]="14" /> {{ 'admin.projects.upload' | translate }}
         </button>
         <button
+          app-button
+          variant="ghost"
           type="button"
-          class="btn btn--ghost"
           (click)="copy(invitation(), 'admin.projects.copyInvitation')"
         >
           <app-icon name="copy" [size]="14" /> {{ 'admin.projects.copyInvitation' | translate }}
@@ -138,10 +141,11 @@
   } @else {
     <form [formGroup]="form" (ngSubmit)="create()" class="project-form" novalidate>
       <p class="project-form__section">{{ 'admin.projects.form.project' | translate }}</p>
-      <label class="field">
+      <label app-field>
         <span class="field__label">{{ 'admin.projects.form.title' | translate }}</span>
         <input
-          class="field__control field__control--boxed"
+          app-input
+          boxed
           formControlName="title"
           [placeholder]="'admin.projects.form.titlePlaceholder' | translate"
           (input)="suggestUsername()"
@@ -150,20 +154,17 @@
           <small class="field__error">{{ 'admin.projects.form.errors.title' | translate }}</small>
         }
       </label>
-      <label class="field">
+      <label app-field>
         <span class="field__label">{{ 'admin.projects.form.date' | translate }}</span>
-        <input
-          class="field__control field__control--boxed field__control--date"
-          type="date"
-          formControlName="date"
-        />
+        <input app-input boxed date type="date" formControlName="date" />
       </label>
 
       <p class="project-form__section">{{ 'admin.projects.form.customer' | translate }}</p>
-      <label class="field">
+      <label app-field>
         <span class="field__label">{{ 'admin.projects.form.name' | translate }}</span>
         <input
-          class="field__control field__control--boxed"
+          app-input
+          boxed
           formControlName="customerName"
           [placeholder]="'admin.projects.form.namePlaceholder' | translate"
           (input)="suggestUsername()"
@@ -172,10 +173,11 @@
           <small class="field__error">{{ 'admin.projects.form.errors.name' | translate }}</small>
         }
       </label>
-      <label class="field">
+      <label app-field>
         <span class="field__label">{{ 'admin.projects.form.email' | translate }}</span>
         <input
-          class="field__control field__control--boxed"
+          app-input
+          boxed
           type="email"
           formControlName="customerEmail"
           placeholder="customer@example.com"
@@ -185,9 +187,9 @@
         }
       </label>
 
-      <label class="field">
+      <label app-field>
         <span class="field__label">{{ 'admin.projects.form.language' | translate }}</span>
-        <select class="field__control field__control--boxed" formControlName="language">
+        <select app-input boxed formControlName="language">
           @for (l of languages; track l.code) {
             <option [value]="l.code">{{ l.name }}</option>
           }
@@ -195,10 +197,12 @@
       </label>
 
       <p class="project-form__section">{{ 'admin.projects.form.access' | translate }}</p>
-      <label class="field">
+      <label app-field>
         <span class="field__label">{{ 'common.username' | translate }}</span>
         <input
-          class="field__control field__control--boxed field__control--mono"
+          app-input
+          boxed
+          mono
           formControlName="username"
           autocapitalize="none"
           spellcheck="false"
@@ -214,17 +218,15 @@
           </small>
         }
       </label>
-      <label class="field">
+      <label app-field>
         <span class="field__label">{{ 'common.password' | translate }}</span>
         <div class="field__wrap">
-          <input
-            class="field__control field__control--boxed field__control--mono"
-            formControlName="password"
-            autocomplete="new-password"
-          />
+          <input app-input boxed mono formControlName="password" autocomplete="new-password" />
           <button
+            app-button
+            variant="ghost"
+            size="icon"
             type="button"
-            class="btn btn--ghost btn--icon"
             (click)="regenerate()"
             [attr.title]="'admin.projects.form.regenerate' | translate"
             [attr.aria-label]="'admin.projects.form.regenerate' | translate"
@@ -240,13 +242,13 @@
       </label>
 
       <div class="project-form__actions">
-        <button type="submit" class="btn btn--primary" [disabled]="saving()">
+        <button app-button type="submit" [disabled]="saving()">
           @if (saving()) {
-            <span class="spinner"></span>
+            <app-spinner />
           }
           {{ 'admin.projects.form.create' | translate }}
         </button>
-        <button type="button" class="btn btn--ghost" (click)="modalOpen.set(false)">
+        <button app-button variant="ghost" type="button" (click)="modalOpen.set(false)">
           {{ 'common.cancel' | translate }}
         </button>
       </div>

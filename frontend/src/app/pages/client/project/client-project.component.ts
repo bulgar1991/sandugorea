@@ -8,11 +8,29 @@ import { CustomerProject } from '@models/project.models';
 import { LocalDatePipe } from '@pipes/local-date.pipe';
 import { ProjectsApi } from '@services/projects-api.service';
 import { formatBytes } from '@/utils/format';
+import { ButtonComponent } from '@ui/button/button.component';
+import {
+  EyebrowComponent,
+  TextComponent,
+  TitleComponent,
+} from '@ui/typography/typography.component';
+import { ContainerComponent } from '@ui/container/container.component';
 
 /** The one project the signed-in customer has access to (the API decides which). */
 @Component({
   selector: 'app-client-project',
-  imports: [LocalDatePipe, TranslatePipe, IconComponent, LightboxComponent, RevealDirective],
+  imports: [
+    ButtonComponent,
+    TitleComponent,
+    EyebrowComponent,
+    TextComponent,
+    ContainerComponent,
+    LocalDatePipe,
+    TranslatePipe,
+    IconComponent,
+    LightboxComponent,
+    RevealDirective,
+  ],
   templateUrl: './client-project.component.html',
   styleUrl: './client-project.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

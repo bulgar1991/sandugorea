@@ -1,12 +1,12 @@
 <div class="showcase">
-  <div class="wrapper showcase__head">
-    <p class="eyebrow" appReveal>{{ 'showcase.eyebrow' | translate }}</p>
-    <h2 class="title title--lg showcase__title" appReveal [revealDelay]="100">
+  <div app-container class="showcase__head">
+    <p app-eyebrow appReveal>{{ 'showcase.eyebrow' | translate }}</p>
+    <h2 app-title size="lg" class="showcase__title" appReveal [revealDelay]="100">
       {{ 'showcase.titleStart' | translate }} <em>{{ 'showcase.titleAccent' | translate }}</em>
     </h2>
   </div>
 
-  <div class="wrapper">
+  <div app-container>
     <div class="panels" appReveal="up" [revealDelay]="150">
       @for (cat of categories; track cat.id; let i = $index) {
         <a
@@ -39,7 +39,7 @@
     </div>
   </div>
 
-  <div class="wrapper counters">
+  <div app-container class="counters">
     @for (s of stats; track s.key; let i = $index) {
       <div class="counters__item" appReveal [revealDelay]="i * 100">
         <span class="counters__value" [appCountUp]="s.value" [suffix]="s.suffix"></span>

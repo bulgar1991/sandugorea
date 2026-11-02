@@ -4,11 +4,11 @@
       <img [src]="cover()" alt="" class="project-cover__image" decoding="async" />
     }
     <div class="project-cover__shade"></div>
-    <div class="wrapper project-cover__content">
-      <p class="eyebrow project-cover__appear" style="--d: 0ms">
+    <div app-container class="project-cover__content">
+      <p app-eyebrow class="project-cover__appear" style="--d: 0ms">
         {{ 'client.project.for' | translate: { name: p.customerName } }}
       </p>
-      <h1 class="title title--xl project-cover__title">
+      <h1 app-title size="xl" class="project-cover__title">
         <span class="project-cover__mask"
           ><span class="project-cover__word" style="--d: 100ms">{{ p.title }}</span></span
         >
@@ -18,9 +18,10 @@
         {{ 'client.project.meta' | translate: { count: p.photos.length, size: totalSize() } }}
       </p>
       <a
+        app-button
         [href]="zipUrl"
         download
-        class="btn btn--primary project-cover__button project-cover__appear"
+        class="project-cover__button project-cover__appear"
         style="--d: 600ms"
       >
         <app-icon name="download" [size]="16" />
@@ -29,7 +30,7 @@
     </div>
   </section>
 
-  <section class="wrapper project-photos">
+  <section app-container class="project-photos">
     @for (photo of p.photos; track photo.id; let i = $index) {
       <figure class="project-photos__item" appReveal="fade" [revealDelay]="(i % 4) * 80">
         <button
@@ -60,9 +61,9 @@
 
   <app-lightbox [items]="items()" [(index)]="openIndex" [allowDownload]="true" />
 } @else if (loaded()) {
-  <section class="wrapper project-empty">
+  <section app-container class="project-empty">
     <app-icon name="camera" [size]="36" class="project-empty__icon" />
-    <h1 class="title title--md">{{ 'client.project.emptyTitle' | translate }}</h1>
-    <p class="text">{{ 'client.project.emptyText' | translate }}</p>
+    <h1 app-title size="md">{{ 'client.project.emptyTitle' | translate }}</h1>
+    <p app-text>{{ 'client.project.emptyText' | translate }}</p>
   </section>
 }

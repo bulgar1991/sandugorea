@@ -1,7 +1,7 @@
 <div class="hero">
   <div class="hero__glow" aria-hidden="true"></div>
 
-  <div class="wrapper hero__inner">
+  <div app-container class="hero__inner">
     <div class="hero__text">
       <p class="hero__welcome hero__appear" style="--d: 0ms">{{ 'hero.welcome' | translate }}</p>
 
@@ -24,16 +24,16 @@
         </span>
       </p>
 
-      <p class="text hero__description hero__appear" style="--d: 480ms">
+      <p app-text class="hero__description hero__appear" style="--d: 480ms">
         {{ 'hero.text' | translate }}
       </p>
 
       <div class="hero__actions hero__appear" style="--d: 640ms">
-        <a routerLink="/" fragment="booking" class="btn btn--primary">
+        <a app-button routerLink="/" fragment="booking">
           {{ 'hero.cta' | translate }}
           <app-icon name="arrow-right" [size]="16" />
         </a>
-        <a routerLink="/" fragment="works" class="link link--caps link--underline">
+        <a app-link caps underline routerLink="/" fragment="works">
           {{ 'hero.works' | translate }}
         </a>
       </div>

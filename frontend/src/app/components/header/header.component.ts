@@ -14,6 +14,9 @@ import { IconComponent } from '@components/icon/icon.component';
 import { LanguageSwitcherComponent } from '@components/language-switcher/language-switcher.component';
 import { ActiveSectionService } from '@services/active-section.service';
 import { BRAND } from '@/data/portfolio.data';
+import { ButtonComponent } from '@ui/button/button.component';
+import { LinkComponent } from '@ui/link/link.component';
+import { ContainerComponent } from '@ui/container/container.component';
 
 /** One-page sections, in page order. */
 export const NAV_LINKS = [
@@ -26,7 +29,15 @@ export const NAV_LINKS = [
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, TranslatePipe, IconComponent, LanguageSwitcherComponent],
+  imports: [
+    ButtonComponent,
+    LinkComponent,
+    ContainerComponent,
+    RouterLink,
+    TranslatePipe,
+    IconComponent,
+    LanguageSwitcherComponent,
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

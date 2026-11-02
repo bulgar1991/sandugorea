@@ -3,6 +3,8 @@
 }
 
 .testimonials {
+  @apply py-28 lg:py-40;
+
   &__header {
     @apply mb-12 flex items-end justify-between gap-6;
   }

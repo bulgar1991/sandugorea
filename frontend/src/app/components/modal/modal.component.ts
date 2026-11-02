@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, input, model } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { IconComponent } from '@components/icon/icon.component';
+import { TitleComponent } from '@ui/typography/typography.component';
 
 @Component({
   selector: 'app-modal',
-  imports: [IconComponent, TranslatePipe],
+  imports: [TitleComponent, IconComponent, TranslatePipe],
   template: `
     @if (open()) {
       <div
@@ -17,7 +18,7 @@ import { IconComponent } from '@components/icon/icon.component';
         <div class="modal__backdrop" (click)="close()" aria-hidden="true"></div>
         <div class="modal__panel" [class.modal__panel--wide]="wide()">
           <div class="modal__head">
-            <h2 class="title title--md">{{ title() }}</h2>
+            <h2 app-title size="md">{{ title() }}</h2>
             <button
               type="button"
               class="modal__close"

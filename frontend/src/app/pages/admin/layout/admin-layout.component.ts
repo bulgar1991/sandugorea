@@ -16,10 +16,12 @@ import { LanguageSwitcherComponent } from '@components/language-switcher/languag
 import { ToastsComponent } from '@components/toast/toast.component';
 import { ADMIN_IDLE_TIMEOUT_MS, AuthService } from '@services/auth.service';
 import { BRAND } from '@/data/portfolio.data';
+import { AvatarComponent } from '@ui/avatar/avatar.component';
 
 @Component({
   selector: 'app-admin-layout',
   imports: [
+    AvatarComponent,
     RouterOutlet,
     RouterLink,
     RouterLinkActive,

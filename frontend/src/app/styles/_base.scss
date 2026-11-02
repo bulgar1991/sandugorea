@@ -1,0 +1,33 @@
+// Page-wide element defaults (no classes). Component styles live in each component.
+@layer base {
+  html {
+    color-scheme: dark;
+    @apply scroll-smooth bg-background;
+  }
+
+  body {
+    @apply min-h-screen bg-background font-sans text-ink antialiased;
+  }
+
+  a {
+    @apply transition-colors duration-300;
+  }
+
+  ::selection {
+    @apply bg-accent text-black;
+  }
+
+  :focus-visible {
+    @apply outline outline-2 outline-offset-4 outline-accent;
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-background;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-line;
+  }
+}

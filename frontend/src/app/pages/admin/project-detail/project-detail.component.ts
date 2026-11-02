@@ -20,6 +20,19 @@ import { ProjectDetail, STATUS_BADGE, projectStatus } from '@models/project.mode
 import { LocalDatePipe } from '@pipes/local-date.pipe';
 import { ProjectsApi } from '@services/projects-api.service';
 import { formatBytes, uid } from '@/utils/format';
+import { ButtonComponent } from '@ui/button/button.component';
+import { LinkComponent } from '@ui/link/link.component';
+import {
+  EyebrowComponent,
+  TextComponent,
+  TitleComponent,
+} from '@ui/typography/typography.component';
+import { InputDirective } from '@ui/form-field/form-field.component';
+import { CardComponent } from '@ui/card/card.component';
+import { BadgeComponent } from '@ui/badge/badge.component';
+import { SpinnerComponent } from '@ui/spinner/spinner.component';
+import { AvatarComponent } from '@ui/avatar/avatar.component';
+import { CredentialsComponent } from '@ui/credentials/credentials.component';
 
 interface UploadItem {
   id: string;
@@ -35,6 +48,17 @@ const PARALLEL_UPLOADS = 2;
 @Component({
   selector: 'app-project-detail',
   imports: [
+    ButtonComponent,
+    LinkComponent,
+    TitleComponent,
+    EyebrowComponent,
+    TextComponent,
+    InputDirective,
+    CardComponent,
+    BadgeComponent,
+    SpinnerComponent,
+    AvatarComponent,
+    CredentialsComponent,
     RouterLink,
     LocalDatePipe,
     TranslatePipe,

@@ -13,14 +13,14 @@ export interface Language {
 
 // Order matters: this is the order shown in the language switcher.
 export const LANGUAGES: Language[] = [
-  { code: 'en', label: 'EN', name: 'English' },
   { code: 'de', label: 'DE', name: 'Deutsch' },
+  { code: 'en', label: 'EN', name: 'English' },
   { code: 'it', label: 'IT', name: 'Italiano' },
   { code: 'fr', label: 'FR', name: 'Français' },
   { code: 'ro', label: 'RO', name: 'Română' },
 ];
 
-export const DEFAULT_LANGUAGE: LanguageCode = 'en';
+export const DEFAULT_LANGUAGE: LanguageCode = 'de';
 
 const STORAGE_KEY = 'sg.lang';
 
@@ -35,9 +35,9 @@ export class LanguageService {
     () => (this.translate.currentLang() as LanguageCode | null) ?? DEFAULT_LANGUAGE,
   );
 
-  /** Called once on app start, before the first render: saved choice, then browser language. */
+  /** Called once on app start, before the first render: the visitor's saved choice, else German. */
   init(): Observable<unknown> {
-    return this.use(this.savedLanguage() ?? this.browserLanguage() ?? DEFAULT_LANGUAGE);
+    return this.use(this.savedLanguage() ?? DEFAULT_LANGUAGE);
   }
 
   use(code: LanguageCode): Observable<unknown> {
@@ -56,10 +56,6 @@ export class LanguageService {
     } catch {
       return null;
     }
-  }
-
-  private browserLanguage(): LanguageCode | null {
-    return this.valid(navigator.language?.slice(0, 2).toLowerCase());
   }
 
   private valid(code: string | null | undefined): LanguageCode | null {

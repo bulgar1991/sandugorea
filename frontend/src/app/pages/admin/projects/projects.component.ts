@@ -21,12 +21,28 @@ import { LocalDatePipe } from '@pipes/local-date.pipe';
 import { LANGUAGES, LanguageService } from '@services/language.service';
 import { ProjectsApi } from '@services/projects-api.service';
 import { generatePassword, slugifyUsername } from '@/utils/format';
+import { ButtonComponent } from '@ui/button/button.component';
+import { EyebrowComponent, TextComponent } from '@ui/typography/typography.component';
+import { FormFieldComponent, InputDirective } from '@ui/form-field/form-field.component';
+import { BadgeComponent } from '@ui/badge/badge.component';
+import { SpinnerComponent } from '@ui/spinner/spinner.component';
+import { PageHeadComponent } from '@ui/page-head/page-head.component';
+import { CredentialsComponent } from '@ui/credentials/credentials.component';
 
 type Filter = ProjectStatus | 'all';
 
 @Component({
   selector: 'app-projects',
   imports: [
+    ButtonComponent,
+    EyebrowComponent,
+    TextComponent,
+    FormFieldComponent,
+    InputDirective,
+    BadgeComponent,
+    SpinnerComponent,
+    PageHeadComponent,
+    CredentialsComponent,
     RouterLink,
     LocalDatePipe,
     TranslatePipe,

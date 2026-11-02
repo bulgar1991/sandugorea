@@ -6,10 +6,20 @@ import { LanguageSwitcherComponent } from '@components/language-switcher/languag
 import { NAV_LINKS } from '@components/header/header.component';
 import { RevealDirective } from '@directives/reveal.directive';
 import { BRAND } from '@/data/portfolio.data';
+import { TextComponent } from '@ui/typography/typography.component';
+import { ContainerComponent } from '@ui/container/container.component';
 
 @Component({
   selector: 'app-footer',
-  imports: [RouterLink, TranslatePipe, IconComponent, LanguageSwitcherComponent, RevealDirective],
+  imports: [
+    TextComponent,
+    ContainerComponent,
+    RouterLink,
+    TranslatePipe,
+    IconComponent,
+    LanguageSwitcherComponent,
+    RevealDirective,
+  ],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

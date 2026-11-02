@@ -5,13 +5,23 @@ import { IconComponent } from '@components/icon/icon.component';
 import { LanguageSwitcherComponent } from '@components/language-switcher/language-switcher.component';
 import { AuthService } from '@services/auth.service';
 import { BRAND } from '@/data/portfolio.data';
+import { ButtonComponent } from '@ui/button/button.component';
+import { ContainerComponent } from '@ui/container/container.component';
 
 @Component({
   selector: 'app-client-layout',
-  imports: [RouterOutlet, RouterLink, IconComponent, TranslatePipe, LanguageSwitcherComponent],
+  imports: [
+    ButtonComponent,
+    ContainerComponent,
+    RouterOutlet,
+    RouterLink,
+    IconComponent,
+    TranslatePipe,
+    LanguageSwitcherComponent,
+  ],
   template: `
     <header class="portal-bar">
-      <div class="wrapper portal-bar__inner">
+      <div app-container class="portal-bar__inner">
         <a routerLink="/client" class="portal-bar__logo">
           <span class="portal-bar__name">{{ brand.owner }}</span>
           <span class="portal-bar__tagline">{{ 'client.layout.tagline' | translate }}</span>
@@ -22,7 +32,7 @@ import { BRAND } from '@/data/portfolio.data';
             <app-icon name="user" [size]="16" />
             {{ auth.session()?.displayName }}
           </span>
-          <button type="button" class="btn btn--ghost btn--sm" (click)="auth.logout()">
+          <button app-button variant="ghost" size="sm" type="button" (click)="auth.logout()">
             <app-icon name="logout" [size]="14" />
             <span class="portal-bar__signout">{{ 'common.signOut' | translate }}</span>
           </button>
@@ -32,7 +42,7 @@ import { BRAND } from '@/data/portfolio.data';
     <main class="portal-main">
       <router-outlet />
     </main>
-    <footer class="wrapper portal-footer">
+    <footer app-container class="portal-footer">
       {{ 'client.layout.private' | translate }} © {{ brand.name }}
     </footer>
   `,

@@ -4,6 +4,13 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { IconComponent } from '@components/icon/icon.component';
 import { RevealDirective } from '@directives/reveal.directive';
 import { BRAND, imageUrl } from '@/data/portfolio.data';
+import { ButtonComponent } from '@ui/button/button.component';
+import {
+  EyebrowComponent,
+  TextComponent,
+  TitleComponent,
+} from '@ui/typography/typography.component';
+import { ContainerComponent } from '@ui/container/container.component';
 
 /** Max tilt of the portrait towards the mouse, in degrees. */
 const MAX_TILT = 8;
@@ -11,7 +18,17 @@ const MAX_TILT = 8;
 /** Image + description about the photographer. */
 @Component({
   selector: 'app-about-section',
-  imports: [RouterLink, TranslatePipe, IconComponent, RevealDirective],
+  imports: [
+    ButtonComponent,
+    TitleComponent,
+    EyebrowComponent,
+    TextComponent,
+    ContainerComponent,
+    RouterLink,
+    TranslatePipe,
+    IconComponent,
+    RevealDirective,
+  ],
   templateUrl: './about-section.component.html',
   styleUrl: './about-section.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

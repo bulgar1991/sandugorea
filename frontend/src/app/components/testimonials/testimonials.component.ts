@@ -12,11 +12,20 @@ import { A11y, Autoplay, Keyboard, Navigation, Pagination } from 'swiper/modules
 import { IconComponent } from '@components/icon/icon.component';
 import { RevealDirective } from '@directives/reveal.directive';
 import { TESTIMONIALS } from '@/data/portfolio.data';
+import { EyebrowComponent, TitleComponent } from '@ui/typography/typography.component';
+import { ContainerComponent } from '@ui/container/container.component';
 
 /** Testimonials carousel (Swiper), same setup as the services slider in swisscleangroup. */
 @Component({
   selector: 'app-testimonials',
-  imports: [TranslatePipe, IconComponent, RevealDirective],
+  imports: [
+    TitleComponent,
+    EyebrowComponent,
+    ContainerComponent,
+    TranslatePipe,
+    IconComponent,
+    RevealDirective,
+  ],
   templateUrl: './testimonials.component.html',
   styleUrl: './testimonials.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

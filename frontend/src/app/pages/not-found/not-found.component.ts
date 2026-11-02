@@ -2,16 +2,27 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { IconComponent } from '@components/icon/icon.component';
+import { ButtonComponent } from '@ui/button/button.component';
+import { TextComponent, TitleComponent } from '@ui/typography/typography.component';
+import { ContainerComponent } from '@ui/container/container.component';
 
 @Component({
   selector: 'app-not-found',
-  imports: [RouterLink, TranslatePipe, IconComponent],
+  imports: [
+    ButtonComponent,
+    TitleComponent,
+    TextComponent,
+    ContainerComponent,
+    RouterLink,
+    TranslatePipe,
+    IconComponent,
+  ],
   template: `
-    <section class="wrapper not-found">
+    <section app-container class="not-found">
       <p class="not-found__code">404</p>
-      <h1 class="title title--lg not-found__title">{{ 'notFound.title' | translate }}</h1>
-      <p class="text not-found__text">{{ 'notFound.text' | translate }}</p>
-      <a routerLink="/" class="btn btn--primary not-found__button">
+      <h1 app-title size="lg" class="not-found__title">{{ 'notFound.title' | translate }}</h1>
+      <p app-text class="not-found__text">{{ 'notFound.text' | translate }}</p>
+      <a app-button routerLink="/" class="not-found__button">
         <app-icon name="arrow-left" [size]="16" />
         {{ 'common.backHome' | translate }}
       </a>

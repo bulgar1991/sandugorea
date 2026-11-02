@@ -3,6 +3,8 @@
 }
 
 .about {
+  @apply py-28 lg:py-40;
+
   @apply grid items-center gap-16 lg:grid-cols-12 lg:gap-12;
 
   &__visual {
@@ -37,7 +39,7 @@
   }
 
   &__portrait {
-    @apply aspect-portrait;
+    @apply block aspect-portrait h-full w-full object-cover;
   }
 
   // A blurred gold glow that follows the mouse (moved with transform only).
@@ -55,6 +57,10 @@
   &__inset {
     @apply absolute bottom-0 right-0 w-2/5 animate-float;
     animation-delay: -2s;
+  }
+
+  &__inset-img {
+    @apply block h-full w-full object-cover;
   }
 
   &__inset-inner {

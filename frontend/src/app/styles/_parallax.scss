@@ -1,0 +1,14 @@
+@supports (animation-timeline: view()) {
+  .parallax {
+    animation: parallax linear both;
+    animation-timeline: view();
+  }
+  @keyframes parallax {
+    from {
+      transform: translate3d(0, -8%, 0) scale(1.16);
+    }
+    to {
+      transform: translate3d(0, 8%, 0) scale(1.16);
+    }
+  }
+}

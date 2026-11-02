@@ -1,0 +1,32 @@
+// Scroll reveal states, toggled by the [appReveal] directive - opacity / transform / clip-path only.
+[data-reveal] {
+  --reveal-delay: 0ms;
+  transition:
+    opacity 1s theme('transitionTimingFunction.out-expo'),
+    transform 1.2s theme('transitionTimingFunction.out-expo'),
+    clip-path 1.4s theme('transitionTimingFunction.in-out-quart');
+  transition-delay: var(--reveal-delay);
+
+  &:not(.is-revealed) {
+    opacity: 0;
+  }
+  &[data-reveal='up']:not(.is-revealed) {
+    transform: translate3d(0, 48px, 0);
+  }
+  &[data-reveal='scale']:not(.is-revealed) {
+    transform: scale(0.94);
+  }
+  // The curtain is applied to the element's CONTENT: an element that is itself fully clipped
+  // never counts as "in view" for IntersectionObserver, so it would never be revealed.
+  &[data-reveal='clip'] {
+    opacity: 1;
+    > * {
+      clip-path: inset(0 0 0 0);
+      transition: clip-path 1.4s theme('transitionTimingFunction.in-out-quart');
+      transition-delay: var(--reveal-delay);
+    }
+    &:not(.is-revealed) > * {
+      clip-path: inset(100% 0 0 0);
+    }
+  }
+}

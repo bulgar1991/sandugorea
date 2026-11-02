@@ -1,14 +1,14 @@
-<div class="page-head">
+<div app-page-head>
   <div>
-    <p class="eyebrow" appReveal>{{ today | localDate: 'EEEE, d MMMM' }}</p>
+    <p app-eyebrow appReveal>{{ today | localDate: 'EEEE, d MMMM' }}</p>
     <h1 class="page-head__title" appReveal [revealDelay]="80">
       {{ 'admin.dashboard.greeting' | translate }}
     </h1>
   </div>
   <a
+    app-button
     routerLink="/admin/projects"
     [queryParams]="{ new: 1 }"
-    class="btn btn--primary"
     appReveal
     [revealDelay]="160"
   >
@@ -18,7 +18,7 @@
 
 <div class="stats-row">
   @for (c of cards(); track c.label; let i = $index) {
-    <div class="card card--hover stat-card" appReveal [revealDelay]="i * 80">
+    <div app-card hover class="stat-card" appReveal [revealDelay]="i * 80">
       <div class="stat-card__head">
         <span class="stat-card__label">{{ c.label | translate }}</span>
         <span class="stat-card__icon"><app-icon [name]="c.icon" [size]="16" /></span>
@@ -29,12 +29,10 @@
   }
 </div>
 
-<div class="card recent" appReveal [revealDelay]="200">
+<div app-card class="recent" appReveal [revealDelay]="200">
   <div class="recent__head">
-    <h2 class="title title--sm">{{ 'admin.dashboard.recent' | translate }}</h2>
-    <a routerLink="/admin/projects" class="link link--caps">{{
-      'admin.dashboard.all' | translate
-    }}</a>
+    <h2 app-title size="sm">{{ 'admin.dashboard.recent' | translate }}</h2>
+    <a app-link caps routerLink="/admin/projects">{{ 'admin.dashboard.all' | translate }}</a>
   </div>
   <ul class="recent__list">
     @for (p of recent(); track p.id) {
@@ -54,9 +52,9 @@
             </p>
           </div>
           <span class="recent__date">{{ p.date | localDate: 'd MMM y' }}</span>
-          <span class="badge" [class]="'badge--' + badge[status(p)]">{{
+          <app-badge [tone]="badge[status(p)]">{{
             'admin.status.' + status(p) | translate
-          }}</span>
+          }}</app-badge>
         </a>
       </li>
     }

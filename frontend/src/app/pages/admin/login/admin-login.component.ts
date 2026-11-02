@@ -17,12 +17,26 @@ import { LanguageSwitcherComponent } from '@components/language-switcher/languag
 import { ToastsComponent } from '@components/toast/toast.component';
 import { ToastService } from '@components/toast/toast.service';
 import { AdminLoginStep, AuthError, AuthService } from '@services/auth.service';
+import { ButtonComponent } from '@ui/button/button.component';
+import { TextComponent, TitleComponent } from '@ui/typography/typography.component';
+import { FormFieldComponent, InputDirective } from '@ui/form-field/form-field.component';
+import { CardComponent } from '@ui/card/card.component';
+import { AlertComponent } from '@ui/alert/alert.component';
+import { SpinnerComponent } from '@ui/spinner/spinner.component';
 
 type Step = 'credentials' | 'code' | 'recovery';
 
 @Component({
   selector: 'app-admin-login',
   imports: [
+    ButtonComponent,
+    TitleComponent,
+    TextComponent,
+    FormFieldComponent,
+    InputDirective,
+    CardComponent,
+    AlertComponent,
+    SpinnerComponent,
     ReactiveFormsModule,
     TranslatePipe,
     IconComponent,

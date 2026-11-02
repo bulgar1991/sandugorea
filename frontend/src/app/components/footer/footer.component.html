@@ -1,11 +1,11 @@
 <footer class="footer">
-  <div class="wrapper footer__grid">
+  <div app-container class="footer__grid">
     <div class="footer__about" appReveal>
       <a routerLink="/" fragment="home" class="footer__logo">
         <span class="footer__name">{{ brand.owner }}</span>
         <span class="footer__tagline">{{ 'brand.tagline' | translate }}</span>
       </a>
-      <p class="text text--small footer__text">{{ 'footer.about' | translate }}</p>
+      <p app-text size="small" class="footer__text">{{ 'footer.about' | translate }}</p>
       <app-language-switcher variant="inline" />
     </div>
 
@@ -54,7 +54,7 @@
     <span class="footer__wordmark-text" appReveal="up">{{ brand.name }}</span>
   </div>
 
-  <div class="wrapper footer__bottom">
+  <div app-container class="footer__bottom">
     <span>© {{ year }} {{ brand.name }}. {{ 'footer.rights' | translate }}</span>
     <button type="button" class="footer__top" (click)="toTop()">
       {{ 'footer.backToTop' | translate }}

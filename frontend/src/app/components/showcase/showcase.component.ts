@@ -5,6 +5,8 @@ import { IconComponent } from '@components/icon/icon.component';
 import { CountUpDirective } from '@directives/count-up.directive';
 import { RevealDirective } from '@directives/reveal.directive';
 import { CATEGORIES } from '@/data/portfolio.data';
+import { EyebrowComponent, TitleComponent } from '@ui/typography/typography.component';
+import { ContainerComponent } from '@ui/container/container.component';
 
 /**
  * The "fancy" block: expanding image panels, one per category (hover / focus / tap opens one),
@@ -12,7 +14,16 @@ import { CATEGORIES } from '@/data/portfolio.data';
  */
 @Component({
   selector: 'app-showcase',
-  imports: [RouterLink, TranslatePipe, IconComponent, CountUpDirective, RevealDirective],
+  imports: [
+    TitleComponent,
+    EyebrowComponent,
+    ContainerComponent,
+    RouterLink,
+    TranslatePipe,
+    IconComponent,
+    CountUpDirective,
+    RevealDirective,
+  ],
   templateUrl: './showcase.component.html',
   styleUrl: './showcase.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

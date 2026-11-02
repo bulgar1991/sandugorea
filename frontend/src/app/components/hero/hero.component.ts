@@ -13,6 +13,10 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { IconComponent } from '@components/icon/icon.component';
 import { PageLoaderState } from '@services/page-loader.service';
 import { BRAND, HERO_PORTRAIT } from '@/data/portfolio.data';
+import { ButtonComponent } from '@ui/button/button.component';
+import { LinkComponent } from '@ui/link/link.component';
+import { TextComponent } from '@ui/typography/typography.component';
+import { ContainerComponent } from '@ui/container/container.component';
 
 const ROLE_KEYS = ['hero.roles.r1', 'hero.roles.r2', 'hero.roles.r3'];
 const TYPE_MS = 70;
@@ -25,7 +29,15 @@ const HOLD_MS = 2000;
  */
 @Component({
   selector: 'app-hero',
-  imports: [RouterLink, TranslatePipe, IconComponent],
+  imports: [
+    ButtonComponent,
+    LinkComponent,
+    TextComponent,
+    ContainerComponent,
+    RouterLink,
+    TranslatePipe,
+    IconComponent,
+  ],
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

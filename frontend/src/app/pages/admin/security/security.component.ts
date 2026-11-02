@@ -16,10 +16,28 @@ import { RevealDirective } from '@directives/reveal.directive';
 import { AdminSessionInfo, LoginEventInfo } from '@models/project.models';
 import { LocalDatePipe } from '@pipes/local-date.pipe';
 import { ProjectsApi } from '@services/projects-api.service';
+import { ButtonComponent } from '@ui/button/button.component';
+import { EyebrowComponent, TextComponent } from '@ui/typography/typography.component';
+import { FormFieldComponent, InputDirective } from '@ui/form-field/form-field.component';
+import { CardComponent } from '@ui/card/card.component';
+import { BadgeComponent } from '@ui/badge/badge.component';
+import { AlertComponent } from '@ui/alert/alert.component';
+import { SpinnerComponent } from '@ui/spinner/spinner.component';
+import { CredentialsComponent } from '@ui/credentials/credentials.component';
 
 @Component({
   selector: 'app-security',
   imports: [
+    ButtonComponent,
+    EyebrowComponent,
+    TextComponent,
+    FormFieldComponent,
+    InputDirective,
+    CardComponent,
+    BadgeComponent,
+    AlertComponent,
+    SpinnerComponent,
+    CredentialsComponent,
     ReactiveFormsModule,
     LocalDatePipe,
     TranslatePipe,

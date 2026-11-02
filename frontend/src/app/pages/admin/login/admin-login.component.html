@@ -8,11 +8,11 @@
       <span class="admin-login__shield">
         <app-icon name="shield" [size]="26" />
       </span>
-      <h1 class="title title--md admin-login__title">{{ 'admin.login.title' | translate }}</h1>
-      <p class="text text--small">{{ 'admin.login.subtitle' | translate }}</p>
+      <h1 app-title size="md" class="admin-login__title">{{ 'admin.login.title' | translate }}</h1>
+      <p app-text size="small">{{ 'admin.login.subtitle' | translate }}</p>
     </div>
 
-    <div class="card card--padded admin-login__card">
+    <div app-card padded class="admin-login__card">
       <div class="admin-login__steps">
         <span
           class="admin-login__step"
@@ -39,21 +39,23 @@
           class="admin-login__form"
           novalidate
         >
-          <label class="field">
+          <label app-field>
             <span class="field__label">{{ 'common.username' | translate }}</span>
             <input
-              class="field__control field__control--boxed"
+              app-input
+              boxed
               formControlName="username"
               autocomplete="username"
               autocapitalize="none"
               spellcheck="false"
             />
           </label>
-          <label class="field">
+          <label app-field>
             <span class="field__label">{{ 'common.password' | translate }}</span>
             <div class="field__wrap">
               <input
-                class="field__control field__control--boxed"
+                app-input
+                boxed
                 [type]="showPassword() ? 'text' : 'password'"
                 formControlName="password"
                 autocomplete="current-password"
@@ -72,7 +74,7 @@
           </label>
 
           @if (error(); as err) {
-            <p class="alert" role="alert">
+            <p app-alert role="alert">
               {{ err.key | translate: err.params }}
               @if (lockSeconds() > 0) {
                 ({{ lockSeconds() }}s)
@@ -80,13 +82,9 @@
             </p>
           }
 
-          <button
-            type="submit"
-            class="btn btn--primary btn--block"
-            [disabled]="loading() || lockSeconds() > 0"
-          >
+          <button app-button block type="submit" [disabled]="loading() || lockSeconds() > 0">
             @if (loading()) {
-              <span class="spinner"></span> {{ 'admin.login.verifying' | translate }}
+              <app-spinner /> {{ 'admin.login.verifying' | translate }}
             } @else {
               {{ 'admin.login.continue' | translate }} <app-icon name="arrow-right" [size]="16" />
             }
@@ -97,7 +95,7 @@
           @if (enrollment(); as e) {
             <div class="enroll">
               <p class="enroll__title">{{ 'admin.login.enrollTitle' | translate }}</p>
-              <p class="text text--small">{{ 'admin.login.enrollText' | translate }}</p>
+              <p app-text size="small">{{ 'admin.login.enrollText' | translate }}</p>
               <img [src]="e.qrPng" alt="QR code" class="enroll__qr" width="200" height="200" />
               <p class="enroll__label">{{ 'admin.login.enrollManual' | translate }}</p>
               <code class="enroll__secret">{{ e.secret }}</code>
@@ -111,13 +109,14 @@
               }}
             </div>
           }
-          <label class="field">
+          <label app-field>
             <span class="field__label">{{
               (useRecoveryCode() ? 'admin.login.recoveryCode' : 'admin.login.code') | translate
             }}</span>
             <input
+              app-input
+              boxed
               #codeInput
-              class="field__control field__control--boxed"
               [class.field__control--code]="!useRecoveryCode()"
               [formControl]="code"
               (input)="onCodeInput()"
@@ -131,7 +130,7 @@
           </label>
 
           @if (error(); as err) {
-            <p class="alert" role="alert">
+            <p app-alert role="alert">
               {{ err.key | translate: err.params }}
               @if (lockSeconds() > 0) {
                 ({{ lockSeconds() }}s)
@@ -140,12 +139,13 @@
           }
 
           <button
+            app-button
+            block
             type="submit"
-            class="btn btn--primary btn--block"
             [disabled]="loading() || code.invalid || lockSeconds() > 0"
           >
             @if (loading()) {
-              <span class="spinner"></span> {{ 'admin.login.checking' | translate }}
+              <app-spinner /> {{ 'admin.login.checking' | translate }}
             } @else {
               {{ 'admin.login.signIn' | translate }} <app-icon name="lock" [size]="14" />
             }
@@ -172,10 +172,10 @@
               <li class="recovery-codes__item">{{ c }}</li>
             }
           </ul>
-          <button type="button" class="btn btn--ghost btn--block" (click)="copyCodes()">
+          <button app-button variant="ghost" block type="button" (click)="copyCodes()">
             <app-icon name="copy" [size]="14" /> {{ 'common.copy' | translate }}
           </button>
-          <button type="button" class="btn btn--primary btn--block" (click)="finish()">
+          <button app-button block type="button" (click)="finish()">
             {{ 'admin.login.saved' | translate }} <app-icon name="arrow-right" [size]="16" />
           </button>
         </div>

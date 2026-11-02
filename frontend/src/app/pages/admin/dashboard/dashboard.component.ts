@@ -7,10 +7,29 @@ import { ProjectSummary, STATUS_BADGE, Stats, projectStatus } from '@models/proj
 import { LocalDatePipe } from '@pipes/local-date.pipe';
 import { ProjectsApi } from '@services/projects-api.service';
 import { formatBytes } from '@/utils/format';
+import { ButtonComponent } from '@ui/button/button.component';
+import { LinkComponent } from '@ui/link/link.component';
+import { EyebrowComponent, TitleComponent } from '@ui/typography/typography.component';
+import { CardComponent } from '@ui/card/card.component';
+import { BadgeComponent } from '@ui/badge/badge.component';
+import { PageHeadComponent } from '@ui/page-head/page-head.component';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [RouterLink, LocalDatePipe, TranslatePipe, IconComponent, RevealDirective],
+  imports: [
+    ButtonComponent,
+    LinkComponent,
+    TitleComponent,
+    EyebrowComponent,
+    CardComponent,
+    BadgeComponent,
+    PageHeadComponent,
+    RouterLink,
+    LocalDatePipe,
+    TranslatePipe,
+    IconComponent,
+    RevealDirective,
+  ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

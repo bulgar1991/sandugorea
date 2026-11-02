@@ -7,11 +7,35 @@ import { IconComponent, IconName } from '@components/icon/icon.component';
 import { RevealDirective } from '@directives/reveal.directive';
 import { LanguageService } from '@services/language.service';
 import { BRAND, CATEGORY_IDS } from '@/data/portfolio.data';
+import { ButtonComponent } from '@ui/button/button.component';
+import {
+  EyebrowComponent,
+  TextComponent,
+  TitleComponent,
+} from '@ui/typography/typography.component';
+import { FormFieldComponent, InputDirective } from '@ui/form-field/form-field.component';
+import { AlertComponent } from '@ui/alert/alert.component';
+import { SpinnerComponent } from '@ui/spinner/spinner.component';
+import { ContainerComponent } from '@ui/container/container.component';
 
 /** Booking request form + contact details. */
 @Component({
   selector: 'app-booking',
-  imports: [ReactiveFormsModule, TranslatePipe, IconComponent, RevealDirective],
+  imports: [
+    ButtonComponent,
+    TitleComponent,
+    EyebrowComponent,
+    TextComponent,
+    FormFieldComponent,
+    InputDirective,
+    AlertComponent,
+    SpinnerComponent,
+    ContainerComponent,
+    ReactiveFormsModule,
+    TranslatePipe,
+    IconComponent,
+    RevealDirective,
+  ],
   templateUrl: './booking.component.html',
   styleUrl: './booking.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

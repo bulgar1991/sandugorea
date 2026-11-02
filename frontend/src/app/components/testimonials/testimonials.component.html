@@ -1,8 +1,8 @@
-<div class="wrapper section testimonials">
+<div app-container class="testimonials">
   <div class="testimonials__header">
     <div>
-      <p class="eyebrow" appReveal>{{ 'testimonials.eyebrow' | translate }}</p>
-      <h2 class="title title--lg testimonials__title" appReveal [revealDelay]="100">
+      <p app-eyebrow appReveal>{{ 'testimonials.eyebrow' | translate }}</p>
+      <h2 app-title size="lg" class="testimonials__title" appReveal [revealDelay]="100">
         {{ 'testimonials.title' | translate }}
       </h2>
     </div>

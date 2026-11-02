@@ -6,6 +6,12 @@ import { IconComponent } from '@components/icon/icon.component';
 import { LanguageSwitcherComponent } from '@components/language-switcher/language-switcher.component';
 import { AuthError, AuthService } from '@services/auth.service';
 import { BRAND, imageUrl } from '@/data/portfolio.data';
+import { ButtonComponent } from '@ui/button/button.component';
+import { LinkComponent } from '@ui/link/link.component';
+import { TextComponent, TitleComponent } from '@ui/typography/typography.component';
+import { FormFieldComponent, InputDirective } from '@ui/form-field/form-field.component';
+import { AlertComponent } from '@ui/alert/alert.component';
+import { SpinnerComponent } from '@ui/spinner/spinner.component';
 
 interface ErrorMessage {
   key: string;
@@ -15,6 +21,14 @@ interface ErrorMessage {
 @Component({
   selector: 'app-client-login',
   imports: [
+    ButtonComponent,
+    LinkComponent,
+    TitleComponent,
+    TextComponent,
+    FormFieldComponent,
+    InputDirective,
+    AlertComponent,
+    SpinnerComponent,
     ReactiveFormsModule,
     RouterLink,
     TranslatePipe,

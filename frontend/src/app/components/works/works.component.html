@@ -1,12 +1,12 @@
-<div class="wrapper section works">
+<div app-container class="works">
   <div class="works__head">
     <div>
-      <p class="eyebrow" appReveal>{{ 'works.eyebrow' | translate }}</p>
-      <h2 class="title title--lg works__title" appReveal [revealDelay]="100">
+      <p app-eyebrow appReveal>{{ 'works.eyebrow' | translate }}</p>
+      <h2 app-title size="lg" class="works__title" appReveal [revealDelay]="100">
         {{ 'works.title' | translate }}
       </h2>
     </div>
-    <p class="text works__subtitle" appReveal [revealDelay]="200">
+    <p app-text class="works__subtitle" appReveal [revealDelay]="200">
       {{ 'works.subtitle' | translate }}
     </p>
   </div>
@@ -48,7 +48,7 @@
       ></span>
     </div>
     @if (hasMore()) {
-      <button type="button" class="btn btn--outline" (click)="loadMore()">
+      <button app-button variant="outline" type="button" (click)="loadMore()">
         {{ 'works.loadMore' | translate }}
         <app-icon name="plus" [size]="16" />
       </button>

@@ -5,13 +5,30 @@ import { LightboxComponent } from '@components/lightbox/lightbox.component';
 import { RevealDirective } from '@directives/reveal.directive';
 import { LightboxItem } from '@models/photo.models';
 import { PORTFOLIO } from '@/data/portfolio.data';
+import { ButtonComponent } from '@ui/button/button.component';
+import {
+  EyebrowComponent,
+  TextComponent,
+  TitleComponent,
+} from '@ui/typography/typography.component';
+import { ContainerComponent } from '@ui/container/container.component';
 
 const PAGE_SIZE = 8;
 
 /** "Our Latest Works": composed grid with a Load more button and a lightbox. */
 @Component({
   selector: 'app-works',
-  imports: [TranslatePipe, IconComponent, LightboxComponent, RevealDirective],
+  imports: [
+    ButtonComponent,
+    TitleComponent,
+    EyebrowComponent,
+    TextComponent,
+    ContainerComponent,
+    TranslatePipe,
+    IconComponent,
+    LightboxComponent,
+    RevealDirective,
+  ],
   templateUrl: './works.component.html',
   styleUrl: './works.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

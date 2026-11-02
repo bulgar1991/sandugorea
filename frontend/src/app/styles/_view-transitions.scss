@@ -1,0 +1,6 @@
+// Crossfade between pages (View Transitions API).
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 450ms;
+  animation-timing-function: theme('transitionTimingFunction.out-expo');
+}

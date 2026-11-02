@@ -7,7 +7,7 @@
     <!-- Main: upload + photos -->
     <section class="detail__main">
       <div class="detail__head">
-        <p class="eyebrow">{{ p.date | localDate: 'd MMMM y' }}</p>
+        <p app-eyebrow>{{ p.date | localDate: 'd MMMM y' }}</p>
         <h1 class="page-head__title">{{ p.title }}</h1>
         <p class="detail__summary">
           {{ 'admin.project.summary' | translate: { count: p.photos.length, size: totalSize() } }}
@@ -36,7 +36,7 @@
       @if (uploads().length) {
         <ul class="uploads">
           @for (u of uploads(); track u.id) {
-            <li class="card uploads__item">
+            <li app-card class="uploads__item">
               <div class="uploads__row">
                 <span class="uploads__name">{{ u.file.name }}</span>
                 <span class="uploads__meta"
@@ -89,25 +89,25 @@
 
     <!-- Side: customer, delivery, access -->
     <aside class="detail__side">
-      <div class="card panel">
+      <div app-card class="panel">
         <h2 class="panel__title">{{ 'admin.project.customer' | translate }}</h2>
         <div class="panel__customer">
-          <span class="avatar avatar--lg">{{ p.customerName.charAt(0) }}</span>
+          <span app-avatar size="lg">{{ p.customerName.charAt(0) }}</span>
           <div class="panel__customer-info">
             <p class="panel__name">{{ p.customerName }}</p>
-            <a [href]="'mailto:' + p.customerEmail" class="link panel__email">{{
+            <a app-link [href]="'mailto:' + p.customerEmail" class="panel__email">{{
               p.customerEmail
             }}</a>
           </div>
         </div>
       </div>
 
-      <div class="card panel">
+      <div app-card class="panel">
         <div class="panel__row">
           <h2 class="panel__title">{{ 'admin.project.delivery' | translate }}</h2>
-          <span class="badge" [class]="'badge--' + badge[status()]">{{
+          <app-badge [tone]="badge[status()]">{{
             'admin.status.' + status() | translate
-          }}</span>
+          }}</app-badge>
         </div>
         <p class="panel__text">
           @if (p.sentAt) {
@@ -119,8 +119,9 @@
           }
         </p>
         <button
+          app-button
+          block
           type="button"
-          class="btn btn--primary btn--block"
           (click)="confirmSend.set(true)"
           [disabled]="!p.photos.length || !p.active"
         >
@@ -129,7 +130,7 @@
         </button>
       </div>
 
-      <div class="card panel">
+      <div app-card class="panel">
         <h2 class="panel__title">{{ 'admin.project.access' | translate }}</h2>
         <dl class="panel__list">
           <div class="panel__item">
@@ -162,10 +163,10 @@
           </div>
         </dl>
         <div class="panel__actions">
-          <button type="button" class="btn btn--ghost btn--sm" (click)="resetPassword()">
+          <button app-button variant="ghost" size="sm" type="button" (click)="resetPassword()">
             <app-icon name="key" [size]="14" /> {{ 'admin.project.newPassword' | translate }}
           </button>
-          <button type="button" class="btn btn--ghost btn--sm" (click)="toggleAccess()">
+          <button app-button variant="ghost" size="sm" type="button" (click)="toggleAccess()">
             <app-icon [name]="p.active ? 'lock' : 'check'" [size]="14" />
             {{ (p.active ? 'admin.project.disable' : 'admin.project.enable') | translate }}
           </button>
@@ -173,8 +174,10 @@
       </div>
 
       <button
+        app-button
+        variant="danger"
+        block
         type="button"
-        class="btn btn--danger btn--block"
         (click)="deleteText.set(''); confirmDelete.set(true)"
       >
         <app-icon name="trash" [size]="14" /> {{ 'admin.project.deleteProject' | translate }}
@@ -185,7 +188,7 @@
   <app-lightbox [items]="lightboxItems()" [(index)]="openIndex" />
 
   <app-modal [(open)]="confirmSend" [title]="'admin.project.sendTitle' | translate">
-    <p class="text text--small">
+    <p app-text size="small">
       {{
         'admin.project.sendText'
           | translate
@@ -209,16 +212,16 @@
         <span class="send-option__hint">{{ 'admin.project.includePasswordHint' | translate }}</span>
       </span>
     </label>
-    <div class="credentials__actions modal-actions">
-      <button type="button" class="btn btn--primary" (click)="send()" [disabled]="sending()">
+    <div class="modal-actions">
+      <button app-button type="button" (click)="send()" [disabled]="sending()">
         @if (sending()) {
-          <span class="spinner"></span>
+          <app-spinner />
         } @else {
           <app-icon name="send" [size]="14" />
         }
         {{ 'admin.project.sendButton' | translate }}
       </button>
-      <button type="button" class="btn btn--ghost" (click)="confirmSend.set(false)">
+      <button app-button variant="ghost" type="button" (click)="confirmSend.set(false)">
         {{ 'common.cancel' | translate }}
       </button>
     </div>
@@ -229,8 +232,8 @@
     (openChange)="newPassword.set(null)"
     [title]="'admin.project.passwordTitle' | translate"
   >
-    <div class="credentials">
-      <p class="text text--small">
+    <div app-credentials>
+      <p app-text size="small">
         {{ 'admin.project.passwordText' | translate }}
         <span class="credentials__warning">{{ 'admin.projects.notShownAgain' | translate }}</span>
       </p>
@@ -248,7 +251,7 @@
         </div>
       </div>
       <div class="credentials__actions">
-        <button type="button" class="btn btn--primary" (click)="newPassword.set(null)">
+        <button app-button type="button" (click)="newPassword.set(null)">
           {{ 'common.done' | translate }}
         </button>
       </div>
@@ -256,36 +259,41 @@
   </app-modal>
 
   <app-modal [(open)]="confirmDelete" [title]="'admin.project.deleteTitle' | translate">
-    <p class="text text--small">
+    <p app-text size="small">
       {{
         'admin.project.deleteText'
           | translate: { title: p.title, count: p.photos.length, username: p.username }
       }}
     </p>
-    <input
-      class="field__control field__control--boxed field__control--mono modal-input"
-      [value]="deleteText()"
-      (input)="deleteText.set($any($event.target).value)"
-      autocapitalize="none"
-    />
-    <div class="credentials__actions modal-actions">
+    <div app-field class="modal-input">
+      <input
+        app-input
+        boxed
+        mono
+        [value]="deleteText()"
+        (input)="deleteText.set($any($event.target).value)"
+        autocapitalize="none"
+      />
+    </div>
+    <div class="modal-actions">
       <button
+        app-button
+        variant="danger"
         type="button"
-        class="btn btn--danger"
         [disabled]="deleteText() !== p.username"
         (click)="deleteProject()"
       >
         {{ 'admin.project.deleteForever' | translate }}
       </button>
-      <button type="button" class="btn btn--ghost" (click)="confirmDelete.set(false)">
+      <button app-button variant="ghost" type="button" (click)="confirmDelete.set(false)">
         {{ 'common.cancel' | translate }}
       </button>
     </div>
   </app-modal>
 } @else if (notFound()) {
   <div class="not-found-block">
-    <h1 class="title title--md">{{ 'admin.project.notFound' | translate }}</h1>
-    <a routerLink="/admin/projects" class="btn btn--outline">{{
+    <h1 app-title size="md">{{ 'admin.project.notFound' | translate }}</h1>
+    <a app-button variant="outline" routerLink="/admin/projects">{{
       'admin.project.backToProjects' | translate
     }}</a>
   </div>

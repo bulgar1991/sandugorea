@@ -167,7 +167,11 @@
 }
 
 .modal-actions {
-  @apply mt-6;
+  @apply mt-6 flex flex-wrap gap-3;
+}
+
+.detail__strong {
+  @apply text-ink;
 }
 
 .modal-input {

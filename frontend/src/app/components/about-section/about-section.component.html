@@ -1,4 +1,4 @@
-<div class="wrapper section about">
+<div app-container class="about">
   <div class="about__visual" (mousemove)="onMove($event)" (mouseleave)="onLeave()">
     <!-- Thin gold frame drifting behind the portrait -->
     <span class="about__outline" aria-hidden="true"></span>
@@ -9,7 +9,7 @@
           <img
             [src]="portrait"
             [alt]="'about.imageAlt' | translate"
-            class="cover parallax about__portrait"
+            class="parallax about__portrait"
             loading="lazy"
             decoding="async"
           />
@@ -21,7 +21,7 @@
 
     <div class="about__inset" appReveal="clip" [revealDelay]="300">
       <div class="about__inset-inner">
-        <img [src]="detail" alt="" class="cover" loading="lazy" decoding="async" />
+        <img [src]="detail" alt="" class="about__inset-img" loading="lazy" decoding="async" />
       </div>
     </div>
 
@@ -40,11 +40,11 @@
   </div>
 
   <div class="about__body">
-    <p class="eyebrow" appReveal>{{ 'about.eyebrow' | translate }}</p>
-    <h2 class="title title--lg about__title" appReveal [revealDelay]="100">
+    <p app-eyebrow appReveal>{{ 'about.eyebrow' | translate }}</p>
+    <h2 app-title size="lg" class="about__title" appReveal [revealDelay]="100">
       {{ 'about.titleStart' | translate }} <em>{{ 'about.titleAccent' | translate }}</em>
     </h2>
-    <div class="text about__text" appReveal [revealDelay]="200">
+    <div app-text class="about__text" appReveal [revealDelay]="200">
       <p>{{ 'about.p1' | translate }}</p>
       <p>{{ 'about.p2' | translate }}</p>
     </div>
@@ -63,7 +63,7 @@
         <p class="about__signature">{{ 'about.signature' | translate }}</p>
         <p class="about__role">{{ 'about.role' | translate }}</p>
       </div>
-      <a routerLink="/" fragment="booking" class="btn btn--outline">
+      <a app-button variant="outline" routerLink="/" fragment="booking">
         {{ 'about.cta' | translate }}
         <app-icon name="arrow-right" [size]="16" />
       </a>

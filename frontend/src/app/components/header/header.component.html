@@ -3,7 +3,7 @@
   [class.header--solid]="scrolled() || menuOpen()"
   [class.header--hidden]="hidden() && !menuOpen()"
 >
-  <div class="wrapper header__bar">
+  <div app-container class="header__bar">
     <a
       routerLink="/"
       fragment="home"
@@ -17,9 +17,11 @@
     <nav class="header__nav" [attr.aria-label]="'nav.main' | translate">
       @for (link of links; track link.fragment) {
         <a
+          app-link
+          underline
           routerLink="/"
           [fragment]="link.fragment"
-          class="header__link link--underline"
+          class="header__link"
           [class.header__link--active]="section() === link.fragment"
           [class.link--active]="section() === link.fragment"
         >
@@ -30,7 +32,7 @@
 
     <div class="header__actions">
       <app-language-switcher class="header__lang" />
-      <a routerLink="/client/login" class="btn btn--outline btn--sm header__client">
+      <a app-button variant="outline" size="sm" routerLink="/client/login" class="header__client">
         <app-icon name="lock" [size]="14" />
         {{ 'nav.clientArea' | translate }}
       </a>
@@ -51,7 +53,7 @@
 
 @if (menuOpen()) {
   <div class="menu" animate.enter="menu--entering" animate.leave="menu--leaving">
-    <nav class="wrapper menu__nav" [attr.aria-label]="'nav.main' | translate">
+    <nav app-container class="menu__nav" [attr.aria-label]="'nav.main' | translate">
       @for (link of links; track link.fragment; let i = $index) {
         <a
           routerLink="/"
@@ -74,9 +76,9 @@
         {{ 'nav.clientArea' | translate }}
       </a>
     </nav>
-    <div class="wrapper menu__footer">
+    <div app-container class="menu__footer">
       <app-language-switcher variant="inline" />
-      <a [href]="'mailto:' + brand.email" class="link">{{ brand.email }}</a>
+      <a app-link [href]="'mailto:' + brand.email">{{ brand.email }}</a>
     </div>
   </div>
 }

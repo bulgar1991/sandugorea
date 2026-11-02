@@ -18,18 +18,18 @@
       <span class="sign-in__lock sign-in__step" style="--i: 0">
         <app-icon name="lock" />
       </span>
-      <h1 class="title title--lg sign-in__title sign-in__step" style="--i: 1">
+      <h1 app-title size="lg" class="sign-in__title sign-in__step" style="--i: 1">
         {{ 'client.login.title' | translate }}
       </h1>
-      <p class="text sign-in__text sign-in__step" style="--i: 2">
+      <p app-text class="sign-in__text sign-in__step" style="--i: 2">
         {{ 'client.login.text' | translate }}
       </p>
 
       <form [formGroup]="form" (ngSubmit)="submit()" class="sign-in__form" novalidate>
-        <label class="field sign-in__step" style="--i: 3">
+        <label app-field class="sign-in__step" style="--i: 3">
           <span class="field__label">{{ 'common.username' | translate }}</span>
           <input
-            class="field__control"
+            app-input
             formControlName="username"
             autocomplete="username"
             autocapitalize="none"
@@ -37,11 +37,11 @@
           />
         </label>
 
-        <label class="field sign-in__step" style="--i: 4">
+        <label app-field class="sign-in__step" style="--i: 4">
           <span class="field__label">{{ 'common.password' | translate }}</span>
           <div class="field__wrap">
             <input
-              class="field__control"
+              app-input
               [type]="showPassword() ? 'text' : 'password'"
               formControlName="password"
               autocomplete="current-password"
@@ -60,17 +60,19 @@
         </label>
 
         @if (error()) {
-          <p class="alert" role="alert">{{ error()!.key | translate: error()!.params }}</p>
+          <p app-alert role="alert">{{ error()!.key | translate: error()!.params }}</p>
         }
 
         <button
+          app-button
+          block
           type="submit"
-          class="btn btn--primary btn--block sign-in__step"
+          class="sign-in__step"
           style="--i: 5"
           [disabled]="loading()"
         >
           @if (loading()) {
-            <span class="spinner"></span>
+            <app-spinner />
             {{ 'client.login.loading' | translate }}
           } @else {
             {{ 'client.login.submit' | translate }}
@@ -81,9 +83,7 @@
 
       <p class="sign-in__help sign-in__step" style="--i: 6">
         {{ 'client.login.lost' | translate }}
-        <a routerLink="/" fragment="booking" class="link">{{
-          'client.login.contact' | translate
-        }}</a
+        <a app-link routerLink="/" fragment="booking">{{ 'client.login.contact' | translate }}</a
         >.
       </p>
     </div>

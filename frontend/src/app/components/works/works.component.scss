@@ -3,6 +3,8 @@
 }
 
 .works {
+  @apply py-28 lg:py-40;
+
   &__head {
     @apply flex flex-col justify-between gap-6 lg:flex-row lg:items-end;
   }
