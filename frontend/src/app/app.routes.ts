@@ -1,33 +1,55 @@
-import { Routes } from '@angular/router';
-import { SiteLayoutComponent } from '@components/site-layout/site-layout.component';
+import { inject } from '@angular/core';
+import { Router, Routes } from '@angular/router';
 import { adminGuard, adminGuestGuard, customerGuard, customerGuestGuard } from '@guards/auth.guard';
+import { seoResolver } from './resolvers/seo.resolver';
 
-export const routes: Routes = [
-  // ---------- Public site ----------
+// `data.seo` holds translation keys (under "seo" in public/i18n/*.json); seoResolver turns them
+// into the page title, description, canonical link and social-media tags.
+
+/** Private pages must never show up in search engines. */
+const NOINDEX = [{ name: 'robots', content: 'noindex, nofollow' }];
+
+/** Old multi-page URLs now live as sections of the one-page site. */
+const toSection = (fragment: string) => () => inject(Router).createUrlTree(['/'], { fragment });
+
+const mainLayoutRoutes: Routes = [
   {
     path: '',
-    component: SiteLayoutComponent,
-    children: [
-      {
-        path: '',
-        title: 'Sandugorea — Photography',
-        loadComponent: () => import('./pages/home/home.component').then((m) => m.HomeComponent),
+    loadComponent: () => import('./pages/home/home.component').then((m) => m.HomeComponent),
+    resolve: { seo: seoResolver },
+    data: {
+      seo: {
+        title: 'seo.home.title',
+        description: 'seo.home.description',
       },
-    ],
+    },
   },
+  { path: 'about', redirectTo: toSection('about') },
+  { path: 'portfolio', redirectTo: toSection('works') },
+  { path: 'contact', redirectTo: toSection('booking') },
+  {
+    path: '**',
+    loadComponent: () =>
+      import('./pages/not-found/not-found.component').then((m) => m.NotFoundComponent),
+    resolve: { seo: seoResolver },
+    data: {
+      seo: {
+        title: 'seo.notFound.title',
+        description: 'seo.notFound.description',
+        metaTags: [{ name: 'robots', content: 'noindex, follow' }],
+      },
+    },
+  },
+];
 
-  // Old multi-page URLs now live as sections on the one-page site.
-  { path: 'portfolio', redirectTo: '' },
-  { path: 'about', redirectTo: '' },
-  { path: 'contact', redirectTo: '' },
-
-  // ---------- Customer private project ----------
+const customerRoutes: Routes = [
   {
     path: 'client/login',
-    title: 'Your project — Sandugorea',
     canMatch: [customerGuestGuard],
     loadComponent: () =>
       import('./pages/client/login/client-login.component').then((m) => m.ClientLoginComponent),
+    resolve: { seo: seoResolver },
+    data: { seo: { title: 'seo.clientLogin.title', metaTags: NOINDEX } },
   },
   {
     path: 'client',
@@ -37,22 +59,26 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        title: 'Your photos — Sandugorea',
         loadComponent: () =>
           import('./pages/client/project/client-project.component').then(
             (m) => m.ClientProjectComponent,
           ),
+        resolve: { seo: seoResolver },
+        data: { seo: { title: 'seo.client.title', metaTags: NOINDEX } },
       },
     ],
   },
+];
 
-  // ---------- Admin (not linked anywhere on the site) ----------
+// Not linked anywhere on the site.
+const adminRoutes: Routes = [
   {
     path: 'admin/login',
-    title: 'Sign in',
     canMatch: [adminGuestGuard],
     loadComponent: () =>
       import('./pages/admin/login/admin-login.component').then((m) => m.AdminLoginComponent),
+    resolve: { seo: seoResolver },
+    data: { seo: { title: 'seo.adminLogin.title', metaTags: NOINDEX } },
   },
   {
     path: 'admin',
@@ -62,44 +88,45 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        title: 'Dashboard · Admin',
         loadComponent: () =>
           import('./pages/admin/dashboard/dashboard.component').then((m) => m.DashboardComponent),
+        resolve: { seo: seoResolver },
+        data: { seo: { title: 'seo.admin.dashboard', metaTags: NOINDEX } },
       },
       {
         path: 'projects',
-        title: 'Projects · Admin',
         loadComponent: () =>
           import('./pages/admin/projects/projects.component').then((m) => m.ProjectsComponent),
+        resolve: { seo: seoResolver },
+        data: { seo: { title: 'seo.admin.projects', metaTags: NOINDEX } },
       },
       {
         path: 'projects/:id',
-        title: 'Project · Admin',
         loadComponent: () =>
           import('./pages/admin/project-detail/project-detail.component').then(
             (m) => m.ProjectDetailComponent,
           ),
+        resolve: { seo: seoResolver },
+        data: { seo: { title: 'seo.admin.project', metaTags: NOINDEX } },
       },
       {
         path: 'security',
-        title: 'Security · Admin',
         loadComponent: () =>
           import('./pages/admin/security/security.component').then((m) => m.SecurityComponent),
+        resolve: { seo: seoResolver },
+        data: { seo: { title: 'seo.admin.security', metaTags: NOINDEX } },
       },
     ],
   },
+];
 
-  // ---------- 404 ----------
+export const routes: Routes = [
+  ...customerRoutes,
+  ...adminRoutes,
   {
-    path: '**',
-    component: SiteLayoutComponent,
-    children: [
-      {
-        path: '',
-        title: 'Not found — Sandugorea',
-        loadComponent: () =>
-          import('./pages/not-found/not-found.component').then((m) => m.NotFoundComponent),
-      },
-    ],
+    path: '',
+    loadComponent: () =>
+      import('@components/main-layout/main-layout.component').then((m) => m.MainLayoutComponent),
+    children: mainLayoutRoutes,
   },
 ];

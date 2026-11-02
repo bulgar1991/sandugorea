@@ -8,7 +8,6 @@ import {
   signal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Meta } from '@angular/platform-browser';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -59,7 +58,6 @@ export class AdminLayoutComponent {
   protected readonly expiringSoon = computed(() => this.remainingMs() < 2 * 60_000);
 
   constructor() {
-    inject(Meta).updateTag({ name: 'robots', content: 'noindex, nofollow' });
     const destroyRef = inject(DestroyRef);
 
     inject(Router)

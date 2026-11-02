@@ -10,7 +10,6 @@ import {
   viewChild,
 } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Meta } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { IconComponent } from '@components/icon/icon.component';
@@ -63,7 +62,6 @@ export class AdminLoginComponent {
   private readonly codeInput = viewChild<ElementRef<HTMLInputElement>>('codeInput');
 
   constructor() {
-    inject(Meta).updateTag({ name: 'robots', content: 'noindex, nofollow' });
     const destroyRef = inject(DestroyRef);
     afterNextRender(() => {
       const t = setInterval(() => this.now.set(Date.now()), 1000);

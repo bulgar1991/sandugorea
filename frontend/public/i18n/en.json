@@ -22,7 +22,8 @@
     "photos": "{{count}} photos",
     "backHome": "Back home",
     "never": "Never",
-    "somethingWrong": "Something went wrong. Please try again."
+    "somethingWrong": "Something went wrong. Please try again.",
+    "loading": "Loading…"
   },
   "nav": {
     "home": "Home",
@@ -32,7 +33,8 @@
     "booking": "Booking",
     "clientArea": "Client area",
     "menu": "Menu",
-    "main": "Main navigation"
+    "main": "Main navigation",
+    "skipToContent": "Skip to content"
   },
   "categories": {
     "weddings": {
@@ -393,6 +395,31 @@
       "passwordUpdated": "Password updated. Other sessions were signed out.",
       "codesRegenerated": "New recovery codes generated",
       "sessionsRevoked": "Signed out of all other sessions"
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "Sandugorea — Wedding, portrait & family photographer",
+      "description": "Calm, cinematic wedding, portrait and family photography. Private online delivery of every photograph. Based in Switzerland, available worldwide."
+    },
+    "notFound": {
+      "title": "Page not found — Sandugorea",
+      "description": "The page you're looking for doesn't exist or has moved."
+    },
+    "clientLogin": {
+      "title": "Your private project — Sandugorea"
+    },
+    "client": {
+      "title": "Your photos — Sandugorea"
+    },
+    "adminLogin": {
+      "title": "Sign in"
+    },
+    "admin": {
+      "dashboard": "Dashboard · Admin",
+      "projects": "Projects · Admin",
+      "project": "Project · Admin",
+      "security": "Security · Admin"
     }
   }
 }

@@ -2,6 +2,16 @@
   @apply block;
 }
 
+// Until the page loader is gone, every intro animation waits on its first frame.
+:host(:not(.hero--ready)) {
+  .hero__rise,
+  .hero__appear,
+  .hero__frame,
+  .hero__portrait {
+    animation-play-state: paused;
+  }
+}
+
 .hero {
   @apply relative flex min-h-[100svh] items-center overflow-hidden pb-16 pt-28 lg:pb-0 lg:pt-header;
 

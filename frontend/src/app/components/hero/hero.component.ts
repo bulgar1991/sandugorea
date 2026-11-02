@@ -2,14 +2,16 @@ import {
   ChangeDetectionStrategy,
   Component,
   DestroyRef,
-  afterNextRender,
+  computed,
+  effect,
   inject,
   signal,
+  untracked,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { IconComponent } from '@components/icon/icon.component';
-import { introDelayMs } from '@components/preloader/preloader.component';
+import { PageLoaderState } from '@services/page-loader.service';
 import { BRAND, HERO_PORTRAIT } from '@/data/portfolio.data';
 
 const ROLE_KEYS = ['hero.roles.r1', 'hero.roles.r2', 'hero.roles.r3'];
@@ -27,14 +29,16 @@ const HOLD_MS = 2000;
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { '[style.--intro]': 'introDelay + "ms"' },
+  // The intro animations stay paused until the page loader has gone.
+  host: { '[class.hero--ready]': 'ready()', '[style.--intro]': '"150ms"' },
 })
 export class HeroComponent {
   private readonly translate = inject(TranslateService);
 
   protected readonly owner = BRAND.owner;
   protected readonly portrait = HERO_PORTRAIT;
-  protected readonly introDelay = introDelayMs();
+  private readonly loader = inject(PageLoaderState);
+  protected readonly ready = computed(() => !this.loader.visible());
   protected readonly roleKeys = ROLE_KEYS;
 
   /** The part of the current role typed so far. */
@@ -42,39 +46,46 @@ export class HeroComponent {
 
   constructor() {
     const destroyRef = inject(DestroyRef);
-    afterNextRender(() => {
-      if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        this.typed.set(this.translate.instant(ROLE_KEYS[0]));
-        return;
-      }
-      let timer = 0;
-      let role = 0;
-      let length = 0;
-      let deleting = false;
-
-      const tick = () => {
-        // Read the text every tick, so a language switch is picked up immediately.
-        const text: string = this.translate.instant(ROLE_KEYS[role]);
-        if (length > text.length) length = text.length;
-
-        if (!deleting && length < text.length) {
-          this.typed.set(text.slice(0, ++length));
-          timer = window.setTimeout(tick, TYPE_MS);
-        } else if (!deleting) {
-          deleting = true;
-          timer = window.setTimeout(tick, HOLD_MS);
-        } else if (length > 0) {
-          this.typed.set(text.slice(0, --length));
-          timer = window.setTimeout(tick, DELETE_MS);
-        } else {
-          deleting = false;
-          role = (role + 1) % ROLE_KEYS.length;
-          timer = window.setTimeout(tick, 400);
-        }
-      };
-
-      timer = window.setTimeout(tick, this.introDelay + 900);
-      destroyRef.onDestroy(() => clearTimeout(timer));
+    let started = false;
+    effect(() => {
+      if (!this.ready() || started) return;
+      started = true;
+      untracked(() => this.startTyping(destroyRef));
     });
+  }
+
+  private startTyping(destroyRef: DestroyRef) {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      this.typed.set(this.translate.instant(ROLE_KEYS[0]));
+      return;
+    }
+    let timer = 0;
+    let role = 0;
+    let length = 0;
+    let deleting = false;
+
+    const tick = () => {
+      // Read the text every tick, so a language switch is picked up immediately.
+      const text: string = this.translate.instant(ROLE_KEYS[role]);
+      if (length > text.length) length = text.length;
+
+      if (!deleting && length < text.length) {
+        this.typed.set(text.slice(0, ++length));
+        timer = window.setTimeout(tick, TYPE_MS);
+      } else if (!deleting) {
+        deleting = true;
+        timer = window.setTimeout(tick, HOLD_MS);
+      } else if (length > 0) {
+        this.typed.set(text.slice(0, --length));
+        timer = window.setTimeout(tick, DELETE_MS);
+      } else {
+        deleting = false;
+        role = (role + 1) % ROLE_KEYS.length;
+        timer = window.setTimeout(tick, 400);
+      }
+    };
+
+    timer = window.setTimeout(tick, 1000);
+    destroyRef.onDestroy(() => clearTimeout(timer));
   }
 }

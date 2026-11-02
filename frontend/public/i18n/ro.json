@@ -22,7 +22,8 @@
     "photos": "{{count}} fotografii",
     "backHome": "Înapoi acasă",
     "never": "Niciodată",
-    "somethingWrong": "Ceva nu a mers bine. Încearcă din nou."
+    "somethingWrong": "Ceva nu a mers bine. Încearcă din nou.",
+    "loading": "Se încarcă…"
   },
   "nav": {
     "home": "Acasă",
@@ -32,7 +33,8 @@
     "booking": "Rezervare",
     "clientArea": "Zona clienților",
     "menu": "Meniu",
-    "main": "Navigare principală"
+    "main": "Navigare principală",
+    "skipToContent": "Sari la conținut"
   },
   "categories": {
     "weddings": {
@@ -393,6 +395,31 @@
       "passwordUpdated": "Parola a fost actualizată. Celelalte sesiuni au fost deconectate.",
       "codesRegenerated": "Coduri de recuperare noi generate",
       "sessionsRevoked": "Deconectat de pe toate celelalte sesiuni"
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "Sandugorea — Fotograf de nunți, portrete și familie",
+      "description": "Fotografie de nuntă, portret și familie, calmă și cinematică. Livrare online privată a fiecărei fotografii. Din Elveția, disponibil în toată lumea."
+    },
+    "notFound": {
+      "title": "Pagina nu a fost găsită — Sandugorea",
+      "description": "Pagina pe care o cauți nu există sau a fost mutată."
+    },
+    "clientLogin": {
+      "title": "Proiectul tău privat — Sandugorea"
+    },
+    "client": {
+      "title": "Fotografiile tale — Sandugorea"
+    },
+    "adminLogin": {
+      "title": "Autentificare"
+    },
+    "admin": {
+      "dashboard": "Panou · Admin",
+      "projects": "Proiecte · Admin",
+      "project": "Proiect · Admin",
+      "security": "Securitate · Admin"
     }
   }
 }

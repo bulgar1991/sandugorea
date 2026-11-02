@@ -22,7 +22,8 @@
     "photos": "{{count}} foto",
     "backHome": "Torna alla home",
     "never": "Mai",
-    "somethingWrong": "Qualcosa è andato storto. Riprova."
+    "somethingWrong": "Qualcosa è andato storto. Riprova.",
+    "loading": "Caricamento…"
   },
   "nav": {
     "home": "Home",
@@ -32,7 +33,8 @@
     "booking": "Prenota",
     "clientArea": "Area clienti",
     "menu": "Menu",
-    "main": "Navigazione principale"
+    "main": "Navigazione principale",
+    "skipToContent": "Vai al contenuto"
   },
   "categories": {
     "weddings": {
@@ -393,6 +395,31 @@
       "passwordUpdated": "Password aggiornata. Le altre sessioni sono state disconnesse.",
       "codesRegenerated": "Nuovi codici di recupero generati",
       "sessionsRevoked": "Disconnesso da tutte le altre sessioni"
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "Sandugorea — Fotografo di matrimoni, ritratti e famiglie",
+      "description": "Fotografia di matrimonio, ritratto e famiglia, calma e cinematografica. Consegna online privata di ogni foto. Dalla Svizzera, disponibile in tutto il mondo."
+    },
+    "notFound": {
+      "title": "Pagina non trovata — Sandugorea",
+      "description": "La pagina che cerchi non esiste o è stata spostata."
+    },
+    "clientLogin": {
+      "title": "Il tuo progetto privato — Sandugorea"
+    },
+    "client": {
+      "title": "Le tue foto — Sandugorea"
+    },
+    "adminLogin": {
+      "title": "Accedi"
+    },
+    "admin": {
+      "dashboard": "Panoramica · Admin",
+      "projects": "Progetti · Admin",
+      "project": "Progetto · Admin",
+      "security": "Sicurezza · Admin"
     }
   }
 }

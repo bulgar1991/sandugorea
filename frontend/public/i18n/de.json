@@ -22,7 +22,8 @@
     "photos": "{{count}} Fotos",
     "backHome": "Zur Startseite",
     "never": "Nie",
-    "somethingWrong": "Etwas ist schiefgelaufen. Bitte versuche es erneut."
+    "somethingWrong": "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
+    "loading": "Wird geladen…"
   },
   "nav": {
     "home": "Start",
@@ -32,7 +33,8 @@
     "booking": "Buchung",
     "clientArea": "Kundenbereich",
     "menu": "Menü",
-    "main": "Hauptnavigation"
+    "main": "Hauptnavigation",
+    "skipToContent": "Zum Inhalt springen"
   },
   "categories": {
     "weddings": {
@@ -393,6 +395,31 @@
       "passwordUpdated": "Passwort aktualisiert. Andere Sitzungen wurden abgemeldet.",
       "codesRegenerated": "Neue Wiederherstellungscodes erzeugt",
       "sessionsRevoked": "Von allen anderen Sitzungen abgemeldet"
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "Sandugorea — Hochzeits-, Porträt- & Familienfotograf",
+      "description": "Ruhige, filmische Hochzeits-, Porträt- und Familienfotografie. Private Online-Übergabe aller Fotos. Aus der Schweiz, weltweit verfügbar."
+    },
+    "notFound": {
+      "title": "Seite nicht gefunden — Sandugorea",
+      "description": "Die gesuchte Seite existiert nicht oder wurde verschoben."
+    },
+    "clientLogin": {
+      "title": "Dein privates Projekt — Sandugorea"
+    },
+    "client": {
+      "title": "Deine Fotos — Sandugorea"
+    },
+    "adminLogin": {
+      "title": "Anmelden"
+    },
+    "admin": {
+      "dashboard": "Übersicht · Admin",
+      "projects": "Projekte · Admin",
+      "project": "Projekt · Admin",
+      "security": "Sicherheit · Admin"
     }
   }
 }

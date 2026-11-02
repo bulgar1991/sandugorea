@@ -1,0 +1,15 @@
+<!-- Same markup as the pre-boot copy in index.html (styles are global: styles/_page-loader.scss). -->
+<div
+  class="page-loader"
+  [class.page-loader--hidden]="!state.visible()"
+  role="status"
+  [attr.aria-hidden]="!state.visible()"
+>
+  <div class="page-loader__brand" aria-hidden="true">
+    @for (letter of letters; track $index) {
+      <span class="page-loader__letter" [style.animation-delay.ms]="$index * 45">{{ letter }}</span>
+    }
+  </div>
+  <span class="page-loader__bar" aria-hidden="true"></span>
+  <span class="sr-only">{{ 'common.loading' | translate }}</span>
+</div>
