@@ -1,0 +1,50 @@
+<div class="showcase">
+  <div class="wrapper showcase__head">
+    <p class="eyebrow" appReveal>{{ 'showcase.eyebrow' | translate }}</p>
+    <h2 class="title title--lg showcase__title" appReveal [revealDelay]="100">
+      {{ 'showcase.titleStart' | translate }} <em>{{ 'showcase.titleAccent' | translate }}</em>
+    </h2>
+  </div>
+
+  <div class="wrapper">
+    <div class="panels" appReveal="up" [revealDelay]="150">
+      @for (cat of categories; track cat.id; let i = $index) {
+        <a
+          routerLink="/"
+          fragment="works"
+          class="panel"
+          [class.panel--active]="active() === i"
+          (mouseenter)="active.set(i)"
+          (focus)="active.set(i)"
+        >
+          <img
+            [src]="cat.cover"
+            [alt]="cat.labelKey | translate"
+            class="panel__image"
+            loading="lazy"
+          />
+          <span class="panel__shade"></span>
+          <span class="panel__label">{{ cat.labelKey | translate }}</span>
+          <span class="panel__body">
+            <span class="panel__index">0{{ i + 1 }}</span>
+            <span class="panel__title">{{ cat.labelKey | translate }}</span>
+            <span class="panel__blurb">{{ cat.blurbKey | translate }}</span>
+            <span class="panel__more">
+              {{ 'showcase.explore' | translate }}
+              <app-icon name="arrow-right" [size]="14" />
+            </span>
+          </span>
+        </a>
+      }
+    </div>
+  </div>
+
+  <div class="wrapper counters">
+    @for (s of stats; track s.key; let i = $index) {
+      <div class="counters__item" appReveal [revealDelay]="i * 100">
+        <span class="counters__value" [appCountUp]="s.value" [suffix]="s.suffix"></span>
+        <span class="counters__label">{{ s.key | translate }}</span>
+      </div>
+    }
+  </div>
+</div>

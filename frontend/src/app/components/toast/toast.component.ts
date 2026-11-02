@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { IconComponent } from '@components/icon/icon.component';
 import { ToastService } from './toast.service';
 
 @Component({
   selector: 'app-toasts',
-  imports: [IconComponent],
+  imports: [IconComponent, TranslatePipe],
   template: `
     <div class="toasts" aria-live="polite">
       @for (t of toasts.toasts(); track t.id) {
@@ -19,12 +20,12 @@ import { ToastService } from './toast.service';
             [name]="t.kind === 'error' ? 'close' : 'check'"
             [size]="16"
           />
-          <span class="toasts__message">{{ t.message }}</span>
+          <span class="toasts__message">{{ t.message | translate: t.params }}</span>
           <button
             type="button"
             class="toasts__close"
             (click)="toasts.dismiss(t.id)"
-            aria-label="Dismiss"
+            [attr.aria-label]="'common.close' | translate"
           >
             <app-icon name="close" [size]="14" />
           </button>

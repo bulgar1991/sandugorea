@@ -7,14 +7,15 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { DatePipe } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 import { IconComponent } from '@components/icon/icon.component';
+import { LocalDatePipe } from '@pipes/local-date.pipe';
 import { ToastService } from '@components/toast/toast.service';
 import { RevealDirective } from '@directives/reveal.directive';
 
 @Component({
   selector: 'app-security',
-  imports: [ReactiveFormsModule, DatePipe, IconComponent, RevealDirective],
+  imports: [ReactiveFormsModule, LocalDatePipe, TranslatePipe, IconComponent, RevealDirective],
   templateUrl: './security.component.html',
   styleUrl: './security.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -46,15 +47,9 @@ export class SecurityComponent {
     if (/\d/.test(p) && /[^A-Za-z0-9]/.test(p)) s++;
     return s;
   });
-  protected readonly strengthLabel = computed(
-    () => ['Too weak', 'Weak', 'Fair', 'Good', 'Strong'][this.strength()],
-  );
+  protected readonly strengthLabel = computed(() => `admin.security.strength.s${this.strength()}`);
 
-  protected readonly rules = [
-    'Account locks for 1 minute after 5 failed attempts',
-    'Automatic sign-out after 15 minutes of inactivity',
-    'Admin area hidden from search engines and site navigation',
-  ];
+  protected readonly rules = ['r1', 'r2', 'r3'].map((r) => `admin.security.rules.${r}`);
 
   protected readonly sessions = signal([
     {
@@ -89,16 +84,16 @@ export class SecurityComponent {
     }
     // TODO: POST /api/admin/account/password
     this.form.reset();
-    this.toast.show('Password updated. Other sessions were signed out.');
+    this.toast.show('admin.toasts.passwordUpdated');
   }
 
   protected regenerateCodes() {
     // TODO: POST /api/admin/account/recovery-codes
-    this.toast.show('New recovery codes generated', 'info');
+    this.toast.show('admin.toasts.codesRegenerated', undefined, 'info');
   }
 
   protected revokeOthers() {
     this.sessions.update((s) => s.filter((x) => x.current));
-    this.toast.show('Signed out of all other sessions', 'info');
+    this.toast.show('admin.toasts.sessionsRevoked', undefined, 'info');
   }
 }

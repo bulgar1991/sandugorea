@@ -1,7 +1,9 @@
 <div class="page-head">
   <div>
-    <p class="eyebrow" appReveal>{{ today | date: 'EEEE, d MMMM' }}</p>
-    <h1 class="page-head__title" appReveal [revealDelay]="80">Good to see you.</h1>
+    <p class="eyebrow" appReveal>{{ today | localDate: 'EEEE, d MMMM' }}</p>
+    <h1 class="page-head__title" appReveal [revealDelay]="80">
+      {{ 'admin.dashboard.greeting' | translate }}
+    </h1>
   </div>
   <a
     routerLink="/admin/projects"
@@ -10,7 +12,7 @@
     appReveal
     [revealDelay]="160"
   >
-    <app-icon name="plus" [size]="16" /> New project
+    <app-icon name="plus" [size]="16" /> {{ 'admin.dashboard.newProject' | translate }}
   </a>
 </div>
 
@@ -18,19 +20,21 @@
   @for (c of cards(); track c.label; let i = $index) {
     <div class="card card--hover stat-card" appReveal [revealDelay]="i * 80">
       <div class="stat-card__head">
-        <span class="stat-card__label">{{ c.label }}</span>
+        <span class="stat-card__label">{{ c.label | translate }}</span>
         <span class="stat-card__icon"><app-icon [name]="c.icon" [size]="16" /></span>
       </div>
       <p class="stat-card__value">{{ c.value }}</p>
-      <p class="stat-card__hint">{{ c.hint }}</p>
+      <p class="stat-card__hint">{{ c.hint | translate: c.params }}</p>
     </div>
   }
 </div>
 
 <div class="card recent" appReveal [revealDelay]="200">
   <div class="recent__head">
-    <h2 class="title title--sm">Recent projects</h2>
-    <a routerLink="/admin/projects" class="link link--caps">All projects →</a>
+    <h2 class="title title--sm">{{ 'admin.dashboard.recent' | translate }}</h2>
+    <a routerLink="/admin/projects" class="link link--caps">{{
+      'admin.dashboard.all' | translate
+    }}</a>
   </div>
   <ul class="recent__list">
     @for (p of recent(); track p.id) {
@@ -45,20 +49,14 @@
           }
           <div class="recent__info">
             <p class="recent__title">{{ p.title }}</p>
-            <p class="recent__meta">{{ p.customerName }} · {{ p.photos.length }} photos</p>
+            <p class="recent__meta">
+              {{ p.customerName }} · {{ 'common.photos' | translate: { count: p.photos.length } }}
+            </p>
           </div>
-          <span class="recent__date">{{ p.date | date: 'd MMM y' }}</span>
-          @switch (status(p)) {
-            @case ('delivered') {
-              <span class="badge badge--success">Delivered</span>
-            }
-            @case ('draft') {
-              <span class="badge badge--accent">Draft</span>
-            }
-            @default {
-              <span class="badge badge--muted">Disabled</span>
-            }
-          }
+          <span class="recent__date">{{ p.date | localDate: 'd MMM y' }}</span>
+          <span class="badge" [class]="'badge--' + badge[status(p)]">{{
+            'admin.status.' + status(p) | translate
+          }}</span>
         </a>
       </li>
     }

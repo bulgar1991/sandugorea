@@ -1,47 +1,87 @@
+:host {
+  @apply block;
+}
+
 .footer {
-  @apply border-t border-line bg-black;
+  @apply overflow-hidden border-t border-line bg-black pt-20;
 
-  &__cta {
-    @apply py-24 lg:py-32;
+  &__grid {
+    @apply grid gap-12 sm:grid-cols-2 lg:grid-cols-12;
   }
 
-  &__title {
-    @apply mt-6 max-w-4xl;
+  &__about {
+    @apply flex flex-col gap-6 lg:col-span-5;
   }
 
-  &__contact {
-    @apply mt-12 flex flex-col gap-8 sm:flex-row sm:items-center;
+  &__logo {
+    @apply flex flex-col leading-none;
   }
 
-  &__email {
-    @apply font-display text-2xl sm:text-3xl;
+  &__name {
+    @apply font-display text-3xl uppercase tracking-caps-md;
   }
 
-  &__bottom {
-    @apply flex flex-col gap-8 border-t border-line py-10 lg:flex-row lg:items-center lg:justify-between;
+  &__tagline {
+    @apply mt-1 text-2xs uppercase tracking-caps-2xl text-accent;
   }
 
-  &__brand {
-    @apply font-display text-xl uppercase tracking-caps-md;
+  &__text {
+    @apply max-w-sm;
   }
 
-  &__nav {
-    @apply flex flex-wrap gap-x-8 gap-y-3;
+  &__column {
+    @apply lg:col-span-2;
+
+    &:nth-child(3) {
+      @apply lg:col-span-3;
+    }
+  }
+
+  &__heading {
+    @apply mb-5 text-xs font-semibold uppercase tracking-caps-lg text-accent;
+  }
+
+  &__list {
+    @apply flex flex-col gap-3;
   }
 
   &__link {
-    @apply text-label uppercase tracking-caps-lg text-ink-muted hover:text-accent;
+    @apply w-fit text-sm text-ink-muted transition-colors hover:text-ink;
+  }
+
+  &__plain {
+    @apply text-sm text-ink-muted;
   }
 
   &__social {
-    @apply flex items-center gap-5 text-ink-muted;
+    @apply flex gap-3;
   }
 
   &__icon {
-    @apply hover:text-accent;
+    @apply flex h-11 w-11 items-center justify-center rounded-full border border-line text-ink-muted transition-colors duration-300 hover:border-accent hover:bg-accent hover:text-black;
   }
 
-  &__copy {
-    @apply text-xs text-ink-subtle;
+  &__wordmark {
+    @apply mt-16 select-none overflow-hidden text-center;
+  }
+
+  &__wordmark-text {
+    @apply block whitespace-nowrap bg-gradient-to-b from-ink/20 to-transparent bg-clip-text font-display text-[13.5vw] font-light uppercase leading-[0.8] tracking-tight text-transparent;
+  }
+
+  &__bottom {
+    @apply flex flex-col items-center justify-between gap-4 border-t border-line py-8 text-xs text-ink-subtle sm:flex-row;
+  }
+
+  &__top {
+    @apply inline-flex cursor-pointer items-center gap-3 uppercase tracking-caps hover:text-accent;
+  }
+
+  &__top-icon {
+    @apply flex h-8 w-8 -rotate-45 items-center justify-center rounded-full border border-line transition-transform duration-600 ease-out-expo;
+  }
+
+  &__top:hover &__top-icon {
+    @apply rotate-0 border-accent;
   }
 }

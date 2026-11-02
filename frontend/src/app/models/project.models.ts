@@ -36,6 +36,13 @@ export function projectStatus(p: Project): ProjectStatus {
   return p.sentAt ? 'delivered' : 'draft';
 }
 
+/** Badge modifier per status (`.badge--success` etc.). */
+export const STATUS_BADGE: Record<ProjectStatus, string> = {
+  delivered: 'success',
+  draft: 'accent',
+  disabled: 'muted',
+};
+
 export type Role = 'admin' | 'customer';
 
 export interface Session {

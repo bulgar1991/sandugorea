@@ -1,44 +1,38 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { TranslatePipe } from '@ngx-translate/core';
 import { IconComponent, IconName } from '@components/icon/icon.component';
-import { PageHeroComponent } from '@components/page-hero/page-hero.component';
 import { RevealDirective } from '@directives/reveal.directive';
-import { BRAND, CATEGORIES } from '@/data/portfolio.data';
+import { BRAND, CATEGORY_IDS } from '@/data/portfolio.data';
 
+/** Booking request form + contact details. */
 @Component({
-  selector: 'app-contact',
-  imports: [ReactiveFormsModule, IconComponent, PageHeroComponent, RevealDirective],
-  templateUrl: './contact.component.html',
-  styleUrl: './contact.component.scss',
+  selector: 'app-booking',
+  imports: [ReactiveFormsModule, TranslatePipe, IconComponent, RevealDirective],
+  templateUrl: './booking.component.html',
+  styleUrl: './booking.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ContactComponent {
-  protected readonly brand = BRAND;
-  protected readonly contactItems: {
-    icon: IconName;
-    label: string;
-    value: string;
-    href: string;
-  }[] = [
-    { icon: 'mail', label: 'Email', value: BRAND.email, href: `mailto:${BRAND.email}` },
-    {
-      icon: 'phone',
-      label: 'Phone',
-      value: BRAND.phone,
-      href: `tel:${BRAND.phone.replace(/\s/g, '')}`,
-    },
-    { icon: 'instagram', label: 'Instagram', value: '@sandugorea', href: BRAND.instagram },
-    { icon: 'map-pin', label: 'Based in', value: BRAND.location, href: '' },
-  ];
-  protected readonly sessionTypes = [...CATEGORIES.map((c) => c.label), 'Something else'];
+export class BookingComponent {
+  protected readonly types = [...CATEGORY_IDS, 'other'];
   protected readonly state = signal<'idle' | 'sending' | 'sent'>('idle');
+  protected readonly minDate = new Date().toISOString().slice(0, 10);
+
+  protected readonly contacts: { icon: IconName; value: string; href: string }[] = [
+    { icon: 'mail', value: BRAND.email, href: `mailto:${BRAND.email}` },
+    { icon: 'phone', value: BRAND.phone, href: `tel:${BRAND.phone.replace(/\s/g, '')}` },
+    { icon: 'instagram', value: '@sandugorea', href: BRAND.instagram },
+  ];
 
   protected readonly form = inject(NonNullableFormBuilder).group({
     name: ['', [Validators.required, Validators.maxLength(100)]],
     email: ['', [Validators.required, Validators.email]],
-    type: [this.sessionTypes[0]],
+    phone: ['', Validators.maxLength(30)],
+    type: ['weddings'],
     date: [''],
+    location: ['', Validators.maxLength(120)],
     message: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(4000)]],
+    consent: [false, Validators.requiredTrue],
   });
 
   protected invalid(name: keyof typeof this.form.controls) {
@@ -52,7 +46,7 @@ export class ContactComponent {
       return;
     }
     this.state.set('sending');
-    // TODO: POST /api/contact once the backend endpoint exists.
+    // TODO: POST /api/booking once the backend endpoint exists.
     await new Promise((r) => setTimeout(r, 1200));
     this.state.set('sent');
     this.form.reset();

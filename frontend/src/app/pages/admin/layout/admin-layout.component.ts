@@ -11,14 +11,24 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Meta } from '@angular/platform-browser';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
+import { TranslatePipe } from '@ngx-translate/core';
 import { IconComponent, IconName } from '@components/icon/icon.component';
+import { LanguageSwitcherComponent } from '@components/language-switcher/language-switcher.component';
 import { ToastsComponent } from '@components/toast/toast.component';
 import { ADMIN_IDLE_TIMEOUT_MS, AuthService } from '@services/auth.service';
 import { BRAND } from '@/data/portfolio.data';
 
 @Component({
   selector: 'app-admin-layout',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, IconComponent, ToastsComponent],
+  imports: [
+    RouterOutlet,
+    RouterLink,
+    RouterLinkActive,
+    TranslatePipe,
+    IconComponent,
+    LanguageSwitcherComponent,
+    ToastsComponent,
+  ],
   templateUrl: './admin-layout.component.html',
   styleUrl: './admin-layout.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -34,9 +44,9 @@ export class AdminLayoutComponent {
   protected readonly navOpen = signal(false);
 
   protected readonly nav: { path: string; label: string; icon: IconName; exact: boolean }[] = [
-    { path: '/admin', label: 'Dashboard', icon: 'grid', exact: true },
-    { path: '/admin/projects', label: 'Projects', icon: 'folder', exact: false },
-    { path: '/admin/security', label: 'Security', icon: 'shield', exact: false },
+    { path: '/admin', label: 'admin.nav.dashboard', icon: 'grid', exact: true },
+    { path: '/admin/projects', label: 'admin.nav.projects', icon: 'folder', exact: false },
+    { path: '/admin/security', label: 'admin.nav.security', icon: 'shield', exact: false },
   ];
 
   /** Inactivity auto sign-out. */

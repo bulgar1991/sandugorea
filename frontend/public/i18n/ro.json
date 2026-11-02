@@ -1,0 +1,377 @@
+{
+  "brand": {
+    "tagline": "Fotografie",
+    "location": "București · Disponibil în toată lumea"
+  },
+  "common": {
+    "language": "Limbă",
+    "close": "Închide",
+    "cancel": "Anulează",
+    "done": "Gata",
+    "copy": "Copiază",
+    "copied": "Copiat",
+    "signOut": "Deconectare",
+    "username": "Utilizator",
+    "password": "Parolă",
+    "showPassword": "Arată parola",
+    "hidePassword": "Ascunde parola",
+    "previous": "Înapoi",
+    "next": "Înainte",
+    "download": "Descarcă",
+    "open": "Deschide",
+    "photos": "{{count}} fotografii",
+    "backHome": "Înapoi acasă",
+    "never": "Niciodată",
+    "somethingWrong": "Ceva nu a mers bine. Încearcă din nou."
+  },
+  "nav": {
+    "home": "Acasă",
+    "about": "Despre mine",
+    "works": "Lucrări",
+    "testimonials": "Recenzii",
+    "booking": "Rezervare",
+    "clientArea": "Zona clienților",
+    "menu": "Meniu",
+    "main": "Navigare principală"
+  },
+  "categories": {
+    "weddings": {
+      "label": "Nunți",
+      "blurb": "Priviri tăcute, râsete zgomotoase, întreaga zi așa cum ați trăit-o cu adevărat."
+    },
+    "portraits": {
+      "label": "Portrete",
+      "blurb": "Lumină sinceră și ședințe fără grabă, în care poți fi tu însuți."
+    },
+    "family": {
+      "label": "Familie",
+      "blurb": "Momentele mici și obișnuite care, mai târziu, devin totul."
+    },
+    "events": {
+      "label": "Evenimente",
+      "blurb": "Atmosferă, oameni și detalii, surprinse cu discreție."
+    },
+    "landscapes": {
+      "label": "Peisaje",
+      "blurb": "Locuri care rămân cu tine mult după ce lumina a plecat."
+    },
+    "other": {
+      "label": "Altceva"
+    }
+  },
+  "hero": {
+    "eyebrow": "Fine art · Portret · Nuntă",
+    "line1": "Lumină,",
+    "line2": "emoție,",
+    "line3": "pentru totdeauna.",
+    "works": "Vezi lucrările",
+    "book": "Rezervă o ședință",
+    "scroll": "Derulează",
+    "slide": "Imaginea {{n}}",
+    "slides": {
+      "s1": "Nunți — Toscana",
+      "s2": "Portrete — Studio",
+      "s3": "Peisaje — Islanda",
+      "s4": "Familie — Marea Neagră"
+    }
+  },
+  "about": {
+    "eyebrow": "Despre mine",
+    "titleStart": "Fotografiez oamenii așa cum se simt,",
+    "titleAccent": "nu doar așa cum arată.",
+    "p1": "De peste zece ani caut lumina sinceră și momentele liniștite: respirația dinaintea jurământului, mâna unui copil care o caută pe a ta, un chip în lumina perfectă a unei ferestre.",
+    "p2": "Lucrările mele sunt calme, cinematice și făcute pentru a fi privite o viață întreagă. Fiecare ședință e fără grabă și fiecare imagine e editată manual.",
+    "signature": "Sandu",
+    "role": "Fotograf și povestitor",
+    "imageAlt": "Fotograful la lucru",
+    "cta": "Rezervă o ședință",
+    "highlights": {
+      "h1": "Stil natural, documentar",
+      "h2": "Culori atemporale, editate manual",
+      "h3": "Livrare online privată"
+    }
+  },
+  "showcase": {
+    "eyebrow": "Ce fotografiez",
+    "titleStart": "Fiecare poveste merită",
+    "titleAccent": "propria lumină",
+    "explore": "Descoperă",
+    "stats": {
+      "years": "Ani în spatele aparatului",
+      "sessions": "Ședințe foto",
+      "weddings": "Nunți",
+      "countries": "Țări"
+    }
+  },
+  "works": {
+    "eyebrow": "Portofoliu",
+    "title": "Cele mai noi lucrări",
+    "subtitle": "O selecție de ședințe recente: nunți, portrete, familii și locuri.",
+    "loadMore": "Încarcă mai multe",
+    "showing": "{{shown}} din {{total}}",
+    "allLoaded": "Ai văzut tot, deocamdată.",
+    "open": "Deschide fotografia"
+  },
+  "testimonials": {
+    "eyebrow": "Vorbe frumoase",
+    "title": "Ce spun clienții mei",
+    "items": {
+      "t1": {
+        "quote": "Ne deschidem fotografiile la fiecare aniversare și plângem de fiecare dată. Sandu a văzut momente despre care nici nu știam că s-au întâmplat.",
+        "author": "Ana & Mihai",
+        "detail": "Nuntă · Toscana"
+      },
+      "t2": {
+        "quote": "Calm, răbdător și atât de prezent. Portretele mă arată în cea mai bună zi a mea, fără efort.",
+        "author": "Elena R.",
+        "detail": "Ședință portret"
+      },
+      "t3": {
+        "quote": "Primirea dosarului nostru privat a fost ca deschiderea unui cadou. Fiecare fotografie a fost gândită.",
+        "author": "Familia Popescu",
+        "detail": "Ședință de familie"
+      },
+      "t4": {
+        "quote": "Discret toată seara și totuși nu a ratat nimic. Invitații noștri încă vorbesc despre fotografii.",
+        "author": "Laura & Matteo",
+        "detail": "Nuntă · Lacul Como"
+      },
+      "t5": {
+        "quote": "Profesionist de la primul mesaj până la livrarea finală. Aș rezerva din nou chiar mâine.",
+        "author": "Julien M.",
+        "detail": "Eveniment corporate"
+      }
+    }
+  },
+  "booking": {
+    "eyebrow": "Rezervare",
+    "title": "Să creăm ceva atemporal",
+    "text": "Spune-mi câte ceva despre tine și despre ședința pe care ți-o dorești. Răspund la fiecare mesaj în cel mult două zile.",
+    "response": "Răspuns în 48 de ore",
+    "fields": {
+      "name": "Numele tău",
+      "email": "Email",
+      "phone": "Telefon",
+      "type": "Tipul ședinței",
+      "date": "Data preferată",
+      "location": "Locație",
+      "locationPlaceholder": "Oraș sau locație",
+      "message": "Mesajul tău",
+      "messagePlaceholder": "Spune-mi despre planurile tale, oameni, atmosferă…",
+      "consent": "Sunt de acord ca datele mele să fie folosite pentru a răspunde cererii mele."
+    },
+    "errors": {
+      "name": "Te rog introdu numele.",
+      "email": "Te rog introdu un email valid.",
+      "message": "Spune-mi puțin mai mult (cel puțin 10 caractere).",
+      "consent": "Te rog acceptă pentru a continua."
+    },
+    "send": "Trimite cererea",
+    "sending": "Se trimite…",
+    "successTitle": "Mulțumesc!",
+    "successText": "Cererea ta a fost trimisă. Revin foarte curând.",
+    "again": "Trimite altă cerere"
+  },
+  "footer": {
+    "about": "Fotografie fine art, de portret și de nuntă: calmă, cinematică și făcută să dureze.",
+    "explore": "Explorează",
+    "contact": "Contact",
+    "follow": "Urmărește",
+    "rights": "Toate drepturile rezervate.",
+    "backToTop": "Înapoi sus"
+  },
+  "notFound": {
+    "title": "Acest cadru este gol",
+    "text": "Pagina pe care o cauți nu există sau a fost mutată."
+  },
+  "client": {
+    "login": {
+      "title": "Proiectul tău",
+      "text": "Autentifică-te cu utilizatorul și parola primite de la fotograful tău.",
+      "submit": "Deschide fotografiile mele",
+      "loading": "Se deschide…",
+      "lost": "Ai pierdut parola?",
+      "contact": "Contactează-ți fotograful",
+      "quote": "„Fotografiile sunt un mod de a păstra momentele care altfel ar dispărea.”"
+    },
+    "layout": {
+      "tagline": "Proiect privat",
+      "private": "Aceste fotografii sunt private și partajate doar cu tine."
+    },
+    "project": {
+      "for": "Pentru {{name}}",
+      "meta": "{{count}} fotografii · {{size}}",
+      "downloadAll": "Descarcă tot",
+      "preparing": "Se pregătește descărcarea…",
+      "emptyTitle": "Fotografiile tale sunt în pregătire",
+      "emptyText": "Vei primi un email imediat ce sunt gata."
+    }
+  },
+  "auth": {
+    "invalidCustomer": "Utilizator sau parolă incorectă.",
+    "invalidAdmin": "Date de autentificare invalide. Mai ai {{left}} încercări.",
+    "locked": "Prea multe încercări. Încearcă mai târziu.",
+    "expired": "Sesiunea a expirat. Autentifică-te din nou.",
+    "invalidCode": "Cod invalid."
+  },
+  "admin": {
+    "nav": {
+      "dashboard": "Panou",
+      "projects": "Proiecte",
+      "security": "Securitate",
+      "openMenu": "Deschide meniul"
+    },
+    "autoSignOut": "Deconectare automată în {{time}}",
+    "login": {
+      "title": "Zonă restricționată",
+      "subtitle": "Doar pentru personal autorizat. Fiecare acces este înregistrat.",
+      "step1": "1 · Parolă",
+      "step2": "2 · Verificare",
+      "continue": "Continuă",
+      "verifying": "Se verifică…",
+      "codeHint": "Introdu codul de 6 cifre din aplicația de autentificare.",
+      "code": "Cod de autentificare",
+      "signIn": "Autentificare",
+      "checking": "Se verifică…",
+      "back": "← Folosește alt cont",
+      "footnote": "Sesiunile expiră după 15 minute de inactivitate."
+    },
+    "status": {
+      "draft": "Ciornă",
+      "delivered": "Livrat",
+      "disabled": "Dezactivat"
+    },
+    "dashboard": {
+      "greeting": "Bine ai revenit.",
+      "newProject": "Proiect nou",
+      "recent": "Proiecte recente",
+      "all": "Toate proiectele →",
+      "cards": {
+        "projects": "Proiecte",
+        "projectsHint": "{{n}} în lucru",
+        "delivered": "Livrate",
+        "deliveredHint": "clienți cu acces",
+        "photos": "Fotografii",
+        "photosHint": "în toate proiectele",
+        "storage": "Spațiu",
+        "storageHint": "originale pe server"
+      }
+    },
+    "projects": {
+      "eyebrow": "Proiecte",
+      "title": "Dosare private",
+      "new": "Proiect nou",
+      "search": "Caută proiecte, clienți sau utilizatori",
+      "filters": {
+        "all": "Toate",
+        "draft": "Ciorne",
+        "delivered": "Livrate",
+        "disabled": "Dezactivate"
+      },
+      "noPhotos": "Încă nu sunt fotografii",
+      "empty": "Nu s-au găsit proiecte.",
+      "created": "Proiect creat",
+      "createdText": "Acestea sunt datele de autentificare pentru {{name}}.",
+      "notShownAgain": "Parola nu va mai fi afișată.",
+      "upload": "Încarcă fotografii",
+      "copyInvitation": "Copiază invitația",
+      "invitation": "Fotografiile tale: {{url}}\nUtilizator: {{username}}\nParolă: {{password}}",
+      "form": {
+        "project": "Proiect",
+        "title": "Titlu",
+        "titlePlaceholder": "ex. Ziua nunții",
+        "date": "Data ședinței",
+        "customer": "Client",
+        "name": "Nume",
+        "namePlaceholder": "ex. Ana & Mihai",
+        "email": "Email",
+        "access": "Acces",
+        "regenerate": "Generează parolă nouă",
+        "create": "Creează proiectul",
+        "errors": {
+          "title": "Titlul este obligatoriu.",
+          "name": "Numele clientului este obligatoriu.",
+          "email": "Introdu un email valid.",
+          "usernameTaken": "Acest utilizator este deja folosit.",
+          "usernameFormat": "3–40 caractere: litere mici, cifre, . _ -",
+          "password": "Cel puțin 10 caractere."
+        }
+      }
+    },
+    "project": {
+      "back": "Proiecte",
+      "summary": "{{count}} fotografii · {{size}}",
+      "drop": "Trage fotografiile aici",
+      "dropHint": "sau apasă pentru a alege · JPG, PNG, WEBP, HEIC până la 50 MB",
+      "preview": "Previzualizare {{name}}",
+      "delete": "Șterge {{name}}",
+      "customer": "Client",
+      "delivery": "Livrare",
+      "sentAt": "Trimis pe {{date}}.",
+      "notSent": "Încarcă fotografiile, apoi trimite datele de acces clientului.",
+      "send": "Trimite clientului",
+      "sendAgain": "Trimite din nou",
+      "access": "Acces",
+      "lastSignIn": "Ultima autentificare",
+      "newPassword": "Parolă nouă",
+      "disable": "Dezactivează",
+      "enable": "Activează",
+      "deleteProject": "Șterge proiectul",
+      "notFound": "Proiectul nu a fost găsit",
+      "backToProjects": "Înapoi la proiecte",
+      "sendTitle": "Trimite clientului",
+      "sendText": "{{name}} va primi un email la {{email}} cu linkul și utilizatorul {{username}}. Cele {{count}} fotografii devin vizibile imediat după autentificare.",
+      "sendButton": "Trimite",
+      "passwordTitle": "Parolă nouă",
+      "passwordText": "Parola veche nu mai funcționează.",
+      "deleteTitle": "Ștergi proiectul?",
+      "deleteText": "Se vor șterge definitiv „{{title}}” și toate cele {{count}} fotografii. Clientul pierde accesul imediat. Scrie {{username}} pentru confirmare.",
+      "deleteForever": "Șterge definitiv"
+    },
+    "security": {
+      "eyebrow": "Securitate",
+      "title": "Protecția contului",
+      "changePassword": "Schimbă parola",
+      "current": "Parola actuală",
+      "new": "Parola nouă",
+      "confirm": "Confirmă parola nouă",
+      "mismatch": "Parolele nu coincid.",
+      "rulesHint": "cel puțin 12 caractere, litere mari și mici, o cifră și un simbol",
+      "strength": {
+        "s0": "Prea slabă",
+        "s1": "Slabă",
+        "s2": "Acceptabilă",
+        "s3": "Bună",
+        "s4": "Puternică"
+      },
+      "update": "Actualizează parola",
+      "twoFactor": "Autentificare în doi pași",
+      "enabled": "Activată",
+      "enabledText": "Aplicația de autentificare (TOTP) este necesară la fiecare conectare.",
+      "rules": {
+        "r1": "Contul se blochează 1 minut după 5 încercări eșuate",
+        "r2": "Deconectare automată după 15 minute de inactivitate",
+        "r3": "Zona de administrare este ascunsă motoarelor de căutare și navigării"
+      },
+      "regenerate": "Regenerează codurile de recuperare",
+      "sessions": "Sesiuni active",
+      "signOutOthers": "Deconectează celelalte",
+      "thisDevice": "Acest dispozitiv",
+      "history": "Istoric autentificări",
+      "success": "Reușită",
+      "blocked": "Blocată"
+    },
+    "toasts": {
+      "projectCreated": "Proiectul „{{title}}” a fost creat",
+      "copied": "{{what}} copiat",
+      "skipped": "{{n}} fișier(e) ignorat(e) (doar imagini de până la 50 MB)",
+      "sent": "Datele de acces au fost trimise la {{email}}",
+      "accessDisabled": "Accesul clientului a fost dezactivat",
+      "accessEnabled": "Accesul clientului a fost activat",
+      "projectDeleted": "Proiectul „{{title}}” a fost șters",
+      "passwordUpdated": "Parola a fost actualizată. Celelalte sesiuni au fost deconectate.",
+      "codesRegenerated": "Coduri de recuperare noi generate",
+      "sessionsRevoked": "Deconectat de pe toate celelalte sesiuni"
+    }
+  }
+}

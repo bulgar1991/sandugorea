@@ -1,4 +1,14 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeDe from '@angular/common/locales/de';
+import localeFr from '@angular/common/locales/fr';
+import localeIt from '@angular/common/locales/it';
+import localeRo from '@angular/common/locales/ro';
+import {
+  ApplicationConfig,
+  inject,
+  provideAppInitializer,
+  provideBrowserGlobalErrorListeners,
+} from '@angular/core';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import {
   ActivatedRouteSnapshot,
@@ -7,9 +17,15 @@ import {
   withInMemoryScrolling,
   withViewTransitions,
 } from '@angular/router';
+import { provideTranslateService } from '@ngx-translate/core';
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
+import { DEFAULT_LANGUAGE, LanguageService } from '@services/language.service';
 import { routes } from './app.routes';
 
-/** URL path of the deepest matched route, without query params. */
+// Month/day names for the localDate pipe (English is built in).
+[localeDe, localeFr, localeIt, localeRo].forEach((l) => registerLocaleData(l));
+
+/** URL path of the deepest matched route, without query params or fragment. */
 function leafPath(snapshot: ActivatedRouteSnapshot): string {
   let s = snapshot;
   while (s.firstChild) s = s.firstChild;
@@ -24,7 +40,7 @@ export const appConfig: ApplicationConfig = {
       withInMemoryScrolling({ anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' }),
       // Route params, query params and resolved data are bound to component inputs.
       withComponentInputBinding(),
-      // Smooth crossfade between pages; skipped when only query params change (e.g. filters).
+      // Smooth crossfade between pages; skipped when only query params / #anchor change.
       withViewTransitions({
         skipInitialTransition: true,
         onViewTransitionCreated: ({ transition, from, to }) => {
@@ -33,5 +49,11 @@ export const appConfig: ApplicationConfig = {
       }),
     ),
     provideHttpClient(withFetch()),
+    provideTranslateService({
+      loader: provideTranslateHttpLoader({ prefix: 'i18n/', suffix: '.json' }),
+      fallbackLang: DEFAULT_LANGUAGE,
+    }),
+    // Load the saved (or browser) language before the first render, so no raw keys flash.
+    provideAppInitializer(() => inject(LanguageService).init()),
   ],
 };

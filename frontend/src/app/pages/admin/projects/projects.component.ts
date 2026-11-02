@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -17,11 +16,13 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { IconComponent } from '@components/icon/icon.component';
+import { LocalDatePipe } from '@pipes/local-date.pipe';
 import { ModalComponent } from '@components/modal/modal.component';
 import { ToastService } from '@components/toast/toast.service';
 import { RevealDirective } from '@directives/reveal.directive';
-import { ProjectStatus, projectStatus } from '@models/project.models';
+import { ProjectStatus, STATUS_BADGE, projectStatus } from '@models/project.models';
 import { ProjectStore } from '@services/project-store.service';
 import { generatePassword, slugifyUsername } from '@/utils/format';
 
@@ -31,7 +32,8 @@ type Filter = ProjectStatus | 'all';
   selector: 'app-projects',
   imports: [
     RouterLink,
-    DatePipe,
+    LocalDatePipe,
+    TranslatePipe,
     ReactiveFormsModule,
     IconComponent,
     ModalComponent,
@@ -45,17 +47,14 @@ export class ProjectsComponent {
   private readonly store = inject(ProjectStore);
   private readonly toast = inject(ToastService);
   private readonly router = inject(Router);
+  private readonly translate = inject(TranslateService);
 
   /** ?new=1 opens the "new project" dialog. */
   readonly new = input<string>();
 
   protected readonly status = projectStatus;
-  protected readonly filters: { id: Filter; label: string }[] = [
-    { id: 'all', label: 'All' },
-    { id: 'draft', label: 'Drafts' },
-    { id: 'delivered', label: 'Delivered' },
-    { id: 'disabled', label: 'Disabled' },
-  ];
+  protected readonly badge = STATUS_BADGE;
+  protected readonly filters: Filter[] = ['all', 'draft', 'delivered', 'disabled'];
   protected readonly filter = signal<Filter>('all');
   protected readonly query = signal('');
 
@@ -141,7 +140,7 @@ export class ProjectsComponent {
       username: data.username,
       password: data.password,
     });
-    this.toast.show(`Project “${data.title}” created`);
+    this.toast.show('admin.toasts.projectCreated', { title: data.title });
   }
 
   protected openCreated() {
@@ -152,13 +151,17 @@ export class ProjectsComponent {
 
   protected async copy(text: string, what: string) {
     await navigator.clipboard.writeText(text);
-    this.toast.show(`${what} copied`, 'info', 2000);
+    this.toast.show('admin.toasts.copied', { what: this.translate.instant(what) }, 'info', 2000);
   }
 
   protected invitation() {
     const c = this.created();
     return c
-      ? `Your photos: ${location.origin}/client/login\nUsername: ${c.username}\nPassword: ${c.password}`
+      ? this.translate.instant('admin.projects.invitation', {
+          url: `${location.origin}/client/login`,
+          username: c.username,
+          password: c.password,
+        })
       : '';
   }
 

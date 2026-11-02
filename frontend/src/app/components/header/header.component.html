@@ -4,28 +4,35 @@
   [class.header--hidden]="hidden() && !menuOpen()"
 >
   <div class="wrapper header__bar">
-    <a routerLink="/" class="header__logo" aria-label="Home">
+    <a
+      routerLink="/"
+      fragment="home"
+      class="header__logo"
+      [attr.aria-label]="'nav.home' | translate"
+    >
       <span class="header__name">{{ brand.name }}</span>
-      <span class="header__tagline">{{ brand.tagline }}</span>
+      <span class="header__tagline">{{ 'brand.tagline' | translate }}</span>
     </a>
 
-    <nav class="header__nav" aria-label="Main">
-      @for (link of links; track link.path) {
+    <nav class="header__nav" [attr.aria-label]="'nav.main' | translate">
+      @for (link of links; track link.fragment) {
         <a
-          [routerLink]="link.path"
-          routerLinkActive="header__link--active link--active"
-          [routerLinkActiveOptions]="{ exact: link.exact }"
+          routerLink="/"
+          [fragment]="link.fragment"
           class="header__link link--underline"
+          [class.header__link--active]="section() === link.fragment"
+          [class.link--active]="section() === link.fragment"
         >
-          {{ link.label }}
+          {{ link.key | translate }}
         </a>
       }
     </nav>
 
     <div class="header__actions">
+      <app-language-switcher class="header__lang" />
       <a routerLink="/client/login" class="btn btn--outline btn--sm header__client">
         <app-icon name="lock" [size]="14" />
-        Client area
+        {{ 'nav.clientArea' | translate }}
       </a>
       <button
         type="button"
@@ -33,7 +40,7 @@
         [class.header__burger--open]="menuOpen()"
         (click)="toggleMenu()"
         [attr.aria-expanded]="menuOpen()"
-        aria-label="Menu"
+        [attr.aria-label]="'nav.menu' | translate"
       >
         <span class="header__burger-line"></span>
         <span class="header__burger-line"></span>
@@ -44,17 +51,18 @@
 
 @if (menuOpen()) {
   <div class="menu" animate.enter="menu--entering" animate.leave="menu--leaving">
-    <nav class="wrapper menu__nav" aria-label="Mobile">
-      @for (link of links; track link.path; let i = $index) {
+    <nav class="wrapper menu__nav" [attr.aria-label]="'nav.main' | translate">
+      @for (link of links; track link.fragment; let i = $index) {
         <a
-          [routerLink]="link.path"
-          routerLinkActive="menu__link--active"
-          [routerLinkActiveOptions]="{ exact: link.exact }"
+          routerLink="/"
+          [fragment]="link.fragment"
           class="menu__link"
+          [class.menu__link--active]="section() === link.fragment"
           [style.animation-delay.ms]="150 + i * 70"
+          (click)="menuOpen.set(false)"
         >
           <span class="menu__index">0{{ i + 1 }}</span>
-          {{ link.label }}
+          {{ link.key | translate }}
         </a>
       }
       <a
@@ -63,12 +71,12 @@
         [style.animation-delay.ms]="150 + links.length * 70"
       >
         <span class="menu__index">0{{ links.length + 1 }}</span>
-        Client area
+        {{ 'nav.clientArea' | translate }}
       </a>
     </nav>
-    <div class="wrapper menu__contact">
+    <div class="wrapper menu__footer">
+      <app-language-switcher variant="inline" />
       <a [href]="'mailto:' + brand.email" class="link">{{ brand.email }}</a>
-      <span>{{ brand.location }}</span>
     </div>
   </div>
 }

@@ -1,0 +1,85 @@
+:host {
+  @apply block;
+}
+
+.booking {
+  @apply relative overflow-hidden border-t border-line py-28 lg:py-36;
+
+  // Soft gold glow behind the form.
+  &::before {
+    content: '';
+    @apply pointer-events-none absolute -right-40 top-1/3 h-[36rem] w-[36rem] rounded-full bg-glow-accent opacity-20 blur-3xl;
+  }
+
+  &__inner {
+    @apply relative grid gap-16 lg:grid-cols-12;
+  }
+
+  &__intro {
+    @apply lg:col-span-5;
+  }
+
+  &__title {
+    @apply mt-6;
+  }
+
+  &__text {
+    @apply mt-6 max-w-md;
+  }
+
+  &__contacts {
+    @apply mt-10 flex flex-col gap-4;
+  }
+
+  &__contact {
+    @apply flex items-center gap-4 text-ink transition-colors hover:text-accent;
+
+    &--static {
+      @apply hover:text-ink;
+    }
+  }
+
+  &__contact-icon {
+    @apply flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-line text-accent;
+  }
+
+  &__response {
+    @apply mt-10 inline-flex items-center gap-2 rounded-full border border-accent/30 px-4 py-2 text-xs text-accent;
+  }
+
+  &__panel {
+    @apply rounded-3xl border border-line bg-surface/80 p-6 backdrop-blur-sm sm:p-10 lg:col-span-7;
+  }
+
+  &__form {
+    @apply grid gap-8 sm:grid-cols-2;
+  }
+
+  &__wide {
+    @apply sm:col-span-2;
+  }
+
+  &__select {
+    @apply cursor-pointer bg-surface;
+  }
+
+  &__message {
+    @apply min-h-32 resize-y;
+  }
+
+  &__consent {
+    @apply flex cursor-pointer items-start gap-3 text-sm text-ink-muted;
+  }
+
+  &__checkbox {
+    @apply mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-accent;
+  }
+
+  &__success {
+    @apply flex animate-fade-up flex-col items-start gap-5 py-10;
+  }
+
+  &__success-icon {
+    @apply flex h-16 w-16 items-center justify-center rounded-full bg-accent text-black;
+  }
+}

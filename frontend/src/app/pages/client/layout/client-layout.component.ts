@@ -1,27 +1,30 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 import { IconComponent } from '@components/icon/icon.component';
+import { LanguageSwitcherComponent } from '@components/language-switcher/language-switcher.component';
 import { AuthService } from '@services/auth.service';
 import { BRAND } from '@/data/portfolio.data';
 
 @Component({
   selector: 'app-client-layout',
-  imports: [RouterOutlet, RouterLink, IconComponent],
+  imports: [RouterOutlet, RouterLink, IconComponent, TranslatePipe, LanguageSwitcherComponent],
   template: `
     <header class="portal-bar">
       <div class="wrapper portal-bar__inner">
         <a routerLink="/client" class="portal-bar__logo">
           <span class="portal-bar__name">{{ brand.name }}</span>
-          <span class="portal-bar__tagline">Private project</span>
+          <span class="portal-bar__tagline">{{ 'client.layout.tagline' | translate }}</span>
         </a>
         <div class="portal-bar__user">
+          <app-language-switcher />
           <span class="portal-bar__customer">
             <app-icon name="user" [size]="16" />
             {{ auth.session()?.displayName }}
           </span>
           <button type="button" class="btn btn--ghost btn--sm" (click)="auth.logout()">
             <app-icon name="logout" [size]="14" />
-            <span class="portal-bar__signout">Sign out</span>
+            <span class="portal-bar__signout">{{ 'common.signOut' | translate }}</span>
           </button>
         </div>
       </div>
@@ -30,7 +33,7 @@ import { BRAND } from '@/data/portfolio.data';
       <router-outlet />
     </main>
     <footer class="wrapper portal-footer">
-      These photographs are private and shared only with you. © {{ brand.name }}
+      {{ 'client.layout.private' | translate }} © {{ brand.name }}
     </footer>
   `,
   styles: `

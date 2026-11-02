@@ -1,0 +1,61 @@
+<div class="wrapper section works">
+  <div class="works__head">
+    <div>
+      <p class="eyebrow" appReveal>{{ 'works.eyebrow' | translate }}</p>
+      <h2 class="title title--lg works__title" appReveal [revealDelay]="100">
+        {{ 'works.title' | translate }}
+      </h2>
+    </div>
+    <p class="text works__subtitle" appReveal [revealDelay]="200">
+      {{ 'works.subtitle' | translate }}
+    </p>
+  </div>
+
+  <div class="works__grid">
+    @for (work of works(); track work.id; let i = $index) {
+      <figure
+        class="work"
+        [class]="'work--' + work.orientation"
+        appReveal="up"
+        [revealDelay]="(i % 4) * 90"
+      >
+        <button
+          type="button"
+          class="work__button"
+          (click)="openIndex.set(i)"
+          [attr.aria-label]="'works.open' | translate"
+        >
+          <img [src]="work.thumb" alt="" class="work__image" loading="lazy" decoding="async" />
+          <figcaption class="work__caption">
+            <span class="work__category">{{
+              'categories.' + work.category + '.label' | translate
+            }}</span>
+            <span class="work__zoom"><app-icon name="plus" [size]="18" /></span>
+          </figcaption>
+        </button>
+      </figure>
+    }
+  </div>
+
+  <div class="works__footer">
+    <p class="works__count">
+      {{ 'works.showing' | translate: { shown: works().length, total: total } }}
+    </p>
+    <div class="works__progress">
+      <span
+        class="works__progress-bar"
+        [style.transform]="'scaleX(' + works().length / total + ')'"
+      ></span>
+    </div>
+    @if (hasMore()) {
+      <button type="button" class="btn btn--outline" (click)="loadMore()">
+        {{ 'works.loadMore' | translate }}
+        <app-icon name="plus" [size]="16" />
+      </button>
+    } @else {
+      <p class="works__done">{{ 'works.allLoaded' | translate }}</p>
+    }
+  </div>
+</div>
+
+<app-lightbox [items]="lightboxItems()" [(index)]="openIndex" />

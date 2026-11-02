@@ -1,43 +1,64 @@
 <footer class="footer">
-  <div class="wrapper footer__cta">
-    <p class="eyebrow" appReveal>Let's talk</p>
-    <h2 class="title title--xl footer__title" appReveal [revealDelay]="100">
-      Let's create something <em>timeless</em>.
-    </h2>
-    <div class="footer__contact" appReveal [revealDelay]="200">
-      <a [href]="'mailto:' + brand.email" class="link link--underline footer__email">
-        {{ brand.email }}
+  <div class="wrapper footer__grid">
+    <div class="footer__about" appReveal>
+      <a routerLink="/" fragment="home" class="footer__logo">
+        <span class="footer__name">{{ brand.name }}</span>
+        <span class="footer__tagline">{{ 'brand.tagline' | translate }}</span>
       </a>
-      <a routerLink="/contact" class="btn btn--primary">
-        Book a session
-        <app-icon name="arrow-right" [size]="16" />
-      </a>
+      <p class="text text--small footer__text">{{ 'footer.about' | translate }}</p>
+      <app-language-switcher variant="inline" />
+    </div>
+
+    <div class="footer__column" appReveal [revealDelay]="100">
+      <p class="footer__heading">{{ 'footer.explore' | translate }}</p>
+      <nav class="footer__list" [attr.aria-label]="'footer.explore' | translate">
+        @for (link of links; track link.fragment) {
+          <a routerLink="/" [fragment]="link.fragment" class="footer__link">{{
+            link.key | translate
+          }}</a>
+        }
+        <a routerLink="/client/login" class="footer__link">{{ 'nav.clientArea' | translate }}</a>
+      </nav>
+    </div>
+
+    <div class="footer__column" appReveal [revealDelay]="200">
+      <p class="footer__heading">{{ 'footer.contact' | translate }}</p>
+      <div class="footer__list">
+        <a [href]="'mailto:' + brand.email" class="footer__link">{{ brand.email }}</a>
+        <a [href]="'tel:' + brand.phone" class="footer__link">{{ brand.phone }}</a>
+        <span class="footer__plain">{{ 'brand.location' | translate }}</span>
+      </div>
+    </div>
+
+    <div class="footer__column" appReveal [revealDelay]="300">
+      <p class="footer__heading">{{ 'footer.follow' | translate }}</p>
+      <div class="footer__social">
+        <a
+          [href]="brand.instagram"
+          target="_blank"
+          rel="noopener"
+          aria-label="Instagram"
+          class="footer__icon"
+        >
+          <app-icon name="instagram" />
+        </a>
+        <a [href]="'mailto:' + brand.email" aria-label="Email" class="footer__icon">
+          <app-icon name="mail" />
+        </a>
+      </div>
     </div>
   </div>
 
+  <!-- Oversized wordmark that rises in -->
+  <div class="footer__wordmark" aria-hidden="true">
+    <span class="footer__wordmark-text" appReveal="up">{{ brand.name }}</span>
+  </div>
+
   <div class="wrapper footer__bottom">
-    <a routerLink="/" class="footer__brand">{{ brand.name }}</a>
-
-    <nav class="footer__nav" aria-label="Footer">
-      @for (link of links; track link.path) {
-        <a [routerLink]="link.path" class="footer__link">{{ link.label }}</a>
-      }
-    </nav>
-
-    <div class="footer__social">
-      <a
-        [href]="brand.instagram"
-        target="_blank"
-        rel="noopener"
-        aria-label="Instagram"
-        class="footer__icon"
-      >
-        <app-icon name="instagram" />
-      </a>
-      <a [href]="'mailto:' + brand.email" aria-label="Email" class="footer__icon">
-        <app-icon name="mail" />
-      </a>
-      <span class="footer__copy">© {{ year }} {{ brand.name }}</span>
-    </div>
+    <span>© {{ year }} {{ brand.name }}. {{ 'footer.rights' | translate }}</span>
+    <button type="button" class="footer__top" (click)="toTop()">
+      {{ 'footer.backToTop' | translate }}
+      <span class="footer__top-icon"><app-icon name="arrow-up-right" [size]="14" /></span>
+    </button>
   </div>
 </footer>

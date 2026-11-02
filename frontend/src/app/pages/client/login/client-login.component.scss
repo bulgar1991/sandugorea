@@ -21,6 +21,10 @@
     @apply flex flex-col px-6 py-10 sm:px-16;
   }
 
+  &__top {
+    @apply flex items-center justify-between gap-4;
+  }
+
   &__back {
     @apply flex items-center gap-2 text-xs uppercase tracking-caps-lg text-ink-muted hover:text-accent;
   }

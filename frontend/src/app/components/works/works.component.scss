@@ -1,0 +1,96 @@
+:host {
+  @apply block;
+}
+
+.works {
+  &__head {
+    @apply flex flex-col justify-between gap-6 lg:flex-row lg:items-end;
+  }
+
+  &__title {
+    @apply mt-6;
+  }
+
+  &__subtitle {
+    @apply max-w-sm;
+  }
+
+  // Composed grid: portraits span two rows, landscapes two columns; `dense` fills the gaps.
+  &__grid {
+    @apply mt-14 grid auto-rows-[11rem] grid-flow-dense grid-cols-2 gap-3 sm:auto-rows-[14rem] sm:gap-4 lg:auto-rows-[16rem] lg:grid-cols-4;
+  }
+
+  &__footer {
+    @apply mt-14 flex flex-col items-center gap-5 text-center;
+  }
+
+  &__count {
+    @apply text-xs uppercase tracking-caps text-ink-muted;
+  }
+
+  &__progress {
+    @apply h-px w-48 overflow-hidden bg-line;
+  }
+
+  &__progress-bar {
+    @apply block h-full origin-left bg-accent transition-transform duration-800 ease-out-expo;
+  }
+
+  &__done {
+    @apply font-display text-xl italic text-ink-muted;
+  }
+}
+
+.work {
+  @apply relative overflow-hidden rounded-lg bg-surface;
+
+  &--portrait {
+    @apply row-span-2;
+  }
+
+  &--landscape {
+    @apply col-span-2;
+  }
+
+  &__button {
+    @apply block h-full w-full cursor-zoom-in;
+  }
+
+  &__image {
+    @apply block h-full w-full object-cover transition-transform duration-1200 ease-out-expo;
+  }
+
+  &__caption {
+    @apply absolute inset-0 flex items-end justify-between gap-3 bg-fade-up p-4 opacity-0 transition-opacity duration-600 sm:p-5;
+
+    @media (hover: none) {
+      @apply opacity-100;
+    }
+  }
+
+  &__category {
+    @apply translate-y-2 text-2xs font-semibold uppercase tracking-caps-lg text-accent transition-transform duration-600 ease-out-expo;
+  }
+
+  &__zoom {
+    @apply flex h-10 w-10 scale-75 items-center justify-center rounded-full bg-accent text-black transition-transform duration-600 ease-out-expo;
+  }
+
+  &:hover &__image,
+  &__button:focus-visible &__image {
+    @apply scale-[1.06];
+  }
+
+  &:hover &__caption,
+  &__button:focus-visible &__caption {
+    @apply opacity-100;
+  }
+
+  &:hover &__category {
+    @apply translate-y-0;
+  }
+
+  &:hover &__zoom {
+    @apply scale-100;
+  }
+}

@@ -1,0 +1,68 @@
+:host {
+  @apply block;
+}
+
+.about {
+  @apply grid items-center gap-16 lg:grid-cols-12 lg:gap-12;
+
+  &__visual {
+    @apply relative pb-16 pr-10 lg:col-span-6 lg:pb-20 lg:pr-16;
+  }
+
+  &__frame {
+    @apply relative overflow-hidden;
+  }
+
+  &__portrait {
+    @apply aspect-portrait;
+  }
+
+  // Small second image overlapping the corner.
+  &__inset {
+    @apply absolute bottom-0 right-0 aspect-tall w-2/5 overflow-hidden border-[6px] border-black;
+  }
+
+  &__badge {
+    @apply absolute left-6 top-6 flex h-20 w-20 items-center justify-center rounded-full bg-black/70 text-accent backdrop-blur-sm;
+  }
+
+  &__badge-ring {
+    @apply absolute inset-0 animate-ping-soft rounded-full border border-accent/50;
+  }
+
+  &__body {
+    @apply lg:col-span-5 lg:col-start-8;
+  }
+
+  &__title {
+    @apply mt-6;
+  }
+
+  &__text {
+    @apply mt-8 max-w-lg space-y-5;
+  }
+
+  &__highlights {
+    @apply mt-8 flex flex-col gap-3;
+  }
+
+  &__highlight {
+    @apply flex items-center gap-3 text-sm text-ink;
+  }
+
+  &__check {
+    @apply flex h-7 w-7 items-center justify-center rounded-full border border-accent/40 text-accent;
+  }
+
+  &__footer {
+    @apply mt-12 flex flex-wrap items-center justify-between gap-8 border-t border-line pt-8;
+  }
+
+  &__signature {
+    @apply font-display text-4xl italic text-accent;
+  }
+
+  &__role {
+    @apply mt-1 text-xs uppercase tracking-caps text-ink-subtle;
+  }
+}

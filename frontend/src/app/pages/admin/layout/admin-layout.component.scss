@@ -41,6 +41,10 @@
     @apply border-t border-line p-4;
   }
 
+  &__lang {
+    @apply mb-3 px-2;
+  }
+
   &__timer {
     @apply flex items-center gap-2 text-xs text-ink-subtle;
 

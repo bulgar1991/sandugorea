@@ -1,34 +1,36 @@
 <div class="page-head">
   <div>
-    <p class="eyebrow" appReveal>Projects</p>
-    <h1 class="page-head__title" appReveal [revealDelay]="80">Private folders</h1>
+    <p class="eyebrow" appReveal>{{ 'admin.projects.eyebrow' | translate }}</p>
+    <h1 class="page-head__title" appReveal [revealDelay]="80">
+      {{ 'admin.projects.title' | translate }}
+    </h1>
   </div>
   <button type="button" class="btn btn--primary" (click)="openNew()" appReveal [revealDelay]="160">
-    <app-icon name="plus" [size]="16" /> New project
+    <app-icon name="plus" [size]="16" /> {{ 'admin.projects.new' | translate }}
   </button>
 </div>
 
 <div class="toolbar" appReveal [revealDelay]="200">
   <div class="toolbar__search">
-    <app-icon name="search" [size]="16" class="toolbar__search-icon" />
+    <span class="toolbar__search-icon"><app-icon name="search" [size]="16" /></span>
     <input
       class="field__control field__control--boxed toolbar__input"
-      placeholder="Search projects, customers or usernames"
+      [placeholder]="'admin.projects.search' | translate"
       [value]="query()"
       (input)="query.set($any($event.target).value)"
     />
   </div>
   <div class="toolbar__tabs" role="tablist">
-    @for (f of filters; track f.id) {
+    @for (f of filters; track f) {
       <button
         type="button"
         role="tab"
         class="toolbar__tab"
-        [class.toolbar__tab--active]="filter() === f.id"
-        [attr.aria-selected]="filter() === f.id"
-        (click)="filter.set(f.id)"
+        [class.toolbar__tab--active]="filter() === f"
+        [attr.aria-selected]="filter() === f"
+        (click)="filter.set(f)"
       >
-        {{ f.label }}
+        {{ 'admin.projects.filters.' + f | translate }}
       </button>
     }
   </div>
@@ -52,29 +54,21 @@
         } @else {
           <div class="project-card__empty">
             <app-icon name="upload" [size]="28" />
-            <span>No photos yet</span>
+            <span>{{ 'admin.projects.noPhotos' | translate }}</span>
           </div>
         }
         <span class="project-card__status">
-          @switch (status(p)) {
-            @case ('delivered') {
-              <span class="badge badge--success">Delivered</span>
-            }
-            @case ('draft') {
-              <span class="badge badge--accent">Draft</span>
-            }
-            @default {
-              <span class="badge badge--muted">Disabled</span>
-            }
-          }
+          <span class="badge" [class]="'badge--' + badge[status(p)]">{{
+            'admin.status.' + status(p) | translate
+          }}</span>
         </span>
       </div>
       <div class="project-card__body">
         <h2 class="project-card__title">{{ p.title }}</h2>
         <p class="project-card__customer">{{ p.customerName }}</p>
         <p class="project-card__meta">
-          <span>{{ p.date | date: 'd MMM y' }}</span>
-          <span>{{ p.photos.length }} photos</span>
+          <span>{{ p.date | localDate: 'd MMM y' }}</span>
+          <span>{{ 'common.photos' | translate: { count: p.photos.length } }}</span>
           <span class="project-card__username">{{ p.username }}</span>
         </p>
       </div>
@@ -82,46 +76,46 @@
   } @empty {
     <div class="project-grid__empty">
       <app-icon name="folder" [size]="32" />
-      <p>No projects found.</p>
+      <p>{{ 'admin.projects.empty' | translate }}</p>
     </div>
   }
 </div>
 
 <app-modal
   [(open)]="modalOpen"
-  [title]="created() ? 'Project created' : 'New project'"
+  [title]="(created() ? 'admin.projects.created' : 'admin.projects.new') | translate"
   [wide]="!created()"
 >
   @if (created(); as c) {
     <div class="credentials">
       <p class="text text--small">
-        These are the login details for <span class="credentials__name">{{ c.customerName }}</span
-        >. <span class="credentials__warning">The password won't be shown again.</span>
+        {{ 'admin.projects.createdText' | translate: { name: c.customerName } }}
+        <span class="credentials__warning">{{ 'admin.projects.notShownAgain' | translate }}</span>
       </p>
       <div class="credentials__box">
         <div class="credentials__row">
-          <span class="credentials__key">Username</span>
+          <span class="credentials__key">{{ 'common.username' | translate }}</span>
           <span class="credentials__value"
             >{{ c.username }}
             <button
               type="button"
               class="credentials__copy"
-              (click)="copy(c.username, 'Username')"
-              aria-label="Copy username"
+              (click)="copy(c.username, 'common.username')"
+              [attr.aria-label]="'common.copy' | translate"
             >
               <app-icon name="copy" [size]="14" />
             </button>
           </span>
         </div>
         <div class="credentials__row">
-          <span class="credentials__key">Password</span>
+          <span class="credentials__key">{{ 'common.password' | translate }}</span>
           <span class="credentials__value"
             >{{ c.password }}
             <button
               type="button"
               class="credentials__copy"
-              (click)="copy(c.password, 'Password')"
-              aria-label="Copy password"
+              (click)="copy(c.password, 'common.password')"
+              [attr.aria-label]="'common.copy' | translate"
             >
               <app-icon name="copy" [size]="14" />
             </button>
@@ -130,30 +124,34 @@
       </div>
       <div class="credentials__actions">
         <button type="button" class="btn btn--primary" (click)="openCreated()">
-          <app-icon name="upload" [size]="14" /> Upload photos
+          <app-icon name="upload" [size]="14" /> {{ 'admin.projects.upload' | translate }}
         </button>
-        <button type="button" class="btn btn--ghost" (click)="copy(invitation(), 'Invitation')">
-          <app-icon name="copy" [size]="14" /> Copy invitation
+        <button
+          type="button"
+          class="btn btn--ghost"
+          (click)="copy(invitation(), 'admin.projects.copyInvitation')"
+        >
+          <app-icon name="copy" [size]="14" /> {{ 'admin.projects.copyInvitation' | translate }}
         </button>
       </div>
     </div>
   } @else {
     <form [formGroup]="form" (ngSubmit)="create()" class="project-form" novalidate>
-      <p class="project-form__section">Project</p>
-      <label class="field project-form__wide">
-        <span class="field__label">Title</span>
+      <p class="project-form__section">{{ 'admin.projects.form.project' | translate }}</p>
+      <label class="field">
+        <span class="field__label">{{ 'admin.projects.form.title' | translate }}</span>
         <input
           class="field__control field__control--boxed"
           formControlName="title"
-          placeholder="e.g. Wedding Day"
+          [placeholder]="'admin.projects.form.titlePlaceholder' | translate"
           (input)="suggestUsername()"
         />
         @if (invalid('title')) {
-          <small class="field__error">Title is required.</small>
+          <small class="field__error">{{ 'admin.projects.form.errors.title' | translate }}</small>
         }
       </label>
       <label class="field">
-        <span class="field__label">Session date</span>
+        <span class="field__label">{{ 'admin.projects.form.date' | translate }}</span>
         <input
           class="field__control field__control--boxed field__control--date"
           type="date"
@@ -161,21 +159,21 @@
         />
       </label>
 
-      <p class="project-form__section">Customer</p>
+      <p class="project-form__section">{{ 'admin.projects.form.customer' | translate }}</p>
       <label class="field">
-        <span class="field__label">Name</span>
+        <span class="field__label">{{ 'admin.projects.form.name' | translate }}</span>
         <input
           class="field__control field__control--boxed"
           formControlName="customerName"
-          placeholder="e.g. Ana & Mihai"
+          [placeholder]="'admin.projects.form.namePlaceholder' | translate"
           (input)="suggestUsername()"
         />
         @if (invalid('customerName')) {
-          <small class="field__error">Customer name is required.</small>
+          <small class="field__error">{{ 'admin.projects.form.errors.name' | translate }}</small>
         }
       </label>
       <label class="field">
-        <span class="field__label">Email</span>
+        <span class="field__label">{{ 'admin.projects.form.email' | translate }}</span>
         <input
           class="field__control field__control--boxed"
           type="email"
@@ -183,13 +181,13 @@
           placeholder="customer@example.com"
         />
         @if (invalid('customerEmail')) {
-          <small class="field__error">Enter a valid email.</small>
+          <small class="field__error">{{ 'admin.projects.form.errors.email' | translate }}</small>
         }
       </label>
 
-      <p class="project-form__section">Access</p>
+      <p class="project-form__section">{{ 'admin.projects.form.access' | translate }}</p>
       <label class="field">
-        <span class="field__label">Username</span>
+        <span class="field__label">{{ 'common.username' | translate }}</span>
         <input
           class="field__control field__control--boxed field__control--mono"
           formControlName="username"
@@ -199,15 +197,16 @@
         @if (invalid('username')) {
           <small class="field__error">
             {{
-              form.controls.username.hasError('taken')
-                ? 'This username is taken.'
-                : '3–40 chars: lowercase letters, numbers, . _ -'
+              (form.controls.username.hasError('taken')
+                ? 'admin.projects.form.errors.usernameTaken'
+                : 'admin.projects.form.errors.usernameFormat'
+              ) | translate
             }}
           </small>
         }
       </label>
       <label class="field">
-        <span class="field__label">Password</span>
+        <span class="field__label">{{ 'common.password' | translate }}</span>
         <div class="field__wrap">
           <input
             class="field__control field__control--boxed field__control--mono"
@@ -218,20 +217,26 @@
             type="button"
             class="btn btn--ghost btn--icon"
             (click)="regenerate()"
-            title="Generate new password"
-            aria-label="Generate new password"
+            [attr.title]="'admin.projects.form.regenerate' | translate"
+            [attr.aria-label]="'admin.projects.form.regenerate' | translate"
           >
             <app-icon name="refresh" [size]="16" />
           </button>
         </div>
         @if (invalid('password')) {
-          <small class="field__error">At least 10 characters.</small>
+          <small class="field__error">{{
+            'admin.projects.form.errors.password' | translate
+          }}</small>
         }
       </label>
 
       <div class="project-form__actions">
-        <button type="submit" class="btn btn--primary">Create project</button>
-        <button type="button" class="btn btn--ghost" (click)="modalOpen.set(false)">Cancel</button>
+        <button type="submit" class="btn btn--primary">
+          {{ 'admin.projects.form.create' | translate }}
+        </button>
+        <button type="button" class="btn btn--ghost" (click)="modalOpen.set(false)">
+          {{ 'common.cancel' | translate }}
+        </button>
       </div>
     </form>
   }

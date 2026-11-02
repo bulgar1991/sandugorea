@@ -1,12 +1,14 @@
-import { DatePipe, DecimalPipe } from '@angular/common';
+import { DecimalPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 import { IconComponent } from '@components/icon/icon.component';
+import { LocalDatePipe } from '@pipes/local-date.pipe';
 import { LightboxComponent } from '@components/lightbox/lightbox.component';
 import { ModalComponent } from '@components/modal/modal.component';
 import { ToastService } from '@components/toast/toast.service';
 import { LightboxItem } from '@models/photo.models';
-import { projectStatus } from '@models/project.models';
+import { STATUS_BADGE, projectStatus } from '@models/project.models';
 import { ProjectStore } from '@services/project-store.service';
 import { formatBytes, generatePassword, uid } from '@/utils/format';
 
@@ -21,7 +23,15 @@ const MAX_FILE_BYTES = 50 * 1024 * 1024;
 
 @Component({
   selector: 'app-project-detail',
-  imports: [RouterLink, DatePipe, DecimalPipe, IconComponent, ModalComponent, LightboxComponent],
+  imports: [
+    RouterLink,
+    LocalDatePipe,
+    TranslatePipe,
+    DecimalPipe,
+    IconComponent,
+    ModalComponent,
+    LightboxComponent,
+  ],
   templateUrl: './project-detail.component.html',
   styleUrl: './project-detail.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -58,6 +68,7 @@ export class ProjectDetailComponent {
   protected readonly newPassword = signal<string | null>(null);
 
   protected readonly formatBytes = formatBytes;
+  protected readonly badge = STATUS_BADGE;
 
   protected onDrop(e: DragEvent) {
     e.preventDefault();
@@ -81,7 +92,7 @@ export class ProjectDetailComponent {
       (f) => f.type.startsWith('image/') && f.size <= MAX_FILE_BYTES,
     );
     const rejected = files.length - accepted.length;
-    if (rejected) this.toast.show(`${rejected} file(s) skipped (images up to 50 MB only)`, 'error');
+    if (rejected) this.toast.show('admin.toasts.skipped', { n: rejected }, 'error');
 
     for (const file of accepted) {
       const item: UploadItem = { id: uid(), name: file.name, size: file.size, progress: 0 };
@@ -108,14 +119,18 @@ export class ProjectDetailComponent {
     if (!p) return;
     this.store.send(p.id);
     this.confirmSend.set(false);
-    this.toast.show(`Login details sent to ${p.customerEmail}`);
+    this.toast.show('admin.toasts.sent', { email: p.customerEmail });
   }
 
   protected toggleAccess() {
     const p = this.project();
     if (!p) return;
     this.store.setActive(p.id, !p.active);
-    this.toast.show(p.active ? 'Customer access disabled' : 'Customer access enabled', 'info');
+    this.toast.show(
+      p.active ? 'admin.toasts.accessDisabled' : 'admin.toasts.accessEnabled',
+      undefined,
+      'info',
+    );
   }
 
   protected resetPassword() {
@@ -128,12 +143,12 @@ export class ProjectDetailComponent {
     const p = this.project();
     if (!p || this.deleteText() !== p.username) return;
     this.store.delete(p.id);
-    this.toast.show(`Project “${p.title}” deleted`, 'info');
+    this.toast.show('admin.toasts.projectDeleted', { title: p.title }, 'info');
     this.router.navigateByUrl('/admin/projects');
   }
 
   protected async copy(text: string) {
     await navigator.clipboard.writeText(text);
-    this.toast.show('Copied', 'info', 2000);
+    this.toast.show('common.copied', undefined, 'info', 2000);
   }
 }

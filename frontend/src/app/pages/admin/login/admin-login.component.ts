@@ -12,12 +12,14 @@ import {
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Meta } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 import { IconComponent } from '@components/icon/icon.component';
+import { LanguageSwitcherComponent } from '@components/language-switcher/language-switcher.component';
 import { AuthError, AuthService } from '@services/auth.service';
 
 @Component({
   selector: 'app-admin-login',
-  imports: [ReactiveFormsModule, IconComponent],
+  imports: [ReactiveFormsModule, TranslatePipe, IconComponent, LanguageSwitcherComponent],
   templateUrl: './admin-login.component.html',
   styleUrl: './admin-login.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -29,7 +31,7 @@ export class AdminLoginComponent {
 
   protected readonly step = signal<'credentials' | 'code'>('credentials');
   protected readonly loading = signal(false);
-  protected readonly error = signal('');
+  protected readonly error = signal<{ key: string; params?: Record<string, unknown> } | null>(null);
   protected readonly showPassword = signal(false);
   protected readonly lockedUntil = signal(0);
   protected readonly now = signal(Date.now());
@@ -93,17 +95,17 @@ export class AdminLoginComponent {
   protected back() {
     this.step.set('credentials');
     this.code.reset();
-    this.error.set('');
+    this.error.set(null);
   }
 
   private async run(action: () => Promise<void>, onError: () => void) {
     this.loading.set(true);
-    this.error.set('');
+    this.error.set(null);
     try {
       await action();
     } catch (e) {
-      const err = e instanceof AuthError ? e : new AuthError('Something went wrong.');
-      this.error.set(err.message);
+      const err = e instanceof AuthError ? e : new AuthError('common.somethingWrong');
+      this.error.set({ key: err.message, params: err.params });
       if (err.lockedUntil) this.lockedUntil.set(err.lockedUntil);
       onError();
     } finally {

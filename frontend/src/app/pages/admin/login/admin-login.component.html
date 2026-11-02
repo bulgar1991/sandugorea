@@ -1,13 +1,14 @@
 <div class="admin-login">
   <div class="admin-login__glow" aria-hidden="true"></div>
+  <app-language-switcher class="admin-login__lang" />
 
   <div class="admin-login__container">
     <div class="admin-login__head">
       <span class="admin-login__shield">
         <app-icon name="shield" [size]="26" />
       </span>
-      <h1 class="title title--md admin-login__title">Restricted area</h1>
-      <p class="text text--small">Authorised personnel only. All access is logged.</p>
+      <h1 class="title title--md admin-login__title">{{ 'admin.login.title' | translate }}</h1>
+      <p class="text text--small">{{ 'admin.login.subtitle' | translate }}</p>
     </div>
 
     <div class="card card--padded admin-login__card">
@@ -15,7 +16,7 @@
         <span
           class="admin-login__step"
           [class.admin-login__step--current]="step() === 'credentials'"
-          >1 · Password</span
+          >{{ 'admin.login.step1' | translate }}</span
         >
         <span class="admin-login__track">
           <span
@@ -23,9 +24,9 @@
             [class.admin-login__fill--done]="step() === 'code'"
           ></span>
         </span>
-        <span class="admin-login__step" [class.admin-login__step--current]="step() === 'code'"
-          >2 · Verify</span
-        >
+        <span class="admin-login__step" [class.admin-login__step--current]="step() === 'code'">{{
+          'admin.login.step2' | translate
+        }}</span>
       </div>
 
       @if (step() === 'credentials') {
@@ -36,7 +37,7 @@
           novalidate
         >
           <label class="field">
-            <span class="field__label">Username</span>
+            <span class="field__label">{{ 'common.username' | translate }}</span>
             <input
               class="field__control field__control--boxed"
               formControlName="username"
@@ -46,7 +47,7 @@
             />
           </label>
           <label class="field">
-            <span class="field__label">Password</span>
+            <span class="field__label">{{ 'common.password' | translate }}</span>
             <div class="field__wrap">
               <input
                 class="field__control field__control--boxed"
@@ -58,16 +59,18 @@
                 type="button"
                 class="field__toggle"
                 (click)="showPassword.update((v) => !v)"
-                [attr.aria-label]="showPassword() ? 'Hide password' : 'Show password'"
+                [attr.aria-label]="
+                  (showPassword() ? 'common.hidePassword' : 'common.showPassword') | translate
+                "
               >
                 <app-icon [name]="showPassword() ? 'eye-off' : 'eye'" [size]="18" />
               </button>
             </div>
           </label>
 
-          @if (error()) {
+          @if (error(); as err) {
             <p class="alert" role="alert">
-              {{ error() }}
+              {{ err.key | translate: err.params }}
               @if (lockSeconds() > 0) {
                 ({{ lockSeconds() }}s)
               }
@@ -80,20 +83,20 @@
             [disabled]="loading() || lockSeconds() > 0"
           >
             @if (loading()) {
-              <span class="spinner"></span> Verifying…
+              <span class="spinner"></span> {{ 'admin.login.verifying' | translate }}
             } @else {
-              Continue <app-icon name="arrow-right" [size]="16" />
+              {{ 'admin.login.continue' | translate }} <app-icon name="arrow-right" [size]="16" />
             }
           </button>
         </form>
       } @else {
         <form (ngSubmit)="submitCode()" class="admin-login__form" novalidate>
           <div class="admin-login__notice">
-            <app-icon name="key" [size]="18" class="admin-login__notice-icon" />
-            Enter the 6-digit code from your authenticator app.
+            <span class="admin-login__notice-icon"><app-icon name="key" [size]="18" /></span>
+            {{ 'admin.login.codeHint' | translate }}
           </div>
           <label class="field">
-            <span class="field__label">Authentication code</span>
+            <span class="field__label">{{ 'admin.login.code' | translate }}</span>
             <input
               #codeInput
               class="field__control field__control--boxed field__control--code"
@@ -106,8 +109,8 @@
             />
           </label>
 
-          @if (error()) {
-            <p class="alert" role="alert">{{ error() }}</p>
+          @if (error(); as err) {
+            <p class="alert" role="alert">{{ err.key | translate: err.params }}</p>
           }
 
           <button
@@ -116,18 +119,18 @@
             [disabled]="loading() || code.invalid"
           >
             @if (loading()) {
-              <span class="spinner"></span> Checking…
+              <span class="spinner"></span> {{ 'admin.login.checking' | translate }}
             } @else {
-              Sign in <app-icon name="lock" [size]="14" />
+              {{ 'admin.login.signIn' | translate }} <app-icon name="lock" [size]="14" />
             }
           </button>
           <button type="button" class="admin-login__back" (click)="back()">
-            ← Use a different account
+            {{ 'admin.login.back' | translate }}
           </button>
         </form>
       }
     </div>
 
-    <p class="admin-login__footnote">Sessions expire after 15 minutes of inactivity.</p>
+    <p class="admin-login__footnote">{{ 'admin.login.footnote' | translate }}</p>
   </div>
 </div>

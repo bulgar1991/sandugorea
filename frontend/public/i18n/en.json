@@ -1,0 +1,377 @@
+{
+  "brand": {
+    "tagline": "Photography",
+    "location": "Bucharest · Available worldwide"
+  },
+  "common": {
+    "language": "Language",
+    "close": "Close",
+    "cancel": "Cancel",
+    "done": "Done",
+    "copy": "Copy",
+    "copied": "Copied",
+    "signOut": "Sign out",
+    "username": "Username",
+    "password": "Password",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "previous": "Previous",
+    "next": "Next",
+    "download": "Download",
+    "open": "Open",
+    "photos": "{{count}} photos",
+    "backHome": "Back home",
+    "never": "Never",
+    "somethingWrong": "Something went wrong. Please try again."
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "works": "Works",
+    "testimonials": "Testimonials",
+    "booking": "Booking",
+    "clientArea": "Client area",
+    "menu": "Menu",
+    "main": "Main navigation"
+  },
+  "categories": {
+    "weddings": {
+      "label": "Weddings",
+      "blurb": "Quiet glances, loud laughter, the whole day as it truly felt."
+    },
+    "portraits": {
+      "label": "Portraits",
+      "blurb": "Honest light and unhurried sessions that let you be yourself."
+    },
+    "family": {
+      "label": "Family",
+      "blurb": "The small, ordinary moments that become everything later."
+    },
+    "events": {
+      "label": "Events",
+      "blurb": "Atmosphere, people and details, documented with discretion."
+    },
+    "landscapes": {
+      "label": "Landscapes",
+      "blurb": "Places that stay with you long after the light has gone."
+    },
+    "other": {
+      "label": "Something else"
+    }
+  },
+  "hero": {
+    "eyebrow": "Fine art · Portrait · Wedding",
+    "line1": "Light,",
+    "line2": "emotion,",
+    "line3": "forever.",
+    "works": "See my work",
+    "book": "Book a session",
+    "scroll": "Scroll",
+    "slide": "Slide {{n}}",
+    "slides": {
+      "s1": "Weddings — Tuscany",
+      "s2": "Portraits — Studio",
+      "s3": "Landscapes — Iceland",
+      "s4": "Family — Black Sea"
+    }
+  },
+  "about": {
+    "eyebrow": "About me",
+    "titleStart": "I photograph people the way they feel,",
+    "titleAccent": "not just how they look.",
+    "p1": "For more than a decade I have been chasing honest light and quiet moments: the breath before a vow, a child's hand reaching for yours, a face in perfect window light.",
+    "p2": "My work is calm, cinematic and made to be looked at for a lifetime. Every session is unhurried and every image is edited by hand.",
+    "signature": "Sandu",
+    "role": "Photographer & storyteller",
+    "imageAlt": "The photographer at work",
+    "cta": "Book a session",
+    "highlights": {
+      "h1": "Natural, documentary style",
+      "h2": "Hand-edited, timeless colour",
+      "h3": "Private online delivery"
+    }
+  },
+  "showcase": {
+    "eyebrow": "What I capture",
+    "titleStart": "Every story deserves",
+    "titleAccent": "its own light",
+    "explore": "Explore",
+    "stats": {
+      "years": "Years behind the camera",
+      "sessions": "Sessions photographed",
+      "weddings": "Weddings",
+      "countries": "Countries"
+    }
+  },
+  "works": {
+    "eyebrow": "Portfolio",
+    "title": "Our Latest Works",
+    "subtitle": "A selection of recent sessions - weddings, portraits, families and places.",
+    "loadMore": "Load more",
+    "showing": "Showing {{shown}} of {{total}}",
+    "allLoaded": "You've seen everything - for now.",
+    "open": "Open photo"
+  },
+  "testimonials": {
+    "eyebrow": "Kind words",
+    "title": "What my clients say",
+    "items": {
+      "t1": {
+        "quote": "We open our photos every anniversary and cry every single time. Sandu saw moments we didn't even know had happened.",
+        "author": "Ana & Mihai",
+        "detail": "Wedding · Tuscany"
+      },
+      "t2": {
+        "quote": "Calm, patient and so present. The portraits feel like me on my best day, without trying too hard.",
+        "author": "Elena R.",
+        "detail": "Portrait session"
+      },
+      "t3": {
+        "quote": "Receiving our private folder was like opening a present. Every single photograph felt considered.",
+        "author": "The Popescu family",
+        "detail": "Family session"
+      },
+      "t4": {
+        "quote": "Discreet all evening, and yet nothing was missed. Our guests still talk about the photos.",
+        "author": "Laura & Matteo",
+        "detail": "Wedding · Lake Como"
+      },
+      "t5": {
+        "quote": "Professional from the first message to the final delivery. I would book again tomorrow.",
+        "author": "Julien M.",
+        "detail": "Corporate event"
+      }
+    }
+  },
+  "booking": {
+    "eyebrow": "Booking",
+    "title": "Let's create something timeless",
+    "text": "Tell me a little about you and the session you have in mind. I reply to every message within two days.",
+    "response": "Reply within 48 hours",
+    "fields": {
+      "name": "Your name",
+      "email": "Email",
+      "phone": "Phone",
+      "type": "Session type",
+      "date": "Preferred date",
+      "location": "Location",
+      "locationPlaceholder": "City or venue",
+      "message": "Your message",
+      "messagePlaceholder": "Tell me about your plans, the people, the mood…",
+      "consent": "I agree that my details are used to answer my request."
+    },
+    "errors": {
+      "name": "Please enter your name.",
+      "email": "Please enter a valid email.",
+      "message": "Tell me a little more (at least 10 characters).",
+      "consent": "Please accept to continue."
+    },
+    "send": "Send request",
+    "sending": "Sending…",
+    "successTitle": "Thank you!",
+    "successText": "Your request is on its way. I'll be in touch very soon.",
+    "again": "Send another request"
+  },
+  "footer": {
+    "about": "Fine art, portrait and wedding photography - calm, cinematic and made to last.",
+    "explore": "Explore",
+    "contact": "Contact",
+    "follow": "Follow",
+    "rights": "All rights reserved.",
+    "backToTop": "Back to top"
+  },
+  "notFound": {
+    "title": "This frame is empty",
+    "text": "The page you're looking for doesn't exist or has moved."
+  },
+  "client": {
+    "login": {
+      "title": "Your project",
+      "text": "Sign in with the username and password your photographer sent you.",
+      "submit": "Open my photos",
+      "loading": "Opening…",
+      "lost": "Lost your password?",
+      "contact": "Contact your photographer",
+      "quote": "“Photographs are a way of keeping the moments that would otherwise disappear.”"
+    },
+    "layout": {
+      "tagline": "Private project",
+      "private": "These photographs are private and shared only with you."
+    },
+    "project": {
+      "for": "For {{name}}",
+      "meta": "{{count}} photographs · {{size}}",
+      "downloadAll": "Download all",
+      "preparing": "Preparing download…",
+      "emptyTitle": "Your photographs are being prepared",
+      "emptyText": "You'll receive an email as soon as they are ready."
+    }
+  },
+  "auth": {
+    "invalidCustomer": "Incorrect username or password.",
+    "invalidAdmin": "Invalid credentials. {{left}} attempts left.",
+    "locked": "Too many attempts. Try again later.",
+    "expired": "Session expired. Sign in again.",
+    "invalidCode": "Invalid code."
+  },
+  "admin": {
+    "nav": {
+      "dashboard": "Dashboard",
+      "projects": "Projects",
+      "security": "Security",
+      "openMenu": "Open menu"
+    },
+    "autoSignOut": "Auto sign-out in {{time}}",
+    "login": {
+      "title": "Restricted area",
+      "subtitle": "Authorised personnel only. All access is logged.",
+      "step1": "1 · Password",
+      "step2": "2 · Verify",
+      "continue": "Continue",
+      "verifying": "Verifying…",
+      "codeHint": "Enter the 6-digit code from your authenticator app.",
+      "code": "Authentication code",
+      "signIn": "Sign in",
+      "checking": "Checking…",
+      "back": "← Use a different account",
+      "footnote": "Sessions expire after 15 minutes of inactivity."
+    },
+    "status": {
+      "draft": "Draft",
+      "delivered": "Delivered",
+      "disabled": "Disabled"
+    },
+    "dashboard": {
+      "greeting": "Good to see you.",
+      "newProject": "New project",
+      "recent": "Recent projects",
+      "all": "All projects →",
+      "cards": {
+        "projects": "Projects",
+        "projectsHint": "{{n}} in progress",
+        "delivered": "Delivered",
+        "deliveredHint": "customers with access",
+        "photos": "Photos",
+        "photosHint": "across all projects",
+        "storage": "Storage",
+        "storageHint": "originals on server"
+      }
+    },
+    "projects": {
+      "eyebrow": "Projects",
+      "title": "Private folders",
+      "new": "New project",
+      "search": "Search projects, customers or usernames",
+      "filters": {
+        "all": "All",
+        "draft": "Drafts",
+        "delivered": "Delivered",
+        "disabled": "Disabled"
+      },
+      "noPhotos": "No photos yet",
+      "empty": "No projects found.",
+      "created": "Project created",
+      "createdText": "These are the login details for {{name}}.",
+      "notShownAgain": "The password won't be shown again.",
+      "upload": "Upload photos",
+      "copyInvitation": "Copy invitation",
+      "invitation": "Your photos: {{url}}\nUsername: {{username}}\nPassword: {{password}}",
+      "form": {
+        "project": "Project",
+        "title": "Title",
+        "titlePlaceholder": "e.g. Wedding Day",
+        "date": "Session date",
+        "customer": "Customer",
+        "name": "Name",
+        "namePlaceholder": "e.g. Ana & Mihai",
+        "email": "Email",
+        "access": "Access",
+        "regenerate": "Generate new password",
+        "create": "Create project",
+        "errors": {
+          "title": "Title is required.",
+          "name": "Customer name is required.",
+          "email": "Enter a valid email.",
+          "usernameTaken": "This username is taken.",
+          "usernameFormat": "3–40 chars: lowercase letters, numbers, . _ -",
+          "password": "At least 10 characters."
+        }
+      }
+    },
+    "project": {
+      "back": "Projects",
+      "summary": "{{count}} photos · {{size}}",
+      "drop": "Drop photos here",
+      "dropHint": "or click to browse · JPG, PNG, WEBP, HEIC up to 50 MB each",
+      "preview": "Preview {{name}}",
+      "delete": "Delete {{name}}",
+      "customer": "Customer",
+      "delivery": "Delivery",
+      "sentAt": "Sent {{date}}.",
+      "notSent": "Upload the photos, then send the login details to the customer.",
+      "send": "Send to customer",
+      "sendAgain": "Send again",
+      "access": "Access",
+      "lastSignIn": "Last sign-in",
+      "newPassword": "New password",
+      "disable": "Disable",
+      "enable": "Enable",
+      "deleteProject": "Delete project",
+      "notFound": "Project not found",
+      "backToProjects": "Back to projects",
+      "sendTitle": "Send to customer",
+      "sendText": "{{name}} will receive an email at {{email}} with the link and the username {{username}}. The {{count}} photos become visible as soon as they sign in.",
+      "sendButton": "Send",
+      "passwordTitle": "New password",
+      "passwordText": "The old password no longer works.",
+      "deleteTitle": "Delete project?",
+      "deleteText": "This permanently deletes “{{title}}” and all {{count}} photos. The customer loses access immediately. Type {{username}} to confirm.",
+      "deleteForever": "Delete forever"
+    },
+    "security": {
+      "eyebrow": "Security",
+      "title": "Account protection",
+      "changePassword": "Change password",
+      "current": "Current password",
+      "new": "New password",
+      "confirm": "Confirm new password",
+      "mismatch": "Passwords don't match.",
+      "rulesHint": "at least 12 characters, mixed case, a number and a symbol",
+      "strength": {
+        "s0": "Too weak",
+        "s1": "Weak",
+        "s2": "Fair",
+        "s3": "Good",
+        "s4": "Strong"
+      },
+      "update": "Update password",
+      "twoFactor": "Two-factor authentication",
+      "enabled": "Enabled",
+      "enabledText": "Authenticator app (TOTP) is required at every sign-in.",
+      "rules": {
+        "r1": "Account locks for 1 minute after 5 failed attempts",
+        "r2": "Automatic sign-out after 15 minutes of inactivity",
+        "r3": "Admin area hidden from search engines and site navigation"
+      },
+      "regenerate": "Regenerate recovery codes",
+      "sessions": "Active sessions",
+      "signOutOthers": "Sign out others",
+      "thisDevice": "This device",
+      "history": "Sign-in history",
+      "success": "Success",
+      "blocked": "Blocked"
+    },
+    "toasts": {
+      "projectCreated": "Project “{{title}}” created",
+      "copied": "{{what}} copied",
+      "skipped": "{{n}} file(s) skipped (images up to 50 MB only)",
+      "sent": "Login details sent to {{email}}",
+      "accessDisabled": "Customer access disabled",
+      "accessEnabled": "Customer access enabled",
+      "projectDeleted": "Project “{{title}}” deleted",
+      "passwordUpdated": "Password updated. Other sessions were signed out.",
+      "codesRegenerated": "New recovery codes generated",
+      "sessionsRevoked": "Signed out of all other sessions"
+    }
+  }
+}

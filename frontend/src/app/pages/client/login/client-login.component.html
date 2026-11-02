@@ -2,29 +2,32 @@
   <div class="sign-in__visual">
     <img [src]="image" alt="" class="sign-in__image" decoding="async" />
     <div class="sign-in__shade"></div>
-    <p class="sign-in__quote">
-      “Photographs are a way of keeping the moments that would otherwise disappear.”
-    </p>
+    <p class="sign-in__quote">{{ 'client.login.quote' | translate }}</p>
   </div>
 
   <div class="sign-in__side">
-    <a routerLink="/" class="sign-in__back">
-      <app-icon name="arrow-left" [size]="14" />
-      {{ brand.name }}
-    </a>
+    <div class="sign-in__top">
+      <a routerLink="/" class="sign-in__back">
+        <app-icon name="arrow-left" [size]="14" />
+        {{ brand.name }}
+      </a>
+      <app-language-switcher />
+    </div>
 
     <div class="sign-in__box">
       <span class="sign-in__lock sign-in__step" style="--i: 0">
         <app-icon name="lock" />
       </span>
-      <h1 class="title title--lg sign-in__title sign-in__step" style="--i: 1">Your project</h1>
+      <h1 class="title title--lg sign-in__title sign-in__step" style="--i: 1">
+        {{ 'client.login.title' | translate }}
+      </h1>
       <p class="text sign-in__text sign-in__step" style="--i: 2">
-        Sign in with the username and password your photographer sent you.
+        {{ 'client.login.text' | translate }}
       </p>
 
       <form [formGroup]="form" (ngSubmit)="submit()" class="sign-in__form" novalidate>
         <label class="field sign-in__step" style="--i: 3">
-          <span class="field__label">Username</span>
+          <span class="field__label">{{ 'common.username' | translate }}</span>
           <input
             class="field__control"
             formControlName="username"
@@ -35,7 +38,7 @@
         </label>
 
         <label class="field sign-in__step" style="--i: 4">
-          <span class="field__label">Password</span>
+          <span class="field__label">{{ 'common.password' | translate }}</span>
           <div class="field__wrap">
             <input
               class="field__control"
@@ -47,7 +50,9 @@
               type="button"
               class="field__toggle"
               (click)="showPassword.update((v) => !v)"
-              [attr.aria-label]="showPassword() ? 'Hide password' : 'Show password'"
+              [attr.aria-label]="
+                (showPassword() ? 'common.hidePassword' : 'common.showPassword') | translate
+              "
             >
               <app-icon [name]="showPassword() ? 'eye-off' : 'eye'" [size]="18" />
             </button>
@@ -55,7 +60,7 @@
         </label>
 
         @if (error()) {
-          <p class="alert" role="alert">{{ error() }}</p>
+          <p class="alert" role="alert">{{ error()!.key | translate: error()!.params }}</p>
         }
 
         <button
@@ -66,17 +71,20 @@
         >
           @if (loading()) {
             <span class="spinner"></span>
-            Opening…
+            {{ 'client.login.loading' | translate }}
           } @else {
-            Open my photos
+            {{ 'client.login.submit' | translate }}
             <app-icon name="arrow-right" [size]="16" />
           }
         </button>
       </form>
 
       <p class="sign-in__help sign-in__step" style="--i: 6">
-        Lost your password?
-        <a routerLink="/contact" class="link">Contact your photographer</a>.
+        {{ 'client.login.lost' | translate }}
+        <a routerLink="/" fragment="booking" class="link">{{
+          'client.login.contact' | translate
+        }}</a
+        >.
       </p>
     </div>
   </div>

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, afterNextRender, signal } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { BRAND } from '@/data/portfolio.data';
 
 /** Shown once per page load, never again on in-app navigation. */
@@ -11,6 +12,7 @@ export const introDelayMs = () => (finished ? 0 : DURATION_MS - 300);
 
 @Component({
   selector: 'app-preloader',
+  imports: [TranslatePipe],
   template: `
     @if (visible()) {
       <div class="preloader" animate.leave="preloader--leaving" aria-hidden="true">
@@ -22,7 +24,7 @@ export const introDelayMs = () => (finished ? 0 : DURATION_MS - 300);
           }
         </div>
         <div class="preloader__line"></div>
-        <p class="preloader__tag">{{ tagline }}</p>
+        <p class="preloader__tag">{{ 'brand.tagline' | translate }}</p>
       </div>
     }
   `,
@@ -31,7 +33,6 @@ export const introDelayMs = () => (finished ? 0 : DURATION_MS - 300);
 })
 export class PreloaderComponent {
   protected readonly letters = BRAND.name.split('');
-  protected readonly tagline = BRAND.tagline;
   protected readonly visible = signal(!alreadyShown);
 
   constructor() {

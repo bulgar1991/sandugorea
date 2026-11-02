@@ -6,7 +6,7 @@
   }
 
   &__search-icon {
-    @apply absolute left-4 top-1/2 -translate-y-1/2 text-ink-subtle;
+    @apply absolute left-4 top-1/2 flex -translate-y-1/2 text-ink-subtle;
   }
 
   &__input {

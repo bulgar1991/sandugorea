@@ -13,25 +13,13 @@ export const routes: Routes = [
         title: 'Sandugorea — Photography',
         loadComponent: () => import('./pages/home/home.component').then((m) => m.HomeComponent),
       },
-      {
-        path: 'portfolio',
-        title: 'Portfolio — Sandugorea',
-        loadComponent: () =>
-          import('./pages/portfolio/portfolio.component').then((m) => m.PortfolioComponent),
-      },
-      {
-        path: 'about',
-        title: 'About — Sandugorea',
-        loadComponent: () => import('./pages/about/about.component').then((m) => m.AboutComponent),
-      },
-      {
-        path: 'contact',
-        title: 'Contact — Sandugorea',
-        loadComponent: () =>
-          import('./pages/contact/contact.component').then((m) => m.ContactComponent),
-      },
     ],
   },
+
+  // Old multi-page URLs now live as sections on the one-page site.
+  { path: 'portfolio', redirectTo: '' },
+  { path: 'about', redirectTo: '' },
+  { path: 'contact', redirectTo: '' },
 
   // ---------- Customer private project ----------
   {

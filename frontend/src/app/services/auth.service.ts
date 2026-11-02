@@ -9,9 +9,11 @@ const LOCKOUT_MS = 60_000;
 /** Admin is logged out after this long without activity. */
 export const ADMIN_IDLE_TIMEOUT_MS = 15 * 60_000;
 
+/** `message` is a translation key; `params` fill its {{placeholders}}. */
 export class AuthError extends Error {
   constructor(
     message: string,
+    readonly params?: Record<string, unknown>,
     readonly lockedUntil?: number,
   ) {
     super(message);
@@ -47,19 +49,19 @@ export class AuthService {
   async adminLogin(username: string, password: string): Promise<void> {
     await delay(700);
     if (Date.now() < this.lockedUntil) {
-      throw new AuthError('Too many attempts. Try again later.', this.lockedUntil);
+      throw new AuthError('auth.locked', undefined, this.lockedUntil);
     }
     if (username !== 'admin' || password !== 'admin123') {
       this.failedAdminAttempts++;
       if (this.failedAdminAttempts >= MAX_ADMIN_ATTEMPTS) {
         this.failedAdminAttempts = 0;
         this.lockedUntil = Date.now() + LOCKOUT_MS;
-        throw new AuthError('Too many attempts. Try again later.', this.lockedUntil);
+        throw new AuthError('auth.locked', undefined, this.lockedUntil);
       }
       // Same message for unknown user and wrong password - don't leak which one was wrong.
-      throw new AuthError(
-        `Invalid credentials. ${MAX_ADMIN_ATTEMPTS - this.failedAdminAttempts} attempts left.`,
-      );
+      throw new AuthError('auth.invalidAdmin', {
+        left: MAX_ADMIN_ATTEMPTS - this.failedAdminAttempts,
+      });
     }
     this.pendingAdmin = username;
   }
@@ -67,8 +69,8 @@ export class AuthService {
   /** Step 2 of admin sign-in: the 6-digit code from the authenticator app. */
   async adminVerify(code: string): Promise<void> {
     await delay(600);
-    if (!this.pendingAdmin) throw new AuthError('Session expired. Sign in again.');
-    if (code !== '123456') throw new AuthError('Invalid code.');
+    if (!this.pendingAdmin) throw new AuthError('auth.expired');
+    if (code !== '123456') throw new AuthError('auth.invalidCode');
     this.failedAdminAttempts = 0;
     this.setSession({ role: 'admin', username: this.pendingAdmin, displayName: 'Administrator' });
     this.pendingAdmin = null;
@@ -78,7 +80,7 @@ export class AuthService {
   async customerLogin(username: string, password: string): Promise<void> {
     await delay(700);
     const project = this.store.verifyCustomer(username.trim().toLowerCase(), password);
-    if (!project) throw new AuthError('Incorrect username or password.');
+    if (!project) throw new AuthError('auth.invalidCustomer');
     this.setSession({
       role: 'customer',
       username: project.username,

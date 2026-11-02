@@ -5,14 +5,17 @@
     }
     <div class="project-cover__shade"></div>
     <div class="wrapper project-cover__content">
-      <p class="eyebrow project-cover__appear" style="--d: 0ms">For {{ p.customerName }}</p>
+      <p class="eyebrow project-cover__appear" style="--d: 0ms">
+        {{ 'client.project.for' | translate: { name: p.customerName } }}
+      </p>
       <h1 class="title title--xl project-cover__title">
         <span class="project-cover__mask"
           ><span class="project-cover__word" style="--d: 100ms">{{ p.title }}</span></span
         >
       </h1>
       <p class="project-cover__meta project-cover__appear" style="--d: 400ms">
-        {{ p.date | date: 'd MMMM y' }} · {{ p.photos.length }} photographs · {{ totalSize() }}
+        {{ p.date | localDate: 'd MMMM y' }} ·
+        {{ 'client.project.meta' | translate: { count: p.photos.length, size: totalSize() } }}
       </p>
       <button
         type="button"
@@ -22,7 +25,10 @@
         [disabled]="zipState() === 'preparing'"
       >
         <app-icon name="download" [size]="16" />
-        {{ zipState() === 'preparing' ? 'Preparing download…' : 'Download all' }}
+        {{
+          (zipState() === 'preparing' ? 'client.project.preparing' : 'client.project.downloadAll')
+            | translate
+        }}
       </button>
     </div>
   </section>
@@ -34,7 +40,7 @@
           type="button"
           class="project-photos__open"
           (click)="openIndex.set(i)"
-          [attr.aria-label]="'Open ' + photo.name"
+          [attr.aria-label]="('common.open' | translate) + ' ' + photo.name"
         >
           <img
             [src]="photo.thumbUrl"
@@ -50,7 +56,7 @@
           target="_blank"
           rel="noopener"
           class="project-photos__download"
-          [attr.aria-label]="'Download ' + photo.name"
+          [attr.aria-label]="('common.download' | translate) + ' ' + photo.name"
         >
           <app-icon name="download" [size]="16" />
         </a>
@@ -62,7 +68,7 @@
 } @else {
   <section class="wrapper project-empty">
     <app-icon name="camera" [size]="36" class="project-empty__icon" />
-    <h1 class="title title--md">Your photographs are being prepared</h1>
-    <p class="text">You'll receive an email as soon as they are ready.</p>
+    <h1 class="title title--md">{{ 'client.project.emptyTitle' | translate }}</h1>
+    <p class="text">{{ 'client.project.emptyText' | translate }}</p>
   </section>
 }

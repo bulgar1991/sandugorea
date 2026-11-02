@@ -1,0 +1,87 @@
+:host {
+  @apply block;
+}
+
+.testimonials {
+  &__header {
+    @apply mb-12 flex items-end justify-between gap-6;
+  }
+
+  &__title {
+    @apply mt-6;
+  }
+
+  &__arrows {
+    @apply hidden shrink-0 gap-3 sm:flex;
+  }
+
+  &__arrow {
+    @apply flex h-14 w-14 cursor-pointer items-center justify-center rounded-full border border-line text-ink transition-colors duration-300;
+
+    &:hover:not(.swiper-button-disabled) {
+      @apply border-accent bg-accent text-black;
+    }
+
+    // Swiper adds this class at the first/last slide...
+    &.swiper-button-disabled {
+      @apply cursor-default opacity-30;
+    }
+
+    // ...and this one when every slide already fits.
+    &.swiper-button-lock {
+      @apply hidden;
+    }
+  }
+
+  // Room for the card hover lift, which the swiper would otherwise clip.
+  &__swiper {
+    @apply -mt-2 pb-2 pt-2;
+  }
+
+  &__slide {
+    @apply h-auto;
+  }
+
+  // Swiper renders the bullets itself, so style them through its CSS variables.
+  &__pagination {
+    @apply mt-10 flex justify-center gap-1;
+    @apply [--swiper-pagination-bullet-inactive-color:theme(colors.ink-muted)] [--swiper-pagination-bullet-inactive-opacity:0.3];
+    @apply [--swiper-pagination-bullet-size:8px] [--swiper-pagination-color:theme(colors.accent)];
+
+    &.swiper-pagination-lock {
+      @apply hidden;
+    }
+  }
+}
+
+.quote-card {
+  @apply relative flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface p-8 transition duration-600 ease-out-expo hover:-translate-y-1 hover:border-accent/40;
+
+  &__mark {
+    @apply pointer-events-none absolute -right-2 -top-10 font-display text-[12rem] leading-none text-accent/10;
+  }
+
+  &__stars {
+    @apply flex gap-1 text-sm text-accent;
+  }
+
+  &__text {
+    @apply mt-6 flex-1 font-display text-2xl font-light italic leading-snug text-ink;
+  }
+
+  &__author {
+    @apply mt-8 flex items-center gap-4 border-t border-line pt-6;
+  }
+
+  &__avatar {
+    @apply h-12 w-12 rounded-full object-cover grayscale;
+  }
+
+  &__name {
+    @apply block text-sm font-semibold;
+  }
+
+  &__detail {
+    @apply block text-xs text-ink-subtle;
+  }
+}

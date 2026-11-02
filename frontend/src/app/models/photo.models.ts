@@ -4,9 +4,8 @@ export interface PortfolioPhoto {
   id: string;
   src: string;
   thumb: string;
-  title: string;
   category: PhotoCategory;
-  /** Used for layout only (masonry aspect). */
+  /** Used for layout only (grid spans / aspect). */
   orientation: 'portrait' | 'landscape' | 'square';
 }
 

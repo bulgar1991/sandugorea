@@ -1,15 +1,16 @@
-import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 import { IconComponent, IconName } from '@components/icon/icon.component';
+import { LocalDatePipe } from '@pipes/local-date.pipe';
 import { RevealDirective } from '@directives/reveal.directive';
-import { projectStatus } from '@models/project.models';
+import { STATUS_BADGE, projectStatus } from '@models/project.models';
 import { ProjectStore } from '@services/project-store.service';
 import { formatBytes } from '@/utils/format';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [RouterLink, DatePipe, IconComponent, RevealDirective],
+  imports: [RouterLink, LocalDatePipe, TranslatePipe, IconComponent, RevealDirective],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,34 +19,37 @@ export class DashboardComponent {
   private readonly store = inject(ProjectStore);
   protected readonly today = new Date();
   protected readonly status = projectStatus;
+  protected readonly badge = STATUS_BADGE;
 
   protected readonly cards = computed<
-    { label: string; value: string; hint: string; icon: IconName }[]
+    { label: string; value: string; hint: string; params?: object; icon: IconName }[]
   >(() => {
     const s = this.store.stats();
+    const c = 'admin.dashboard.cards.';
     return [
       {
-        label: 'Projects',
+        label: c + 'projects',
         value: String(s.projects),
-        hint: `${s.drafts} in progress`,
+        hint: c + 'projectsHint',
+        params: { n: s.drafts },
         icon: 'folder',
       },
       {
-        label: 'Delivered',
+        label: c + 'delivered',
         value: String(s.delivered),
-        hint: 'customers with access',
+        hint: c + 'deliveredHint',
         icon: 'send',
       },
       {
-        label: 'Photos',
+        label: c + 'photos',
         value: s.photos.toLocaleString(),
-        hint: 'across all projects',
+        hint: c + 'photosHint',
         icon: 'image',
       },
       {
-        label: 'Storage',
+        label: c + 'storage',
         value: formatBytes(s.bytes),
-        hint: 'originals on server',
+        hint: c + 'storageHint',
         icon: 'upload',
       },
     ];

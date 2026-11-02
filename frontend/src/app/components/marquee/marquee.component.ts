@@ -1,15 +1,17 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
-/** Endless horizontal ticker. The list is rendered twice and shifted by -50% (GPU only). */
+/** Endless horizontal ticker (items are translation keys). The list is rendered twice and shifted by -50% (GPU only). */
 @Component({
   selector: 'app-marquee',
+  imports: [TranslatePipe],
   template: `
     <div class="marquee" aria-hidden="true">
       <div class="marquee__track">
         @for (copy of [0, 1]; track copy) {
           @for (item of items(); track $index) {
             <span class="marquee__item">
-              {{ item }}
+              {{ item | translate }}
               <span class="marquee__star">✦</span>
             </span>
           }

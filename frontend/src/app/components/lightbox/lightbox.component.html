@@ -20,12 +20,17 @@
             [attr.download]="item.downloadName || ''"
             target="_blank"
             rel="noopener"
-            aria-label="Download"
+            [attr.aria-label]="'common.download' | translate"
           >
             <app-icon name="download" />
           </a>
         }
-        <button type="button" class="lightbox__button" (click)="close()" aria-label="Close">
+        <button
+          type="button"
+          class="lightbox__button"
+          (click)="close()"
+          [attr.aria-label]="'common.close' | translate"
+        >
           <app-icon name="close" />
         </button>
       </div>
@@ -45,7 +50,7 @@
         type="button"
         class="lightbox__nav lightbox__nav--prev"
         (click)="step(-1)"
-        aria-label="Previous"
+        [attr.aria-label]="'common.previous' | translate"
       >
         <app-icon name="chevron-left" [size]="28" [stroke]="1" />
       </button>
@@ -53,7 +58,7 @@
         type="button"
         class="lightbox__nav lightbox__nav--next"
         (click)="step(1)"
-        aria-label="Next"
+        [attr.aria-label]="'common.next' | translate"
       >
         <app-icon name="chevron-right" [size]="28" [stroke]="1" />
       </button>

@@ -1,13 +1,16 @@
-<p class="eyebrow" appReveal>Security</p>
-<h1 class="page-head__title" appReveal [revealDelay]="80">Account protection</h1>
+<p class="eyebrow" appReveal>{{ 'admin.security.eyebrow' | translate }}</p>
+<h1 class="page-head__title" appReveal [revealDelay]="80">
+  {{ 'admin.security.title' | translate }}
+</h1>
 
 <div class="security">
-  <!-- Password -->
   <section class="card security__card" appReveal [revealDelay]="120">
-    <h2 class="security__title"><app-icon name="key" [size]="18" /> Change password</h2>
+    <h2 class="security__title">
+      <app-icon name="key" [size]="18" /> {{ 'admin.security.changePassword' | translate }}
+    </h2>
     <form [formGroup]="form" (ngSubmit)="changePassword()" class="security__form" novalidate>
       <label class="field">
-        <span class="field__label">Current password</span>
+        <span class="field__label">{{ 'admin.security.current' | translate }}</span>
         <input
           class="field__control field__control--boxed"
           type="password"
@@ -16,7 +19,7 @@
         />
       </label>
       <label class="field">
-        <span class="field__label">New password</span>
+        <span class="field__label">{{ 'admin.security.new' | translate }}</span>
         <input
           class="field__control field__control--boxed"
           type="password"
@@ -33,11 +36,11 @@
           }
         </div>
         <small class="field__hint"
-          >{{ strengthLabel() }} · at least 12 characters, mixed case, a number and a symbol</small
+          >{{ strengthLabel() | translate }} · {{ 'admin.security.rulesHint' | translate }}</small
         >
       </label>
       <label class="field">
-        <span class="field__label">Confirm new password</span>
+        <span class="field__label">{{ 'admin.security.confirm' | translate }}</span>
         <input
           class="field__control field__control--boxed"
           type="password"
@@ -45,42 +48,44 @@
           autocomplete="new-password"
         />
         @if (form.hasError('mismatch') && form.controls.confirm.touched) {
-          <small class="field__error">Passwords don't match.</small>
+          <small class="field__error">{{ 'admin.security.mismatch' | translate }}</small>
         }
       </label>
-      <button type="submit" class="btn btn--primary security__submit">Update password</button>
+      <button type="submit" class="btn btn--primary security__submit">
+        {{ 'admin.security.update' | translate }}
+      </button>
     </form>
   </section>
 
-  <!-- 2FA -->
   <section class="card security__card" appReveal [revealDelay]="180">
     <h2 class="security__title">
-      <app-icon name="shield" [size]="18" /> Two-factor authentication
+      <app-icon name="shield" [size]="18" /> {{ 'admin.security.twoFactor' | translate }}
     </h2>
     <div class="security__status">
       <span class="security__status-icon"><app-icon name="check" [size]="18" /></span>
       <div>
-        <p>Enabled</p>
-        <p class="text text--subtle">Authenticator app (TOTP) is required at every sign-in.</p>
+        <p>{{ 'admin.security.enabled' | translate }}</p>
+        <p class="text text--subtle">{{ 'admin.security.enabledText' | translate }}</p>
       </div>
     </div>
     <ul class="security__rules">
       @for (rule of rules; track rule) {
-        <li class="security__rule"><app-icon name="check" [size]="16" /> {{ rule }}</li>
+        <li class="security__rule"><app-icon name="check" [size]="16" /> {{ rule | translate }}</li>
       }
     </ul>
     <button type="button" class="btn btn--ghost security__submit" (click)="regenerateCodes()">
-      <app-icon name="refresh" [size]="14" /> Regenerate recovery codes
+      <app-icon name="refresh" [size]="14" /> {{ 'admin.security.regenerate' | translate }}
     </button>
   </section>
 
-  <!-- Sessions -->
   <section class="card security__card" appReveal [revealDelay]="120">
     <div class="security__row">
-      <h2 class="security__title"><app-icon name="monitor" [size]="18" /> Active sessions</h2>
+      <h2 class="security__title">
+        <app-icon name="monitor" [size]="18" /> {{ 'admin.security.sessions' | translate }}
+      </h2>
       @if (sessions().length > 1) {
         <button type="button" class="security__revoke" (click)="revokeOthers()">
-          Sign out others
+          {{ 'admin.security.signOutOthers' | translate }}
         </button>
       }
     </div>
@@ -92,11 +97,13 @@
             <p class="security__session-name">
               {{ s.device }}
               @if (s.current) {
-                <span class="badge badge--accent">This device</span>
+                <span class="badge badge--accent">{{
+                  'admin.security.thisDevice' | translate
+                }}</span>
               }
             </p>
             <p class="text text--subtle">
-              {{ s.location }} · {{ s.ip }} · {{ s.lastSeen | date: 'd MMM, HH:mm' }}
+              {{ s.location }} · {{ s.ip }} · {{ s.lastSeen | localDate: 'd MMM, HH:mm' }}
             </p>
           </div>
         </li>
@@ -104,18 +111,19 @@
     </ul>
   </section>
 
-  <!-- History -->
   <section class="card security__card" appReveal [revealDelay]="180">
-    <h2 class="security__title"><app-icon name="clock" [size]="18" /> Sign-in history</h2>
+    <h2 class="security__title">
+      <app-icon name="clock" [size]="18" /> {{ 'admin.security.history' | translate }}
+    </h2>
     <ul class="security__list">
       @for (h of history; track h.time) {
         <li class="security__event">
-          <span class="security__event-time">{{ h.time | date: 'd MMM y, HH:mm' }}</span>
+          <span class="security__event-time">{{ h.time | localDate: 'd MMM y, HH:mm' }}</span>
           <span class="security__event-place">{{ h.location }} · {{ h.ip }}</span>
           @if (h.ok) {
-            <span class="badge badge--success">Success</span>
+            <span class="badge badge--success">{{ 'admin.security.success' | translate }}</span>
           } @else {
-            <span class="badge badge--danger">Blocked</span>
+            <span class="badge badge--danger">{{ 'admin.security.blocked' | translate }}</span>
           }
         </li>
       }

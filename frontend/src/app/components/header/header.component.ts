@@ -7,21 +7,26 @@ import {
   signal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 import { filter } from 'rxjs';
 import { IconComponent } from '@components/icon/icon.component';
+import { LanguageSwitcherComponent } from '@components/language-switcher/language-switcher.component';
+import { ActiveSectionService } from '@services/active-section.service';
 import { BRAND } from '@/data/portfolio.data';
 
+/** One-page sections, in page order. */
 export const NAV_LINKS = [
-  { path: '/', label: 'Home', exact: true },
-  { path: '/portfolio', label: 'Portfolio', exact: false },
-  { path: '/about', label: 'About', exact: false },
-  { path: '/contact', label: 'Contact', exact: false },
+  { fragment: 'home', key: 'nav.home' },
+  { fragment: 'about', key: 'nav.about' },
+  { fragment: 'works', key: 'nav.works' },
+  { fragment: 'testimonials', key: 'nav.testimonials' },
+  { fragment: 'booking', key: 'nav.booking' },
 ];
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, RouterLinkActive, IconComponent],
+  imports: [RouterLink, TranslatePipe, IconComponent, LanguageSwitcherComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -30,6 +35,7 @@ export const NAV_LINKS = [
 export class HeaderComponent {
   protected readonly links = NAV_LINKS;
   protected readonly brand = BRAND;
+  protected readonly section = inject(ActiveSectionService).id;
   protected readonly scrolled = signal(false);
   protected readonly hidden = signal(false);
   protected readonly menuOpen = signal(false);

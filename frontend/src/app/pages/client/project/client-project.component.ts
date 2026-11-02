@@ -1,6 +1,7 @@
-import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { IconComponent } from '@components/icon/icon.component';
+import { LocalDatePipe } from '@pipes/local-date.pipe';
 import { LightboxComponent } from '@components/lightbox/lightbox.component';
 import { RevealDirective } from '@directives/reveal.directive';
 import { LightboxItem } from '@models/photo.models';
@@ -11,7 +12,7 @@ import { formatBytes } from '@/utils/format';
 /** The one project the signed-in customer has access to. */
 @Component({
   selector: 'app-client-project',
-  imports: [DatePipe, IconComponent, LightboxComponent, RevealDirective],
+  imports: [LocalDatePipe, TranslatePipe, IconComponent, LightboxComponent, RevealDirective],
   templateUrl: './client-project.component.html',
   styleUrl: './client-project.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

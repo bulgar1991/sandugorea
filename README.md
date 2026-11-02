@@ -21,12 +21,19 @@ or download those photos.
 
 | Area | URLs | Notes |
 | --- | --- | --- |
-| Public | `/`, `/portfolio`, `/about`, `/contact` | Portfolio images come from `frontend/src/app/data/portfolio.data.ts` (placeholders for now) |
+| Public | `/` (one page: `#home`, `#about`, `#works`, `#testimonials`, `#booking`) | Images come from `frontend/src/app/data/portfolio.data.ts` (placeholders for now) |
 | Customer | `/client/login`, `/client` | Opens only after the project was sent and while access is enabled |
 | Admin | `/admin/login`, `/admin`, `/admin/projects`, `/admin/projects/:id`, `/admin/security` | Not linked from the site; password + 2FA; 15-min idle sign-out |
 
 **The UI currently runs on mock data** (`project-store.service.ts`, `auth.service.ts`) until the API is built.
 Dev credentials — admin: `admin` / `admin123`, 2FA code `123456` · customer: `ana.mihai` / `demo1234`.
+
+## Languages (ngx-translate)
+
+English, Deutsch, Italiano, Français and Română. All text lives in `frontend/public/i18n/{en,de,it,fr,ro}.json`
+and is used in templates as `{{ 'section.key' | translate }}`. Dates use the `localDate` pipe so month names follow
+the language. The choice is remembered; first visit uses the browser language (fallback English).
+When adding text, add the key to **all five** files.
 
 ## Styling: Tailwind CSS v3 + SCSS + BEM
 

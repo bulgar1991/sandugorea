@@ -5,6 +5,10 @@
     @apply pointer-events-none absolute left-1/2 top-1/2 h-[40rem] w-[40rem] animate-breathe rounded-full bg-glow-accent opacity-25;
   }
 
+  &__lang {
+    @apply absolute right-5 top-5 z-10;
+  }
+
   &__container {
     @apply relative w-full max-w-md;
   }

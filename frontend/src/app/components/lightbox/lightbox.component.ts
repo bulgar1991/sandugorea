@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, computed, effect, input, model } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { IconComponent } from '@components/icon/icon.component';
 import { LightboxItem } from '@models/photo.models';
 
 @Component({
   selector: 'app-lightbox',
-  imports: [IconComponent],
+  imports: [IconComponent, TranslatePipe],
   templateUrl: './lightbox.component.html',
   styleUrl: './lightbox.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,15 +1,17 @@
 @if (project(); as p) {
   <a routerLink="/admin/projects" class="back-link">
-    <app-icon name="arrow-left" [size]="14" /> Projects
+    <app-icon name="arrow-left" [size]="14" /> {{ 'admin.project.back' | translate }}
   </a>
 
   <div class="detail">
     <!-- Main: upload + photos -->
     <section class="detail__main">
       <div class="detail__head">
-        <p class="eyebrow">{{ p.date | date: 'd MMMM y' }}</p>
+        <p class="eyebrow">{{ p.date | localDate: 'd MMMM y' }}</p>
         <h1 class="page-head__title">{{ p.title }}</h1>
-        <p class="detail__summary">{{ p.photos.length }} photos · {{ totalSize() }}</p>
+        <p class="detail__summary">
+          {{ 'admin.project.summary' | translate: { count: p.photos.length, size: totalSize() } }}
+        </p>
       </div>
 
       <label
@@ -20,10 +22,8 @@
         (drop)="onDrop($event)"
       >
         <span class="dropzone__icon"><app-icon name="upload" /></span>
-        <span class="dropzone__title">Drop photos here</span>
-        <span class="dropzone__hint"
-          >or click to browse · JPG, PNG, WEBP, HEIC up to 50 MB each</span
-        >
+        <span class="dropzone__title">{{ 'admin.project.drop' | translate }}</span>
+        <span class="dropzone__hint">{{ 'admin.project.dropHint' | translate }}</span>
         <input
           type="file"
           class="dropzone__input"
@@ -62,7 +62,7 @@
                 type="button"
                 class="thumbs__open"
                 (click)="openIndex.set(i)"
-                [attr.aria-label]="'Preview ' + photo.name"
+                [attr.aria-label]="'admin.project.preview' | translate: { name: photo.name }"
               >
                 <img
                   [src]="photo.thumbUrl"
@@ -77,7 +77,7 @@
                 type="button"
                 class="thumbs__delete"
                 (click)="deletePhoto(photo.id)"
-                [attr.aria-label]="'Delete ' + photo.name"
+                [attr.aria-label]="'admin.project.delete' | translate: { name: photo.name }"
               >
                 <app-icon name="trash" [size]="14" />
               </button>
@@ -87,10 +87,10 @@
       }
     </section>
 
-    <!-- Side: customer, access, delivery -->
+    <!-- Side: customer, delivery, access -->
     <aside class="detail__side">
       <div class="card panel">
-        <h2 class="panel__title">Customer</h2>
+        <h2 class="panel__title">{{ 'admin.project.customer' | translate }}</h2>
         <div class="panel__customer">
           <span class="avatar avatar--lg">{{ p.customerName.charAt(0) }}</span>
           <div class="panel__customer-info">
@@ -104,24 +104,18 @@
 
       <div class="card panel">
         <div class="panel__row">
-          <h2 class="panel__title">Delivery</h2>
-          @switch (status()) {
-            @case ('delivered') {
-              <span class="badge badge--success">Delivered</span>
-            }
-            @case ('draft') {
-              <span class="badge badge--accent">Draft</span>
-            }
-            @default {
-              <span class="badge badge--muted">Disabled</span>
-            }
-          }
+          <h2 class="panel__title">{{ 'admin.project.delivery' | translate }}</h2>
+          <span class="badge" [class]="'badge--' + badge[status()]">{{
+            'admin.status.' + status() | translate
+          }}</span>
         </div>
         <p class="panel__text">
           @if (p.sentAt) {
-            Sent {{ p.sentAt | date: 'd MMM y, HH:mm' }}.
+            {{
+              'admin.project.sentAt' | translate: { date: (p.sentAt | localDate: 'd MMM y, HH:mm') }
+            }}
           } @else {
-            Upload the photos, then send the login details to the customer.
+            {{ 'admin.project.notSent' | translate }}
           }
         </p>
         <button
@@ -130,43 +124,50 @@
           (click)="confirmSend.set(true)"
           [disabled]="!p.photos.length || !p.active"
         >
-          <app-icon name="send" [size]="14" /> {{ p.sentAt ? 'Send again' : 'Send to customer' }}
+          <app-icon name="send" [size]="14" />
+          {{ (p.sentAt ? 'admin.project.sendAgain' : 'admin.project.send') | translate }}
         </button>
       </div>
 
       <div class="card panel">
-        <h2 class="panel__title">Access</h2>
+        <h2 class="panel__title">{{ 'admin.project.access' | translate }}</h2>
         <dl class="panel__list">
           <div class="panel__item">
-            <dt>Username</dt>
+            <dt>{{ 'common.username' | translate }}</dt>
             <dd class="panel__mono">
               {{ p.username }}
               <button
                 type="button"
                 class="panel__copy"
                 (click)="copy(p.username)"
-                aria-label="Copy username"
+                [attr.aria-label]="'common.copy' | translate"
               >
                 <app-icon name="copy" [size]="14" />
               </button>
             </dd>
           </div>
           <div class="panel__item">
-            <dt>Password</dt>
+            <dt>{{ 'common.password' | translate }}</dt>
             <dd class="panel__mono">••••••••••</dd>
           </div>
           <div class="panel__item">
-            <dt>Last sign-in</dt>
-            <dd>{{ p.lastLoginAt ? (p.lastLoginAt | date: 'd MMM, HH:mm') : 'Never' }}</dd>
+            <dt>{{ 'admin.project.lastSignIn' | translate }}</dt>
+            <dd>
+              {{
+                p.lastLoginAt
+                  ? (p.lastLoginAt | localDate: 'd MMM, HH:mm')
+                  : ('common.never' | translate)
+              }}
+            </dd>
           </div>
         </dl>
         <div class="panel__actions">
           <button type="button" class="btn btn--ghost btn--sm" (click)="resetPassword()">
-            <app-icon name="key" [size]="14" /> New password
+            <app-icon name="key" [size]="14" /> {{ 'admin.project.newPassword' | translate }}
           </button>
           <button type="button" class="btn btn--ghost btn--sm" (click)="toggleAccess()">
             <app-icon [name]="p.active ? 'lock' : 'check'" [size]="14" />
-            {{ p.active ? 'Disable' : 'Enable' }}
+            {{ (p.active ? 'admin.project.disable' : 'admin.project.enable') | translate }}
           </button>
         </div>
       </div>
@@ -176,37 +177,45 @@
         class="btn btn--danger btn--block"
         (click)="deleteText.set(''); confirmDelete.set(true)"
       >
-        <app-icon name="trash" [size]="14" /> Delete project
+        <app-icon name="trash" [size]="14" /> {{ 'admin.project.deleteProject' | translate }}
       </button>
     </aside>
   </div>
 
   <app-lightbox [items]="lightboxItems()" [(index)]="openIndex" />
 
-  <app-modal [(open)]="confirmSend" title="Send to customer">
+  <app-modal [(open)]="confirmSend" [title]="'admin.project.sendTitle' | translate">
     <p class="text text--small">
-      {{ p.customerName }} will receive an email at
-      <span class="credentials__name">{{ p.customerEmail }}</span> with the link and their username
-      <span class="credentials__name">{{ p.username }}</span
-      >. The {{ p.photos.length }} photos become visible as soon as they sign in.
+      {{
+        'admin.project.sendText'
+          | translate
+            : {
+                name: p.customerName,
+                email: p.customerEmail,
+                username: p.username,
+                count: p.photos.length,
+              }
+      }}
     </p>
     <div class="credentials__actions modal-actions">
       <button type="button" class="btn btn--primary" (click)="send()">
-        <app-icon name="send" [size]="14" /> Send
+        <app-icon name="send" [size]="14" /> {{ 'admin.project.sendButton' | translate }}
       </button>
-      <button type="button" class="btn btn--ghost" (click)="confirmSend.set(false)">Cancel</button>
+      <button type="button" class="btn btn--ghost" (click)="confirmSend.set(false)">
+        {{ 'common.cancel' | translate }}
+      </button>
     </div>
   </app-modal>
 
   <app-modal
     [open]="newPassword() !== null"
     (openChange)="newPassword.set(null)"
-    title="New password"
+    [title]="'admin.project.passwordTitle' | translate"
   >
     <div class="credentials">
       <p class="text text--small">
-        The old password no longer works.
-        <span class="credentials__warning">This one won't be shown again.</span>
+        {{ 'admin.project.passwordText' | translate }}
+        <span class="credentials__warning">{{ 'admin.projects.notShownAgain' | translate }}</span>
       </p>
       <div class="credentials__box">
         <div class="credentials__row">
@@ -215,23 +224,26 @@
             type="button"
             class="credentials__copy"
             (click)="copy(newPassword() ?? '')"
-            aria-label="Copy password"
+            [attr.aria-label]="'common.copy' | translate"
           >
             <app-icon name="copy" [size]="16" />
           </button>
         </div>
       </div>
       <div class="credentials__actions">
-        <button type="button" class="btn btn--primary" (click)="newPassword.set(null)">Done</button>
+        <button type="button" class="btn btn--primary" (click)="newPassword.set(null)">
+          {{ 'common.done' | translate }}
+        </button>
       </div>
     </div>
   </app-modal>
 
-  <app-modal [(open)]="confirmDelete" title="Delete project?">
+  <app-modal [(open)]="confirmDelete" [title]="'admin.project.deleteTitle' | translate">
     <p class="text text--small">
-      This permanently deletes “{{ p.title }}” and all {{ p.photos.length }} photos. The customer
-      loses access immediately. Type <span class="credentials__name">{{ p.username }}</span> to
-      confirm.
+      {{
+        'admin.project.deleteText'
+          | translate: { title: p.title, count: p.photos.length, username: p.username }
+      }}
     </p>
     <input
       class="field__control field__control--boxed field__control--mono modal-input"
@@ -246,16 +258,18 @@
         [disabled]="deleteText() !== p.username"
         (click)="deleteProject()"
       >
-        Delete forever
+        {{ 'admin.project.deleteForever' | translate }}
       </button>
       <button type="button" class="btn btn--ghost" (click)="confirmDelete.set(false)">
-        Cancel
+        {{ 'common.cancel' | translate }}
       </button>
     </div>
   </app-modal>
 } @else {
   <div class="not-found-block">
-    <h1 class="title title--md">Project not found</h1>
-    <a routerLink="/admin/projects" class="btn btn--outline">Back to projects</a>
+    <h1 class="title title--md">{{ 'admin.project.notFound' | translate }}</h1>
+    <a routerLink="/admin/projects" class="btn btn--outline">{{
+      'admin.project.backToProjects' | translate
+    }}</a>
   </div>
 }

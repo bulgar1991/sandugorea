@@ -1,0 +1,54 @@
+@if (variant() === 'inline') {
+  <div class="lang lang--inline" role="group" [attr.aria-label]="'common.language' | translate">
+    @for (l of language.languages; track l.code) {
+      <button
+        type="button"
+        class="lang__code"
+        [class.lang__code--active]="language.current() === l.code"
+        [attr.aria-pressed]="language.current() === l.code"
+        [attr.title]="l.name"
+        (click)="select(l.code)"
+      >
+        {{ l.label }}
+      </button>
+    }
+  </div>
+} @else {
+  <div class="lang">
+    <button
+      type="button"
+      class="lang__toggle"
+      [attr.aria-expanded]="open()"
+      aria-haspopup="listbox"
+      [attr.aria-label]="'common.language' | translate"
+      (click)="open.update((v) => !v)"
+    >
+      {{ language.current().toUpperCase() }}
+      <span class="lang__caret" [class.lang__caret--open]="open()"></span>
+    </button>
+    @if (open()) {
+      <ul
+        class="lang__menu"
+        [class.lang__menu--up]="up()"
+        role="listbox"
+        animate.leave="lang__menu--leaving"
+      >
+        @for (l of language.languages; track l.code) {
+          <li>
+            <button
+              type="button"
+              role="option"
+              class="lang__option"
+              [class.lang__option--active]="language.current() === l.code"
+              [attr.aria-selected]="language.current() === l.code"
+              (click)="select(l.code)"
+            >
+              <span class="lang__option-code">{{ l.label }}</span>
+              {{ l.name }}
+            </button>
+          </li>
+        }
+      </ul>
+    }
+  </div>
+}

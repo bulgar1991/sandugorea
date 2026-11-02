@@ -1,0 +1,60 @@
+<div class="hero">
+  @for (slide of slides; track slide.src; let i = $index) {
+    <div class="hero__slide" [class.hero__slide--active]="active() === i" aria-hidden="true">
+      <img
+        [src]="slide.src"
+        alt=""
+        class="hero__image"
+        [class.hero__image--zoom]="active() === i"
+        [attr.fetchpriority]="i === 0 ? 'high' : null"
+        [attr.loading]="i === 0 ? null : 'lazy'"
+        decoding="async"
+      />
+    </div>
+  }
+  <div class="hero__shade"></div>
+
+  <div class="wrapper hero__content">
+    <p class="eyebrow hero__appear" style="--d: 0ms">{{ 'hero.eyebrow' | translate }}</p>
+    <h1 class="hero__title">
+      <span class="hero__line"
+        ><span class="hero__word" style="--d: 100ms">{{ 'hero.line1' | translate }}</span></span
+      >
+      <span class="hero__line"
+        ><span class="hero__word hero__word--accent" style="--d: 220ms">{{
+          'hero.line2' | translate
+        }}</span></span
+      >
+      <span class="hero__line"
+        ><span class="hero__word" style="--d: 340ms">{{ 'hero.line3' | translate }}</span></span
+      >
+    </h1>
+    <div class="hero__actions hero__appear" style="--d: 700ms">
+      <a routerLink="/" fragment="works" class="btn btn--primary">
+        {{ 'hero.works' | translate }}
+        <app-icon name="arrow-right" [size]="16" />
+      </a>
+      <a routerLink="/" fragment="booking" class="btn btn--ghost">{{ 'hero.book' | translate }}</a>
+    </div>
+  </div>
+
+  <div class="hero__slider hero__appear" style="--d: 900ms">
+    <span class="hero__caption">{{ slides[active()].captionKey | translate }}</span>
+    @for (slide of slides; track slide.src; let i = $index) {
+      <button
+        type="button"
+        class="hero__dot"
+        [class.hero__dot--active]="active() === i"
+        (click)="active.set(i)"
+        [attr.aria-label]="'hero.slide' | translate: { n: i + 1 }"
+      >
+        <span class="hero__progress"></span>
+      </button>
+    }
+  </div>
+
+  <a routerLink="/" fragment="about" class="hero__scroll hero__appear" style="--d: 1100ms">
+    <span class="hero__scroll-label">{{ 'hero.scroll' | translate }}</span>
+    <span class="hero__scroll-line"></span>
+  </a>
+</div>

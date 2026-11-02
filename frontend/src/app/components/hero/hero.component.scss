@@ -1,0 +1,97 @@
+:host {
+  @apply block;
+}
+
+.hero {
+  @apply relative h-[100svh] min-h-[36rem] overflow-hidden;
+
+  &__slide {
+    @apply absolute inset-0 overflow-hidden opacity-0 transition-opacity duration-1800;
+
+    &--active {
+      @apply opacity-100;
+    }
+  }
+
+  &__image {
+    @apply block h-full w-full object-cover;
+
+    &--zoom {
+      @apply animate-ken-burns;
+    }
+  }
+
+  &__shade {
+    @apply pointer-events-none absolute inset-0 bg-hero-shade;
+  }
+
+  &__content {
+    @apply relative z-10 flex h-full flex-col justify-end pb-28 lg:pb-32;
+  }
+
+  &__title {
+    @apply mt-6 font-display text-6xl font-light leading-display sm:text-8xl lg:text-hero;
+  }
+
+  &__line {
+    @apply block overflow-hidden pb-[0.06em];
+  }
+
+  &__word {
+    @apply inline-block animate-rise;
+    animation-duration: 1.3s;
+    animation-delay: calc(var(--intro) + var(--d));
+
+    &--accent {
+      @apply italic text-accent;
+    }
+  }
+
+  &__appear {
+    @apply animate-fade-in;
+    animation-duration: 1.2s;
+    animation-delay: calc(var(--intro) + var(--d));
+  }
+
+  &__actions {
+    @apply mt-10 flex flex-wrap items-center gap-4;
+  }
+
+  &__slider {
+    @apply absolute bottom-10 right-5 z-10 flex items-center gap-3 sm:right-8 lg:right-12;
+  }
+
+  &__caption {
+    @apply hidden text-xs tracking-caps-md text-ink-muted sm:inline;
+  }
+
+  &__dot {
+    @apply relative h-5 w-10 cursor-pointer;
+
+    &::before {
+      content: '';
+      @apply absolute inset-x-0 top-1/2 h-px bg-white/25;
+    }
+
+    &--active .hero__progress {
+      @apply animate-progress;
+      animation-duration: var(--slide-ms);
+    }
+  }
+
+  &__progress {
+    @apply absolute inset-x-0 top-1/2 h-px origin-left scale-x-0 bg-accent;
+  }
+
+  &__scroll {
+    @apply absolute bottom-10 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-3 md:flex;
+  }
+
+  &__scroll-label {
+    @apply text-2xs uppercase tracking-caps-xl text-ink-muted;
+  }
+
+  &__scroll-line {
+    @apply h-12 w-px animate-scroll-hint bg-accent;
+  }
+}

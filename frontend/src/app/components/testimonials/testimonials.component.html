@@ -1,0 +1,55 @@
+<div class="wrapper section testimonials">
+  <div class="testimonials__header">
+    <div>
+      <p class="eyebrow" appReveal>{{ 'testimonials.eyebrow' | translate }}</p>
+      <h2 class="title title--lg testimonials__title" appReveal [revealDelay]="100">
+        {{ 'testimonials.title' | translate }}
+      </h2>
+    </div>
+    <div class="testimonials__arrows" appReveal [revealDelay]="200">
+      <button
+        #prevEl
+        type="button"
+        class="testimonials__arrow"
+        [attr.aria-label]="'common.previous' | translate"
+      >
+        <app-icon name="arrow-left" [size]="18" />
+      </button>
+      <button
+        #nextEl
+        type="button"
+        class="testimonials__arrow"
+        [attr.aria-label]="'common.next' | translate"
+      >
+        <app-icon name="arrow-right" [size]="18" />
+      </button>
+    </div>
+  </div>
+
+  <div #swiperEl class="swiper testimonials__swiper" appReveal="up" [revealDelay]="200">
+    <div class="swiper-wrapper">
+      @for (t of testimonials; track t.id) {
+        <div class="swiper-slide testimonials__slide">
+          <figure class="quote-card">
+            <span class="quote-card__mark" aria-hidden="true">“</span>
+            <div class="quote-card__stars" aria-hidden="true">
+              @for (s of stars; track s) {
+                <span class="quote-card__star">★</span>
+              }
+            </div>
+            <blockquote class="quote-card__text">{{ t.quoteKey | translate }}</blockquote>
+            <figcaption class="quote-card__author">
+              <img [src]="t.avatar" alt="" class="quote-card__avatar" loading="lazy" />
+              <span>
+                <span class="quote-card__name">{{ t.authorKey | translate }}</span>
+                <span class="quote-card__detail">{{ t.detailKey | translate }}</span>
+              </span>
+            </figcaption>
+          </figure>
+        </div>
+      }
+    </div>
+  </div>
+
+  <div #paginationEl class="testimonials__pagination"></div>
+</div>
