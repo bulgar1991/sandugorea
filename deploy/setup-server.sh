@@ -20,6 +20,10 @@ apt-get update -q
 apt-get upgrade -yq
 apt-get install -yq nginx certbot python3-certbot-nginx ufw fail2ban unattended-upgrades rsync sqlite3 rclone
 
+step "Locale (silences perl/apt warnings when connecting from a Mac)"
+locale-gen en_US.UTF-8 >/dev/null
+update-locale LANG=en_US.UTF-8
+
 step "Automatic security updates"
 dpkg-reconfigure -f noninteractive unattended-upgrades
 
@@ -80,6 +84,8 @@ systemctl daemon-reload
 systemctl enable --now sandugorea-backup.timer
 
 step "nginx"
+# Small VPS: the default hash bucket is too small for "www.sandugorea.ch".
+echo 'server_names_hash_bucket_size 64;' > /etc/nginx/conf.d/server-names.conf
 cp "$HERE/nginx.conf" /etc/nginx/sites-available/sandugorea
 ln -sf /etc/nginx/sites-available/sandugorea /etc/nginx/sites-enabled/sandugorea
 rm -f /etc/nginx/sites-enabled/default
