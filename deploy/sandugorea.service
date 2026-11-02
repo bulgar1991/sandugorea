@@ -4,6 +4,8 @@ Description=Sandugorea (ASP.NET Core + Angular)
 After=network.target
 
 [Service]
+# If the server runs out of memory, restart only this app (never take the whole VPS down).
+MemoryMax=700M
 WorkingDirectory=/var/www/sandugorea
 ExecStart=/var/www/sandugorea/Sandugorea.Api
 Restart=always
@@ -21,6 +23,8 @@ UMask=0077
 Environment=ASPNETCORE_ENVIRONMENT=Production
 Environment=ASPNETCORE_URLS=http://127.0.0.1:5000
 Environment=DOTNET_NOLOGO=true
+# 1 GB RAM: workstation GC keeps the memory footprint small.
+Environment=DOTNET_gcServer=0
 Environment=Storage__Root=/var/lib/sandugorea
 # Secrets (admin bootstrap password, SMTP) - see deploy/sandugorea.env.example
 EnvironmentFile=/etc/sandugorea/sandugorea.env

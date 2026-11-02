@@ -71,29 +71,21 @@ When adding text, add the key to **all five** files.
 - Each component has its own BEM block in its `.scss`, built with `@apply`
   (e.g. `.hero`, `.hero__title`, `.hero__slide--active`). Templates use BEM class names only.
 
-## Production (VPS, Ubuntu + nginx)
+## Production — sandugorea.ch (VPS 66.29.142.5, Ubuntu 24.04, 1 GB RAM)
 
-One-time server setup:
+1. **DNS** (at your domain registrar): `A  sandugorea.ch → 66.29.142.5` and `A  www → 66.29.142.5`.
+2. **Server setup** (once; safe to re-run):
+   ```bash
+   scp -r deploy root@66.29.142.5:/root/
+   ssh root@66.29.142.5 'bash /root/deploy/setup-server.sh you@example.com'
+   ```
+   Installs nginx, certbot, firewall (22/80/443 only), fail2ban, automatic security updates, a 2 GB swap file,
+   the service user, systemd unit and nginx site, and gets the HTTPS certificate once DNS points at the server.
+3. **Secrets**: `ssh root@66.29.142.5 nano /etc/sandugorea/sandugorea.env` — set `Admin__Password`
+   (12+ chars, upper, lower, digit, symbol) and the SMTP settings.
+4. **Deploy** (every release, from your Mac): `./deploy/deploy.sh`
+5. Open https://sandugorea.ch/admin/login, scan the QR code, save the recovery codes, then remove
+   `Admin__Password` from the env file.
 
-```bash
-sudo useradd --system --no-create-home --shell /usr/sbin/nologin sandugorea
-sudo mkdir -p /var/www/sandugorea /etc/sandugorea
-sudo cp deploy/sandugorea.env.example /etc/sandugorea/sandugorea.env   # edit: admin password, SMTP, domain
-sudo chmod 600 /etc/sandugorea/sandugorea.env
-sudo cp deploy/sandugorea.service /etc/systemd/system/
-sudo systemctl daemon-reload && sudo systemctl enable sandugorea
-sudo cp deploy/nginx.conf /etc/nginx/sites-available/sandugorea   # edit server_name
-sudo ln -s /etc/nginx/sites-available/sandugorea /etc/nginx/sites-enabled/
-sudo nginx -t && sudo systemctl reload nginx
-sudo certbot --nginx -d your-domain.com
-```
-
-Deploy (from your machine):
-
-```bash
-SERVER=user@your-vps ./deploy/deploy.sh
-```
-
-`dotnet publish` builds Angular automatically and puts it in `wwwroot`; the output is self-contained, so the
-VPS doesn't need .NET installed. All data (database, photos, keys) is in `/var/lib/sandugorea` — back up that
-one folder. After the first admin sign-in, remove `Admin__Password` from the env file.
+All data (database, photos, encryption keys) is in `/var/lib/sandugorea` — back up that folder.
+Logs: `journalctl -u sandugorea -f`. Disk: 20 GB total ≈ 1,000–1,500 full-size photos.

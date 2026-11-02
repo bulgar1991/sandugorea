@@ -31,8 +31,6 @@ public sealed class PhotoStorage(IOptions<StorageOptions> options, ILogger<Photo
     private const int PreviewSize = 2048;
     private const int WebpQuality = 82;
 
-    /// <summary>Decoding big photos is memory-hungry; limit parallel work on a small VPS.</summary>
-    private static readonly SemaphoreSlim Gate = new(2);
 
     private static readonly Dictionary<SKEncodedImageFormat, (string Ext, string Mime)> Allowed = new()
     {
@@ -42,6 +40,9 @@ public sealed class PhotoStorage(IOptions<StorageOptions> options, ILogger<Photo
     };
 
     private readonly StorageOptions _options = options.Value;
+
+    /// <summary>Decoding big photos is memory-hungry; limit parallel work on a small VPS.</summary>
+    private readonly SemaphoreSlim _gate = new(Math.Max(1, options.Value.ParallelProcessing));
 
     public string Root => Path.GetFullPath(_options.Root);
 
@@ -79,7 +80,7 @@ public sealed class PhotoStorage(IOptions<StorageOptions> options, ILogger<Photo
         Directory.CreateDirectory(incoming);
         var tempPath = Path.Combine(incoming, photo.Id.ToString("N"));
 
-        await Gate.WaitAsync(ct);
+        await _gate.WaitAsync(ct);
         try
         {
             await using (var target = File.Create(tempPath))
@@ -102,7 +103,7 @@ public sealed class PhotoStorage(IOptions<StorageOptions> options, ILogger<Photo
         }
         finally
         {
-            Gate.Release();
+            _gate.Release();
             TryDelete(tempPath);
         }
     }

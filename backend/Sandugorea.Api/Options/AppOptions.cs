@@ -12,6 +12,9 @@ public sealed class StorageOptions
 
     /// <summary>Rejects images above this many megapixels (decompression-bomb guard).</summary>
     public int MaxMegapixels { get; set; } = 120;
+
+    /// <summary>Photos processed at the same time. Use 1 on a server with 1 GB of RAM.</summary>
+    public int ParallelProcessing { get; set; } = 2;
 }
 
 /// <summary>Initial admin account, created on first start when no admin exists.</summary>
@@ -54,17 +57,17 @@ public sealed class EmailOptions
     public int SmtpPort { get; set; } = 587;
     public string SmtpUser { get; set; } = "";
     public string SmtpPassword { get; set; } = "";
-    public string FromAddress { get; set; } = "hello@sandugorea.com";
+    public string FromAddress { get; set; } = "hello@sandugorea.ch";
     public string FromName { get; set; } = "Sandugorea Photography";
 
     /// <summary>Where booking requests are sent.</summary>
-    public string OwnerAddress { get; set; } = "hello@sandugorea.com";
+    public string OwnerAddress { get; set; } = "hello@sandugorea.ch";
 }
 
 public sealed class SiteOptions
 {
     public const string Section = "Site";
 
-    /// <summary>Public URL used in emails, e.g. https://sandugorea.com</summary>
+    /// <summary>Public URL used in emails, e.g. https://sandugorea.ch</summary>
     public string BaseUrl { get; set; } = "http://localhost:4200";
 }
