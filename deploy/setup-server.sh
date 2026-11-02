@@ -18,7 +18,7 @@ step "System updates and packages"
 export DEBIAN_FRONTEND=noninteractive
 apt-get update -q
 apt-get upgrade -yq
-apt-get install -yq nginx certbot python3-certbot-nginx ufw fail2ban unattended-upgrades rsync sqlite3
+apt-get install -yq nginx certbot python3-certbot-nginx ufw fail2ban unattended-upgrades rsync sqlite3 rclone
 
 step "Automatic security updates"
 dpkg-reconfigure -f noninteractive unattended-upgrades
@@ -56,6 +56,17 @@ cp "$HERE/sandugorea.service" /etc/systemd/system/sandugorea.service
 systemctl daemon-reload
 systemctl enable sandugorea
 
+step "Nightly backup (systemd timer, 03:30)"
+install -m 750 "$HERE/backup.sh" /usr/local/bin/sandugorea-backup
+install -m 750 "$HERE/restore.sh" /usr/local/bin/sandugorea-restore
+if [ ! -f /etc/sandugorea/backup.env ]; then
+  install -m 600 "$HERE/backup.env.example" /etc/sandugorea/backup.env
+  NEED_BACKUP=1
+fi
+cp "$HERE/sandugorea-backup.service" "$HERE/sandugorea-backup.timer" /etc/systemd/system/
+systemctl daemon-reload
+systemctl enable --now sandugorea-backup.timer
+
 step "nginx"
 cp "$HERE/nginx.conf" /etc/nginx/sites-available/sandugorea
 ln -sf /etc/nginx/sites-available/sandugorea /etc/nginx/sites-enabled/sandugorea
@@ -79,5 +90,8 @@ fi
 step "Done"
 if [ "${NEED_ENV:-0}" = 1 ]; then
   echo "NEXT: edit /etc/sandugorea/sandugorea.env (admin password, SMTP):  nano /etc/sandugorea/sandugorea.env"
+fi
+if [ "${NEED_BACKUP:-0}" = 1 ] || ! rclone listremotes 2>/dev/null | grep -q '^sgbackup:'; then
+  echo "BACKUP: set up the encrypted off-site storage - see deploy/BACKUP.md (until then the nightly backup fails on purpose)."
 fi
 echo "Then deploy from your Mac:  ./deploy/deploy.sh"

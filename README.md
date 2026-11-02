@@ -87,5 +87,6 @@ When adding text, add the key to **all five** files.
 5. Open https://sandugorea.ch/admin/login, scan the QR code, save the recovery codes, then remove
    `Admin__Password` from the env file.
 
-All data (database, photos, encryption keys) is in `/var/lib/sandugorea` — back up that folder.
+All data (database, photos, encryption keys) is in `/var/lib/sandugorea`. It is backed up every night,
+encrypted, to off-site storage — set that up once with [deploy/BACKUP.md](deploy/BACKUP.md).
 Logs: `journalctl -u sandugorea -f`. Disk: 20 GB total ≈ 1,000–1,500 full-size photos.

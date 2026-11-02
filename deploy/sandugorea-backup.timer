@@ -1,0 +1,12 @@
+# /etc/systemd/system/sandugorea-backup.timer
+[Unit]
+Description=Nightly Sandugorea backup
+
+[Timer]
+OnCalendar=*-*-* 03:30
+RandomizedDelaySec=20m
+# Run on next boot if the server was off at 03:30.
+Persistent=true
+
+[Install]
+WantedBy=timers.target

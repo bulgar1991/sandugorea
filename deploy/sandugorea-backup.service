@@ -1,0 +1,12 @@
+# /etc/systemd/system/sandugorea-backup.service - run by sandugorea-backup.timer
+[Unit]
+Description=Sandugorea backup (database, photos, keys -> encrypted off-site)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/sandugorea-backup
+# Be gentle with the 1 GB server.
+Nice=10
+IOSchedulingClass=idle
