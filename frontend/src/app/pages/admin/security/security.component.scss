@@ -6,7 +6,7 @@
   }
 
   &__title {
-    @apply flex items-center gap-2 font-display text-2xl;
+    @apply flex items-center gap-2 font-title text-xl;
 
     app-icon {
       @apply text-accent;

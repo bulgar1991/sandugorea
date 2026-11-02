@@ -34,7 +34,7 @@
   }
 
   &__title {
-    @apply mt-6 font-display text-5xl font-medium leading-[1.05] sm:text-6xl lg:text-[4.25rem] xl:text-7xl;
+    @apply mt-6 font-title text-[2.6rem] leading-[1.1] sm:text-6xl lg:text-[3.6rem] xl:text-[4.1rem];
   }
 
   &__line {
@@ -48,12 +48,13 @@
   }
 
   // The full name never splits across lines ("Sandu / Gorea").
+  // Handwritten name; script fonts run small, so it's set larger than the title around it.
   &__name {
-    @apply whitespace-nowrap italic text-accent;
+    @apply whitespace-nowrap font-script text-[1.45em] font-normal leading-none text-accent;
   }
 
   &__role {
-    @apply mt-3 flex min-h-[1.3em] items-center font-display text-3xl font-medium text-ink sm:text-4xl lg:text-5xl;
+    @apply mt-4 flex min-h-[1.3em] items-center font-title text-2xl text-ink sm:text-3xl lg:text-4xl;
   }
 
   &__caret {
@@ -79,7 +80,7 @@
   }
 
   &__frame {
-    @apply absolute inset-x-0 bottom-0 top-1/4 animate-fade-in rounded-3xl border border-line bg-surface shadow-2xl;
+    @apply absolute inset-x-0 bottom-0 top-1/4 animate-fade-in rounded-3xl bg-surface shadow-2xl;
     animation-duration: 1.2s;
     animation-delay: calc(var(--intro) + 200ms);
   }

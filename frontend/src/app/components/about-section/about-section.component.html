@@ -1,20 +1,41 @@
 <div class="wrapper section about">
-  <div class="about__visual">
-    <div class="about__frame" appReveal="clip">
-      <img
-        [src]="portrait"
-        [alt]="'about.imageAlt' | translate"
-        class="cover parallax about__portrait"
-        loading="lazy"
-        decoding="async"
-      />
+  <div class="about__visual" (mousemove)="onMove($event)" (mouseleave)="onLeave()">
+    <!-- Thin gold frame drifting behind the portrait -->
+    <span class="about__outline" aria-hidden="true"></span>
+
+    <div #tilt class="about__tilt">
+      <div class="about__frame" appReveal="clip">
+        <div class="about__frame-inner">
+          <img
+            [src]="portrait"
+            [alt]="'about.imageAlt' | translate"
+            class="cover parallax about__portrait"
+            loading="lazy"
+            decoding="async"
+          />
+          <!-- Soft gold light following the mouse -->
+          <span class="about__light" aria-hidden="true"></span>
+        </div>
+      </div>
     </div>
+
     <div class="about__inset" appReveal="clip" [revealDelay]="300">
-      <img [src]="detail" alt="" class="cover" loading="lazy" decoding="async" />
+      <div class="about__inset-inner">
+        <img [src]="detail" alt="" class="cover" loading="lazy" decoding="async" />
+      </div>
     </div>
-    <div class="about__badge" appReveal="scale" [revealDelay]="500">
-      <span class="about__badge-ring"></span>
-      <app-icon name="camera" [size]="26" />
+
+    <!-- Rotating "SANDU GOREA • PHOTOGRAPHY •" ring around the camera -->
+    <div class="about__badge" appReveal="scale" [revealDelay]="500" aria-hidden="true">
+      <svg class="about__ring" viewBox="0 0 120 120">
+        <defs>
+          <path id="about-ring-path" d="M60,60 m-48,0 a48,48 0 1,1 96,0 a48,48 0 1,1 -96,0" />
+        </defs>
+        <text class="about__ring-text">
+          <textPath href="#about-ring-path" textLength="300">{{ ringText }}</textPath>
+        </text>
+      </svg>
+      <span class="about__badge-icon"><app-icon name="camera" [size]="24" /></span>
     </div>
   </div>
 

@@ -10,7 +10,7 @@ import {
 } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { PageLoaderState } from '@services/page-loader.service';
-import { SITE_NAME } from '@/config/site';
+import { BRAND } from '@/data/portfolio.data';
 
 // Keeps the loader on screen at least this long, so fast navigations don't just flicker.
 const MIN_VISIBLE_MS = 400;
@@ -32,7 +32,7 @@ const pathOf = (url: string) => url.split(/[?#]/)[0];
 export class PageLoaderComponent {
   private readonly router = inject(Router);
   protected readonly state = inject(PageLoaderState);
-  protected readonly letters = SITE_NAME.toUpperCase().split('');
+  protected readonly name = BRAND.owner;
 
   private shownAt = Date.now();
   private hideTimer?: ReturnType<typeof setTimeout>;

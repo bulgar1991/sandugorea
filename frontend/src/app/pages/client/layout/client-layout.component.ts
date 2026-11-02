@@ -13,7 +13,7 @@ import { BRAND } from '@/data/portfolio.data';
     <header class="portal-bar">
       <div class="wrapper portal-bar__inner">
         <a routerLink="/client" class="portal-bar__logo">
-          <span class="portal-bar__name">{{ brand.name }}</span>
+          <span class="portal-bar__name">{{ brand.owner }}</span>
           <span class="portal-bar__tagline">{{ 'client.layout.tagline' | translate }}</span>
         </a>
         <div class="portal-bar__user">
@@ -47,7 +47,7 @@ import { BRAND } from '@/data/portfolio.data';
         @apply flex flex-col leading-none;
       }
       &__name {
-        @apply font-display text-xl uppercase tracking-caps-md;
+        @apply font-script text-3xl leading-none;
       }
       &__tagline {
         @apply mt-1 text-2xs uppercase tracking-caps-xl text-accent;

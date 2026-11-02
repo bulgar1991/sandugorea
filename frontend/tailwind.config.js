@@ -18,6 +18,12 @@ module.exports = {
           'sans-serif',
         ],
         display: ['"Cormorant Garamond"', 'Georgia', '"Times New Roman"', 'serif'],
+        // Every title.
+        title: ['"Train One"', '"Cormorant Garamond"', 'Georgia', 'serif'],
+        // Handwritten: logo, the photographer's name, signature.
+        script: ['Allura', '"Cormorant Garamond"', 'cursive'],
+        // Highlighted (gold) words inside titles.
+        accent: ['Parisienne', '"Cormorant Garamond"', 'cursive'],
         mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
       },
 
@@ -173,6 +179,17 @@ module.exports = {
         },
         // Typing cursor.
         caret: { '0%, 100%': { opacity: '1' }, '50%': { opacity: '0' } },
+        // Slow wandering of decorative frames.
+        drift: {
+          '0%, 100%': { transform: 'translate3d(0, 0, 0)' },
+          '50%': { transform: 'translate3d(10px, -14px, 0)' },
+        },
+        float: {
+          '0%, 100%': { transform: 'translate3d(0, 0, 0)' },
+          '50%': { transform: 'translate3d(0, -12px, 0)' },
+        },
+        // Handwriting effect: the wordmark is uncovered left to right.
+        write: { from: { clipPath: 'inset(0 100% 0 0)' }, to: { clipPath: 'inset(0 0 0 0)' } },
         // Hero portrait rising into its frame.
         'portrait-in': {
           from: { opacity: '0', transform: 'translate3d(0, 60px, 0) scale(0.97)' },
@@ -202,6 +219,10 @@ module.exports = {
         'ping-soft': 'ping-soft 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite',
         'spin-fast': 'spin 0.7s linear infinite',
         caret: 'caret 1s steps(1) infinite',
+        drift: 'drift 9s ease-in-out infinite',
+        float: 'float 6s ease-in-out infinite',
+        'spin-slow': 'spin 18s linear infinite',
+        write: 'write 1.4s cubic-bezier(0.65, 0, 0.35, 1) both',
         'portrait-in': 'portrait-in 1.4s cubic-bezier(0.16, 1, 0.3, 1) both',
       },
     },

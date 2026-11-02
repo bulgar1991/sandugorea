@@ -3,7 +3,7 @@
     <div class="admin__brand">
       <span class="admin__brand-mark"><app-icon name="camera" [size]="18" /></span>
       <div>
-        <p class="admin__brand-name">{{ brand.name }}</p>
+        <p class="admin__brand-name">{{ brand.owner }}</p>
         <p class="admin__brand-tag">Admin</p>
       </div>
     </div>
@@ -60,7 +60,7 @@
     >
       <app-icon name="menu" />
     </button>
-    <span class="admin__topbar-title">{{ brand.name }}</span>
+    <span class="admin__topbar-title">{{ brand.owner }}</span>
     <span class="admin__timer" [class.admin__timer--warning]="expiringSoon()">{{
       remaining()
     }}</span>

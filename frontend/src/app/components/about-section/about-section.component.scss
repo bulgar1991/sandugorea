@@ -6,30 +6,79 @@
   @apply grid items-center gap-16 lg:grid-cols-12 lg:gap-12;
 
   &__visual {
-    @apply relative pb-16 pr-10 lg:col-span-6 lg:pb-20 lg:pr-16;
+    @apply relative pb-16 pl-6 pr-10 pt-6 lg:col-span-6 lg:pb-20 lg:pr-16;
+    perspective: 1200px;
+  }
+
+  // Gold outline offset behind the portrait, slowly drifting.
+  &__outline {
+    @apply pointer-events-none absolute bottom-24 left-0 right-16 top-0 animate-drift rounded-2xl border border-accent/40 lg:right-24;
+  }
+
+  // ---------- Portrait with 3D tilt ----------
+  &__tilt {
+    @apply relative;
+    --rx: 0deg;
+    --ry: 0deg;
+    --lx: 0%;
+    --ly: 0%;
+    transform: rotateX(var(--rx)) rotateY(var(--ry));
+    transform-style: preserve-3d;
+    transition: transform 0.7s theme('transitionTimingFunction.out-expo');
+    will-change: transform;
   }
 
   &__frame {
-    @apply relative overflow-hidden;
+    @apply relative;
+  }
+
+  &__frame-inner {
+    @apply relative overflow-hidden rounded-2xl shadow-2xl;
   }
 
   &__portrait {
     @apply aspect-portrait;
   }
 
-  // Small second image overlapping the corner.
+  // A blurred gold glow that follows the mouse (moved with transform only).
+  &__light {
+    @apply pointer-events-none absolute left-1/4 top-1/4 h-1/2 w-1/2 rounded-full opacity-0 mix-blend-soft-light blur-3xl transition-opacity duration-600;
+    background: radial-gradient(circle, theme('colors.accent-light') 0%, transparent 70%);
+    transform: translate3d(var(--lx), var(--ly), 0) scale(1.6);
+  }
+
+  &__tilt--active &__light {
+    @apply opacity-90;
+  }
+
+  // ---------- Second photo, floating ----------
   &__inset {
-    @apply absolute bottom-0 right-0 aspect-tall w-2/5 overflow-hidden border-[6px] border-black;
+    @apply absolute bottom-0 right-0 w-2/5 animate-float;
+    animation-delay: -2s;
   }
 
+  &__inset-inner {
+    @apply aspect-tall overflow-hidden rounded-xl border-[6px] border-black shadow-2xl;
+  }
+
+  // ---------- Rotating text ring ----------
   &__badge {
-    @apply absolute left-6 top-6 flex h-20 w-20 items-center justify-center rounded-full bg-black/70 text-accent backdrop-blur-sm;
+    @apply absolute -left-2 -top-2 z-10 flex h-32 w-32 items-center justify-center rounded-full bg-black/80 backdrop-blur-sm sm:h-36 sm:w-36;
   }
 
-  &__badge-ring {
-    @apply absolute inset-0 animate-ping-soft rounded-full border border-accent/50;
+  &__ring {
+    @apply absolute inset-0 h-full w-full animate-spin-slow;
   }
 
+  &__ring-text {
+    @apply fill-accent text-[9px] font-semibold uppercase tracking-[0.2em];
+  }
+
+  &__badge-icon {
+    @apply flex h-12 w-12 items-center justify-center rounded-full bg-accent text-black;
+  }
+
+  // ---------- Text ----------
   &__body {
     @apply lg:col-span-5 lg:col-start-8;
   }
@@ -59,10 +108,10 @@
   }
 
   &__signature {
-    @apply font-display text-4xl italic text-accent;
+    @apply font-script text-5xl leading-none text-accent;
   }
 
   &__role {
-    @apply mt-1 text-xs uppercase tracking-caps text-ink-subtle;
+    @apply mt-2 text-xs uppercase tracking-caps text-ink-subtle;
   }
 }

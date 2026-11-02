@@ -74,7 +74,7 @@
   }
 
   &__title {
-    @apply font-display text-2xl transition-colors;
+    @apply font-title text-xl transition-colors;
   }
 
   &:hover &__title {

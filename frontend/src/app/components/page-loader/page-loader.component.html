@@ -5,11 +5,7 @@
   role="status"
   [attr.aria-hidden]="!state.visible()"
 >
-  <div class="page-loader__brand" aria-hidden="true">
-    @for (letter of letters; track $index) {
-      <span class="page-loader__letter" [style.animation-delay.ms]="$index * 45">{{ letter }}</span>
-    }
-  </div>
+  <div class="page-loader__brand" aria-hidden="true">{{ name }}</div>
   <span class="page-loader__bar" aria-hidden="true"></span>
   <span class="sr-only">{{ 'common.loading' | translate }}</span>
 </div>

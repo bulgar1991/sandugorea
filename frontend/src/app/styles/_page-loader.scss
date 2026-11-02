@@ -15,14 +15,9 @@
     }
   }
 
+  // Handwritten name, uncovered left to right like it's being written.
   &__brand {
-    @apply flex overflow-hidden font-display text-3xl font-light tracking-caps-lg text-ink transition-transform duration-500 sm:text-5xl;
-  }
-
-  // Letters rise in one after another.
-  &__letter {
-    @apply inline-block animate-rise;
-    animation-duration: 0.8s;
+    @apply animate-write whitespace-nowrap px-2 font-script text-6xl leading-tight text-ink transition-transform duration-500 sm:text-7xl;
   }
 
   // Thin gold line sweeping across: "working on it".

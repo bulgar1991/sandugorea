@@ -18,11 +18,11 @@
   }
 
   &__name {
-    @apply font-display text-3xl uppercase tracking-caps-md;
+    @apply font-script text-5xl leading-none;
   }
 
   &__tagline {
-    @apply mt-1 text-2xs uppercase tracking-caps-2xl text-accent;
+    @apply mt-1 pl-1 text-2xs uppercase tracking-caps-2xl text-accent;
   }
 
   &__text {

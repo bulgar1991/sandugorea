@@ -83,7 +83,7 @@
   @apply flex flex-col items-center gap-3 rounded-xl border border-line bg-black/40 p-5 text-center;
 
   &__title {
-    @apply font-display text-xl;
+    @apply font-title text-lg;
   }
 
   // White quiet zone so phone cameras read the code reliably on the dark page.

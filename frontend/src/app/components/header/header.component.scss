@@ -22,11 +22,11 @@
   }
 
   &__name {
-    @apply font-display text-2xl uppercase tracking-caps-md text-ink;
+    @apply font-script text-4xl leading-none text-ink;
   }
 
   &__tagline {
-    @apply mt-1 text-2xs uppercase tracking-caps-2xl text-accent;
+    @apply mt-1.5 pl-1 text-2xs uppercase tracking-caps-2xl text-accent;
   }
 
   &__nav {
@@ -84,7 +84,7 @@
   }
 
   &__link {
-    @apply flex animate-fade-up items-baseline gap-4 border-b border-line py-3 font-display text-4xl font-light text-ink sm:text-5xl;
+    @apply flex animate-fade-up items-baseline gap-4 border-b border-line py-3 font-title text-3xl text-ink sm:text-4xl;
 
     &--active {
       @apply text-accent;

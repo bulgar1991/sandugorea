@@ -18,7 +18,7 @@
   }
 
   &__brand-name {
-    @apply font-display text-lg uppercase tracking-caps;
+    @apply font-script text-3xl leading-none;
   }
 
   &__brand-tag {
@@ -90,7 +90,7 @@
   }
 
   &__topbar-title {
-    @apply font-display uppercase tracking-caps;
+    @apply font-script text-2xl leading-none;
   }
 
   &__main {
