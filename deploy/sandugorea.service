@@ -1,0 +1,19 @@
+# /etc/systemd/system/sandugorea.service
+[Unit]
+Description=Sandugorea (ASP.NET Core + Angular)
+After=network.target
+
+[Service]
+WorkingDirectory=/var/www/sandugorea
+ExecStart=/var/www/sandugorea/Sandugorea.Api
+Restart=always
+RestartSec=5
+KillSignal=SIGINT
+SyslogIdentifier=sandugorea
+User=www-data
+Environment=ASPNETCORE_ENVIRONMENT=Production
+Environment=ASPNETCORE_URLS=http://127.0.0.1:5000
+Environment=DOTNET_NOLOGO=true
+
+[Install]
+WantedBy=multi-user.target

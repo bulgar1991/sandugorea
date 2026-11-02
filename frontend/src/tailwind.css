@@ -1,0 +1,32 @@
+/*
+ * Tailwind v4 entry. Kept as plain CSS (not SCSS) because Sass can't process Tailwind's
+ * @import / @theme. Theme tokens live here; everything else goes in styles.scss.
+ *
+ * Usage in a component .scss with @apply:
+ *   @reference '../../tailwind.css';   (path relative to the component file)
+ */
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+
+  /* Site palette - use as `bg-primary`, `text-ink`, etc. */
+  --color-primary: #2563eb;
+  --color-ink: #0b1033;
+  --color-ink-muted: #4a5078;
+  --color-background: #ffffff;
+  --color-surface: #f6f7ff;
+  --color-border: #dde1f2;
+  --color-danger: #e0244f;
+  --color-success: #12a86c;
+}
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply min-h-screen bg-background font-sans text-ink antialiased;
+  }
+}
