@@ -4,12 +4,12 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
 @Component({
   selector: 'app-page-hero',
   template: `
-    <section class="container-x pt-40 pb-16 lg:pt-48 lg:pb-24">
-      <p class="eyebrow hero-fade" style="animation-delay: 100ms">{{ eyebrow() }}</p>
-      <h1 class="heading-xl mt-6">
+    <section class="wrapper page-hero">
+      <p class="eyebrow page-hero__fade" style="animation-delay: 100ms">{{ eyebrow() }}</p>
+      <h1 class="title title--xl page-hero__title">
         @for (word of words(); track $index) {
-          <span class="word-mask"
-            ><span class="word" [style.animation-delay.ms]="200 + $index * 90">{{
+          <span class="page-hero__mask"
+            ><span class="page-hero__word" [style.animation-delay.ms]="200 + $index * 90">{{
               word
             }}</span></span
           >{{ ' ' }}
@@ -17,7 +17,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
       </h1>
       @if (subtitle()) {
         <p
-          class="hero-fade mt-8 max-w-xl text-lg leading-relaxed text-ink-muted"
+          class="text text--lead page-hero__subtitle page-hero__fade"
           [style.animation-delay.ms]="300 + words().length * 90"
         >
           {{ subtitle() }}
@@ -26,29 +26,24 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
     </section>
   `,
   styles: `
-    .word-mask {
-      display: inline-block;
-      overflow: hidden;
-      vertical-align: top;
-      padding-bottom: 0.08em;
-    }
-    .word {
-      display: inline-block;
-      transform: translate3d(0, 105%, 0);
-      animation: word-up 1.1s var(--ease-out-expo) forwards;
-    }
-    .hero-fade {
-      opacity: 0;
-      animation: hero-fade 1s ease forwards;
-    }
-    @keyframes word-up {
-      to {
-        transform: translate3d(0, 0, 0);
+    .page-hero {
+      @apply pb-16 pt-40 lg:pb-24 lg:pt-48;
+
+      &__title {
+        @apply mt-6;
       }
-    }
-    @keyframes hero-fade {
-      to {
-        opacity: 1;
+      &__mask {
+        @apply inline-block overflow-hidden pb-[0.08em] align-top;
+      }
+      &__word {
+        @apply inline-block animate-rise;
+      }
+      &__subtitle {
+        @apply mt-8 max-w-xl;
+      }
+      &__fade {
+        @apply animate-fade-in;
+        animation-duration: 1s;
       }
     }
   `,

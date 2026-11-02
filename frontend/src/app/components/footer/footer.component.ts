@@ -9,6 +9,7 @@ import { BRAND } from '@/data/portfolio.data';
   selector: 'app-footer',
   imports: [RouterLink, IconComponent, RevealDirective],
   templateUrl: './footer.component.html',
+  styleUrl: './footer.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent {

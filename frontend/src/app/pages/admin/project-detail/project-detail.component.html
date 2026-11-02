@@ -1,0 +1,261 @@
+@if (project(); as p) {
+  <a routerLink="/admin/projects" class="back-link">
+    <app-icon name="arrow-left" [size]="14" /> Projects
+  </a>
+
+  <div class="detail">
+    <!-- Main: upload + photos -->
+    <section class="detail__main">
+      <div class="detail__head">
+        <p class="eyebrow">{{ p.date | date: 'd MMMM y' }}</p>
+        <h1 class="page-head__title">{{ p.title }}</h1>
+        <p class="detail__summary">{{ p.photos.length }} photos · {{ totalSize() }}</p>
+      </div>
+
+      <label
+        class="dropzone"
+        [class.dropzone--active]="dragging()"
+        (dragover)="$event.preventDefault(); dragging.set(true)"
+        (dragleave)="dragging.set(false)"
+        (drop)="onDrop($event)"
+      >
+        <span class="dropzone__icon"><app-icon name="upload" /></span>
+        <span class="dropzone__title">Drop photos here</span>
+        <span class="dropzone__hint"
+          >or click to browse · JPG, PNG, WEBP, HEIC up to 50 MB each</span
+        >
+        <input
+          type="file"
+          class="dropzone__input"
+          accept="image/*"
+          multiple
+          (change)="onFiles($event)"
+        />
+      </label>
+
+      @if (uploads().length) {
+        <ul class="uploads">
+          @for (u of uploads(); track u.id) {
+            <li class="card uploads__item">
+              <div class="uploads__row">
+                <span class="uploads__name">{{ u.name }}</span>
+                <span class="uploads__meta"
+                  >{{ formatBytes(u.size) }} · {{ u.progress | number: '1.0-0' }}%</span
+                >
+              </div>
+              <div class="uploads__track">
+                <div
+                  class="uploads__bar"
+                  [style.transform]="'scaleX(' + u.progress / 100 + ')'"
+                ></div>
+              </div>
+            </li>
+          }
+        </ul>
+      }
+
+      @if (p.photos.length) {
+        <div class="thumbs">
+          @for (photo of p.photos; track photo.id; let i = $index) {
+            <figure class="thumbs__item">
+              <button
+                type="button"
+                class="thumbs__open"
+                (click)="openIndex.set(i)"
+                [attr.aria-label]="'Preview ' + photo.name"
+              >
+                <img
+                  [src]="photo.thumbUrl"
+                  [alt]="photo.name"
+                  class="thumbs__image"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </button>
+              <figcaption class="thumbs__caption">{{ photo.name }}</figcaption>
+              <button
+                type="button"
+                class="thumbs__delete"
+                (click)="deletePhoto(photo.id)"
+                [attr.aria-label]="'Delete ' + photo.name"
+              >
+                <app-icon name="trash" [size]="14" />
+              </button>
+            </figure>
+          }
+        </div>
+      }
+    </section>
+
+    <!-- Side: customer, access, delivery -->
+    <aside class="detail__side">
+      <div class="card panel">
+        <h2 class="panel__title">Customer</h2>
+        <div class="panel__customer">
+          <span class="avatar avatar--lg">{{ p.customerName.charAt(0) }}</span>
+          <div class="panel__customer-info">
+            <p class="panel__name">{{ p.customerName }}</p>
+            <a [href]="'mailto:' + p.customerEmail" class="link panel__email">{{
+              p.customerEmail
+            }}</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card panel">
+        <div class="panel__row">
+          <h2 class="panel__title">Delivery</h2>
+          @switch (status()) {
+            @case ('delivered') {
+              <span class="badge badge--success">Delivered</span>
+            }
+            @case ('draft') {
+              <span class="badge badge--accent">Draft</span>
+            }
+            @default {
+              <span class="badge badge--muted">Disabled</span>
+            }
+          }
+        </div>
+        <p class="panel__text">
+          @if (p.sentAt) {
+            Sent {{ p.sentAt | date: 'd MMM y, HH:mm' }}.
+          } @else {
+            Upload the photos, then send the login details to the customer.
+          }
+        </p>
+        <button
+          type="button"
+          class="btn btn--primary btn--block"
+          (click)="confirmSend.set(true)"
+          [disabled]="!p.photos.length || !p.active"
+        >
+          <app-icon name="send" [size]="14" /> {{ p.sentAt ? 'Send again' : 'Send to customer' }}
+        </button>
+      </div>
+
+      <div class="card panel">
+        <h2 class="panel__title">Access</h2>
+        <dl class="panel__list">
+          <div class="panel__item">
+            <dt>Username</dt>
+            <dd class="panel__mono">
+              {{ p.username }}
+              <button
+                type="button"
+                class="panel__copy"
+                (click)="copy(p.username)"
+                aria-label="Copy username"
+              >
+                <app-icon name="copy" [size]="14" />
+              </button>
+            </dd>
+          </div>
+          <div class="panel__item">
+            <dt>Password</dt>
+            <dd class="panel__mono">••••••••••</dd>
+          </div>
+          <div class="panel__item">
+            <dt>Last sign-in</dt>
+            <dd>{{ p.lastLoginAt ? (p.lastLoginAt | date: 'd MMM, HH:mm') : 'Never' }}</dd>
+          </div>
+        </dl>
+        <div class="panel__actions">
+          <button type="button" class="btn btn--ghost btn--sm" (click)="resetPassword()">
+            <app-icon name="key" [size]="14" /> New password
+          </button>
+          <button type="button" class="btn btn--ghost btn--sm" (click)="toggleAccess()">
+            <app-icon [name]="p.active ? 'lock' : 'check'" [size]="14" />
+            {{ p.active ? 'Disable' : 'Enable' }}
+          </button>
+        </div>
+      </div>
+
+      <button
+        type="button"
+        class="btn btn--danger btn--block"
+        (click)="deleteText.set(''); confirmDelete.set(true)"
+      >
+        <app-icon name="trash" [size]="14" /> Delete project
+      </button>
+    </aside>
+  </div>
+
+  <app-lightbox [items]="lightboxItems()" [(index)]="openIndex" />
+
+  <app-modal [(open)]="confirmSend" title="Send to customer">
+    <p class="text text--small">
+      {{ p.customerName }} will receive an email at
+      <span class="credentials__name">{{ p.customerEmail }}</span> with the link and their username
+      <span class="credentials__name">{{ p.username }}</span
+      >. The {{ p.photos.length }} photos become visible as soon as they sign in.
+    </p>
+    <div class="credentials__actions modal-actions">
+      <button type="button" class="btn btn--primary" (click)="send()">
+        <app-icon name="send" [size]="14" /> Send
+      </button>
+      <button type="button" class="btn btn--ghost" (click)="confirmSend.set(false)">Cancel</button>
+    </div>
+  </app-modal>
+
+  <app-modal
+    [open]="newPassword() !== null"
+    (openChange)="newPassword.set(null)"
+    title="New password"
+  >
+    <div class="credentials">
+      <p class="text text--small">
+        The old password no longer works.
+        <span class="credentials__warning">This one won't be shown again.</span>
+      </p>
+      <div class="credentials__box">
+        <div class="credentials__row">
+          <span class="credentials__value">{{ newPassword() }}</span>
+          <button
+            type="button"
+            class="credentials__copy"
+            (click)="copy(newPassword() ?? '')"
+            aria-label="Copy password"
+          >
+            <app-icon name="copy" [size]="16" />
+          </button>
+        </div>
+      </div>
+      <div class="credentials__actions">
+        <button type="button" class="btn btn--primary" (click)="newPassword.set(null)">Done</button>
+      </div>
+    </div>
+  </app-modal>
+
+  <app-modal [(open)]="confirmDelete" title="Delete project?">
+    <p class="text text--small">
+      This permanently deletes “{{ p.title }}” and all {{ p.photos.length }} photos. The customer
+      loses access immediately. Type <span class="credentials__name">{{ p.username }}</span> to
+      confirm.
+    </p>
+    <input
+      class="field__control field__control--boxed field__control--mono modal-input"
+      [value]="deleteText()"
+      (input)="deleteText.set($any($event.target).value)"
+      autocapitalize="none"
+    />
+    <div class="credentials__actions modal-actions">
+      <button
+        type="button"
+        class="btn btn--danger"
+        [disabled]="deleteText() !== p.username"
+        (click)="deleteProject()"
+      >
+        Delete forever
+      </button>
+      <button type="button" class="btn btn--ghost" (click)="confirmDelete.set(false)">
+        Cancel
+      </button>
+    </div>
+  </app-modal>
+} @else {
+  <div class="not-found-block">
+    <h1 class="title title--md">Project not found</h1>
+    <a routerLink="/admin/projects" class="btn btn--outline">Back to projects</a>
+  </div>
+}

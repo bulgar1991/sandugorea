@@ -9,6 +9,7 @@ import { BRAND, CATEGORIES } from '@/data/portfolio.data';
   selector: 'app-contact',
   imports: [ReactiveFormsModule, IconComponent, PageHeroComponent, RevealDirective],
   templateUrl: './contact.component.html',
+  styleUrl: './contact.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContactComponent {

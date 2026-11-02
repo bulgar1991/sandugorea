@@ -1,7 +1,7 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { Session } from '@models/client.models';
-import { GalleryStore } from './gallery-store.service';
+import { Session } from '@models/project.models';
+import { ProjectStore } from './project-store.service';
 
 const STORAGE_KEY = 'sg.session';
 const MAX_ADMIN_ATTEMPTS = 5;
@@ -27,11 +27,11 @@ export class AuthError extends Error {
  *  - TOTP two-factor authentication for the admin
  *  - every photo served through an authorised endpoint, never as a public file
  *
- * Mock credentials — admin: admin / admin123, code 123456 · client: ana.mihai / demo1234
+ * Mock credentials — admin: admin / admin123, code 123456 · customer: ana.mihai / demo1234
  */
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly store = inject(GalleryStore);
+  private readonly store = inject(ProjectStore);
   private readonly router = inject(Router);
 
   private readonly _session = signal<Session | null>(readSession());
@@ -41,7 +41,7 @@ export class AuthService {
 
   readonly session = this._session.asReadonly();
   readonly isAdmin = computed(() => this._session()?.role === 'admin');
-  readonly isClient = computed(() => this._session()?.role === 'client');
+  readonly isCustomer = computed(() => this._session()?.role === 'customer');
 
   /** Step 1 of admin sign-in. Resolves when a 2FA code is required. */
   async adminLogin(username: string, password: string): Promise<void> {
@@ -74,15 +74,16 @@ export class AuthService {
     this.pendingAdmin = null;
   }
 
-  async clientLogin(username: string, password: string): Promise<void> {
+  /** Customers sign in with the credentials of one project. */
+  async customerLogin(username: string, password: string): Promise<void> {
     await delay(700);
-    const client = this.store.verifyClient(username.trim().toLowerCase(), password);
-    if (!client) throw new AuthError('Incorrect username or password.');
+    const project = this.store.verifyCustomer(username.trim().toLowerCase(), password);
+    if (!project) throw new AuthError('Incorrect username or password.');
     this.setSession({
-      role: 'client',
-      username: client.username,
-      displayName: client.name,
-      clientId: client.id,
+      role: 'customer',
+      username: project.username,
+      displayName: project.customerName,
+      projectId: project.id,
     });
   }
 

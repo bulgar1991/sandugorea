@@ -13,22 +13,29 @@ dotnet run --project backend/Sandugorea.Api
 cd frontend && npm start
 ```
 
-## Site map
+## How it works
+
+The photographer creates a **project** (a private folder) for a customer, uploads the photos and
+sends it. Each project has its own **username + password**; only that customer can sign in and see
+or download those photos.
 
 | Area | URLs | Notes |
 | --- | --- | --- |
 | Public | `/`, `/portfolio`, `/about`, `/contact` | Portfolio images come from `frontend/src/app/data/portfolio.data.ts` (placeholders for now) |
-| Client | `/client/login`, `/client`, `/client/galleries/:id` | A client only sees folders that were sent to them |
-| Admin | `/admin/login`, `/admin`, `/admin/clients`, `/admin/clients/:id`, `/admin/security` | Not linked from the site; password + 2FA; 15-min idle sign-out |
+| Customer | `/client/login`, `/client` | Opens only after the project was sent and while access is enabled |
+| Admin | `/admin/login`, `/admin`, `/admin/projects`, `/admin/projects/:id`, `/admin/security` | Not linked from the site; password + 2FA; 15-min idle sign-out |
 
-**The UI currently runs on mock data** (`gallery-store.service.ts`, `auth.service.ts`) until the API is built.
-Dev credentials — admin: `admin` / `admin123`, 2FA code `123456` · client: `ana.mihai` / `demo1234`.
+**The UI currently runs on mock data** (`project-store.service.ts`, `auth.service.ts`) until the API is built.
+Dev credentials — admin: `admin` / `admin123`, 2FA code `123456` · customer: `ana.mihai` / `demo1234`.
 
-## Tailwind v4 + SCSS
+## Styling: Tailwind CSS v3 + SCSS + BEM
 
-- `frontend/src/tailwind.css` — Tailwind import and theme tokens (`@theme`). Plain CSS on purpose: Sass can't process Tailwind v4 directives.
-- `frontend/src/styles.scss` — global SCSS.
-- Component `.scss` files that use `@apply` need `@reference '<relative path>/tailwind.css';` at the top.
+- `frontend/tailwind.config.js` — **all** design tokens: colours, fonts, font sizes, letter-spacing,
+  spacing, z-index, easing, gradients, keyframes and animations.
+- `frontend/src/styles.scss` — `@tailwind` directives plus shared BEM blocks (`.btn`, `.field`,
+  `.card`, `.badge`, `.title`, `.wrapper`, …).
+- Each component has its own BEM block in its `.scss`, built with `@apply`
+  (e.g. `.hero`, `.hero__title`, `.hero__slide--active`). Templates use BEM class names only.
 
 ## Production (VPS, Ubuntu + nginx)
 

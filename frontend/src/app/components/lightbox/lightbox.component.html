@@ -3,21 +3,19 @@
     class="lightbox"
     role="dialog"
     aria-modal="true"
-    animate.enter="lb-enter"
-    animate.leave="lb-leave"
+    animate.enter="lightbox--entering"
+    animate.leave="lightbox--leaving"
     (touchstart)="onTouchStart($event)"
     (touchend)="onTouchEnd($event)"
   >
-    <div class="absolute inset-0" (click)="close()" aria-hidden="true"></div>
+    <div class="lightbox__backdrop" (click)="close()" aria-hidden="true"></div>
 
     <div class="lightbox__bar">
-      <span class="text-xs tracking-[0.3em] text-ink-muted">
-        {{ (index() ?? 0) + 1 }} / {{ items().length }}
-      </span>
-      <div class="flex items-center gap-2">
+      <span class="lightbox__counter">{{ (index() ?? 0) + 1 }} / {{ items().length }}</span>
+      <div class="lightbox__tools">
         @if (allowDownload()) {
           <a
-            class="lightbox__btn"
+            class="lightbox__button"
             [href]="item.src"
             [attr.download]="item.downloadName || ''"
             target="_blank"
@@ -27,19 +25,17 @@
             <app-icon name="download" />
           </a>
         }
-        <button type="button" class="lightbox__btn" (click)="close()" aria-label="Close">
+        <button type="button" class="lightbox__button" (click)="close()" aria-label="Close">
           <app-icon name="close" />
         </button>
       </div>
     </div>
 
     @for (it of [item]; track index()) {
-      <figure class="lightbox__figure" animate.enter="lb-img-enter">
-        <img [src]="it.src" [alt]="it.title || ''" class="lightbox__img" decoding="async" />
+      <figure class="lightbox__figure">
+        <img [src]="it.src" [alt]="it.title || ''" class="lightbox__image" decoding="async" />
         @if (it.title) {
-          <figcaption class="mt-4 text-center font-display text-xl italic text-ink-muted">
-            {{ it.title }}
-          </figcaption>
+          <figcaption class="lightbox__caption">{{ it.title }}</figcaption>
         }
       </figure>
     }
@@ -47,7 +43,7 @@
     @if (items().length > 1) {
       <button
         type="button"
-        class="lightbox__nav left-3 sm:left-6"
+        class="lightbox__nav lightbox__nav--prev"
         (click)="step(-1)"
         aria-label="Previous"
       >
@@ -55,7 +51,7 @@
       </button>
       <button
         type="button"
-        class="lightbox__nav right-3 sm:right-6"
+        class="lightbox__nav lightbox__nav--next"
         (click)="step(1)"
         aria-label="Next"
       >

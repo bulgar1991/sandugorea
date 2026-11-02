@@ -4,15 +4,13 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 @Component({
   selector: 'app-marquee',
   template: `
-    <div class="overflow-hidden border-y border-line py-8" aria-hidden="true">
-      <div class="track flex w-max animate-marquee">
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
         @for (copy of [0, 1]; track copy) {
           @for (item of items(); track $index) {
-            <span
-              class="flex items-center gap-10 pr-10 font-display text-5xl font-light whitespace-nowrap italic text-ink/80 sm:text-7xl"
-            >
+            <span class="marquee__item">
               {{ item }}
-              <span class="text-2xl text-accent not-italic">✦</span>
+              <span class="marquee__star">✦</span>
             </span>
           }
         }
@@ -20,8 +18,18 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
     </div>
   `,
   styles: `
-    .track:hover {
-      animation-play-state: paused;
+    .marquee {
+      @apply overflow-hidden border-y border-line py-8;
+
+      &__track {
+        @apply flex w-max animate-marquee hover:[animation-play-state:paused];
+      }
+      &__item {
+        @apply flex items-center gap-10 whitespace-nowrap pr-10 font-display text-5xl font-light italic text-ink/80 sm:text-7xl;
+      }
+      &__star {
+        @apply text-2xl not-italic text-accent;
+      }
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

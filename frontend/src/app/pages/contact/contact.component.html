@@ -4,84 +4,78 @@
   subtitle="Tell me a little about you and what you have in mind. I reply to every message within two days."
 />
 
-<section class="container-x grid gap-20 pb-32 lg:grid-cols-12">
-  <aside class="flex flex-col gap-10 lg:col-span-4">
+<section class="wrapper contact">
+  <aside class="contact__info">
     @for (item of contactItems; track item.label; let i = $index) {
-      <div class="flex gap-5" appReveal [revealDelay]="i * 100">
-        <span
-          class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-line text-accent"
-        >
+      <div class="contact__item" appReveal [revealDelay]="i * 100">
+        <span class="contact__icon">
           <app-icon [name]="item.icon" [size]="18" />
         </span>
         <div>
-          <p class="text-[0.65rem] tracking-[0.3em] text-ink-subtle uppercase">{{ item.label }}</p>
+          <p class="contact__label">{{ item.label }}</p>
           @if (item.href) {
             <a
               [href]="item.href"
               target="_blank"
               rel="noopener"
-              class="link-underline mt-1 text-lg hover:text-accent"
+              class="link--underline contact__value contact__value--link"
               >{{ item.value }}</a
             >
           } @else {
-            <p class="mt-1 text-lg">{{ item.value }}</p>
+            <p class="contact__value">{{ item.value }}</p>
           }
         </div>
       </div>
     }
   </aside>
 
-  <div class="lg:col-span-7 lg:col-start-6" appReveal [revealDelay]="150">
+  <div class="contact__main" appReveal [revealDelay]="150">
     @if (state() === 'sent') {
-      <div class="card flex flex-col items-start gap-6 p-10" animate.enter="animate-fade-in">
-        <span class="flex h-14 w-14 items-center justify-center rounded-full bg-accent text-black">
-          <app-icon name="check" />
-        </span>
-        <h2 class="font-display text-4xl font-light">Thank you.</h2>
-        <p class="text-ink-muted">Your message is on its way. I'll be in touch very soon.</p>
-        <button type="button" class="btn btn-ghost" (click)="state.set('idle')">
+      <div class="card card--padded contact__success">
+        <span class="contact__check"><app-icon name="check" /></span>
+        <h2 class="title title--md">Thank you.</h2>
+        <p class="text">Your message is on its way. I'll be in touch very soon.</p>
+        <button type="button" class="btn btn--ghost" (click)="state.set('idle')">
           Send another
         </button>
       </div>
     } @else {
-      <form [formGroup]="form" (ngSubmit)="submit()" class="grid gap-10 sm:grid-cols-2" novalidate>
+      <form [formGroup]="form" (ngSubmit)="submit()" class="contact__form" novalidate>
         <label class="field">
-          <span>Your name *</span>
-          <input class="input" formControlName="name" autocomplete="name" />
+          <span class="field__label">Your name *</span>
+          <input class="field__control" formControlName="name" autocomplete="name" />
           @if (invalid('name')) {
-            <small class="text-xs text-danger">Please enter your name.</small>
+            <small class="field__error">Please enter your name.</small>
           }
         </label>
         <label class="field">
-          <span>Email *</span>
-          <input class="input" type="email" formControlName="email" autocomplete="email" />
+          <span class="field__label">Email *</span>
+          <input class="field__control" type="email" formControlName="email" autocomplete="email" />
           @if (invalid('email')) {
-            <small class="text-xs text-danger">Please enter a valid email.</small>
+            <small class="field__error">Please enter a valid email.</small>
           }
         </label>
         <label class="field">
-          <span>Session type</span>
-          <select class="input cursor-pointer bg-black" formControlName="type">
+          <span class="field__label">Session type</span>
+          <select class="field__control contact__select" formControlName="type">
             @for (t of sessionTypes; track t) {
               <option [value]="t">{{ t }}</option>
             }
           </select>
         </label>
         <label class="field">
-          <span>Preferred date</span>
-          <input class="input [color-scheme:dark]" type="date" formControlName="date" />
+          <span class="field__label">Preferred date</span>
+          <input class="field__control field__control--date" type="date" formControlName="date" />
         </label>
-        <label class="field sm:col-span-2">
-          <span>Your message *</span>
-          <textarea class="input min-h-40 resize-y" formControlName="message"></textarea>
+        <label class="field contact__wide">
+          <span class="field__label">Your message *</span>
+          <textarea class="field__control contact__message" formControlName="message"></textarea>
           @if (invalid('message')) {
-            <small class="text-xs text-danger"
-              >Tell me a little more (at least 10 characters).</small
-            >
+            <small class="field__error">Tell me a little more (at least 10 characters).</small>
           }
         </label>
-        <div class="sm:col-span-2">
-          <button type="submit" class="btn btn-primary" [disabled]="state() === 'sending'">
+        <div class="contact__wide">
+          <button type="submit" class="btn btn--primary" [disabled]="state() === 'sending'">
             @if (state() === 'sending') {
               Sending…
             } @else {

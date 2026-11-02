@@ -6,32 +6,23 @@ import { ToastService } from './toast.service';
   selector: 'app-toasts',
   imports: [IconComponent],
   template: `
-    <div
-      class="pointer-events-none fixed right-4 bottom-4 z-[95] flex w-[min(24rem,calc(100vw-2rem))] flex-col gap-3"
-      aria-live="polite"
-    >
+    <div class="toasts" aria-live="polite">
       @for (t of toasts.toasts(); track t.id) {
         <div
-          class="toast pointer-events-auto flex items-center gap-3 rounded-xl border bg-surface-2 px-4 py-3 text-sm shadow-2xl"
-          [class]="
-            t.kind === 'error'
-              ? 'border-danger/40'
-              : t.kind === 'info'
-                ? 'border-line'
-                : 'border-accent/40'
-          "
-          animate.enter="toast-in"
-          animate.leave="toast-out"
+          class="toasts__item"
+          [class]="'toasts__item--' + t.kind"
+          animate.enter="toasts__item--entering"
+          animate.leave="toasts__item--leaving"
         >
           <app-icon
+            class="toasts__icon"
             [name]="t.kind === 'error' ? 'close' : 'check'"
             [size]="16"
-            [class]="t.kind === 'error' ? 'text-danger' : 'text-accent'"
           />
-          <span class="flex-1">{{ t.message }}</span>
+          <span class="toasts__message">{{ t.message }}</span>
           <button
             type="button"
-            class="cursor-pointer text-ink-subtle hover:text-ink"
+            class="toasts__close"
             (click)="toasts.dismiss(t.id)"
             aria-label="Dismiss"
           >
@@ -42,22 +33,36 @@ import { ToastService } from './toast.service';
     </div>
   `,
   styles: `
-    .toast-in {
-      animation: in 0.5s var(--ease-out-expo);
-    }
-    .toast-out {
-      animation: out 0.3s ease forwards;
-    }
-    @keyframes in {
-      from {
-        opacity: 0;
-        transform: translate3d(0, 16px, 0);
+    .toasts {
+      @apply pointer-events-none fixed bottom-4 right-4 z-toast flex w-[min(24rem,calc(100vw-2rem))] flex-col gap-3;
+
+      &__item {
+        @apply pointer-events-auto flex items-center gap-3 rounded-xl border border-line bg-surface-light px-4 py-3 text-sm shadow-2xl;
+
+        &--success {
+          @apply border-accent/40;
+        }
+        &--error {
+          @apply border-danger/40;
+        }
+        &--entering {
+          @apply animate-fade-up;
+        }
+        &--leaving {
+          @apply animate-slide-out;
+        }
       }
-    }
-    @keyframes out {
-      to {
-        opacity: 0;
-        transform: translate3d(24px, 0, 0);
+      &__item--error .toasts__icon {
+        @apply text-danger;
+      }
+      &__icon {
+        @apply text-accent;
+      }
+      &__message {
+        @apply flex-1;
+      }
+      &__close {
+        @apply cursor-pointer text-ink-subtle hover:text-ink;
       }
     }
   `,

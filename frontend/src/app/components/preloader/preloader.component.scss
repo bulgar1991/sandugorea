@@ -1,52 +1,25 @@
-@reference '../../../tailwind.css';
-
 .preloader {
-  @apply fixed inset-0 z-[100] flex flex-col items-center justify-center gap-6 bg-black;
-}
+  @apply fixed inset-0 z-preloader flex flex-col items-center justify-center gap-6 bg-black;
 
-.preloader__brand {
-  @apply flex overflow-hidden font-display text-4xl font-light tracking-[0.3em] text-ink uppercase sm:text-6xl;
-
-  span {
-    display: inline-block;
-    transform: translate3d(0, 110%, 0);
-    animation: letter-up 0.9s var(--ease-out-expo) forwards;
+  &__brand {
+    @apply flex overflow-hidden font-display text-4xl font-light uppercase tracking-caps-lg text-ink sm:text-6xl;
   }
-}
 
-.preloader__line {
-  @apply h-px w-40 origin-left bg-accent;
-  transform: scaleX(0);
-  animation: line-grow 1.3s var(--ease-in-out-quart) 0.3s forwards;
-}
-
-.preloader__tag {
-  @apply text-[0.65rem] tracking-[0.6em] text-ink-muted uppercase;
-  opacity: 0;
-  animation: fade 0.8s ease 0.9s forwards;
-}
-
-.preloader-leave {
-  animation: curtain-up 0.9s var(--ease-in-out-quart) forwards;
-}
-
-@keyframes letter-up {
-  to {
-    transform: translate3d(0, 0, 0);
+  &__letter {
+    @apply inline-block animate-rise;
+    animation-duration: 0.9s;
   }
-}
-@keyframes line-grow {
-  to {
-    transform: scaleX(1);
+
+  &__line {
+    @apply h-px w-40 origin-left animate-line-grow bg-accent;
   }
-}
-@keyframes fade {
-  to {
-    opacity: 1;
+
+  &__tag {
+    @apply animate-fade-in text-2xs uppercase tracking-caps-2xl text-ink-muted;
+    animation-delay: 0.9s;
   }
-}
-@keyframes curtain-up {
-  to {
-    transform: translate3d(0, -100%, 0);
+
+  &--leaving {
+    @apply animate-curtain-up;
   }
 }

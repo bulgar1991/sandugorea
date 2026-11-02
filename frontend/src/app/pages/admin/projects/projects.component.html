@@ -1,0 +1,238 @@
+<div class="page-head">
+  <div>
+    <p class="eyebrow" appReveal>Projects</p>
+    <h1 class="page-head__title" appReveal [revealDelay]="80">Private folders</h1>
+  </div>
+  <button type="button" class="btn btn--primary" (click)="openNew()" appReveal [revealDelay]="160">
+    <app-icon name="plus" [size]="16" /> New project
+  </button>
+</div>
+
+<div class="toolbar" appReveal [revealDelay]="200">
+  <div class="toolbar__search">
+    <app-icon name="search" [size]="16" class="toolbar__search-icon" />
+    <input
+      class="field__control field__control--boxed toolbar__input"
+      placeholder="Search projects, customers or usernames"
+      [value]="query()"
+      (input)="query.set($any($event.target).value)"
+    />
+  </div>
+  <div class="toolbar__tabs" role="tablist">
+    @for (f of filters; track f.id) {
+      <button
+        type="button"
+        role="tab"
+        class="toolbar__tab"
+        [class.toolbar__tab--active]="filter() === f.id"
+        [attr.aria-selected]="filter() === f.id"
+        (click)="filter.set(f.id)"
+      >
+        {{ f.label }}
+      </button>
+    }
+  </div>
+</div>
+
+<div class="project-grid">
+  @for (p of projects(); track p.id; let i = $index) {
+    <a
+      [routerLink]="['/admin/projects', p.id]"
+      class="project-card"
+      appReveal="up"
+      [revealDelay]="(i % 4) * 80"
+    >
+      <div class="project-card__media">
+        @if (p.photos.length) {
+          <div class="project-card__mosaic">
+            @for (photo of p.photos.slice(0, 3); track photo.id) {
+              <img [src]="photo.thumbUrl" alt="" class="project-card__image" loading="lazy" />
+            }
+          </div>
+        } @else {
+          <div class="project-card__empty">
+            <app-icon name="upload" [size]="28" />
+            <span>No photos yet</span>
+          </div>
+        }
+        <span class="project-card__status">
+          @switch (status(p)) {
+            @case ('delivered') {
+              <span class="badge badge--success">Delivered</span>
+            }
+            @case ('draft') {
+              <span class="badge badge--accent">Draft</span>
+            }
+            @default {
+              <span class="badge badge--muted">Disabled</span>
+            }
+          }
+        </span>
+      </div>
+      <div class="project-card__body">
+        <h2 class="project-card__title">{{ p.title }}</h2>
+        <p class="project-card__customer">{{ p.customerName }}</p>
+        <p class="project-card__meta">
+          <span>{{ p.date | date: 'd MMM y' }}</span>
+          <span>{{ p.photos.length }} photos</span>
+          <span class="project-card__username">{{ p.username }}</span>
+        </p>
+      </div>
+    </a>
+  } @empty {
+    <div class="project-grid__empty">
+      <app-icon name="folder" [size]="32" />
+      <p>No projects found.</p>
+    </div>
+  }
+</div>
+
+<app-modal
+  [(open)]="modalOpen"
+  [title]="created() ? 'Project created' : 'New project'"
+  [wide]="!created()"
+>
+  @if (created(); as c) {
+    <div class="credentials">
+      <p class="text text--small">
+        These are the login details for <span class="credentials__name">{{ c.customerName }}</span
+        >. <span class="credentials__warning">The password won't be shown again.</span>
+      </p>
+      <div class="credentials__box">
+        <div class="credentials__row">
+          <span class="credentials__key">Username</span>
+          <span class="credentials__value"
+            >{{ c.username }}
+            <button
+              type="button"
+              class="credentials__copy"
+              (click)="copy(c.username, 'Username')"
+              aria-label="Copy username"
+            >
+              <app-icon name="copy" [size]="14" />
+            </button>
+          </span>
+        </div>
+        <div class="credentials__row">
+          <span class="credentials__key">Password</span>
+          <span class="credentials__value"
+            >{{ c.password }}
+            <button
+              type="button"
+              class="credentials__copy"
+              (click)="copy(c.password, 'Password')"
+              aria-label="Copy password"
+            >
+              <app-icon name="copy" [size]="14" />
+            </button>
+          </span>
+        </div>
+      </div>
+      <div class="credentials__actions">
+        <button type="button" class="btn btn--primary" (click)="openCreated()">
+          <app-icon name="upload" [size]="14" /> Upload photos
+        </button>
+        <button type="button" class="btn btn--ghost" (click)="copy(invitation(), 'Invitation')">
+          <app-icon name="copy" [size]="14" /> Copy invitation
+        </button>
+      </div>
+    </div>
+  } @else {
+    <form [formGroup]="form" (ngSubmit)="create()" class="project-form" novalidate>
+      <p class="project-form__section">Project</p>
+      <label class="field project-form__wide">
+        <span class="field__label">Title</span>
+        <input
+          class="field__control field__control--boxed"
+          formControlName="title"
+          placeholder="e.g. Wedding Day"
+          (input)="suggestUsername()"
+        />
+        @if (invalid('title')) {
+          <small class="field__error">Title is required.</small>
+        }
+      </label>
+      <label class="field">
+        <span class="field__label">Session date</span>
+        <input
+          class="field__control field__control--boxed field__control--date"
+          type="date"
+          formControlName="date"
+        />
+      </label>
+
+      <p class="project-form__section">Customer</p>
+      <label class="field">
+        <span class="field__label">Name</span>
+        <input
+          class="field__control field__control--boxed"
+          formControlName="customerName"
+          placeholder="e.g. Ana & Mihai"
+          (input)="suggestUsername()"
+        />
+        @if (invalid('customerName')) {
+          <small class="field__error">Customer name is required.</small>
+        }
+      </label>
+      <label class="field">
+        <span class="field__label">Email</span>
+        <input
+          class="field__control field__control--boxed"
+          type="email"
+          formControlName="customerEmail"
+          placeholder="customer@example.com"
+        />
+        @if (invalid('customerEmail')) {
+          <small class="field__error">Enter a valid email.</small>
+        }
+      </label>
+
+      <p class="project-form__section">Access</p>
+      <label class="field">
+        <span class="field__label">Username</span>
+        <input
+          class="field__control field__control--boxed field__control--mono"
+          formControlName="username"
+          autocapitalize="none"
+          spellcheck="false"
+        />
+        @if (invalid('username')) {
+          <small class="field__error">
+            {{
+              form.controls.username.hasError('taken')
+                ? 'This username is taken.'
+                : '3–40 chars: lowercase letters, numbers, . _ -'
+            }}
+          </small>
+        }
+      </label>
+      <label class="field">
+        <span class="field__label">Password</span>
+        <div class="field__wrap">
+          <input
+            class="field__control field__control--boxed field__control--mono"
+            formControlName="password"
+            autocomplete="new-password"
+          />
+          <button
+            type="button"
+            class="btn btn--ghost btn--icon"
+            (click)="regenerate()"
+            title="Generate new password"
+            aria-label="Generate new password"
+          >
+            <app-icon name="refresh" [size]="16" />
+          </button>
+        </div>
+        @if (invalid('password')) {
+          <small class="field__error">At least 10 characters.</small>
+        }
+      </label>
+
+      <div class="project-form__actions">
+        <button type="submit" class="btn btn--primary">Create project</button>
+        <button type="button" class="btn btn--ghost" (click)="modalOpen.set(false)">Cancel</button>
+      </div>
+    </form>
+  }
+</app-modal>

@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { SiteLayoutComponent } from '@components/site-layout/site-layout.component';
-import { adminGuard, adminGuestGuard, clientGuard, clientGuestGuard } from '@guards/auth.guard';
+import { adminGuard, adminGuestGuard, customerGuard, customerGuestGuard } from '@guards/auth.guard';
 
 export const routes: Routes = [
   // ---------- Public site ----------
@@ -33,34 +33,26 @@ export const routes: Routes = [
     ],
   },
 
-  // ---------- Client private area ----------
+  // ---------- Customer private project ----------
   {
     path: 'client/login',
-    title: 'Private gallery — Sandugorea',
-    canMatch: [clientGuestGuard],
+    title: 'Your project — Sandugorea',
+    canMatch: [customerGuestGuard],
     loadComponent: () =>
       import('./pages/client/login/client-login.component').then((m) => m.ClientLoginComponent),
   },
   {
     path: 'client',
-    canMatch: [clientGuard],
+    canMatch: [customerGuard],
     loadComponent: () =>
       import('./pages/client/layout/client-layout.component').then((m) => m.ClientLayoutComponent),
     children: [
       {
         path: '',
-        title: 'My galleries — Sandugorea',
+        title: 'Your photos — Sandugorea',
         loadComponent: () =>
-          import('./pages/client/galleries/client-galleries.component').then(
-            (m) => m.ClientGalleriesComponent,
-          ),
-      },
-      {
-        path: 'galleries/:id',
-        title: 'Gallery — Sandugorea',
-        loadComponent: () =>
-          import('./pages/client/gallery/client-gallery.component').then(
-            (m) => m.ClientGalleryComponent,
+          import('./pages/client/project/client-project.component').then(
+            (m) => m.ClientProjectComponent,
           ),
       },
     ],
@@ -87,17 +79,17 @@ export const routes: Routes = [
           import('./pages/admin/dashboard/dashboard.component').then((m) => m.DashboardComponent),
       },
       {
-        path: 'clients',
-        title: 'Clients · Admin',
+        path: 'projects',
+        title: 'Projects · Admin',
         loadComponent: () =>
-          import('./pages/admin/clients/clients.component').then((m) => m.ClientsComponent),
+          import('./pages/admin/projects/projects.component').then((m) => m.ProjectsComponent),
       },
       {
-        path: 'clients/:id',
-        title: 'Client · Admin',
+        path: 'projects/:id',
+        title: 'Project · Admin',
         loadComponent: () =>
-          import('./pages/admin/client-detail/client-detail.component').then(
-            (m) => m.ClientDetailComponent,
+          import('./pages/admin/project-detail/project-detail.component').then(
+            (m) => m.ProjectDetailComponent,
           ),
       },
       {

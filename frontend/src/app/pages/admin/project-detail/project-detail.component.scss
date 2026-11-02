@@ -1,0 +1,179 @@
+.back-link {
+  @apply inline-flex items-center gap-2 text-xs uppercase tracking-caps text-ink-muted hover:text-accent;
+}
+
+.detail {
+  @apply mt-6 grid animate-fade-in gap-8 xl:grid-cols-[1fr_22rem];
+
+  &__main {
+    @apply min-w-0;
+  }
+
+  &__summary {
+    @apply mt-1 text-sm text-ink-muted;
+  }
+
+  &__side {
+    @apply flex flex-col gap-4 xl:sticky xl:top-8 xl:self-start;
+  }
+}
+
+.dropzone {
+  @apply mt-6 flex cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed border-line px-6 py-12 text-center transition-colors duration-300 hover:border-ink-subtle;
+
+  &--active {
+    @apply border-accent bg-accent/5 hover:border-accent;
+  }
+
+  &__icon {
+    @apply flex h-14 w-14 items-center justify-center rounded-full bg-surface-light text-accent transition-transform duration-600;
+  }
+
+  &--active &__icon {
+    @apply scale-110;
+  }
+
+  &__title {
+    @apply font-display text-2xl font-light;
+  }
+
+  &__hint {
+    @apply text-sm text-ink-muted;
+  }
+
+  &__input {
+    @apply sr-only;
+  }
+}
+
+.uploads {
+  @apply mt-4 flex flex-col gap-2;
+
+  &__item {
+    @apply animate-fade-in px-4 py-3;
+  }
+
+  &__row {
+    @apply flex items-center justify-between gap-4 text-sm;
+  }
+
+  &__name {
+    @apply truncate;
+  }
+
+  &__meta {
+    @apply shrink-0 text-xs text-ink-subtle;
+  }
+
+  &__track {
+    @apply mt-2 h-1 overflow-hidden rounded-full bg-line;
+  }
+
+  &__bar {
+    @apply h-full origin-left rounded-full bg-accent transition-transform duration-150;
+  }
+}
+
+.thumbs {
+  @apply mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5;
+
+  &__item {
+    @apply relative aspect-square animate-fade-in overflow-hidden rounded-lg bg-surface;
+
+    &:hover .thumbs__image {
+      @apply scale-105;
+    }
+    &:hover .thumbs__caption,
+    &:hover .thumbs__delete {
+      @apply opacity-100;
+    }
+  }
+
+  &__open {
+    @apply block h-full w-full cursor-zoom-in;
+  }
+
+  &__image {
+    @apply block h-full w-full object-cover transition-transform duration-800;
+  }
+
+  &__caption {
+    @apply pointer-events-none absolute inset-x-0 bottom-0 truncate bg-fade-up px-2 pb-2 pt-6 text-2xs text-ink-muted opacity-0 transition-opacity;
+  }
+
+  &__delete {
+    @apply absolute right-2 top-2 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-black/70 text-ink-muted opacity-0 transition-opacity hover:text-danger focus-visible:opacity-100;
+
+    @media (hover: none) {
+      @apply opacity-100;
+    }
+  }
+}
+
+.panel {
+  @apply flex flex-col gap-4 p-5;
+
+  &__title {
+    @apply text-xs uppercase tracking-caps text-ink-subtle;
+  }
+
+  &__row {
+    @apply flex items-center justify-between;
+  }
+
+  &__customer {
+    @apply flex items-center gap-4;
+  }
+
+  &__customer-info {
+    @apply min-w-0;
+  }
+
+  &__name {
+    @apply font-display text-2xl;
+  }
+
+  &__email {
+    @apply block truncate text-sm;
+  }
+
+  &__text {
+    @apply text-sm text-ink-muted;
+  }
+
+  &__list {
+    @apply flex flex-col gap-3 text-sm;
+  }
+
+  &__item {
+    @apply flex items-center justify-between gap-4;
+
+    dt {
+      @apply text-ink-subtle;
+    }
+  }
+
+  &__mono {
+    @apply flex items-center gap-2 font-mono text-xs;
+  }
+
+  &__copy {
+    @apply cursor-pointer text-ink-subtle hover:text-accent;
+  }
+
+  &__actions {
+    @apply flex flex-wrap gap-2;
+  }
+}
+
+.modal-actions {
+  @apply mt-6;
+}
+
+.modal-input {
+  @apply mt-4;
+}
+
+.not-found-block {
+  @apply flex flex-col items-center gap-6 py-24 text-center;
+}

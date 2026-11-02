@@ -1,0 +1,102 @@
+.security {
+  @apply mt-10 grid gap-6 xl:grid-cols-2;
+
+  &__card {
+    @apply flex flex-col p-6;
+  }
+
+  &__title {
+    @apply flex items-center gap-2 font-display text-2xl;
+
+    app-icon {
+      @apply text-accent;
+    }
+  }
+
+  &__form {
+    @apply mt-6 flex flex-col gap-4;
+  }
+
+  &__submit {
+    @apply mt-auto w-fit;
+  }
+
+  &__form &__submit {
+    @apply mt-2;
+  }
+
+  &__status {
+    @apply mt-6 flex items-center gap-4 rounded-xl border border-success/30 bg-success/5 p-4;
+  }
+
+  &__status-icon {
+    @apply flex h-10 w-10 items-center justify-center rounded-full bg-success/15 text-success;
+  }
+
+  &__rules {
+    @apply my-6 flex flex-col gap-3 text-sm text-ink-muted;
+  }
+
+  &__rule {
+    @apply flex gap-3;
+
+    app-icon {
+      @apply mt-0.5 text-accent;
+    }
+  }
+
+  &__row {
+    @apply flex items-center justify-between gap-4;
+  }
+
+  &__revoke {
+    @apply cursor-pointer text-xs uppercase tracking-caps text-danger hover:opacity-80;
+  }
+
+  &__list {
+    @apply mt-6 divide-y divide-line;
+  }
+
+  &__session {
+    @apply flex items-center gap-4 py-4;
+  }
+
+  &__device {
+    @apply flex h-10 w-10 items-center justify-center rounded-lg bg-surface-light text-ink-muted;
+  }
+
+  &__session-info {
+    @apply min-w-0 flex-1;
+  }
+
+  &__session-name {
+    @apply flex items-center gap-2 text-sm;
+  }
+
+  &__event {
+    @apply flex items-center justify-between gap-4 py-3 text-sm;
+  }
+
+  &__event-time {
+    @apply text-ink-muted;
+  }
+
+  &__event-place {
+    @apply hidden text-xs text-ink-subtle sm:block;
+  }
+}
+
+.strength {
+  @apply mt-1 flex gap-1;
+
+  &__bar {
+    @apply h-1 flex-1 rounded-full bg-line transition-colors duration-300;
+
+    &--fair {
+      @apply bg-accent;
+    }
+    &--good {
+      @apply bg-success;
+    }
+  }
+}

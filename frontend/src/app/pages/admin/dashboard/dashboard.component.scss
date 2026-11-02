@@ -1,0 +1,71 @@
+.stats-row {
+  @apply mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4;
+}
+
+.stat-card {
+  @apply p-6;
+
+  &__head {
+    @apply flex items-center justify-between text-ink-muted;
+  }
+
+  &__label {
+    @apply text-xs uppercase tracking-caps;
+  }
+
+  &__icon {
+    @apply flex h-9 w-9 items-center justify-center rounded-lg bg-black/40 text-accent transition-transform duration-600;
+  }
+
+  &:hover &__icon {
+    @apply scale-110;
+  }
+
+  &__value {
+    @apply mt-4 font-display text-5xl font-light;
+  }
+
+  &__hint {
+    @apply mt-1 text-xs text-ink-subtle;
+  }
+}
+
+.recent {
+  @apply mt-8 overflow-hidden;
+
+  &__head {
+    @apply flex items-center justify-between border-b border-line px-6 py-5;
+  }
+
+  &__list {
+    @apply divide-y divide-line;
+  }
+
+  &__row {
+    @apply flex items-center gap-4 px-6 py-4 transition-colors hover:bg-white/[0.03];
+  }
+
+  &__thumb {
+    @apply h-12 w-12 shrink-0 rounded-lg bg-surface-light object-cover;
+
+    &--empty {
+      @apply flex items-center justify-center text-ink-subtle;
+    }
+  }
+
+  &__info {
+    @apply min-w-0 flex-1;
+  }
+
+  &__title {
+    @apply truncate;
+  }
+
+  &__meta {
+    @apply truncate text-xs text-ink-subtle;
+  }
+
+  &__date {
+    @apply hidden text-xs text-ink-subtle sm:block;
+  }
+}

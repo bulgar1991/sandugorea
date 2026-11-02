@@ -36,7 +36,7 @@ export class ClientLoginComponent {
     this.error.set('');
     try {
       const { username, password } = this.form.getRawValue();
-      await this.auth.clientLogin(username, password);
+      await this.auth.customerLogin(username, password);
       this.router.navigateByUrl('/client');
     } catch (e) {
       this.error.set(

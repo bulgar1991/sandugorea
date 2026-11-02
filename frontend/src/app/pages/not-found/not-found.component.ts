@@ -6,19 +6,33 @@ import { IconComponent } from '@components/icon/icon.component';
   selector: 'app-not-found',
   imports: [RouterLink, IconComponent],
   template: `
-    <section
-      class="container-x flex min-h-[80vh] flex-col items-center justify-center pt-24 text-center"
-    >
-      <p class="font-display text-[10rem] leading-none font-light text-accent/30 sm:text-[16rem]">
-        404
-      </p>
-      <h1 class="heading-lg -mt-6">This frame is empty</h1>
-      <p class="mt-6 text-ink-muted">The page you're looking for doesn't exist or has moved.</p>
-      <a routerLink="/" class="btn btn-primary mt-10">
+    <section class="wrapper not-found">
+      <p class="not-found__code">404</p>
+      <h1 class="title title--lg not-found__title">This frame is empty</h1>
+      <p class="text not-found__text">The page you're looking for doesn't exist or has moved.</p>
+      <a routerLink="/" class="btn btn--primary not-found__button">
         <app-icon name="arrow-left" [size]="16" />
         Back home
       </a>
     </section>
+  `,
+  styles: `
+    .not-found {
+      @apply flex min-h-[80vh] flex-col items-center justify-center pt-24 text-center;
+
+      &__code {
+        @apply font-display text-[10rem] font-light leading-none text-accent/30 sm:text-giant;
+      }
+      &__title {
+        @apply -mt-6;
+      }
+      &__text {
+        @apply mt-6;
+      }
+      &__button {
+        @apply mt-10;
+      }
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

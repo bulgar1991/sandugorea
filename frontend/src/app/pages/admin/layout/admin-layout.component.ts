@@ -20,6 +20,7 @@ import { BRAND } from '@/data/portfolio.data';
   selector: 'app-admin-layout',
   imports: [RouterOutlet, RouterLink, RouterLinkActive, IconComponent, ToastsComponent],
   templateUrl: './admin-layout.component.html',
+  styleUrl: './admin-layout.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '(document:pointerdown)': 'touch()',
@@ -34,7 +35,7 @@ export class AdminLayoutComponent {
 
   protected readonly nav: { path: string; label: string; icon: IconName; exact: boolean }[] = [
     { path: '/admin', label: 'Dashboard', icon: 'grid', exact: true },
-    { path: '/admin/clients', label: 'Clients', icon: 'users', exact: false },
+    { path: '/admin/projects', label: 'Projects', icon: 'folder', exact: false },
     { path: '/admin/security', label: 'Security', icon: 'shield', exact: false },
   ];
 

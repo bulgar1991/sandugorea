@@ -1,0 +1,95 @@
+.admin {
+  @apply min-h-svh lg:pl-sidebar;
+
+  &__sidebar {
+    @apply fixed inset-y-0 left-0 z-header flex w-sidebar -translate-x-full flex-col border-r border-line bg-surface transition-transform duration-600 ease-out-expo lg:translate-x-0;
+
+    &--open {
+      @apply translate-x-0;
+    }
+  }
+
+  &__brand {
+    @apply flex h-header items-center gap-3 border-b border-line px-6 leading-none;
+  }
+
+  &__brand-mark {
+    @apply flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-black;
+  }
+
+  &__brand-name {
+    @apply font-display text-lg uppercase tracking-caps;
+  }
+
+  &__brand-tag {
+    @apply mt-1 text-2xs uppercase tracking-caps-xl text-accent;
+  }
+
+  &__nav {
+    @apply flex flex-1 flex-col gap-1 p-4;
+  }
+
+  &__link {
+    @apply flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-ink-muted transition-colors hover:bg-white/5 hover:text-ink;
+
+    &--active {
+      @apply bg-accent/10 text-accent hover:bg-accent/10 hover:text-accent;
+    }
+  }
+
+  &__account {
+    @apply border-t border-line p-4;
+  }
+
+  &__timer {
+    @apply flex items-center gap-2 text-xs text-ink-subtle;
+
+    &--warning {
+      @apply text-danger;
+    }
+  }
+
+  &__account &__timer {
+    @apply mb-3 px-2;
+  }
+
+  &__user {
+    @apply flex items-center gap-3 rounded-xl bg-black/40 p-3;
+  }
+
+  &__user-info {
+    @apply min-w-0 flex-1;
+  }
+
+  &__user-name {
+    @apply truncate text-sm;
+  }
+
+  &__user-login {
+    @apply truncate text-xs text-ink-subtle;
+  }
+
+  &__logout {
+    @apply cursor-pointer rounded-lg p-2 text-ink-muted hover:bg-white/5 hover:text-danger;
+  }
+
+  &__overlay {
+    @apply fixed inset-0 z-menu animate-fade-in bg-black/70 lg:hidden;
+  }
+
+  &__topbar {
+    @apply sticky top-0 z-30 flex h-16 items-center justify-between border-b border-line bg-black/90 px-4 backdrop-blur-md lg:hidden;
+  }
+
+  &__menu {
+    @apply cursor-pointer p-2;
+  }
+
+  &__topbar-title {
+    @apply font-display uppercase tracking-caps;
+  }
+
+  &__main {
+    @apply px-4 py-8 sm:px-8 lg:px-12 lg:py-12;
+  }
+}

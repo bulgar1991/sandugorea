@@ -48,17 +48,8 @@ export class HomeComponent {
     },
     {
       title: 'You receive',
-      text: 'Your edited photographs in a private online gallery, protected by your own password.',
+      text: 'Your own private project folder with every edited photograph, opened only with your username and password.',
     },
-  ];
-
-  /** Bento layout spans for the five category cards. */
-  protected readonly cardSpans = [
-    'lg:col-span-7 aspect-[4/5] lg:aspect-auto lg:h-[44rem]',
-    'lg:col-span-5 aspect-[4/5] lg:aspect-auto lg:h-[44rem]',
-    'lg:col-span-4 aspect-[4/5]',
-    'lg:col-span-4 aspect-[4/5]',
-    'lg:col-span-4 aspect-[4/5]',
   ];
 
   constructor() {

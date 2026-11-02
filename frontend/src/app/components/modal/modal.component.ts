@@ -7,30 +7,17 @@ import { IconComponent } from '@components/icon/icon.component';
   template: `
     @if (open()) {
       <div
-        class="fixed inset-0 z-[80] flex items-end justify-center p-0 sm:items-center sm:p-6"
+        class="modal"
         role="dialog"
         aria-modal="true"
         [attr.aria-label]="title()"
-        animate.enter="modal-enter"
-        animate.leave="modal-leave"
+        animate.leave="modal--leaving"
       >
-        <div
-          class="modal-backdrop absolute inset-0 bg-black/80"
-          (click)="close()"
-          aria-hidden="true"
-        ></div>
-        <div
-          class="modal-panel relative max-h-[92svh] w-full overflow-y-auto rounded-t-3xl border border-line bg-surface p-6 sm:rounded-3xl sm:p-8"
-          [class]="width()"
-        >
-          <div class="mb-6 flex items-start justify-between gap-6">
-            <h2 class="font-display text-3xl font-light">{{ title() }}</h2>
-            <button
-              type="button"
-              class="-mt-1 -mr-2 cursor-pointer rounded-full p-2 text-ink-muted hover:bg-white/5 hover:text-ink"
-              (click)="close()"
-              aria-label="Close"
-            >
+        <div class="modal__backdrop" (click)="close()" aria-hidden="true"></div>
+        <div class="modal__panel" [class.modal__panel--wide]="wide()">
+          <div class="modal__head">
+            <h2 class="title title--md">{{ title() }}</h2>
+            <button type="button" class="modal__close" (click)="close()" aria-label="Close">
               <app-icon name="close" />
             </button>
           </div>
@@ -40,29 +27,27 @@ import { IconComponent } from '@components/icon/icon.component';
     }
   `,
   styles: `
-    .modal-enter .modal-backdrop {
-      animation: backdrop 0.35s ease;
-    }
-    .modal-enter .modal-panel {
-      animation: panel 0.6s var(--ease-out-expo);
-    }
-    .modal-leave {
-      animation: leave 0.25s ease forwards;
-    }
-    @keyframes backdrop {
-      from {
-        opacity: 0;
+    .modal {
+      @apply fixed inset-0 z-modal flex items-end justify-center sm:items-center sm:p-6;
+
+      &--leaving {
+        @apply animate-fade-out;
       }
-    }
-    @keyframes panel {
-      from {
-        opacity: 0;
-        transform: translate3d(0, 40px, 0) scale(0.98);
+      &__backdrop {
+        @apply absolute inset-0 animate-fade-in bg-black/80;
       }
-    }
-    @keyframes leave {
-      to {
-        opacity: 0;
+      &__panel {
+        @apply relative max-h-[92svh] w-full animate-panel-in overflow-y-auto rounded-t-3xl border border-line bg-surface p-6 sm:max-w-lg sm:rounded-3xl sm:p-8;
+
+        &--wide {
+          @apply sm:max-w-2xl;
+        }
+      }
+      &__head {
+        @apply mb-6 flex items-start justify-between gap-6;
+      }
+      &__close {
+        @apply -mr-2 -mt-1 cursor-pointer rounded-full p-2 text-ink-muted hover:bg-white/5 hover:text-ink;
       }
     }
   `,
@@ -72,7 +57,7 @@ import { IconComponent } from '@components/icon/icon.component';
 export class ModalComponent {
   readonly open = model(false);
   readonly title = input('');
-  readonly width = input('sm:max-w-lg');
+  readonly wide = input(false);
 
   protected close() {
     this.open.set(false);

@@ -13,10 +13,12 @@ export const introDelayMs = () => (finished ? 0 : DURATION_MS - 300);
   selector: 'app-preloader',
   template: `
     @if (visible()) {
-      <div class="preloader" animate.leave="preloader-leave" aria-hidden="true">
+      <div class="preloader" animate.leave="preloader--leaving" aria-hidden="true">
         <div class="preloader__brand">
           @for (letter of letters; track $index) {
-            <span [style.animation-delay.ms]="120 + $index * 55">{{ letter }}</span>
+            <span class="preloader__letter" [style.animation-delay.ms]="120 + $index * 55">{{
+              letter
+            }}</span>
           }
         </div>
         <div class="preloader__line"></div>

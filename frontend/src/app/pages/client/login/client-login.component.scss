@@ -1,39 +1,57 @@
-@reference '../../../../tailwind.css';
+.sign-in {
+  @apply grid min-h-svh lg:grid-cols-2;
 
-.stagger {
-  opacity: 0;
-  transform: translate3d(0, 20px, 0);
-  animation: in 0.9s var(--ease-out-expo) forwards;
-  animation-delay: calc(var(--i) * 80ms + 100ms);
-}
-
-.shake {
-  animation: shake 0.45s ease;
-}
-
-.spinner {
-  @apply h-4 w-4 rounded-full border-2 border-black/30 border-t-black;
-  animation: spin 0.7s linear infinite;
-}
-
-@keyframes in {
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
+  &__visual {
+    @apply relative hidden overflow-hidden lg:block;
   }
-}
-@keyframes shake {
-  20%,
-  60% {
-    transform: translate3d(-6px, 0, 0);
+
+  &__image {
+    @apply absolute inset-0 block h-full w-full animate-ken-burns object-cover;
   }
-  40%,
-  80% {
-    transform: translate3d(6px, 0, 0);
+
+  &__shade {
+    @apply absolute inset-0 bg-fade-side;
   }
-}
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
+
+  &__quote {
+    @apply absolute bottom-12 left-12 max-w-sm font-display text-3xl font-light italic leading-snug text-ink/90;
+  }
+
+  &__side {
+    @apply flex flex-col px-6 py-10 sm:px-16;
+  }
+
+  &__back {
+    @apply flex items-center gap-2 text-xs uppercase tracking-caps-lg text-ink-muted hover:text-accent;
+  }
+
+  &__box {
+    @apply mx-auto my-auto w-full max-w-sm py-16;
+  }
+
+  &__lock {
+    @apply flex h-14 w-14 items-center justify-center rounded-full border border-accent/40 text-accent;
+  }
+
+  &__title {
+    @apply mt-8;
+  }
+
+  &__text {
+    @apply mt-4;
+  }
+
+  &__form {
+    @apply mt-12 flex flex-col gap-8;
+  }
+
+  &__help {
+    @apply mt-10 text-sm text-ink-subtle;
+  }
+
+  // Each block fades up in sequence (--i set in the template).
+  &__step {
+    @apply animate-fade-up;
+    animation-delay: calc(var(--i) * 80ms + 100ms);
   }
 }

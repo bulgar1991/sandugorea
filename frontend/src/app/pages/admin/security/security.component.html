@@ -1,132 +1,101 @@
 <p class="eyebrow" appReveal>Security</p>
-<h1 class="mt-3 font-display text-5xl font-light" appReveal [revealDelay]="80">
-  Account protection
-</h1>
+<h1 class="page-head__title" appReveal [revealDelay]="80">Account protection</h1>
 
-<div class="mt-10 grid gap-6 xl:grid-cols-2">
+<div class="security">
   <!-- Password -->
-  <section class="card p-6" appReveal [revealDelay]="120">
-    <h2 class="flex items-center gap-2 font-display text-2xl">
-      <app-icon name="key" [size]="18" class="text-accent" /> Change password
-    </h2>
-    <form
-      [formGroup]="form"
-      (ngSubmit)="changePassword()"
-      class="mt-6 flex flex-col gap-4"
-      novalidate
-    >
+  <section class="card security__card" appReveal [revealDelay]="120">
+    <h2 class="security__title"><app-icon name="key" [size]="18" /> Change password</h2>
+    <form [formGroup]="form" (ngSubmit)="changePassword()" class="security__form" novalidate>
       <label class="field">
-        <span>Current password</span>
+        <span class="field__label">Current password</span>
         <input
-          class="input-box"
+          class="field__control field__control--boxed"
           type="password"
           formControlName="current"
           autocomplete="current-password"
         />
       </label>
       <label class="field">
-        <span>New password</span>
+        <span class="field__label">New password</span>
         <input
-          class="input-box"
+          class="field__control field__control--boxed"
           type="password"
           formControlName="next"
           autocomplete="new-password"
         />
-        <div class="mt-1 flex gap-1">
+        <div class="strength">
           @for (i of [0, 1, 2, 3]; track i) {
             <span
-              class="h-1 flex-1 rounded-full transition-colors duration-300"
-              [class]="i < strength() ? (strength() >= 3 ? 'bg-success' : 'bg-accent') : 'bg-line'"
+              class="strength__bar"
+              [class.strength__bar--fair]="i < strength() && strength() < 3"
+              [class.strength__bar--good]="i < strength() && strength() >= 3"
             ></span>
           }
         </div>
-        <small class="text-xs text-ink-subtle"
+        <small class="field__hint"
           >{{ strengthLabel() }} · at least 12 characters, mixed case, a number and a symbol</small
         >
       </label>
       <label class="field">
-        <span>Confirm new password</span>
+        <span class="field__label">Confirm new password</span>
         <input
-          class="input-box"
+          class="field__control field__control--boxed"
           type="password"
           formControlName="confirm"
           autocomplete="new-password"
         />
         @if (form.hasError('mismatch') && form.controls.confirm.touched) {
-          <small class="text-xs text-danger">Passwords don't match.</small>
+          <small class="field__error">Passwords don't match.</small>
         }
       </label>
-      <button type="submit" class="btn btn-primary mt-2 w-fit">Update password</button>
+      <button type="submit" class="btn btn--primary security__submit">Update password</button>
     </form>
   </section>
 
   <!-- 2FA -->
-  <section class="card flex flex-col p-6" appReveal [revealDelay]="180">
-    <h2 class="flex items-center gap-2 font-display text-2xl">
-      <app-icon name="shield" [size]="18" class="text-accent" /> Two-factor authentication
+  <section class="card security__card" appReveal [revealDelay]="180">
+    <h2 class="security__title">
+      <app-icon name="shield" [size]="18" /> Two-factor authentication
     </h2>
-    <div class="mt-6 flex items-center gap-4 rounded-xl border border-success/30 bg-success/5 p-4">
-      <span
-        class="flex h-10 w-10 items-center justify-center rounded-full bg-success/15 text-success"
-        ><app-icon name="check" [size]="18"
-      /></span>
+    <div class="security__status">
+      <span class="security__status-icon"><app-icon name="check" [size]="18" /></span>
       <div>
         <p>Enabled</p>
-        <p class="text-xs text-ink-subtle">
-          Authenticator app (TOTP) is required at every sign-in.
-        </p>
+        <p class="text text--subtle">Authenticator app (TOTP) is required at every sign-in.</p>
       </div>
     </div>
-    <ul class="mt-6 flex flex-col gap-3 text-sm text-ink-muted">
-      <li class="flex gap-3">
-        <app-icon name="check" [size]="16" class="mt-0.5 text-accent" /> Account locks for 1 minute
-        after 5 failed attempts
-      </li>
-      <li class="flex gap-3">
-        <app-icon name="check" [size]="16" class="mt-0.5 text-accent" /> Automatic sign-out after 15
-        minutes of inactivity
-      </li>
-      <li class="flex gap-3">
-        <app-icon name="check" [size]="16" class="mt-0.5 text-accent" /> Admin area hidden from
-        search engines and site navigation
-      </li>
+    <ul class="security__rules">
+      @for (rule of rules; track rule) {
+        <li class="security__rule"><app-icon name="check" [size]="16" /> {{ rule }}</li>
+      }
     </ul>
-    <button type="button" class="btn btn-ghost mt-auto w-fit pt-3.5" (click)="regenerateCodes()">
+    <button type="button" class="btn btn--ghost security__submit" (click)="regenerateCodes()">
       <app-icon name="refresh" [size]="14" /> Regenerate recovery codes
     </button>
   </section>
 
   <!-- Sessions -->
-  <section class="card p-6" appReveal [revealDelay]="120">
-    <div class="flex items-center justify-between gap-4">
-      <h2 class="flex items-center gap-2 font-display text-2xl">
-        <app-icon name="monitor" [size]="18" class="text-accent" /> Active sessions
-      </h2>
+  <section class="card security__card" appReveal [revealDelay]="120">
+    <div class="security__row">
+      <h2 class="security__title"><app-icon name="monitor" [size]="18" /> Active sessions</h2>
       @if (sessions().length > 1) {
-        <button
-          type="button"
-          class="text-xs tracking-[0.15em] text-danger uppercase hover:opacity-80 cursor-pointer"
-          (click)="revokeOthers()"
-        >
+        <button type="button" class="security__revoke" (click)="revokeOthers()">
           Sign out others
         </button>
       }
     </div>
-    <ul class="mt-6 divide-y divide-line">
+    <ul class="security__list">
       @for (s of sessions(); track s.id) {
-        <li class="flex items-center gap-4 py-4">
-          <span
-            class="flex h-10 w-10 items-center justify-center rounded-lg bg-surface-2 text-ink-muted"
-            ><app-icon name="monitor" [size]="16"
-          /></span>
-          <div class="min-w-0 flex-1">
-            <p class="text-sm">
+        <li class="security__session">
+          <span class="security__device"><app-icon name="monitor" [size]="16" /></span>
+          <div class="security__session-info">
+            <p class="security__session-name">
               {{ s.device }}
               @if (s.current) {
-                <span class="badge ml-2 border-accent/30 text-accent">This device</span>
+                <span class="badge badge--accent">This device</span>
               }
             </p>
-            <p class="text-xs text-ink-subtle">
+            <p class="text text--subtle">
               {{ s.location }} · {{ s.ip }} · {{ s.lastSeen | date: 'd MMM, HH:mm' }}
             </p>
           </div>
@@ -136,19 +105,17 @@
   </section>
 
   <!-- History -->
-  <section class="card p-6" appReveal [revealDelay]="180">
-    <h2 class="flex items-center gap-2 font-display text-2xl">
-      <app-icon name="clock" [size]="18" class="text-accent" /> Sign-in history
-    </h2>
-    <ul class="mt-6 divide-y divide-line">
+  <section class="card security__card" appReveal [revealDelay]="180">
+    <h2 class="security__title"><app-icon name="clock" [size]="18" /> Sign-in history</h2>
+    <ul class="security__list">
       @for (h of history; track h.time) {
-        <li class="flex items-center justify-between gap-4 py-3 text-sm">
-          <span class="text-ink-muted">{{ h.time | date: 'd MMM y, HH:mm' }}</span>
-          <span class="hidden text-xs text-ink-subtle sm:block">{{ h.location }} · {{ h.ip }}</span>
+        <li class="security__event">
+          <span class="security__event-time">{{ h.time | date: 'd MMM y, HH:mm' }}</span>
+          <span class="security__event-place">{{ h.location }} · {{ h.ip }}</span>
           @if (h.ok) {
-            <span class="badge border-success/30 text-success">Success</span>
+            <span class="badge badge--success">Success</span>
           } @else {
-            <span class="badge border-danger/30 text-danger">Blocked</span>
+            <span class="badge badge--danger">Blocked</span>
           }
         </li>
       }

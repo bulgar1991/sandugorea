@@ -1,140 +1,278 @@
-@reference '../../../tailwind.css';
-
-/* ---------- Hero ---------- */
+// ---------- Hero ----------
 .hero {
   @apply relative h-[100svh] min-h-[36rem] overflow-hidden;
-}
 
-.hero__slide {
-  @apply absolute inset-0 overflow-hidden;
-  opacity: 0;
-  transition: opacity 1.8s ease;
-  &.is-active {
-    opacity: 1;
+  &__slide {
+    @apply absolute inset-0 overflow-hidden opacity-0 transition-opacity duration-1800;
+
+    &--active {
+      @apply opacity-100;
+    }
+  }
+
+  &__image {
+    @apply block h-full w-full object-cover;
+
+    &--zoom {
+      @apply animate-ken-burns;
+    }
+  }
+
+  &__shade {
+    @apply pointer-events-none absolute inset-0 bg-hero-shade;
+  }
+
+  &__content {
+    @apply relative z-10 flex h-full flex-col justify-end pb-28 lg:pb-32;
+  }
+
+  &__title {
+    @apply mt-6 font-display text-6xl font-light leading-display sm:text-8xl lg:text-hero;
+  }
+
+  &__line {
+    @apply block overflow-hidden pb-[0.06em];
+  }
+
+  &__word {
+    @apply inline-block animate-rise;
+    animation-duration: 1.3s;
+    animation-delay: calc(var(--intro) + var(--d));
+
+    &--accent {
+      @apply italic text-accent;
+    }
+  }
+
+  &__appear {
+    @apply animate-fade-in;
+    animation-duration: 1.2s;
+    animation-delay: calc(var(--intro) + var(--d));
+  }
+
+  &__actions {
+    @apply mt-10 flex flex-wrap items-center gap-4;
+  }
+
+  &__slider {
+    @apply absolute bottom-10 right-5 z-10 flex items-center gap-3 sm:right-8 lg:right-12;
+  }
+
+  &__caption {
+    @apply hidden text-xs tracking-caps-md text-ink-muted sm:inline;
+  }
+
+  &__dot {
+    @apply relative h-5 w-10 cursor-pointer;
+
+    &::before {
+      content: '';
+      @apply absolute inset-x-0 top-1/2 h-px bg-white/25;
+    }
+
+    &--active .hero__progress {
+      @apply animate-progress;
+      animation-duration: var(--slide-ms);
+    }
+  }
+
+  &__progress {
+    @apply absolute inset-x-0 top-1/2 h-px origin-left scale-x-0 bg-accent;
+  }
+
+  &__scroll {
+    @apply absolute bottom-10 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-3 md:flex;
+  }
+
+  &__scroll-label {
+    @apply text-2xs uppercase tracking-caps-xl text-ink-muted;
+  }
+
+  &__scroll-line {
+    @apply h-12 w-px animate-scroll-hint bg-accent;
   }
 }
 
-.hero__shade {
-  @apply pointer-events-none absolute inset-0;
-  background: linear-gradient(
-    to top,
-    #000 0%,
-    rgb(0 0 0 / 0.55) 35%,
-    rgb(0 0 0 / 0.15) 70%,
-    rgb(0 0 0 / 0.5) 100%
-  );
-}
+// ---------- Intro ----------
+.intro {
+  @apply grid items-center gap-16 lg:grid-cols-12;
 
-.line {
-  @apply block overflow-hidden pb-[0.06em];
-}
-
-.hero-up {
-  display: inline-block;
-  transform: translate3d(0, 105%, 0);
-  animation: rise 1.3s var(--ease-out-expo) forwards;
-  animation-delay: calc(var(--intro) + var(--d));
-}
-
-.hero-in {
-  opacity: 0;
-  animation: appear 1.2s ease forwards;
-  animation-delay: calc(var(--intro) + var(--d));
-}
-
-.hero__dot {
-  @apply relative h-px w-10 cursor-pointer overflow-hidden bg-white/25 py-2 bg-clip-content;
-
-  span {
-    @apply absolute inset-x-0 top-1/2 h-px origin-left -translate-y-1/2 scale-x-0 bg-accent;
+  &__media {
+    @apply relative overflow-hidden lg:col-span-5;
   }
-  &.is-active span {
-    animation: progress var(--slide-ms) linear forwards;
+
+  &__image {
+    @apply aspect-portrait;
+  }
+
+  &__body {
+    @apply lg:col-span-6 lg:col-start-7;
+  }
+
+  &__title {
+    @apply mt-6;
+  }
+
+  &__text {
+    @apply mt-8 max-w-lg;
+  }
+
+  &__link {
+    @apply mt-10;
   }
 }
 
-@keyframes rise {
-  to {
-    transform: translate3d(0, 0, 0);
-  }
-}
-@keyframes appear {
-  to {
-    opacity: 1;
-  }
-}
-@keyframes progress {
-  to {
-    transform: translateY(-50%) scaleX(1);
+// ---------- Section head ----------
+.section-head {
+  @apply flex flex-col justify-between gap-8 lg:flex-row lg:items-end;
+
+  &__title {
+    @apply mt-6 max-w-2xl;
   }
 }
 
-/* ---------- Category cards ---------- */
-.category-card {
-  @apply relative block overflow-hidden rounded-sm bg-surface;
+// ---------- Categories (bento grid) ----------
+.categories {
+  @apply mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-12;
+}
 
-  &:hover .category-card__img {
-    transform: scale(1.07);
+.category {
+  @apply relative block aspect-portrait overflow-hidden rounded-sm bg-surface lg:col-span-4;
+
+  &--large {
+    @apply lg:col-span-6 lg:aspect-auto lg:h-[44rem];
+
+    &:first-child {
+      @apply lg:col-span-7;
+    }
+    &:nth-child(2) {
+      @apply lg:col-span-5;
+    }
   }
-  &:hover .category-card__blurb {
-    @apply opacity-100;
-    transform: translate3d(0, 0, 0);
+
+  &__image {
+    @apply transition-transform duration-1400 ease-out-expo;
   }
-  &:hover .category-card__arrow {
-    @apply border-accent bg-accent text-black;
-    transform: rotate(45deg);
+
+  &__shade {
+    @apply absolute inset-0 bg-fade-up;
+  }
+
+  &__body {
+    @apply absolute inset-x-0 bottom-0 p-6 sm:p-8;
+  }
+
+  &__index {
+    @apply text-xs tracking-caps-lg text-accent;
+  }
+
+  &__title {
+    @apply mt-2 font-display text-4xl font-light;
+  }
+
+  &__blurb {
+    @apply mt-3 max-w-sm translate-y-3 text-sm leading-relaxed text-ink-muted opacity-0 transition duration-800 ease-out-expo;
+
+    @media (hover: none) {
+      @apply translate-y-0 opacity-100;
+    }
+  }
+
+  &__arrow {
+    @apply absolute right-6 top-6 flex h-12 w-12 items-center justify-center rounded-full border border-white/30 text-ink transition duration-600 ease-out-expo;
+  }
+
+  &:hover &__image {
+    @apply scale-[1.07];
+  }
+  &:hover &__blurb {
+    @apply translate-y-0 opacity-100;
+  }
+  &:hover &__arrow {
+    @apply rotate-45 border-accent bg-accent text-black;
   }
 }
 
-.category-card__img {
-  transition: transform 1.4s var(--ease-out-expo);
-}
+// ---------- Steps ----------
+.steps {
+  @apply mt-16 grid gap-12 md:grid-cols-3 md:gap-8;
 
-.category-card__shade {
-  @apply absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent;
-}
+  &__item {
+    @apply border-t border-line pt-8;
+  }
 
-.category-card__body {
-  @apply absolute inset-x-0 bottom-0 p-6 sm:p-8;
-}
+  &__number {
+    @apply font-display text-7xl font-light text-accent/30;
+  }
 
-.category-card__blurb {
-  @apply mt-3 max-w-sm text-sm leading-relaxed text-ink-muted opacity-0;
-  transform: translate3d(0, 12px, 0);
-  transition:
-    opacity 0.6s ease,
-    transform 0.8s var(--ease-out-expo);
+  &__title {
+    @apply mt-4 font-display text-3xl;
+  }
 
-  @media (hover: none) {
-    @apply opacity-100;
-    transform: none;
+  &__text {
+    @apply mt-4;
   }
 }
 
-.category-card__arrow {
-  @apply absolute top-6 right-6 flex h-12 w-12 items-center justify-center rounded-full border border-white/30 text-ink;
-  transition:
-    transform 0.6s var(--ease-out-expo),
-    background-color 0.4s ease,
-    border-color 0.4s ease,
-    color 0.4s ease;
+// ---------- Testimonials ----------
+.testimonials {
+  @apply text-center;
+
+  &__stage {
+    @apply relative mx-auto mt-10 grid max-w-4xl;
+  }
+
+  &__quote {
+    @apply animate-fade-up [grid-area:1/1];
+    animation-duration: 1.1s;
+  }
+
+  &__text {
+    @apply font-display text-3xl font-light italic leading-snug sm:text-5xl;
+  }
+
+  &__author {
+    @apply mt-10 text-xs uppercase tracking-caps-lg text-ink-muted;
+  }
+
+  &__name {
+    @apply text-accent;
+  }
+
+  &__dots {
+    @apply mt-10 flex justify-center gap-3;
+  }
+
+  &__dot {
+    @apply h-1.5 w-8 cursor-pointer rounded-full bg-line transition-colors duration-600 hover:bg-ink-subtle;
+
+    &--active {
+      @apply bg-accent hover:bg-accent;
+    }
+  }
 }
 
-/* ---------- Process ---------- */
-.step {
-  @apply border-t border-line pt-8;
-}
+// ---------- CTA ----------
+.cta {
+  @apply relative h-[80vh] min-h-[32rem] overflow-hidden;
 
-/* ---------- Testimonials ---------- */
-.quote {
-  grid-area: 1 / 1;
-}
-.quote-enter {
-  animation: quote-in 1.1s var(--ease-out-expo);
-}
-@keyframes quote-in {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 24px, 0);
+  &__image {
+    @apply absolute inset-0;
+  }
+
+  &__shade {
+    @apply absolute inset-0 bg-black/60;
+  }
+
+  &__content {
+    @apply relative flex h-full flex-col items-center justify-center text-center;
+  }
+
+  &__title {
+    @apply mt-6 max-w-4xl;
+  }
+
+  &__button {
+    @apply mt-12;
   }
 }

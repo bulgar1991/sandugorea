@@ -35,7 +35,7 @@ export class AboutComponent {
     },
     {
       title: 'Private',
-      text: 'Your photographs are delivered in a secure gallery that only you can open.',
+      text: 'Your photographs are delivered in your own project folder that only you can open.',
     },
   ];
 

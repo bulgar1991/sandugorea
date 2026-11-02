@@ -1,45 +1,32 @@
-<div class="grid min-h-svh lg:grid-cols-2">
-  <div class="relative hidden overflow-hidden lg:block">
-    <img
-      [src]="image"
-      alt=""
-      class="img-cover absolute inset-0 animate-ken-burns"
-      decoding="async"
-    />
-    <div class="absolute inset-0 bg-gradient-to-r from-black/20 to-black"></div>
-    <p
-      class="absolute bottom-12 left-12 max-w-sm font-display text-3xl leading-snug font-light italic text-ink/90"
-    >
+<div class="sign-in">
+  <div class="sign-in__visual">
+    <img [src]="image" alt="" class="sign-in__image" decoding="async" />
+    <div class="sign-in__shade"></div>
+    <p class="sign-in__quote">
       “Photographs are a way of keeping the moments that would otherwise disappear.”
     </p>
   </div>
 
-  <div class="flex flex-col px-6 py-10 sm:px-16">
-    <a
-      routerLink="/"
-      class="flex items-center gap-2 text-xs tracking-[0.3em] text-ink-muted uppercase hover:text-accent"
-    >
+  <div class="sign-in__side">
+    <a routerLink="/" class="sign-in__back">
       <app-icon name="arrow-left" [size]="14" />
       {{ brand.name }}
     </a>
 
-    <div class="mx-auto my-auto w-full max-w-sm py-16">
-      <span
-        class="stagger flex h-14 w-14 items-center justify-center rounded-full border border-accent/40 text-accent"
-        style="--i: 0"
-      >
+    <div class="sign-in__box">
+      <span class="sign-in__lock sign-in__step" style="--i: 0">
         <app-icon name="lock" />
       </span>
-      <h1 class="stagger mt-8 font-display text-5xl font-light" style="--i: 1">Private gallery</h1>
-      <p class="stagger mt-4 text-ink-muted" style="--i: 2">
+      <h1 class="title title--lg sign-in__title sign-in__step" style="--i: 1">Your project</h1>
+      <p class="text sign-in__text sign-in__step" style="--i: 2">
         Sign in with the username and password your photographer sent you.
       </p>
 
-      <form [formGroup]="form" (ngSubmit)="submit()" class="mt-12 flex flex-col gap-8" novalidate>
-        <label class="field stagger" style="--i: 3">
-          <span>Username</span>
+      <form [formGroup]="form" (ngSubmit)="submit()" class="sign-in__form" novalidate>
+        <label class="field sign-in__step" style="--i: 3">
+          <span class="field__label">Username</span>
           <input
-            class="input"
+            class="field__control"
             formControlName="username"
             autocomplete="username"
             autocapitalize="none"
@@ -47,18 +34,18 @@
           />
         </label>
 
-        <label class="field stagger" style="--i: 4">
-          <span>Password</span>
-          <div class="relative">
+        <label class="field sign-in__step" style="--i: 4">
+          <span class="field__label">Password</span>
+          <div class="field__wrap">
             <input
-              class="input pr-10"
+              class="field__control"
               [type]="showPassword() ? 'text' : 'password'"
               formControlName="password"
               autocomplete="current-password"
             />
             <button
               type="button"
-              class="absolute top-1/2 right-0 -translate-y-1/2 cursor-pointer p-2 text-ink-subtle hover:text-accent"
+              class="field__toggle"
               (click)="showPassword.update((v) => !v)"
               [attr.aria-label]="showPassword() ? 'Hide password' : 'Show password'"
             >
@@ -68,35 +55,28 @@
         </label>
 
         @if (error()) {
-          <p
-            class="shake rounded-lg border border-danger/30 bg-danger/10 px-4 py-3 text-sm text-danger"
-            role="alert"
-          >
-            {{ error() }}
-          </p>
+          <p class="alert" role="alert">{{ error() }}</p>
         }
 
         <button
           type="submit"
-          class="btn btn-primary stagger w-full"
+          class="btn btn--primary btn--block sign-in__step"
           style="--i: 5"
           [disabled]="loading()"
         >
           @if (loading()) {
             <span class="spinner"></span>
-            Opening gallery…
+            Opening…
           } @else {
-            Open my gallery
+            Open my photos
             <app-icon name="arrow-right" [size]="16" />
           }
         </button>
       </form>
 
-      <p class="stagger mt-10 text-sm text-ink-subtle" style="--i: 6">
+      <p class="sign-in__help sign-in__step" style="--i: 6">
         Lost your password?
-        <a routerLink="/contact" class="text-accent hover:text-accent-light"
-          >Contact your photographer</a
-        >.
+        <a routerLink="/contact" class="link">Contact your photographer</a>.
       </p>
     </div>
   </div>

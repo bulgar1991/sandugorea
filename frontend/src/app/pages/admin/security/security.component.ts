@@ -16,6 +16,7 @@ import { RevealDirective } from '@directives/reveal.directive';
   selector: 'app-security',
   imports: [ReactiveFormsModule, DatePipe, IconComponent, RevealDirective],
   templateUrl: './security.component.html',
+  styleUrl: './security.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SecurityComponent {
@@ -48,6 +49,12 @@ export class SecurityComponent {
   protected readonly strengthLabel = computed(
     () => ['Too weak', 'Weak', 'Fair', 'Good', 'Strong'][this.strength()],
   );
+
+  protected readonly rules = [
+    'Account locks for 1 minute after 5 failed attempts',
+    'Automatic sign-out after 15 minutes of inactivity',
+    'Admin area hidden from search engines and site navigation',
+  ];
 
   protected readonly sessions = signal([
     {

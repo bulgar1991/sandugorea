@@ -1,57 +1,43 @@
-<footer class="border-t border-line bg-black">
-  <div class="container-x py-24 lg:py-32">
+<footer class="footer">
+  <div class="wrapper footer__cta">
     <p class="eyebrow" appReveal>Let's talk</p>
-    <h2 class="heading-xl mt-6 max-w-4xl" appReveal [revealDelay]="100">
-      Let's create something <em class="text-accent">timeless</em>.
+    <h2 class="title title--xl footer__title" appReveal [revealDelay]="100">
+      Let's create something <em>timeless</em>.
     </h2>
-    <div
-      class="mt-12 flex flex-col gap-8 sm:flex-row sm:items-center"
-      appReveal
-      [revealDelay]="200"
-    >
-      <a
-        [href]="'mailto:' + brand.email"
-        class="link-underline font-display text-2xl text-accent hover:text-accent-light sm:text-3xl"
-      >
+    <div class="footer__contact" appReveal [revealDelay]="200">
+      <a [href]="'mailto:' + brand.email" class="link link--underline footer__email">
         {{ brand.email }}
       </a>
-      <a routerLink="/contact" class="btn btn-primary w-fit">
+      <a routerLink="/contact" class="btn btn--primary">
         Book a session
         <app-icon name="arrow-right" [size]="16" />
       </a>
     </div>
   </div>
 
-  <div
-    class="container-x flex flex-col gap-8 border-t border-line py-10 lg:flex-row lg:items-center lg:justify-between"
-  >
-    <a routerLink="/" class="font-display text-xl tracking-[0.25em] uppercase">{{ brand.name }}</a>
+  <div class="wrapper footer__bottom">
+    <a routerLink="/" class="footer__brand">{{ brand.name }}</a>
 
-    <nav class="flex flex-wrap gap-x-8 gap-y-3" aria-label="Footer">
+    <nav class="footer__nav" aria-label="Footer">
       @for (link of links; track link.path) {
-        <a
-          [routerLink]="link.path"
-          class="text-[0.7rem] tracking-[0.3em] text-ink-muted uppercase hover:text-accent"
-        >
-          {{ link.label }}
-        </a>
+        <a [routerLink]="link.path" class="footer__link">{{ link.label }}</a>
       }
     </nav>
 
-    <div class="flex items-center gap-5 text-ink-muted">
+    <div class="footer__social">
       <a
         [href]="brand.instagram"
         target="_blank"
         rel="noopener"
         aria-label="Instagram"
-        class="hover:text-accent"
+        class="footer__icon"
       >
         <app-icon name="instagram" />
       </a>
-      <a [href]="'mailto:' + brand.email" aria-label="Email" class="hover:text-accent">
+      <a [href]="'mailto:' + brand.email" aria-label="Email" class="footer__icon">
         <app-icon name="mail" />
       </a>
-      <span class="text-xs text-ink-subtle">© {{ year }} {{ brand.name }}</span>
+      <span class="footer__copy">© {{ year }} {{ brand.name }}</span>
     </div>
   </div>
 </footer>

@@ -1,0 +1,81 @@
+.project-cover {
+  @apply relative flex h-[70vh] min-h-[28rem] items-end overflow-hidden;
+
+  &__image {
+    @apply absolute inset-0 block h-full w-full animate-ken-burns object-cover;
+  }
+
+  &__shade {
+    @apply absolute inset-0 bg-hero-shade;
+  }
+
+  &__content {
+    @apply relative pb-14;
+  }
+
+  &__title {
+    @apply mt-4;
+  }
+
+  &__mask {
+    @apply block overflow-hidden pb-[0.08em];
+  }
+
+  &__word {
+    @apply inline-block animate-rise;
+    animation-delay: var(--d);
+  }
+
+  &__meta {
+    @apply mt-4 text-sm text-ink-muted;
+  }
+
+  &__button {
+    @apply mt-8;
+  }
+
+  &__appear {
+    @apply animate-fade-in;
+    animation-duration: 1s;
+    animation-delay: var(--d);
+  }
+}
+
+.project-photos {
+  @apply columns-2 gap-3 py-12 sm:gap-4 lg:columns-3 xl:columns-4;
+
+  &__item {
+    @apply relative mb-3 break-inside-avoid overflow-hidden bg-surface sm:mb-4;
+
+    &:hover .project-photos__image {
+      @apply scale-105;
+    }
+    &:hover .project-photos__download {
+      @apply opacity-100;
+    }
+  }
+
+  &__open {
+    @apply block w-full cursor-zoom-in;
+  }
+
+  &__image {
+    @apply block w-full transition-transform duration-1200 ease-out-expo;
+  }
+
+  &__download {
+    @apply absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full bg-black/70 text-ink opacity-0 transition-opacity duration-300 hover:text-accent focus-visible:opacity-100;
+
+    @media (hover: none) {
+      @apply opacity-100;
+    }
+  }
+}
+
+.project-empty {
+  @apply flex min-h-[60vh] flex-col items-center justify-center gap-4 text-center;
+
+  &__icon {
+    @apply text-accent;
+  }
+}

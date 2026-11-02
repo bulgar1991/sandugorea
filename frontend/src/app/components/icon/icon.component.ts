@@ -123,7 +123,11 @@ export type IconName = keyof typeof ICONS;
       }
     </svg>
   `,
-  host: { class: 'inline-flex shrink-0' },
+  styles: `
+    :host {
+      @apply inline-flex shrink-0;
+    }
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconComponent {

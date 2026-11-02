@@ -1,0 +1,47 @@
+.footer {
+  @apply border-t border-line bg-black;
+
+  &__cta {
+    @apply py-24 lg:py-32;
+  }
+
+  &__title {
+    @apply mt-6 max-w-4xl;
+  }
+
+  &__contact {
+    @apply mt-12 flex flex-col gap-8 sm:flex-row sm:items-center;
+  }
+
+  &__email {
+    @apply font-display text-2xl sm:text-3xl;
+  }
+
+  &__bottom {
+    @apply flex flex-col gap-8 border-t border-line py-10 lg:flex-row lg:items-center lg:justify-between;
+  }
+
+  &__brand {
+    @apply font-display text-xl uppercase tracking-caps-md;
+  }
+
+  &__nav {
+    @apply flex flex-wrap gap-x-8 gap-y-3;
+  }
+
+  &__link {
+    @apply text-label uppercase tracking-caps-lg text-ink-muted hover:text-accent;
+  }
+
+  &__social {
+    @apply flex items-center gap-5 text-ink-muted;
+  }
+
+  &__icon {
+    @apply hover:text-accent;
+  }
+
+  &__copy {
+    @apply text-xs text-ink-subtle;
+  }
+}

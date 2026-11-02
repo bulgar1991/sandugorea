@@ -1,47 +1,54 @@
-@reference '../../../tailwind.css';
-
 .lightbox {
-  @apply fixed inset-0 z-[90] flex items-center justify-center bg-black/95;
-}
+  @apply fixed inset-0 z-lightbox flex items-center justify-center bg-black/95;
 
-.lightbox__bar {
-  @apply absolute inset-x-0 top-0 z-10 flex items-center justify-between px-4 py-4 sm:px-8;
-}
-
-.lightbox__btn {
-  @apply flex h-11 w-11 cursor-pointer items-center justify-center rounded-full text-ink-muted transition-colors hover:bg-white/10 hover:text-accent;
-}
-
-.lightbox__figure {
-  @apply pointer-events-none relative flex max-h-full flex-col items-center px-4 sm:px-24;
-}
-
-.lightbox__img {
-  @apply pointer-events-auto max-h-[80vh] max-w-full object-contain shadow-2xl select-none;
-}
-
-.lightbox__nav {
-  @apply absolute top-1/2 z-10 flex h-14 w-14 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-line text-ink-muted transition-colors hover:border-accent hover:text-accent;
-}
-
-.lb-enter {
-  animation: lb-fade 0.4s ease;
-}
-.lb-leave {
-  animation: lb-fade 0.3s ease reverse forwards;
-}
-.lb-img-enter {
-  animation: lb-img 0.7s var(--ease-out-expo);
-}
-
-@keyframes lb-fade {
-  from {
-    opacity: 0;
+  &--entering {
+    @apply animate-fade-in;
+    animation-duration: 0.4s;
   }
-}
-@keyframes lb-img {
-  from {
-    opacity: 0;
-    transform: scale(0.96);
+  &--leaving {
+    @apply animate-fade-out;
+  }
+
+  &__backdrop {
+    @apply absolute inset-0;
+  }
+
+  &__bar {
+    @apply absolute inset-x-0 top-0 z-10 flex items-center justify-between px-4 py-4 sm:px-8;
+  }
+
+  &__counter {
+    @apply text-xs tracking-caps-lg text-ink-muted;
+  }
+
+  &__tools {
+    @apply flex items-center gap-2;
+  }
+
+  &__button {
+    @apply flex h-11 w-11 cursor-pointer items-center justify-center rounded-full text-ink-muted transition-colors hover:bg-white/10 hover:text-accent;
+  }
+
+  &__figure {
+    @apply pointer-events-none relative flex max-h-full animate-zoom-in flex-col items-center px-4 sm:px-24;
+  }
+
+  &__image {
+    @apply pointer-events-auto max-h-[80vh] max-w-full select-none object-contain shadow-2xl;
+  }
+
+  &__caption {
+    @apply mt-4 text-center font-display text-xl italic text-ink-muted;
+  }
+
+  &__nav {
+    @apply absolute top-1/2 z-10 flex h-14 w-14 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-line text-ink-muted transition-colors hover:border-accent hover:text-accent;
+
+    &--prev {
+      @apply left-3 sm:left-6;
+    }
+    &--next {
+      @apply right-3 sm:right-6;
+    }
   }
 }

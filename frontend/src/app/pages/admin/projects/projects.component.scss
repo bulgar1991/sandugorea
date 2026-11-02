@@ -1,0 +1,107 @@
+.toolbar {
+  @apply mt-10 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between;
+
+  &__search {
+    @apply relative w-full max-w-md;
+  }
+
+  &__search-icon {
+    @apply absolute left-4 top-1/2 -translate-y-1/2 text-ink-subtle;
+  }
+
+  &__input {
+    @apply pl-11;
+  }
+
+  &__tabs {
+    @apply flex gap-1 rounded-full border border-line bg-surface p-1;
+  }
+
+  &__tab {
+    @apply cursor-pointer rounded-full px-4 py-2 text-xs uppercase tracking-caps text-ink-muted transition-colors duration-300 hover:text-ink;
+
+    &--active {
+      @apply bg-accent text-black hover:text-black;
+    }
+  }
+}
+
+.project-grid {
+  @apply mt-8 grid gap-6 sm:grid-cols-2 2xl:grid-cols-3;
+
+  &__empty {
+    @apply col-span-full flex flex-col items-center gap-3 rounded-2xl border border-dashed border-line py-20 text-ink-muted;
+  }
+}
+
+.project-card {
+  @apply block overflow-hidden rounded-2xl border border-line bg-surface transition-colors duration-600 hover:border-accent/40;
+
+  &__media {
+    @apply relative aspect-photo overflow-hidden bg-surface-light;
+  }
+
+  &__mosaic {
+    @apply grid h-full grid-cols-3 grid-rows-2 gap-0.5;
+  }
+
+  &__image {
+    @apply block h-full w-full object-cover transition-transform duration-1200 ease-out-expo;
+
+    &:first-child {
+      @apply col-span-2 row-span-2;
+    }
+  }
+
+  &:hover &__image {
+    @apply scale-105;
+  }
+
+  &__empty {
+    @apply flex h-full flex-col items-center justify-center gap-2 text-sm text-ink-subtle;
+  }
+
+  &__status {
+    @apply absolute left-4 top-4 rounded-full bg-black/70;
+  }
+
+  &__body {
+    @apply p-5;
+  }
+
+  &__title {
+    @apply font-display text-2xl transition-colors;
+  }
+
+  &:hover &__title {
+    @apply text-accent;
+  }
+
+  &__customer {
+    @apply mt-1 text-sm text-ink-muted;
+  }
+
+  &__meta {
+    @apply mt-4 flex flex-wrap gap-x-4 gap-y-1 text-xs text-ink-subtle;
+  }
+
+  &__username {
+    @apply font-mono;
+  }
+}
+
+.project-form {
+  @apply grid gap-5 sm:grid-cols-2;
+
+  &__section {
+    @apply border-b border-line pb-2 text-xs uppercase tracking-caps text-accent sm:col-span-2;
+  }
+
+  &__wide {
+    @apply sm:col-span-1;
+  }
+
+  &__actions {
+    @apply mt-2 flex flex-wrap gap-3 sm:col-span-2;
+  }
+}
