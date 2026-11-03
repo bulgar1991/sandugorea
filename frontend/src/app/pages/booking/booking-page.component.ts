@@ -21,7 +21,7 @@ import { BANNER_IMAGES } from '@/data/portfolio.data';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BookingPageComponent {
-  /** ?type=weddings preselects the session type (from the Services page). */
+  /** ?type=events preselects the session type (from the Services page). */
   readonly type = input<string>();
   protected readonly image = BANNER_IMAGES.booking;
 }

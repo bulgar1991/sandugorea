@@ -3,7 +3,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { CountUpDirective } from '@directives/count-up.directive';
 import { RevealDirective } from '@directives/reveal.directive';
 
-/** Years / sessions / weddings / countries, counting up when they scroll into view. */
+/** Years / sessions / countries, counting up when they scroll into view. */
 @Component({
   selector: 'app-counters',
   imports: [TranslatePipe, CountUpDirective, RevealDirective],
@@ -24,7 +24,6 @@ export class CountersComponent {
   protected readonly stats = [
     { value: 12, suffix: '', key: 'showcase.stats.years' },
     { value: 480, suffix: '+', key: 'showcase.stats.sessions' },
-    { value: 160, suffix: '', key: 'showcase.stats.weddings' },
     { value: 14, suffix: '', key: 'showcase.stats.countries' },
   ];
 }

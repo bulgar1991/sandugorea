@@ -13,6 +13,15 @@
         >{{ 'nav.home' | translate }}</a
       >
       <app-icon name="chevron-right" [size]="12" />
+      @if (parent(); as p) {
+        <a
+          data-testid="page-banner-crumb-parent"
+          [routerLink]="p.path | localize"
+          class="page-banner__crumb"
+          >{{ p.label | translate }}</a
+        >
+        <app-icon name="chevron-right" [size]="12" />
+      }
       <span class="page-banner__crumb page-banner__crumb--current" aria-current="page">{{
         crumb() | translate
       }}</span>

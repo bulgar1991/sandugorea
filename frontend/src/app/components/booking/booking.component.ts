@@ -58,7 +58,7 @@ export class BookingComponent {
     name: ['', [Validators.required, Validators.maxLength(100)]],
     email: ['', [Validators.required, Validators.email]],
     phone: ['', Validators.maxLength(30)],
-    type: ['weddings'],
+    type: [CATEGORY_IDS[0] as string],
     date: ['', Validators.required],
     location: ['', Validators.maxLength(120)],
     message: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(4000)]],

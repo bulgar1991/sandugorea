@@ -34,6 +34,8 @@ export class PageBannerComponent {
   readonly subtitle = input('');
   /** Translation key of this page in the breadcrumb. */
   readonly crumb = input.required<string>();
+  /** Optional level between Home and this page, e.g. Portfolio on a category page. */
+  readonly parent = input<{ path: string; label: string }>();
 
   private readonly loader = inject(PageLoaderState);
   protected readonly ready = computed(() => !this.loader.visible());

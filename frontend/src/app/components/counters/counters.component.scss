@@ -3,7 +3,7 @@
 }
 
 .counters {
-  @apply mx-auto grid w-full max-w-site px-5 sm:px-8 lg:px-12 grid-cols-2 gap-y-12 lg:grid-cols-4;
+  @apply mx-auto grid w-full max-w-site px-5 sm:px-8 lg:px-12 grid-cols-2 gap-y-12 lg:grid-cols-3;
 
   &__item {
     @apply flex flex-col items-center text-center;

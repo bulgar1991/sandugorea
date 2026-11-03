@@ -1,0 +1,20 @@
+:host {
+  @apply block;
+}
+
+// Pills linking to the category pages.
+.portfolio-nav {
+  @apply pt-14 lg:pt-20;
+
+  &__list {
+    @apply flex flex-wrap justify-center gap-3;
+  }
+
+  &__link {
+    @apply inline-flex items-center rounded-full border border-line px-5 py-2.5 text-xs uppercase tracking-caps text-ink-muted transition-colors hover:border-accent/60 hover:text-ink;
+
+    &--active {
+      @apply border-accent bg-accent text-black hover:text-black;
+    }
+  }
+}

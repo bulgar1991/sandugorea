@@ -6,6 +6,7 @@ import { IconComponent } from '@components/icon/icon.component';
 import { LightboxComponent } from '@components/lightbox/lightbox.component';
 import { RevealDirective } from '@directives/reveal.directive';
 import { LightboxItem } from '@models/photo.models';
+import { PhotoCategory } from '@models/photo.models';
 import { PORTFOLIO } from '@/data/portfolio.data';
 import { ButtonComponent } from '@ui/button/button.component';
 import {
@@ -42,11 +43,17 @@ export class WorksComponent {
 
   /** "teaser" (home): first photos + link to the portfolio · "full" (portfolio page): Load more. */
   readonly mode = input<'teaser' | 'full'>('full');
+  /** Only this category (portfolio sub-pages); all photos when empty. */
+  readonly category = input<PhotoCategory>();
 
-  protected readonly total = PORTFOLIO.length;
+  private readonly photos = computed(() => {
+    const category = this.category();
+    return category ? PORTFOLIO.filter((p) => p.category === category) : PORTFOLIO;
+  });
+  protected readonly total = computed(() => this.photos().length);
   protected readonly shown = signal(PAGE_SIZE);
-  protected readonly works = computed(() => PORTFOLIO.slice(0, this.shown()));
-  protected readonly hasMore = computed(() => this.shown() < this.total);
+  protected readonly works = computed(() => this.photos().slice(0, this.shown()));
+  protected readonly hasMore = computed(() => this.shown() < this.total());
 
   protected readonly openIndex = signal<number | null>(null);
   protected readonly lightboxItems = computed<LightboxItem[]>(() => {
@@ -59,6 +66,6 @@ export class WorksComponent {
   });
 
   protected loadMore() {
-    this.shown.update((n) => Math.min(this.total, n + PAGE_SIZE));
+    this.shown.update((n) => Math.min(this.total(), n + PAGE_SIZE));
   }
 }

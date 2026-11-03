@@ -38,19 +38,32 @@
             </li>
           }
         </ul>
-        <a
-          data-testid="services-page-link-booking"
-          app-button
-          variant="outline"
-          [routerLink]="'/booking' | localize"
-          [queryParams]="{ type: s.id }"
-          class="service__button"
-          appReveal
-          [revealDelay]="450"
-        >
-          <app-icon name="calendar" [size]="16" />
-          {{ 'services.book' | translate }}
-        </a>
+        <div class="service__actions">
+          <a
+            data-testid="services-page-link-booking"
+            app-button
+            variant="outline"
+            [routerLink]="'/booking' | localize"
+            [queryParams]="{ type: s.id }"
+            appReveal
+            [revealDelay]="450"
+          >
+            <app-icon name="calendar" [size]="16" />
+            {{ 'services.book' | translate }}
+          </a>
+          <a
+            data-testid="services-page-link-portfolio"
+            app-link
+            caps
+            underline
+            [routerLink]="'/portfolio/' + s.id | localize"
+            appReveal
+            [revealDelay]="500"
+          >
+            {{ 'services.portfolio' | translate }}
+            <app-icon name="arrow-right" [size]="14" />
+          </a>
+        </div>
       </div>
     </article>
   }

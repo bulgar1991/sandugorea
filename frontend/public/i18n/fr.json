@@ -37,24 +37,20 @@
     "portfolio": "Portfolio"
   },
   "categories": {
-    "weddings": {
-      "label": "Mariages",
-      "blurb": "Des regards silencieux, des éclats de rire, toute la journée telle que vous l'avez vécue."
-    },
-    "portraits": {
-      "label": "Portraits",
-      "blurb": "Une lumière sincère et des séances sans précipitation pour être pleinement vous-même."
-    },
-    "family": {
-      "label": "Famille",
-      "blurb": "Les petits moments du quotidien qui deviendront tout, plus tard."
-    },
     "events": {
       "label": "Événements",
       "blurb": "L'atmosphère, les gens et les détails, capturés avec discrétion."
     },
+    "family": {
+      "label": "Famille & portraits",
+      "blurb": "Une lumière sincère, des séances détendues et les petits moments qui, plus tard, comptent le plus."
+    },
+    "commercial": {
+      "label": "Commercial",
+      "blurb": "Produits, marques et les personnes derrière l'entreprise : des images qui vendent tout en restant authentiques."
+    },
     "landscapes": {
-      "label": "Paysages",
+      "label": "Nature & paysages",
       "blurb": "Des lieux qui restent avec vous bien après que la lumière s'est éteinte."
     },
     "other": {
@@ -65,7 +61,7 @@
     "eyebrow": "À propos",
     "titleStart": "Je photographie les gens tels qu'ils se sentent,",
     "titleAccent": "pas seulement tels qu'ils paraissent.",
-    "p1": "Depuis plus de dix ans, je cherche la lumière sincère et les instants silencieux : le souffle avant le « oui », la main d'un enfant qui cherche la vôtre, un visage dans la parfaite lumière d'une fenêtre.",
+    "p1": "Depuis plus de dix ans, je cherche la lumière sincère et les instants silencieux : un éclat de rire au milieu d'une fête, la main d'un enfant qui cherche la vôtre, un visage dans la parfaite lumière d'une fenêtre.",
     "p2": "Mon travail est calme, cinématographique et fait pour être regardé toute une vie. Chaque séance prend son temps et chaque image est retouchée à la main.",
     "signature": "Sandu Gorea",
     "role": "Photographe & conteur",
@@ -83,19 +79,20 @@
     "stats": {
       "years": "Années derrière l'objectif",
       "sessions": "Séances photo",
-      "weddings": "Mariages",
       "countries": "Pays"
     }
   },
   "works": {
     "eyebrow": "Portfolio",
     "title": "Nos derniers travaux",
-    "subtitle": "Une sélection de séances récentes : mariages, portraits, familles et lieux.",
+    "subtitle": "Une sélection de séances récentes : événements, famille & portraits, commercial et nature.",
     "loadMore": "Voir plus",
     "showing": "{{shown}} sur {{total}}",
     "allLoaded": "Vous avez tout vu, pour l'instant.",
     "open": "Ouvrir la photo",
-    "viewAll": "Voir tout le portfolio"
+    "viewAll": "Voir tout le portfolio",
+    "all": "Tous",
+    "count": "{{count}} photos"
   },
   "testimonials": {
     "eyebrow": "Mots doux",
@@ -104,7 +101,7 @@
       "t1": {
         "quote": "Nous ouvrons nos photos à chaque anniversaire et pleurons à chaque fois. Sandu a vu des moments dont nous ignorions même l'existence.",
         "author": "Ana & Mihai",
-        "detail": "Mariage · Toscane"
+        "detail": "Famille · Toscane"
       },
       "t2": {
         "quote": "Calme, patient et tellement présent. Les portraits me montrent sous mon meilleur jour, sans artifice.",
@@ -119,7 +116,7 @@
       "t4": {
         "quote": "Discret toute la soirée, et pourtant rien n'a été manqué. Nos invités parlent encore des photos.",
         "author": "Laura & Matteo",
-        "detail": "Mariage · Lac de Côme"
+        "detail": "Événement · Lac de Côme"
       },
       "t5": {
         "quote": "Professionnel du premier message à la livraison finale. Je réserverais à nouveau demain.",
@@ -166,7 +163,7 @@
     }
   },
   "footer": {
-    "about": "Photographie fine art, portrait et mariage : calme, cinématographique et faite pour durer.",
+    "about": "Photographie de portrait, de famille, d'événements et de nature : calme, cinématographique et faite pour durer.",
     "explore": "Explorer",
     "contact": "Contact",
     "follow": "Suivre",
@@ -281,7 +278,7 @@
       "form": {
         "project": "Projet",
         "title": "Titre",
-        "titlePlaceholder": "ex. Jour du mariage",
+        "titlePlaceholder": "ex. Séance famille Martin",
         "date": "Date de la séance",
         "customer": "Client",
         "name": "Nom",
@@ -392,8 +389,8 @@
   },
   "seo": {
     "home": {
-      "title": "Sandu Gorea — Photographe de mariage, portrait et famille",
-      "description": "Photographie de mariage, de portrait et de famille, calme et cinématographique. Livraison en ligne privée de chaque photo. Basé en Suisse, disponible dans le monde entier."
+      "title": "Sandu Gorea — Photographe d'événements, famille & portraits",
+      "description": "Photographie calme et cinématographique pour événements, familles & portraits, entreprises et nature. Livraison en ligne privée de chaque photo. Basé à Sargans, en Suisse, disponible dans le monde entier."
     },
     "notFound": {
       "title": "Page introuvable — Sandu Gorea",
@@ -416,21 +413,23 @@
     },
     "about": {
       "title": "À propos de Sandu Gorea — Photographe",
-      "description": "Découvrez Sandu Gorea : photographie de mariage, de portrait et de famille, calme et cinématographique."
+      "description": "Découvrez Sandu Gorea : photographie calme et cinématographique d'événements, de famille & portraits, commerciale et de nature."
     },
     "services": {
       "title": "Services — Sandu Gorea",
-      "description": "Mariages, portraits, famille, événements et paysages fine art : ce qui est inclus dans chaque séance."
+      "description": "Événements, famille & portraits, commercial, nature & paysages : ce qui est inclus dans chaque séance."
     },
     "portfolio": {
       "title": "Portfolio — Sandu Gorea",
-      "description": "Une sélection de mariages, portraits, familles et lieux récents par Sandu Gorea."
+      "description": "Une sélection d'événements, de familles & portraits, de travaux commerciaux et de nature par Sandu Gorea.",
+      "categoryTitle": "{{category}} — Portfolio — Sandu Gorea",
+      "categoryDescription": "{{category}} par Sandu Gorea : {{blurb}}"
     },
     "booking": {
       "title": "Réserver une date — Sandu Gorea",
       "description": "Choisissez une date et parlez-moi de vos projets : je réponds sous 48 heures."
     },
-    "shareImageAlt": "Sandu Gorea – Photographie : mariages, portraits, familles"
+    "shareImageAlt": "Sandu Gorea – Photographie : événements, famille & portraits, commercial, nature"
   },
   "social": {
     "eyebrow": "Suivez-moi",
@@ -458,7 +457,7 @@
     "portfolio": {
       "eyebrow": "Portfolio",
       "title": "Une collection d'instants",
-      "subtitle": "Mariages, portraits, familles et lieux : une sélection de travaux récents."
+      "subtitle": "Événements, famille & portraits, commercial et nature : une sélection de travaux récents."
     },
     "booking": {
       "eyebrow": "Réservation",
@@ -470,29 +469,23 @@
     "label": "Service",
     "book": "Réserver cette séance",
     "items": {
-      "weddings": {
-        "text": "Des préparatifs tranquilles à la dernière danse, racontés avec calme pour que vous puissiez simplement vivre votre journée.",
-        "i1": "Reportage sur la journée entière ou partielle",
-        "i2": "Plus de 500 photos retouchées à la main",
-        "i3": "Dossier en ligne privé pour vous et vos invités"
-      },
-      "portraits": {
-        "text": "Des séances détendues en studio ou en extérieur, avec une direction douce et une lumière sincère : des portraits qui vous ressemblent.",
-        "i1": "Séance de 60 à 90 minutes",
-        "i2": "Plus de 30 photos retouchées à la main",
-        "i3": "Conseils pour les tenues et les lieux"
-      },
-      "family": {
-        "text": "De vrais moments à la maison, au parc ou au bord de la mer : les petites choses du quotidien qui deviendront tout.",
-        "i1": "Séance dans un lieu que vous aimez",
-        "i2": "Photos naturelles, sans pose",
-        "i3": "Tirages et albums sur demande"
-      },
       "events": {
         "text": "Événements d'entreprise, anniversaires et fêtes, photographiés avec discrétion : ambiance, personnes et détails.",
         "i1": "Couverture à l'heure",
         "i2": "Livraison rapide en une semaine",
         "i3": "Images prêtes pour le web et l'impression"
+      },
+      "family": {
+        "text": "Des séances détendues à la maison, en extérieur ou en studio, avec des conseils discrets et une lumière sincère, pour des portraits et des photos de famille qui vous ressemblent.",
+        "i1": "Séance de 60 à 90 minutes dans votre lieu préféré",
+        "i2": "Plus de 30 photos retouchées à la main",
+        "i3": "Aide pour les tenues et les lieux"
+      },
+      "commercial": {
+        "text": "Photographie de produits, d'entreprise et de marque pour votre site, vos réseaux sociaux et l'impression : nette, haut de gamme et fidèle à votre marque.",
+        "i1": "Photos de produits et portraits professionnels",
+        "i2": "Images prêtes pour le web, les réseaux et l'impression",
+        "i3": "Droits d'utilisation inclus"
       },
       "landscapes": {
         "text": "Paysages fine art et lieux pour vos murs, votre marque ou votre projet, en tirages ou sous licence.",
@@ -516,6 +509,7 @@
         "title": "Vous recevez",
         "text": "Vos photos retouchées à la main dans un dossier privé, accessible uniquement avec vos identifiants."
       }
-    }
+    },
+    "portfolio": "Voir le portfolio"
   }
 }

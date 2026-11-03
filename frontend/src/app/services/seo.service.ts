@@ -78,7 +78,9 @@ export class SeoService {
     const noindex = (seo.metaTags ?? []).some((t) => t.name === 'robots');
     this.setAlternates(noindex ? null : splitLocalizedUrl(cleanPath).path);
     this.setStructuredData(
-      noindex ? null : this.structuredData(cleanPath, url, title, description, lang),
+      noindex
+        ? null
+        : this.structuredData(splitLocalizedUrl(cleanPath).path, url, title, description, lang),
     );
 
     // Extra per-route tags (e.g. robots: noindex) - these win over the defaults above.
@@ -159,6 +161,11 @@ export class SeoService {
     };
     if (path === '/') return { '@context': 'https://schema.org', '@graph': [business, website] };
 
+    // Category pages sit under the portfolio: Home > Portfolio > Events.
+    const parents = path.startsWith('/portfolio/')
+      ? [{ path: '/portfolio', label: 'nav.portfolio' }]
+      : [];
+
     return {
       '@context': 'https://schema.org',
       '@graph': [
@@ -180,8 +187,19 @@ export class SeoService {
               name: this.text('nav.home'),
               item: SITE_URL + localizePath('/', lang as LanguageCode),
             },
+            ...parents.map((parent, i) => ({
+              '@type': 'ListItem',
+              position: i + 2,
+              name: this.text(parent.label),
+              item: SITE_URL + localizePath(parent.path, lang as LanguageCode),
+            })),
             // "Leistungen — Sandu Gorea" -> "Leistungen"
-            { '@type': 'ListItem', position: 2, name: title.split(' — ')[0], item: url },
+            {
+              '@type': 'ListItem',
+              position: parents.length + 2,
+              name: title.split(' — ')[0],
+              item: url,
+            },
           ],
         },
       ],

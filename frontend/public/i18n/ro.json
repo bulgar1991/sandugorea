@@ -37,24 +37,20 @@
     "portfolio": "Portofoliu"
   },
   "categories": {
-    "weddings": {
-      "label": "Nunți",
-      "blurb": "Priviri tăcute, râsete zgomotoase, întreaga zi așa cum ați trăit-o cu adevărat."
-    },
-    "portraits": {
-      "label": "Portrete",
-      "blurb": "Lumină sinceră și ședințe fără grabă, în care poți fi tu însuți."
-    },
-    "family": {
-      "label": "Familie",
-      "blurb": "Momentele mici și obișnuite care, mai târziu, devin totul."
-    },
     "events": {
       "label": "Evenimente",
       "blurb": "Atmosferă, oameni și detalii, surprinse cu discreție."
     },
+    "family": {
+      "label": "Familie și portrete",
+      "blurb": "Lumină sinceră, ședințe relaxate și micile momente care, mai târziu, înseamnă totul."
+    },
+    "commercial": {
+      "label": "Comercial",
+      "blurb": "Produse, branduri și oamenii din spatele afacerii – imagini care vând și totuși par autentice."
+    },
     "landscapes": {
-      "label": "Peisaje",
+      "label": "Natură și peisaje",
       "blurb": "Locuri care rămân cu tine mult după ce lumina a plecat."
     },
     "other": {
@@ -65,7 +61,7 @@
     "eyebrow": "Despre mine",
     "titleStart": "Fotografiez oamenii așa cum se simt,",
     "titleAccent": "nu doar așa cum arată.",
-    "p1": "De peste zece ani caut lumina sinceră și momentele liniștite: respirația dinaintea jurământului, mâna unui copil care o caută pe a ta, un chip în lumina perfectă a unei ferestre.",
+    "p1": "De peste zece ani caut lumina sinceră și momentele liniștite: un râs în mijlocul unei petreceri, mâna unui copil care o caută pe a ta, un chip în lumina perfectă a unei ferestre.",
     "p2": "Lucrările mele sunt calme, cinematice și făcute pentru a fi privite o viață întreagă. Fiecare ședință e fără grabă și fiecare imagine e editată manual.",
     "signature": "Sandu Gorea",
     "role": "Fotograf și povestitor",
@@ -83,19 +79,20 @@
     "stats": {
       "years": "Ani în spatele aparatului",
       "sessions": "Ședințe foto",
-      "weddings": "Nunți",
       "countries": "Țări"
     }
   },
   "works": {
     "eyebrow": "Portofoliu",
     "title": "Cele mai noi lucrări",
-    "subtitle": "O selecție de ședințe recente: nunți, portrete, familii și locuri.",
+    "subtitle": "O selecție de ședințe recente: evenimente, familie și portrete, comercial și natură.",
     "loadMore": "Încarcă mai multe",
     "showing": "{{shown}} din {{total}}",
     "allLoaded": "Ai văzut tot, deocamdată.",
     "open": "Deschide fotografia",
-    "viewAll": "Vezi tot portofoliul"
+    "viewAll": "Vezi tot portofoliul",
+    "all": "Toate",
+    "count": "{{count}} fotografii"
   },
   "testimonials": {
     "eyebrow": "Vorbe frumoase",
@@ -104,7 +101,7 @@
       "t1": {
         "quote": "Ne deschidem fotografiile la fiecare aniversare și plângem de fiecare dată. Sandu a văzut momente despre care nici nu știam că s-au întâmplat.",
         "author": "Ana & Mihai",
-        "detail": "Nuntă · Toscana"
+        "detail": "Familie · Toscana"
       },
       "t2": {
         "quote": "Calm, răbdător și atât de prezent. Portretele mă arată în cea mai bună zi a mea, fără efort.",
@@ -119,7 +116,7 @@
       "t4": {
         "quote": "Discret toată seara și totuși nu a ratat nimic. Invitații noștri încă vorbesc despre fotografii.",
         "author": "Laura & Matteo",
-        "detail": "Nuntă · Lacul Como"
+        "detail": "Eveniment · Lacul Como"
       },
       "t5": {
         "quote": "Profesionist de la primul mesaj până la livrarea finală. Aș rezerva din nou chiar mâine.",
@@ -166,7 +163,7 @@
     }
   },
   "footer": {
-    "about": "Fotografie fine art, de portret și de nuntă: calmă, cinematică și făcută să dureze.",
+    "about": "Fotografie de portret, familie, evenimente și natură: calmă, cinematică și făcută să dureze.",
     "explore": "Explorează",
     "contact": "Contact",
     "follow": "Urmărește",
@@ -281,7 +278,7 @@
       "form": {
         "project": "Proiect",
         "title": "Titlu",
-        "titlePlaceholder": "ex. Ziua nunții",
+        "titlePlaceholder": "ex. Ședință familia Popescu",
         "date": "Data ședinței",
         "customer": "Client",
         "name": "Nume",
@@ -392,8 +389,8 @@
   },
   "seo": {
     "home": {
-      "title": "Sandu Gorea — Fotograf de nunți, portrete și familie",
-      "description": "Fotografie de nuntă, portret și familie, calmă și cinematică. Livrare online privată a fiecărei fotografii. Din Elveția, disponibil în toată lumea."
+      "title": "Sandu Gorea — Fotograf de evenimente, familie și portrete",
+      "description": "Fotografie calmă și cinematică pentru evenimente, familii și portrete, afaceri și natură. Livrare online privată a fiecărei fotografii. Din Sargans, Elveția, disponibil în toată lumea."
     },
     "notFound": {
       "title": "Pagina nu a fost găsită — Sandu Gorea",
@@ -416,21 +413,23 @@
     },
     "about": {
       "title": "Despre Sandu Gorea — Fotograf",
-      "description": "Cunoaște-l pe Sandu Gorea: fotografie de nuntă, portret și familie, calmă și cinematică."
+      "description": "Cunoaște-l pe Sandu Gorea: fotografie calmă și cinematică de evenimente, familie și portrete, comercială și de natură."
     },
     "services": {
       "title": "Servicii — Sandu Gorea",
-      "description": "Nunți, portrete, familie, evenimente și peisaje fine art – ce include fiecare ședință."
+      "description": "Evenimente, familie și portrete, comercial, natură și peisaje – ce include fiecare ședință."
     },
     "portfolio": {
       "title": "Portofoliu — Sandu Gorea",
-      "description": "O selecție de nunți, portrete, familii și locuri recente de Sandu Gorea."
+      "description": "O selecție de evenimente, familie și portrete, lucrări comerciale și natură de Sandu Gorea.",
+      "categoryTitle": "{{category}} — Portofoliu — Sandu Gorea",
+      "categoryDescription": "{{category}} de Sandu Gorea: {{blurb}}"
     },
     "booking": {
       "title": "Rezervă o dată — Sandu Gorea",
       "description": "Alege o dată și spune-mi despre planurile tale – răspund în 48 de ore."
     },
-    "shareImageAlt": "Sandu Gorea – Fotografie: nunți, portrete, familii"
+    "shareImageAlt": "Sandu Gorea – Fotografie: evenimente, familie și portrete, comercial, natură"
   },
   "social": {
     "eyebrow": "Urmărește-mă",
@@ -458,7 +457,7 @@
     "portfolio": {
       "eyebrow": "Portofoliu",
       "title": "O colecție de momente",
-      "subtitle": "Nunți, portrete, familii și locuri – o selecție de lucrări recente."
+      "subtitle": "Evenimente, familie și portrete, comercial și natură – o selecție de lucrări recente."
     },
     "booking": {
       "eyebrow": "Rezervare",
@@ -470,29 +469,23 @@
     "label": "Serviciu",
     "book": "Rezervă această ședință",
     "items": {
-      "weddings": {
-        "text": "De la momentele liniștite ale pregătirilor până la ultimul dans – documentate cu calm, ca tu să poți trăi pur și simplu ziua ta.",
-        "i1": "Acoperire pe toată ziua sau parțială",
-        "i2": "Peste 500 de fotografii editate manual",
-        "i3": "Dosar online privat pentru tine și invitați"
-      },
-      "portraits": {
-        "text": "Ședințe relaxate în studio sau în aer liber, cu îndrumare blândă și lumină sinceră – portrete care îți seamănă.",
-        "i1": "Ședință de 60–90 de minute",
-        "i2": "Peste 30 de fotografii editate manual",
-        "i3": "Ajutor cu ținutele și locațiile"
-      },
-      "family": {
-        "text": "Momente reale acasă, în parc sau la mare – lucrurile mici de zi cu zi care mai târziu înseamnă totul.",
-        "i1": "Ședință într-un loc pe care îl iubești",
-        "i2": "Fotografii naturale, nepozate",
-        "i3": "Printuri și albume la cerere"
-      },
       "events": {
         "text": "Evenimente corporate, zile de naștere și petreceri, documentate discret – atmosferă, oameni și detalii.",
         "i1": "Acoperire pe ore",
         "i2": "Livrare rapidă într-o săptămână",
         "i3": "Imagini gata pentru web și print"
+      },
+      "family": {
+        "text": "Ședințe relaxate acasă, în aer liber sau în studio – cu îndrumare blândă și lumină sinceră, pentru portrete și fotografii de familie care vă seamănă.",
+        "i1": "Ședință de 60–90 de minute în locul vostru preferat",
+        "i2": "Peste 30 de fotografii editate manual",
+        "i3": "Ajutor cu ținutele și locațiile"
+      },
+      "commercial": {
+        "text": "Fotografie de produs, de business și de brand pentru site, social media și print – curată, de calitate și fidelă brandului vostru.",
+        "i1": "Fotografii de produs și portrete de business",
+        "i2": "Imagini gata pentru web, social media și print",
+        "i3": "Drepturi de utilizare incluse"
       },
       "landscapes": {
         "text": "Peisaje fine art și locuri pentru pereții tăi, brandul sau proiectul tău – ca printuri sau licențe.",
@@ -516,6 +509,7 @@
         "title": "Primești",
         "text": "Fotografiile tale editate manual într-un dosar privat, deschis doar cu datele tale de autentificare."
       }
-    }
+    },
+    "portfolio": "Vezi portofoliul"
   }
 }

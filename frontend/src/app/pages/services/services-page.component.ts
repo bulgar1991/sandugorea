@@ -7,6 +7,7 @@ import { IconComponent } from '@components/icon/icon.component';
 import { PageBannerComponent } from '@components/page-banner/page-banner.component';
 import { RevealDirective } from '@directives/reveal.directive';
 import { ButtonComponent } from '@ui/button/button.component';
+import { LinkComponent } from '@ui/link/link.component';
 import { ContainerComponent } from '@ui/container/container.component';
 import {
   EyebrowComponent,
@@ -27,6 +28,7 @@ import { BANNER_IMAGES, SERVICES } from '@/data/portfolio.data';
     PageBannerComponent,
     RevealDirective,
     ButtonComponent,
+    LinkComponent,
     ContainerComponent,
     EyebrowComponent,
     TextComponent,

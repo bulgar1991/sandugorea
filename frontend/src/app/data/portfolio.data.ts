@@ -8,13 +8,7 @@ import { PhotoCategory, PortfolioPhoto } from '@models/photo.models';
  */
 const img = (seed: string, w: number, h: number) => `https://picsum.photos/seed/${seed}/${w}/${h}`;
 
-export const CATEGORY_IDS: PhotoCategory[] = [
-  'weddings',
-  'portraits',
-  'family',
-  'events',
-  'landscapes',
-];
+export const CATEGORY_IDS: PhotoCategory[] = ['events', 'family', 'commercial', 'landscapes'];
 
 export const CATEGORIES = CATEGORY_IDS.map((id) => ({
   id,

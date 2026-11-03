@@ -58,8 +58,9 @@
     @apply flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-accent/40 text-accent;
   }
 
-  &__button {
-    @apply mt-10;
+  // "Book this session" + "View portfolio" side by side, stacked on narrow phones.
+  &__actions {
+    @apply mt-10 flex flex-wrap items-center gap-x-8 gap-y-5;
   }
 }
 

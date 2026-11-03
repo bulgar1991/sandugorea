@@ -37,24 +37,20 @@
     "portfolio": "Portfolio"
   },
   "categories": {
-    "weddings": {
-      "label": "Matrimoni",
-      "blurb": "Sguardi silenziosi, risate fragorose, l'intera giornata come l'avete vissuta davvero."
-    },
-    "portraits": {
-      "label": "Ritratti",
-      "blurb": "Luce sincera e sessioni senza fretta, per essere semplicemente te stesso."
-    },
-    "family": {
-      "label": "Famiglia",
-      "blurb": "I piccoli momenti quotidiani che un giorno diventeranno tutto."
-    },
     "events": {
       "label": "Eventi",
       "blurb": "Atmosfera, persone e dettagli, raccontati con discrezione."
     },
+    "family": {
+      "label": "Famiglia e ritratti",
+      "blurb": "Luce sincera, sessioni rilassate e i piccoli momenti che un giorno significheranno tutto."
+    },
+    "commercial": {
+      "label": "Commerciale",
+      "blurb": "Prodotti, marchi e le persone dietro l'azienda: immagini che vendono e restano autentiche."
+    },
     "landscapes": {
-      "label": "Paesaggi",
+      "label": "Natura e paesaggi",
       "blurb": "Luoghi che restano con te molto dopo che la luce se n'è andata."
     },
     "other": {
@@ -65,7 +61,7 @@
     "eyebrow": "Chi sono",
     "titleStart": "Fotografo le persone per come si sentono,",
     "titleAccent": "non solo per come appaiono.",
-    "p1": "Da oltre dieci anni inseguo la luce sincera e i momenti silenziosi: il respiro prima del sì, la mano di un bambino che cerca la tua, un volto nella perfetta luce di una finestra.",
+    "p1": "Da oltre dieci anni inseguo la luce sincera e i momenti silenziosi: una risata nel mezzo di una festa, la mano di un bambino che cerca la tua, un volto nella perfetta luce di una finestra.",
     "p2": "Il mio lavoro è calmo, cinematografico e pensato per essere guardato per tutta la vita. Ogni sessione è senza fretta e ogni immagine è ritoccata a mano.",
     "signature": "Sandu Gorea",
     "role": "Fotografo e narratore",
@@ -83,19 +79,20 @@
     "stats": {
       "years": "Anni dietro l'obiettivo",
       "sessions": "Sessioni fotografiche",
-      "weddings": "Matrimoni",
       "countries": "Paesi"
     }
   },
   "works": {
     "eyebrow": "Portfolio",
     "title": "I nostri ultimi lavori",
-    "subtitle": "Una selezione di sessioni recenti: matrimoni, ritratti, famiglie e luoghi.",
+    "subtitle": "Una selezione di sessioni recenti: eventi, famiglia e ritratti, commerciale e natura.",
     "loadMore": "Carica altri",
     "showing": "{{shown}} di {{total}}",
     "allLoaded": "Hai visto tutto, per ora.",
     "open": "Apri foto",
-    "viewAll": "Vedi tutto il portfolio"
+    "viewAll": "Vedi tutto il portfolio",
+    "all": "Tutti",
+    "count": "{{count}} foto"
   },
   "testimonials": {
     "eyebrow": "Parole gentili",
@@ -104,7 +101,7 @@
       "t1": {
         "quote": "Apriamo le nostre foto a ogni anniversario e piangiamo ogni volta. Sandu ha visto momenti che non sapevamo nemmeno fossero accaduti.",
         "author": "Ana & Mihai",
-        "detail": "Matrimonio · Toscana"
+        "detail": "Famiglia · Toscana"
       },
       "t2": {
         "quote": "Calmo, paziente e così presente. I ritratti mi mostrano nel mio giorno migliore, senza sforzo.",
@@ -119,7 +116,7 @@
       "t4": {
         "quote": "Discreto per tutta la serata, eppure non ha perso nulla. I nostri ospiti parlano ancora delle foto.",
         "author": "Laura & Matteo",
-        "detail": "Matrimonio · Lago di Como"
+        "detail": "Evento · Lago di Como"
       },
       "t5": {
         "quote": "Professionale dal primo messaggio alla consegna finale. Prenoterei di nuovo domani.",
@@ -166,7 +163,7 @@
     }
   },
   "footer": {
-    "about": "Fotografia fine art, di ritratto e di matrimonio: calma, cinematografica e fatta per durare.",
+    "about": "Fotografia di ritratto, famiglia, eventi e natura: calma, cinematografica e fatta per durare.",
     "explore": "Esplora",
     "contact": "Contatti",
     "follow": "Seguimi",
@@ -281,7 +278,7 @@
       "form": {
         "project": "Progetto",
         "title": "Titolo",
-        "titlePlaceholder": "es. Giorno del matrimonio",
+        "titlePlaceholder": "es. Sessione famiglia Rossi",
         "date": "Data della sessione",
         "customer": "Cliente",
         "name": "Nome",
@@ -392,8 +389,8 @@
   },
   "seo": {
     "home": {
-      "title": "Sandu Gorea — Fotografo di matrimoni, ritratti e famiglie",
-      "description": "Fotografia di matrimonio, ritratto e famiglia, calma e cinematografica. Consegna online privata di ogni foto. Dalla Svizzera, disponibile in tutto il mondo."
+      "title": "Sandu Gorea — Fotografo di eventi, famiglia e ritratti",
+      "description": "Fotografia calma e cinematografica per eventi, famiglie e ritratti, aziende e natura. Consegna online privata di ogni foto. Da Sargans, Svizzera, disponibile in tutto il mondo."
     },
     "notFound": {
       "title": "Pagina non trovata — Sandu Gorea",
@@ -416,21 +413,23 @@
     },
     "about": {
       "title": "Chi è Sandu Gorea — Fotografo",
-      "description": "Conosci Sandu Gorea: fotografia di matrimonio, ritratto e famiglia, calma e cinematografica."
+      "description": "Conosci Sandu Gorea: fotografia calma e cinematografica di eventi, famiglia e ritratti, commerciale e natura."
     },
     "services": {
       "title": "Servizi — Sandu Gorea",
-      "description": "Matrimoni, ritratti, famiglie, eventi e paesaggi fine art: cosa è incluso in ogni sessione."
+      "description": "Eventi, famiglia e ritratti, commerciale, natura e paesaggi: cosa è incluso in ogni sessione."
     },
     "portfolio": {
       "title": "Portfolio — Sandu Gorea",
-      "description": "Una selezione di matrimoni, ritratti, famiglie e luoghi recenti di Sandu Gorea."
+      "description": "Una selezione di eventi, famiglia e ritratti, lavori commerciali e natura di Sandu Gorea.",
+      "categoryTitle": "{{category}} — Portfolio — Sandu Gorea",
+      "categoryDescription": "{{category}} di Sandu Gorea: {{blurb}}"
     },
     "booking": {
       "title": "Prenota una data — Sandu Gorea",
       "description": "Scegli una data e raccontami i tuoi progetti: rispondo entro 48 ore."
     },
-    "shareImageAlt": "Sandu Gorea – Fotografia: matrimoni, ritratti, famiglie"
+    "shareImageAlt": "Sandu Gorea – Fotografia: eventi, famiglia e ritratti, commerciale, natura"
   },
   "social": {
     "eyebrow": "Seguimi",
@@ -458,7 +457,7 @@
     "portfolio": {
       "eyebrow": "Portfolio",
       "title": "Una collezione di momenti",
-      "subtitle": "Matrimoni, ritratti, famiglie e luoghi: una selezione di lavori recenti."
+      "subtitle": "Eventi, famiglia e ritratti, commerciale e natura: una selezione di lavori recenti."
     },
     "booking": {
       "eyebrow": "Prenotazione",
@@ -470,29 +469,23 @@
     "label": "Servizio",
     "book": "Prenota questa sessione",
     "items": {
-      "weddings": {
-        "text": "Dai momenti tranquilli dei preparativi all'ultimo ballo, raccontati con calma perché tu possa vivere davvero la tua giornata.",
-        "i1": "Servizio di un'intera giornata o parziale",
-        "i2": "Oltre 500 foto ritoccate a mano",
-        "i3": "Cartella online privata per te e i tuoi ospiti"
-      },
-      "portraits": {
-        "text": "Sessioni rilassate in studio o all'aperto, con una guida delicata e luce sincera: ritratti che ti somigliano.",
-        "i1": "Sessione di 60–90 minuti",
-        "i2": "Oltre 30 foto ritoccate a mano",
-        "i3": "Consigli su abiti e location"
-      },
-      "family": {
-        "text": "Momenti veri a casa, al parco o al mare: le piccole cose quotidiane che un giorno significheranno tutto.",
-        "i1": "Sessione in un luogo che ami",
-        "i2": "Foto naturali, non in posa",
-        "i3": "Stampe e album su richiesta"
-      },
       "events": {
         "text": "Eventi aziendali, compleanni e feste raccontati con discrezione: atmosfera, persone e dettagli.",
         "i1": "Servizio a ore",
         "i2": "Consegna rapida entro una settimana",
         "i3": "Immagini pronte per web e stampa"
+      },
+      "family": {
+        "text": "Sessioni rilassate a casa, all'aperto o in studio, con una guida discreta e luce sincera, per ritratti e foto di famiglia che vi somigliano.",
+        "i1": "Sessione di 60–90 minuti nel vostro posto preferito",
+        "i2": "Oltre 30 foto ritoccate a mano",
+        "i3": "Aiuto con outfit e location"
+      },
+      "commercial": {
+        "text": "Fotografia di prodotto, aziendale e di brand per sito web, social media e stampa: pulita, di qualità e fedele al vostro marchio.",
+        "i1": "Foto di prodotto e ritratti aziendali",
+        "i2": "Immagini pronte per web, social e stampa",
+        "i3": "Diritti d'uso inclusi"
       },
       "landscapes": {
         "text": "Paesaggi fine art e luoghi per le tue pareti, il tuo brand o il tuo progetto, come stampe o licenze.",
@@ -516,6 +509,7 @@
         "title": "Ricevi",
         "text": "Le tue foto ritoccate a mano in una cartella privata, accessibile solo con il tuo login."
       }
-    }
+    },
+    "portfolio": "Vedi il portfolio"
   }
 }

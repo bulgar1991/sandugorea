@@ -2,6 +2,7 @@ import { Routes, UrlSegment } from '@angular/router';
 import { adminGuard, adminGuestGuard, customerGuard, customerGuestGuard } from '@guards/auth.guard';
 import { languageGuard } from '@guards/language.guard';
 import { PREFIXED_LANGUAGES } from '@services/language.service';
+import { CATEGORY_IDS } from '@/data/portfolio.data';
 import { seoResolver } from './resolvers/seo.resolver';
 
 // `data.seo` holds translation keys (under "seo" in public/i18n/*.json); seoResolver turns them
@@ -43,6 +44,24 @@ const mainLayoutRoutes: Routes = [
     resolve: { seo: seoResolver },
     data: { seo: { title: 'seo.portfolio.title', description: 'seo.portfolio.description' } },
   },
+  // One page per category: /portfolio/events, /portfolio/family, ... (unknown ones fall to 404).
+  ...CATEGORY_IDS.map((category) => ({
+    path: `portfolio/${category}`,
+    loadComponent: () =>
+      import('./pages/portfolio/portfolio-page.component').then((m) => m.PortfolioPageComponent),
+    resolve: { seo: seoResolver },
+    data: {
+      category,
+      seo: {
+        title: 'seo.portfolio.categoryTitle',
+        description: 'seo.portfolio.categoryDescription',
+        params: {
+          category: `categories.${category}.label`,
+          blurb: `categories.${category}.blurb`,
+        },
+      },
+    },
+  })),
   {
     path: 'booking',
     loadComponent: () =>

@@ -243,6 +243,246 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://sandugorea.ch/portfolio/events</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://sandugorea.ch/portfolio/events" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://sandugorea.ch/en/portfolio/events" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://sandugorea.ch/it/portfolio/events" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://sandugorea.ch/fr/portfolio/events" />
+    <xhtml:link rel="alternate" hreflang="ro" href="https://sandugorea.ch/ro/portfolio/events" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sandugorea.ch/portfolio/events" />
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sandugorea.ch/en/portfolio/events</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://sandugorea.ch/portfolio/events" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://sandugorea.ch/en/portfolio/events" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://sandugorea.ch/it/portfolio/events" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://sandugorea.ch/fr/portfolio/events" />
+    <xhtml:link rel="alternate" hreflang="ro" href="https://sandugorea.ch/ro/portfolio/events" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sandugorea.ch/portfolio/events" />
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sandugorea.ch/it/portfolio/events</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://sandugorea.ch/portfolio/events" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://sandugorea.ch/en/portfolio/events" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://sandugorea.ch/it/portfolio/events" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://sandugorea.ch/fr/portfolio/events" />
+    <xhtml:link rel="alternate" hreflang="ro" href="https://sandugorea.ch/ro/portfolio/events" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sandugorea.ch/portfolio/events" />
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sandugorea.ch/fr/portfolio/events</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://sandugorea.ch/portfolio/events" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://sandugorea.ch/en/portfolio/events" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://sandugorea.ch/it/portfolio/events" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://sandugorea.ch/fr/portfolio/events" />
+    <xhtml:link rel="alternate" hreflang="ro" href="https://sandugorea.ch/ro/portfolio/events" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sandugorea.ch/portfolio/events" />
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sandugorea.ch/ro/portfolio/events</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://sandugorea.ch/portfolio/events" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://sandugorea.ch/en/portfolio/events" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://sandugorea.ch/it/portfolio/events" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://sandugorea.ch/fr/portfolio/events" />
+    <xhtml:link rel="alternate" hreflang="ro" href="https://sandugorea.ch/ro/portfolio/events" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sandugorea.ch/portfolio/events" />
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sandugorea.ch/portfolio/family</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://sandugorea.ch/portfolio/family" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://sandugorea.ch/en/portfolio/family" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://sandugorea.ch/it/portfolio/family" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://sandugorea.ch/fr/portfolio/family" />
+    <xhtml:link rel="alternate" hreflang="ro" href="https://sandugorea.ch/ro/portfolio/family" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sandugorea.ch/portfolio/family" />
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sandugorea.ch/en/portfolio/family</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://sandugorea.ch/portfolio/family" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://sandugorea.ch/en/portfolio/family" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://sandugorea.ch/it/portfolio/family" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://sandugorea.ch/fr/portfolio/family" />
+    <xhtml:link rel="alternate" hreflang="ro" href="https://sandugorea.ch/ro/portfolio/family" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sandugorea.ch/portfolio/family" />
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sandugorea.ch/it/portfolio/family</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://sandugorea.ch/portfolio/family" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://sandugorea.ch/en/portfolio/family" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://sandugorea.ch/it/portfolio/family" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://sandugorea.ch/fr/portfolio/family" />
+    <xhtml:link rel="alternate" hreflang="ro" href="https://sandugorea.ch/ro/portfolio/family" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sandugorea.ch/portfolio/family" />
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sandugorea.ch/fr/portfolio/family</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://sandugorea.ch/portfolio/family" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://sandugorea.ch/en/portfolio/family" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://sandugorea.ch/it/portfolio/family" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://sandugorea.ch/fr/portfolio/family" />
+    <xhtml:link rel="alternate" hreflang="ro" href="https://sandugorea.ch/ro/portfolio/family" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sandugorea.ch/portfolio/family" />
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sandugorea.ch/ro/portfolio/family</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://sandugorea.ch/portfolio/family" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://sandugorea.ch/en/portfolio/family" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://sandugorea.ch/it/portfolio/family" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://sandugorea.ch/fr/portfolio/family" />
+    <xhtml:link rel="alternate" hreflang="ro" href="https://sandugorea.ch/ro/portfolio/family" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sandugorea.ch/portfolio/family" />
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sandugorea.ch/portfolio/commercial</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://sandugorea.ch/portfolio/commercial" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://sandugorea.ch/en/portfolio/commercial" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://sandugorea.ch/it/portfolio/commercial" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://sandugorea.ch/fr/portfolio/commercial" />
+    <xhtml:link rel="alternate" hreflang="ro" href="https://sandugorea.ch/ro/portfolio/commercial" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sandugorea.ch/portfolio/commercial" />
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sandugorea.ch/en/portfolio/commercial</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://sandugorea.ch/portfolio/commercial" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://sandugorea.ch/en/portfolio/commercial" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://sandugorea.ch/it/portfolio/commercial" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://sandugorea.ch/fr/portfolio/commercial" />
+    <xhtml:link rel="alternate" hreflang="ro" href="https://sandugorea.ch/ro/portfolio/commercial" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sandugorea.ch/portfolio/commercial" />
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sandugorea.ch/it/portfolio/commercial</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://sandugorea.ch/portfolio/commercial" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://sandugorea.ch/en/portfolio/commercial" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://sandugorea.ch/it/portfolio/commercial" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://sandugorea.ch/fr/portfolio/commercial" />
+    <xhtml:link rel="alternate" hreflang="ro" href="https://sandugorea.ch/ro/portfolio/commercial" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sandugorea.ch/portfolio/commercial" />
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sandugorea.ch/fr/portfolio/commercial</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://sandugorea.ch/portfolio/commercial" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://sandugorea.ch/en/portfolio/commercial" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://sandugorea.ch/it/portfolio/commercial" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://sandugorea.ch/fr/portfolio/commercial" />
+    <xhtml:link rel="alternate" hreflang="ro" href="https://sandugorea.ch/ro/portfolio/commercial" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sandugorea.ch/portfolio/commercial" />
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sandugorea.ch/ro/portfolio/commercial</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://sandugorea.ch/portfolio/commercial" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://sandugorea.ch/en/portfolio/commercial" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://sandugorea.ch/it/portfolio/commercial" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://sandugorea.ch/fr/portfolio/commercial" />
+    <xhtml:link rel="alternate" hreflang="ro" href="https://sandugorea.ch/ro/portfolio/commercial" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sandugorea.ch/portfolio/commercial" />
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sandugorea.ch/portfolio/landscapes</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://sandugorea.ch/portfolio/landscapes" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://sandugorea.ch/en/portfolio/landscapes" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://sandugorea.ch/it/portfolio/landscapes" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://sandugorea.ch/fr/portfolio/landscapes" />
+    <xhtml:link rel="alternate" hreflang="ro" href="https://sandugorea.ch/ro/portfolio/landscapes" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sandugorea.ch/portfolio/landscapes" />
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sandugorea.ch/en/portfolio/landscapes</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://sandugorea.ch/portfolio/landscapes" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://sandugorea.ch/en/portfolio/landscapes" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://sandugorea.ch/it/portfolio/landscapes" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://sandugorea.ch/fr/portfolio/landscapes" />
+    <xhtml:link rel="alternate" hreflang="ro" href="https://sandugorea.ch/ro/portfolio/landscapes" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sandugorea.ch/portfolio/landscapes" />
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sandugorea.ch/it/portfolio/landscapes</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://sandugorea.ch/portfolio/landscapes" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://sandugorea.ch/en/portfolio/landscapes" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://sandugorea.ch/it/portfolio/landscapes" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://sandugorea.ch/fr/portfolio/landscapes" />
+    <xhtml:link rel="alternate" hreflang="ro" href="https://sandugorea.ch/ro/portfolio/landscapes" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sandugorea.ch/portfolio/landscapes" />
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sandugorea.ch/fr/portfolio/landscapes</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://sandugorea.ch/portfolio/landscapes" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://sandugorea.ch/en/portfolio/landscapes" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://sandugorea.ch/it/portfolio/landscapes" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://sandugorea.ch/fr/portfolio/landscapes" />
+    <xhtml:link rel="alternate" hreflang="ro" href="https://sandugorea.ch/ro/portfolio/landscapes" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sandugorea.ch/portfolio/landscapes" />
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sandugorea.ch/ro/portfolio/landscapes</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://sandugorea.ch/portfolio/landscapes" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://sandugorea.ch/en/portfolio/landscapes" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://sandugorea.ch/it/portfolio/landscapes" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://sandugorea.ch/fr/portfolio/landscapes" />
+    <xhtml:link rel="alternate" hreflang="ro" href="https://sandugorea.ch/ro/portfolio/landscapes" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sandugorea.ch/portfolio/landscapes" />
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://sandugorea.ch/booking</loc>
     <xhtml:link rel="alternate" hreflang="de" href="https://sandugorea.ch/booking" />
     <xhtml:link rel="alternate" hreflang="en" href="https://sandugorea.ch/en/booking" />

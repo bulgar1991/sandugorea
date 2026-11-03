@@ -37,24 +37,20 @@
     "portfolio": "Portfolio"
   },
   "categories": {
-    "weddings": {
-      "label": "Weddings",
-      "blurb": "Quiet glances, loud laughter, the whole day as it truly felt."
-    },
-    "portraits": {
-      "label": "Portraits",
-      "blurb": "Honest light and unhurried sessions that let you be yourself."
-    },
-    "family": {
-      "label": "Family",
-      "blurb": "The small, ordinary moments that become everything later."
-    },
     "events": {
       "label": "Events",
       "blurb": "Atmosphere, people and details, documented with discretion."
     },
+    "family": {
+      "label": "Family & Portraits",
+      "blurb": "Honest light, relaxed sessions and the small moments that later mean everything."
+    },
+    "commercial": {
+      "label": "Commercial",
+      "blurb": "Products, brands and the people behind the business - images that sell and still feel real."
+    },
     "landscapes": {
-      "label": "Landscapes",
+      "label": "Nature & Landscapes",
       "blurb": "Places that stay with you long after the light has gone."
     },
     "other": {
@@ -65,7 +61,7 @@
     "eyebrow": "About me",
     "titleStart": "I photograph people the way they feel,",
     "titleAccent": "not just how they look.",
-    "p1": "For more than a decade I have been chasing honest light and quiet moments: the breath before a vow, a child's hand reaching for yours, a face in perfect window light.",
+    "p1": "For more than a decade I have been chasing honest light and quiet moments: a laugh in the middle of a celebration, a child's hand reaching for yours, a face in perfect window light.",
     "p2": "My work is calm, cinematic and made to be looked at for a lifetime. Every session is unhurried and every image is edited by hand.",
     "signature": "Sandu Gorea",
     "role": "Photographer & storyteller",
@@ -83,19 +79,20 @@
     "stats": {
       "years": "Years behind the camera",
       "sessions": "Sessions photographed",
-      "weddings": "Weddings",
       "countries": "Countries"
     }
   },
   "works": {
     "eyebrow": "Portfolio",
     "title": "Our Latest Works",
-    "subtitle": "A selection of recent sessions - weddings, portraits, families and places.",
+    "subtitle": "A selection of recent sessions - events, family & portraits, commercial and nature.",
     "loadMore": "Load more",
     "showing": "Showing {{shown}} of {{total}}",
     "allLoaded": "You've seen everything - for now.",
     "open": "Open photo",
-    "viewAll": "View full portfolio"
+    "viewAll": "View full portfolio",
+    "all": "All",
+    "count": "{{count}} photos"
   },
   "testimonials": {
     "eyebrow": "Kind words",
@@ -104,7 +101,7 @@
       "t1": {
         "quote": "We open our photos every anniversary and cry every single time. Sandu saw moments we didn't even know had happened.",
         "author": "Ana & Mihai",
-        "detail": "Wedding · Tuscany"
+        "detail": "Family · Tuscany"
       },
       "t2": {
         "quote": "Calm, patient and so present. The portraits feel like me on my best day, without trying too hard.",
@@ -119,7 +116,7 @@
       "t4": {
         "quote": "Discreet all evening, and yet nothing was missed. Our guests still talk about the photos.",
         "author": "Laura & Matteo",
-        "detail": "Wedding · Lake Como"
+        "detail": "Event · Lake Como"
       },
       "t5": {
         "quote": "Professional from the first message to the final delivery. I would book again tomorrow.",
@@ -166,7 +163,7 @@
     }
   },
   "footer": {
-    "about": "Fine art, portrait and wedding photography - calm, cinematic and made to last.",
+    "about": "Portrait, family, event and nature photography - calm, cinematic and made to last.",
     "explore": "Explore",
     "contact": "Contact",
     "follow": "Follow",
@@ -281,7 +278,7 @@
       "form": {
         "project": "Project",
         "title": "Title",
-        "titlePlaceholder": "e.g. Wedding Day",
+        "titlePlaceholder": "e.g. Miller family session",
         "date": "Session date",
         "customer": "Customer",
         "name": "Name",
@@ -392,8 +389,8 @@
   },
   "seo": {
     "home": {
-      "title": "Sandu Gorea — Wedding, portrait & family photographer",
-      "description": "Calm, cinematic wedding, portrait and family photography. Private online delivery of every photograph. Based in Switzerland, available worldwide."
+      "title": "Sandu Gorea — Event, family & portrait photographer",
+      "description": "Calm, cinematic photography for events, families & portraits, businesses and nature. Private online delivery of every photograph. Based in Sargans, Switzerland, available worldwide."
     },
     "notFound": {
       "title": "Page not found — Sandu Gorea",
@@ -416,21 +413,23 @@
     },
     "about": {
       "title": "About Sandu Gorea — Photographer",
-      "description": "Meet Sandu Gorea: calm, cinematic wedding, portrait and family photography."
+      "description": "Meet Sandu Gorea: calm, cinematic photography for events, family & portraits, commercial and nature."
     },
     "services": {
       "title": "Services — Sandu Gorea",
-      "description": "Weddings, portraits, family, events and fine-art landscapes - what's included in every session."
+      "description": "Events, family & portraits, commercial, and nature & landscapes - what's included in every session."
     },
     "portfolio": {
       "title": "Portfolio — Sandu Gorea",
-      "description": "A selection of recent weddings, portraits, families and places by Sandu Gorea."
+      "description": "A selection of recent events, family & portrait, commercial and nature work by Sandu Gorea.",
+      "categoryTitle": "{{category}} — Portfolio — Sandu Gorea",
+      "categoryDescription": "{{category}} by Sandu Gorea: {{blurb}}"
     },
     "booking": {
       "title": "Book a date — Sandu Gorea",
       "description": "Pick a date and tell me about your plans - I reply within 48 hours."
     },
-    "shareImageAlt": "Sandu Gorea – Photography: weddings, portraits, families"
+    "shareImageAlt": "Sandu Gorea – Photography: events, family & portraits, commercial, nature"
   },
   "social": {
     "eyebrow": "Follow me",
@@ -458,7 +457,7 @@
     "portfolio": {
       "eyebrow": "Portfolio",
       "title": "A collection of moments",
-      "subtitle": "Weddings, portraits, families and places - a selection of recent work."
+      "subtitle": "Events, family & portraits, commercial and nature - a selection of recent work."
     },
     "booking": {
       "eyebrow": "Booking",
@@ -470,29 +469,23 @@
     "label": "Service",
     "book": "Book this session",
     "items": {
-      "weddings": {
-        "text": "From the quiet getting-ready moments to the last dance - documented calmly, so you can simply be present on your day.",
-        "i1": "Full-day or partial coverage",
-        "i2": "500+ hand-edited photographs",
-        "i3": "Private online folder for you and your guests"
-      },
-      "portraits": {
-        "text": "Relaxed sessions in the studio or outdoors, with gentle guidance and honest light - portraits that feel like you.",
-        "i1": "60–90 minute session",
-        "i2": "30+ hand-edited photographs",
-        "i3": "Help with outfits and locations"
-      },
-      "family": {
-        "text": "Real moments at home, in the park or by the sea - the small everyday things that later mean everything.",
-        "i1": "Session at a place you love",
-        "i2": "Natural, unposed photographs",
-        "i3": "Prints and albums on request"
-      },
       "events": {
         "text": "Corporate events, birthdays and celebrations, documented discreetly - atmosphere, people and details.",
         "i1": "Coverage by the hour",
         "i2": "Fast delivery within a week",
         "i3": "Images ready for web and print"
+      },
+      "family": {
+        "text": "Relaxed sessions at home, outdoors or in the studio - gentle guidance and honest light, for portraits and family pictures that feel like you.",
+        "i1": "60–90 minute session at your favourite place",
+        "i2": "30+ hand-edited photos",
+        "i3": "Help with outfits and locations"
+      },
+      "commercial": {
+        "text": "Product, business and brand photography for your website, social media and print - clean, high-end and true to your brand.",
+        "i1": "Product shots and business portraits",
+        "i2": "Images ready for web, social and print",
+        "i3": "Usage rights included"
       },
       "landscapes": {
         "text": "Fine-art landscapes and places for your walls, your brand or your project - available as prints or licences.",
@@ -516,6 +509,7 @@
         "title": "You receive",
         "text": "Your hand-edited photographs in a private folder, opened only with your own login."
       }
-    }
+    },
+    "portfolio": "View portfolio"
   }
 }

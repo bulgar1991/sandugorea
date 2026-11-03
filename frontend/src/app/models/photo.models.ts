@@ -1,4 +1,5 @@
-export type PhotoCategory = 'weddings' | 'portraits' | 'family' | 'events' | 'landscapes';
+/** Portfolio categories; each has its own page at /portfolio/<id>. */
+export type PhotoCategory = 'events' | 'family' | 'commercial' | 'landscapes';
 
 export interface PortfolioPhoto {
   id: string;

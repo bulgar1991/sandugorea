@@ -1,0 +1,56 @@
+@if (current(); as c) {
+  <app-page-banner
+    [image]="image()"
+    eyebrow="nav.portfolio"
+    [title]="c.labelKey"
+    [subtitle]="c.blurbKey"
+    [crumb]="c.labelKey"
+    [parent]="portfolio"
+  />
+} @else {
+  <app-page-banner
+    [image]="image()"
+    eyebrow="pages.portfolio.eyebrow"
+    title="pages.portfolio.title"
+    subtitle="pages.portfolio.subtitle"
+    crumb="nav.portfolio"
+  />
+}
+
+<!-- Category pages -->
+<nav app-container class="portfolio-nav" [attr.aria-label]="'nav.portfolio' | translate">
+  <ul class="portfolio-nav__list">
+    <li>
+      <a
+        data-testid="portfolio-nav-all"
+        [routerLink]="'/portfolio' | localize"
+        class="portfolio-nav__link"
+        [class.portfolio-nav__link--active]="!current()"
+        [attr.aria-current]="current() ? null : 'page'"
+        >{{ 'works.all' | translate }}</a
+      >
+    </li>
+    @for (c of categories; track c.id) {
+      <li>
+        <a
+          [attr.data-testid]="'portfolio-nav-' + c.id"
+          [routerLink]="'/portfolio/' + c.id | localize"
+          class="portfolio-nav__link"
+          [class.portfolio-nav__link--active]="current()?.id === c.id"
+          [attr.aria-current]="current()?.id === c.id ? 'page' : null"
+          >{{ c.labelKey | translate }}</a
+        >
+      </li>
+    }
+  </ul>
+</nav>
+
+<!-- Re-created per category so paging starts over. -->
+@if (current(); as c) {
+  @for (id of [c.id]; track id) {
+    <app-works mode="full" [category]="c.id" />
+  }
+} @else {
+  <app-works mode="full" />
+}
+<app-cta-band />

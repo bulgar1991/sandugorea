@@ -37,24 +37,20 @@
     "portfolio": "Portfolio"
   },
   "categories": {
-    "weddings": {
-      "label": "Hochzeiten",
-      "blurb": "Stille Blicke, lautes Lachen – der ganze Tag, so wie er sich wirklich angefühlt hat."
-    },
-    "portraits": {
-      "label": "Porträts",
-      "blurb": "Ehrliches Licht und entspannte Shootings, bei denen du ganz du selbst sein kannst."
-    },
-    "family": {
-      "label": "Familie",
-      "blurb": "Die kleinen, alltäglichen Momente, die später alles bedeuten."
-    },
     "events": {
       "label": "Events",
       "blurb": "Atmosphäre, Menschen und Details – diskret festgehalten."
     },
+    "family": {
+      "label": "Familie & Porträts",
+      "blurb": "Ehrliches Licht, entspannte Shootings und die kleinen Momente, die später alles bedeuten."
+    },
+    "commercial": {
+      "label": "Commercial",
+      "blurb": "Produkte, Marken und die Menschen hinter dem Business – Bilder, die verkaufen und trotzdem echt wirken."
+    },
     "landscapes": {
-      "label": "Landschaften",
+      "label": "Natur & Landschaften",
       "blurb": "Orte, die bleiben, lange nachdem das Licht gegangen ist."
     },
     "other": {
@@ -65,7 +61,7 @@
     "eyebrow": "Über mich",
     "titleStart": "Ich fotografiere Menschen so, wie sie sich fühlen,",
     "titleAccent": "nicht nur, wie sie aussehen.",
-    "p1": "Seit über zehn Jahren suche ich ehrliches Licht und stille Momente: den Atemzug vor dem Jawort, eine Kinderhand, die nach deiner greift, ein Gesicht im perfekten Fensterlicht.",
+    "p1": "Seit über zehn Jahren suche ich ehrliches Licht und stille Momente: ein Lachen mitten im Fest, eine Kinderhand, die nach deiner greift, ein Gesicht im perfekten Fensterlicht.",
     "p2": "Meine Bilder sind ruhig, filmisch und für ein ganzes Leben gemacht. Jedes Shooting ist entspannt, jedes Bild wird von Hand bearbeitet.",
     "signature": "Sandu Gorea",
     "role": "Fotograf & Geschichtenerzähler",
@@ -83,19 +79,20 @@
     "stats": {
       "years": "Jahre hinter der Kamera",
       "sessions": "Fotoshootings",
-      "weddings": "Hochzeiten",
       "countries": "Länder"
     }
   },
   "works": {
     "eyebrow": "Portfolio",
     "title": "Unsere neuesten Arbeiten",
-    "subtitle": "Eine Auswahl aktueller Shootings – Hochzeiten, Porträts, Familien und Orte.",
+    "subtitle": "Eine Auswahl aktueller Shootings – Events, Familien & Porträts, Commercial und Natur.",
     "loadMore": "Mehr laden",
     "showing": "{{shown}} von {{total}}",
     "allLoaded": "Du hast alles gesehen – fürs Erste.",
     "open": "Foto öffnen",
-    "viewAll": "Ganzes Portfolio ansehen"
+    "viewAll": "Ganzes Portfolio ansehen",
+    "all": "Alle",
+    "count": "{{count}} Fotos"
   },
   "testimonials": {
     "eyebrow": "Liebe Worte",
@@ -104,7 +101,7 @@
       "t1": {
         "quote": "Wir öffnen unsere Fotos an jedem Jahrestag und weinen jedes Mal. Sandu hat Momente gesehen, von denen wir nicht einmal wussten, dass es sie gab.",
         "author": "Ana & Mihai",
-        "detail": "Hochzeit · Toskana"
+        "detail": "Familie · Toskana"
       },
       "t2": {
         "quote": "Ruhig, geduldig und so präsent. Die Porträts zeigen mich an meinem besten Tag – ganz ohne Anstrengung.",
@@ -119,7 +116,7 @@
       "t4": {
         "quote": "Den ganzen Abend diskret, und trotzdem wurde nichts verpasst. Unsere Gäste sprechen noch immer über die Fotos.",
         "author": "Laura & Matteo",
-        "detail": "Hochzeit · Comer See"
+        "detail": "Event · Comer See"
       },
       "t5": {
         "quote": "Professionell von der ersten Nachricht bis zur Übergabe. Ich würde sofort wieder buchen.",
@@ -166,7 +163,7 @@
     }
   },
   "footer": {
-    "about": "Fine-Art-, Porträt- und Hochzeitsfotografie – ruhig, filmisch und für die Ewigkeit gemacht.",
+    "about": "Porträt-, Familien-, Event- und Naturfotografie – ruhig, filmisch und für die Ewigkeit gemacht.",
     "explore": "Entdecken",
     "contact": "Kontakt",
     "follow": "Folgen",
@@ -281,7 +278,7 @@
       "form": {
         "project": "Projekt",
         "title": "Titel",
-        "titlePlaceholder": "z. B. Hochzeitstag",
+        "titlePlaceholder": "z. B. Familienshooting Müller",
         "date": "Datum des Shootings",
         "customer": "Kunde",
         "name": "Name",
@@ -392,8 +389,8 @@
   },
   "seo": {
     "home": {
-      "title": "Sandu Gorea — Hochzeits-, Porträt- & Familienfotograf",
-      "description": "Ruhige, filmische Hochzeits-, Porträt- und Familienfotografie. Private Online-Übergabe aller Fotos. Aus der Schweiz, weltweit verfügbar."
+      "title": "Sandu Gorea — Fotograf für Events, Familie & Porträts",
+      "description": "Ruhige, filmische Fotografie für Events, Familien & Porträts, Unternehmen und Natur. Private Online-Übergabe aller Fotos. Aus Sargans, Schweiz – weltweit verfügbar."
     },
     "notFound": {
       "title": "Seite nicht gefunden — Sandu Gorea",
@@ -416,21 +413,23 @@
     },
     "about": {
       "title": "Über Sandu Gorea — Fotograf",
-      "description": "Lerne Sandu Gorea kennen: ruhige, filmische Hochzeits-, Porträt- und Familienfotografie."
+      "description": "Lerne Sandu Gorea kennen: ruhige, filmische Fotografie für Events, Familien & Porträts, Commercial und Natur."
     },
     "services": {
       "title": "Leistungen — Sandu Gorea",
-      "description": "Hochzeiten, Porträts, Familie, Events und Fine-Art-Landschaften – was in jedem Shooting enthalten ist."
+      "description": "Events, Familie & Porträts, Commercial sowie Natur & Landschaften – was in jedem Shooting enthalten ist."
     },
     "portfolio": {
       "title": "Portfolio — Sandu Gorea",
-      "description": "Eine Auswahl aktueller Hochzeiten, Porträts, Familien und Orte von Sandu Gorea."
+      "description": "Eine Auswahl aktueller Events, Familien & Porträts, Commercial- und Naturbilder von Sandu Gorea.",
+      "categoryTitle": "{{category}} — Portfolio — Sandu Gorea",
+      "categoryDescription": "{{category}} von Sandu Gorea: {{blurb}}"
     },
     "booking": {
       "title": "Termin buchen — Sandu Gorea",
       "description": "Wähle ein Datum und erzähl mir von deinen Plänen – ich antworte innerhalb von 48 Stunden."
     },
-    "shareImageAlt": "Sandu Gorea – Fotografie: Hochzeit, Porträt, Familie"
+    "shareImageAlt": "Sandu Gorea – Fotografie: Events, Familie & Porträts, Commercial, Natur"
   },
   "social": {
     "eyebrow": "Folge mir",
@@ -458,7 +457,7 @@
     "portfolio": {
       "eyebrow": "Portfolio",
       "title": "Eine Sammlung von Momenten",
-      "subtitle": "Hochzeiten, Porträts, Familien und Orte – eine Auswahl aktueller Arbeiten."
+      "subtitle": "Events, Familien & Porträts, Commercial und Natur – eine Auswahl aktueller Arbeiten."
     },
     "booking": {
       "eyebrow": "Buchung",
@@ -470,29 +469,23 @@
     "label": "Leistung",
     "book": "Dieses Shooting buchen",
     "items": {
-      "weddings": {
-        "text": "Von den stillen Momenten beim Fertigmachen bis zum letzten Tanz – ruhig begleitet, damit du an deinem Tag einfach da sein kannst.",
-        "i1": "Ganztägige oder teilweise Begleitung",
-        "i2": "Über 500 handbearbeitete Fotos",
-        "i3": "Privater Online-Ordner für dich und deine Gäste"
-      },
-      "portraits": {
-        "text": "Entspannte Shootings im Studio oder draußen, mit sanfter Anleitung und ehrlichem Licht – Porträts, die sich nach dir anfühlen.",
-        "i1": "Shooting von 60–90 Minuten",
-        "i2": "Über 30 handbearbeitete Fotos",
-        "i3": "Hilfe bei Outfits und Locations"
-      },
-      "family": {
-        "text": "Echte Momente zu Hause, im Park oder am Meer – die kleinen Alltagsdinge, die später alles bedeuten.",
-        "i1": "Shooting an deinem Lieblingsort",
-        "i2": "Natürliche, ungestellte Fotos",
-        "i3": "Abzüge und Alben auf Wunsch"
-      },
       "events": {
         "text": "Firmenevents, Geburtstage und Feiern, diskret festgehalten – Atmosphäre, Menschen und Details.",
         "i1": "Begleitung nach Stunden",
         "i2": "Schnelle Lieferung innerhalb einer Woche",
         "i3": "Bilder fertig für Web und Druck"
+      },
+      "family": {
+        "text": "Entspannte Shootings zu Hause, draußen oder im Studio – mit sanfter Anleitung und ehrlichem Licht, für Porträts und Familienbilder, die sich nach euch anfühlen.",
+        "i1": "Shooting von 60–90 Minuten an eurem Lieblingsort",
+        "i2": "Über 30 handbearbeitete Fotos",
+        "i3": "Hilfe bei Outfits und Locations"
+      },
+      "commercial": {
+        "text": "Produkt-, Business- und Markenfotografie für Website, Social Media und Print – klar, hochwertig und passend zu eurer Marke.",
+        "i1": "Produktfotos und Business-Porträts",
+        "i2": "Bilder für Web, Social Media und Druck",
+        "i3": "Nutzungsrechte inklusive"
       },
       "landscapes": {
         "text": "Fine-Art-Landschaften und Orte für deine Wände, deine Marke oder dein Projekt – als Prints oder Lizenzen.",
@@ -516,6 +509,7 @@
         "title": "Du erhältst",
         "text": "Deine handbearbeiteten Fotos in einem privaten Ordner, nur mit deinem eigenen Login."
       }
-    }
+    },
+    "portfolio": "Portfolio ansehen"
   }
 }

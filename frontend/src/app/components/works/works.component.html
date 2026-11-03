@@ -51,12 +51,12 @@
       </a>
     } @else {
       <p class="works__count">
-        {{ 'works.showing' | translate: { shown: works().length, total: total } }}
+        {{ 'works.showing' | translate: { shown: works().length, total: total() } }}
       </p>
       <div class="works__progress">
         <span
           class="works__progress-bar"
-          [style.transform]="'scaleX(' + works().length / total + ')'"
+          [style.transform]="'scaleX(' + works().length / total() + ')'"
         ></span>
       </div>
       @if (hasMore()) {
