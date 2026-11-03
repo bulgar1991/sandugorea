@@ -5,8 +5,8 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { BRAND } from '@/data/portfolio.data';
 
 /**
- * Brand mark: "Sandu Gorea" in Arita Dotum with a gold line under it,
- * "Photography" (translated) centred below.
+ * Brand mark: "Sandu Gorea" in Abel with a gold line under it,
+ * "Photography" (translated) centred below in Allura.
  */
 @Component({
   selector: 'app-logo',

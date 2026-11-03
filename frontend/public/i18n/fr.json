@@ -61,19 +61,6 @@
       "label": "Autre chose"
     }
   },
-  "hero": {
-    "welcome": "Bienvenue dans mon univers",
-    "hello": "Bonjour, je suis",
-    "roles": {
-      "r1": "photographe de mariage.",
-      "r2": "portraitiste.",
-      "r3": "conteur d'images."
-    },
-    "text": "Je capture la lumière sincère et les instants silencieux : mariages, portraits et familles, photographiés avec calme et retouchés à la main, pour revivre la journée à chaque regard.",
-    "imageAlt": "Portrait du photographe",
-    "cta": "Réserver une date",
-    "works": "Voir mon travail"
-  },
   "about": {
     "eyebrow": "À propos",
     "titleStart": "Je photographie les gens tels qu'ils se sentent,",

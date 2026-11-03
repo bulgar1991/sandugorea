@@ -61,19 +61,6 @@
       "label": "Etwas anderes"
     }
   },
-  "hero": {
-    "welcome": "Willkommen in meiner Welt",
-    "hello": "Hallo, ich bin",
-    "roles": {
-      "r1": "Hochzeitsfotograf.",
-      "r2": "Porträtkünstler.",
-      "r3": "visueller Geschichtenerzähler."
-    },
-    "text": "Ich fange ehrliches Licht und stille Momente ein – Hochzeiten, Porträts und Familien, ruhig fotografiert und von Hand bearbeitet, damit du den Tag bei jedem Blick neu fühlst.",
-    "imageAlt": "Porträt des Fotografen",
-    "cta": "Termin buchen",
-    "works": "Meine Arbeiten"
-  },
   "about": {
     "eyebrow": "Über mich",
     "titleStart": "Ich fotografiere Menschen so, wie sie sich fühlen,",

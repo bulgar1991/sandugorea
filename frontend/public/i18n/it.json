@@ -61,19 +61,6 @@
       "label": "Altro"
     }
   },
-  "hero": {
-    "welcome": "Benvenuti nel mio mondo",
-    "hello": "Ciao, sono",
-    "roles": {
-      "r1": "un fotografo di matrimoni.",
-      "r2": "un ritrattista.",
-      "r3": "un narratore visivo."
-    },
-    "text": "Catturo luce sincera e momenti silenziosi: matrimoni, ritratti e famiglie, fotografati con calma e ritoccati a mano, per rivivere quel giorno ogni volta che li guardi.",
-    "imageAlt": "Ritratto del fotografo",
-    "cta": "Prenota una data",
-    "works": "Guarda i miei lavori"
-  },
   "about": {
     "eyebrow": "Chi sono",
     "titleStart": "Fotografo le persone per come si sentono,",

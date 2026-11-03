@@ -42,6 +42,8 @@ export class WorksComponent {
 
   /** "teaser" (home): first photos + link to the portfolio · "full" (portfolio page): Load more. */
   readonly mode = input<'teaser' | 'full'>('full');
+  /** First section of the page (home): the title becomes the page's h1 and clears the fixed header. */
+  readonly lead = input(false);
 
   protected readonly total = PORTFOLIO.length;
   protected readonly shown = signal(PAGE_SIZE);

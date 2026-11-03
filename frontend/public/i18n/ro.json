@@ -61,19 +61,6 @@
       "label": "Altceva"
     }
   },
-  "hero": {
-    "welcome": "Bun venit în lumea mea",
-    "hello": "Bună, sunt",
-    "roles": {
-      "r1": "fotograf de nunți.",
-      "r2": "artist portretist.",
-      "r3": "povestitor vizual."
-    },
-    "text": "Surprind lumina sinceră și momentele liniștite: nunți, portrete și familii, fotografiate cu calm și editate manual, ca să retrăiești ziua de fiecare dată când le privești.",
-    "imageAlt": "Portretul fotografului",
-    "cta": "Rezervă o dată",
-    "works": "Vezi lucrările"
-  },
   "about": {
     "eyebrow": "Despre mine",
     "titleStart": "Fotografiez oamenii așa cum se simt,",

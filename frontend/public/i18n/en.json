@@ -61,19 +61,6 @@
       "label": "Something else"
     }
   },
-  "hero": {
-    "welcome": "Welcome to my world",
-    "hello": "Hi, I'm",
-    "roles": {
-      "r1": "a Wedding Photographer.",
-      "r2": "a Portrait Artist.",
-      "r3": "a Visual Storyteller."
-    },
-    "text": "I capture honest light and quiet moments - weddings, portraits and families, photographed calmly and edited by hand, so you can feel the day again every time you look.",
-    "imageAlt": "Portrait of the photographer",
-    "cta": "Book a date",
-    "works": "See my work"
-  },
   "about": {
     "eyebrow": "About me",
     "titleStart": "I photograph people the way they feel,",

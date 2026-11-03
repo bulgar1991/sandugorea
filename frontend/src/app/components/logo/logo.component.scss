@@ -7,7 +7,7 @@
 
   // Name with a bottom border; the gold line grows a little on hover.
   &__name {
-    @apply relative whitespace-nowrap pb-2 font-logo text-xl font-medium tracking-[0.08em] text-ink;
+    @apply relative whitespace-nowrap pb-2 font-logo text-[18px] font-normal tracking-[0.12em] text-ink;
 
     &::after {
       @apply absolute bottom-0 left-1/2 h-px w-full -translate-x-1/2 bg-accent transition-[width] duration-500 ease-out-expo content-[''];
@@ -20,16 +20,14 @@
   }
 
   &__tagline {
-    @apply mt-2 font-logo text-2xs font-light uppercase tracking-caps-2xl text-accent;
-    // Letter spacing adds space after the last letter too; this keeps the word optically centred.
-    margin-right: -0.55em;
+    @apply mt-1 font-script text-[15px] font-normal leading-none text-accent;
   }
 
   &--lg &__name {
-    @apply text-3xl;
+    @apply text-[26px];
   }
 
   &--lg &__tagline {
-    @apply mt-2.5 text-xs;
+    @apply mt-1.5 text-[20px];
   }
 }
