@@ -5,7 +5,13 @@ import { TranslateService } from '@ngx-translate/core';
 import { OG_LOCALES, SITE_NAME, SITE_SHARE_IMAGE, SITE_URL } from '@/config/site';
 import { SeoData } from '@models/seo.model';
 import { BRAND, SOCIAL_LINKS } from '@/data/portfolio.data';
-import { DEFAULT_LANGUAGE, LANGUAGES } from './language.service';
+import {
+  DEFAULT_LANGUAGE,
+  LANGUAGES,
+  LanguageCode,
+  localizePath,
+  splitLocalizedUrl,
+} from './language.service';
 
 /**
  * Sets the page title, description, canonical link, Open Graph and Twitter tags for the
@@ -70,6 +76,7 @@ export class SeoService {
     this.setCanonical(url);
 
     const noindex = (seo.metaTags ?? []).some((t) => t.name === 'robots');
+    this.setAlternates(noindex ? null : splitLocalizedUrl(cleanPath).path);
     this.setStructuredData(
       noindex ? null : this.structuredData(cleanPath, url, title, description, lang),
     );
@@ -167,13 +174,38 @@ export class SeoService {
         {
           '@type': 'BreadcrumbList',
           itemListElement: [
-            { '@type': 'ListItem', position: 1, name: this.text('nav.home'), item: `${SITE_URL}/` },
+            {
+              '@type': 'ListItem',
+              position: 1,
+              name: this.text('nav.home'),
+              item: SITE_URL + localizePath('/', lang as LanguageCode),
+            },
             // "Leistungen — Sandu Gorea" -> "Leistungen"
             { '@type': 'ListItem', position: 2, name: title.split(' — ')[0], item: url },
           ],
         },
       ],
     };
+  }
+
+  /**
+   * <link rel="alternate" hreflang="…"> for every language version of this page, plus x-default
+   * (German, at the root) - tells search engines the pages are translations of each other.
+   */
+  private setAlternates(basePath: string | null): void {
+    this.document.head
+      .querySelectorAll('link[rel="alternate"][hreflang]')
+      .forEach((link) => link.remove());
+    if (basePath === null) return;
+    const add = (hreflang: string, lang: LanguageCode) => {
+      const link = this.document.createElement('link');
+      link.setAttribute('rel', 'alternate');
+      link.setAttribute('hreflang', hreflang);
+      link.setAttribute('href', SITE_URL + localizePath(basePath, lang));
+      this.document.head.appendChild(link);
+    };
+    for (const l of LANGUAGES) add(l.code, l.code);
+    add('x-default', DEFAULT_LANGUAGE);
   }
 
   /** One <script type="application/ld+json"> (a data block: not executed, so the CSP allows it). */

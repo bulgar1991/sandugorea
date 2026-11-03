@@ -1,3 +1,4 @@
+import { LocalizePipe } from '@pipes/localize.pipe';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -14,6 +15,7 @@ import { ContainerComponent } from '@ui/container/container.component';
 @Component({
   selector: 'app-footer',
   imports: [
+    LocalizePipe,
     LogoComponent,
     SocialLinksComponent,
     TextComponent,

@@ -1,3 +1,4 @@
+import { LocalizePipe } from '@pipes/localize.pipe';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -30,6 +31,7 @@ export const NAV_LINKS = [
 @Component({
   selector: 'app-header',
   imports: [
+    LocalizePipe,
     LogoComponent,
     RouterLinkActive,
     ButtonComponent,

@@ -1,3 +1,4 @@
+import { LocalizePipe } from '@pipes/localize.pipe';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -11,6 +12,7 @@ import { BANNER_IMAGES } from '@/data/portfolio.data';
 @Component({
   selector: 'app-cta-band',
   imports: [
+    LocalizePipe,
     RouterLink,
     TranslatePipe,
     IconComponent,
@@ -31,7 +33,7 @@ import { BANNER_IMAGES } from '@/data/portfolio.data';
         <a
           data-testid="cta-band-link-booking"
           app-button
-          routerLink="/booking"
+          [routerLink]="'/booking' | localize"
           class="cta__button"
           appReveal
           [revealDelay]="200"

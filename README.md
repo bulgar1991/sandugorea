@@ -83,12 +83,18 @@ Use `<app-icon name="calendar" [size]="16" />`; a wrong name is a compile error.
 
 ## SEO, icons & test ids
 
+- **Language in the URL:** German (default) at the root, the others prefixed —
+  `/services`, `/en/services`, `/it/services`, `/fr/services`, `/ro/services`. `/de/…` redirects to
+  the root. `languageGuard` sets the language from the URL; the switcher opens the same page in the
+  other language. Public links use the pipe: `[routerLink]="'/booking' | localize"`. `/admin` and
+  `/client` have no prefix and use the last language. Each page gets `hreflang` alternates.
+
 - **Per page:** title, description, canonical, Open Graph/Twitter and schema.org JSON-LD are set by
   `SeoService` from each route's `data.seo` (translation keys under `seo.*`). Private pages
   (`/admin`, `/client`) get `noindex` and no structured data.
 - **Link previews:** WhatsApp/Facebook don't run JavaScript, so `src/index.html` carries the German
   home-page tags and `og-image.jpg` (1200×630) statically.
-- **`public/`:** `robots.txt`, `sitemap.xml` (add new public pages there), `manifest.webmanifest`,
+- **`public/`:** `robots.txt`, `sitemap.xml` (every page in all 5 languages; add new public pages there), `manifest.webmanifest`,
   favicons (`favicon.svg` "SG" monogram in the logo font, `favicon.ico`, `apple-touch-icon.png`,
   `icon-192/512.png`, `icon-maskable-512.png`).
 - **`data-testid`:** every interactive element has one, named `<component>-<what>`

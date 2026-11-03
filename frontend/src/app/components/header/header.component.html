@@ -15,7 +15,7 @@
           "
           app-link
           underline
-          [routerLink]="link.path"
+          [routerLink]="link.path | localize"
           routerLinkActive="link--active header__link--active"
           [routerLinkActiveOptions]="{ exact: link.exact }"
           class="header__link"
@@ -31,7 +31,7 @@
         data-testid="header-cta-booking"
         app-button
         size="sm"
-        routerLink="/booking"
+        [routerLink]="'/booking' | localize"
         class="header__cta"
       >
         <app-icon name="calendar" [size]="14" />
@@ -61,7 +61,7 @@
           [attr.data-testid]="
             'menu-link' + (link.path === '/' ? '-home' : link.path.replace('/', '-'))
           "
-          [routerLink]="link.path"
+          [routerLink]="link.path | localize"
           routerLinkActive="menu__link--active"
           [routerLinkActiveOptions]="{ exact: link.exact }"
           class="menu__link"

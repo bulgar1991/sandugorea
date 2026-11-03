@@ -42,7 +42,7 @@
           data-testid="services-page-link-booking"
           app-button
           variant="outline"
-          routerLink="/booking"
+          [routerLink]="'/booking' | localize"
           [queryParams]="{ type: s.id }"
           class="service__button"
           appReveal

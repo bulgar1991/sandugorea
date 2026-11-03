@@ -1,5 +1,7 @@
-import { Routes } from '@angular/router';
+import { Routes, UrlSegment } from '@angular/router';
 import { adminGuard, adminGuestGuard, customerGuard, customerGuestGuard } from '@guards/auth.guard';
+import { languageGuard } from '@guards/language.guard';
+import { PREFIXED_LANGUAGES } from '@services/language.service';
 import { seoResolver } from './resolvers/seo.resolver';
 
 // `data.seo` holds translation keys (under "seo" in public/i18n/*.json); seoResolver turns them
@@ -141,13 +143,41 @@ const adminRoutes: Routes = [
   },
 ];
 
+const loadMainLayout = () =>
+  import('@components/main-layout/main-layout.component').then((m) => m.MainLayoutComponent);
+
+/** "/en/…", "/it/…", "/fr/…", "/ro/…": the first segment becomes the `lang` param. */
+function languagePrefix(segments: UrlSegment[]) {
+  const first = segments[0];
+  return first && (PREFIXED_LANGUAGES as string[]).includes(first.path)
+    ? { consumed: [first], posParams: { lang: first } }
+    : null;
+}
+
 export const routes: Routes = [
   ...customerRoutes,
   ...adminRoutes,
+  // German has no prefix: "/de/services" -> "/services".
+  {
+    matcher: (segments) => (segments[0]?.path === 'de' ? { consumed: segments } : null),
+    redirectTo: ({ url }) =>
+      '/' +
+      url
+        .slice(1)
+        .map((s) => s.path)
+        .join('/'),
+  },
+  {
+    matcher: languagePrefix,
+    canActivate: [languageGuard],
+    loadComponent: loadMainLayout,
+    children: mainLayoutRoutes,
+  },
   {
     path: '',
-    loadComponent: () =>
-      import('@components/main-layout/main-layout.component').then((m) => m.MainLayoutComponent),
+    canActivate: [languageGuard],
+    data: { lang: 'de' },
+    loadComponent: loadMainLayout,
     children: mainLayoutRoutes,
   },
 ];

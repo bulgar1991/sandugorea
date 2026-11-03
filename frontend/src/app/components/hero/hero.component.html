@@ -47,11 +47,17 @@
         </p>
 
         <div class="hero__actions hero__appear" style="--d: 640ms">
-          <a data-testid="hero-link-booking" app-button routerLink="/booking">
+          <a data-testid="hero-link-booking" app-button [routerLink]="'/booking' | localize">
             <app-icon name="calendar" [size]="16" />
             {{ 'hero.cta' | translate }}
           </a>
-          <a data-testid="hero-link-portfolio" app-link caps underline routerLink="/portfolio">
+          <a
+            data-testid="hero-link-portfolio"
+            app-link
+            caps
+            underline
+            [routerLink]="'/portfolio' | localize"
+          >
             {{ 'hero.works' | translate }}
             <app-icon name="arrow-right" [size]="14" />
           </a>

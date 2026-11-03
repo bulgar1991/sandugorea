@@ -1,3 +1,4 @@
+import { LocalizePipe } from '@pipes/localize.pipe';
 import { ChangeDetectionStrategy, Component, ElementRef, input, viewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -19,6 +20,7 @@ const MAX_TILT = 8;
 @Component({
   selector: 'app-about-section',
   imports: [
+    LocalizePipe,
     ButtonComponent,
     TitleComponent,
     EyebrowComponent,

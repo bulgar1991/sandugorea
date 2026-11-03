@@ -14,7 +14,7 @@
             [attr.data-testid]="
               'footer-link' + (link.path === '/' ? '-home' : link.path.replace('/', '-'))
             "
-            [routerLink]="link.path"
+            [routerLink]="link.path | localize"
             class="footer__link"
             >{{ link.key | translate }}</a
           >

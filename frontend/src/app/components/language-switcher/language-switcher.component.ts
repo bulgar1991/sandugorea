@@ -35,7 +35,7 @@ export class LanguageSwitcherComponent {
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
 
   protected select(code: LanguageCode) {
-    this.language.use(code).subscribe();
+    this.language.switchTo(code);
     this.open.set(false);
   }
 

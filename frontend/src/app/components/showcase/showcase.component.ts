@@ -1,3 +1,4 @@
+import { LocalizePipe } from '@pipes/localize.pipe';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -16,6 +17,7 @@ import { ContainerComponent } from '@ui/container/container.component';
 @Component({
   selector: 'app-showcase',
   imports: [
+    LocalizePipe,
     TitleComponent,
     EyebrowComponent,
     ContainerComponent,

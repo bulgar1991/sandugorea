@@ -11,7 +11,7 @@
       @for (cat of categories; track cat.id; let i = $index) {
         <a
           data-testid="showcase-panel"
-          routerLink="/services"
+          [routerLink]="'/services' | localize"
           class="panel"
           [class.panel--active]="active() === i"
           (mouseenter)="active.set(i)"
@@ -40,7 +40,12 @@
   </div>
 
   <div class="showcase__more" appReveal>
-    <a data-testid="showcase-all-services" app-button variant="outline" routerLink="/services">
+    <a
+      data-testid="showcase-all-services"
+      app-button
+      variant="outline"
+      [routerLink]="'/services' | localize"
+    >
       {{ 'showcase.all' | translate }}
       <app-icon name="arrow-right" [size]="16" />
     </a>

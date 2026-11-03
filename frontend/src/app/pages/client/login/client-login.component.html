@@ -7,7 +7,7 @@
 
   <div class="sign-in__side">
     <div class="sign-in__top">
-      <a data-testid="client-login-link-home" routerLink="/" class="sign-in__back">
+      <a data-testid="client-login-link-home" [routerLink]="'/' | localize" class="sign-in__back">
         <app-icon name="arrow-left" [size]="14" />
         {{ brand.name }}
       </a>
@@ -93,7 +93,7 @@
 
       <p class="sign-in__help sign-in__step" style="--i: 6">
         {{ 'client.login.lost' | translate }}
-        <a data-testid="client-login-link-booking" app-link routerLink="/booking">{{
+        <a data-testid="client-login-link-booking" app-link [routerLink]="'/booking' | localize">{{
           'client.login.contact' | translate
         }}</a
         >.

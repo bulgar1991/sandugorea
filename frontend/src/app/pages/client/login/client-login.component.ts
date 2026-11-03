@@ -1,3 +1,4 @@
+import { LocalizePipe } from '@pipes/localize.pipe';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -21,6 +22,7 @@ interface ErrorMessage {
 @Component({
   selector: 'app-client-login',
   imports: [
+    LocalizePipe,
     ButtonComponent,
     LinkComponent,
     TitleComponent,

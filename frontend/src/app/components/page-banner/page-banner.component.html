@@ -6,9 +6,12 @@
 
   <div class="page-banner__content">
     <nav class="page-banner__crumbs page-banner__appear" style="--d: 0ms" aria-label="Breadcrumb">
-      <a data-testid="page-banner-crumb-home" routerLink="/" class="page-banner__crumb">{{
-        'nav.home' | translate
-      }}</a>
+      <a
+        data-testid="page-banner-crumb-home"
+        [routerLink]="'/' | localize"
+        class="page-banner__crumb"
+        >{{ 'nav.home' | translate }}</a
+      >
       <app-icon name="chevron-right" [size]="12" />
       <span class="page-banner__crumb page-banner__crumb--current" aria-current="page">{{
         crumb() | translate

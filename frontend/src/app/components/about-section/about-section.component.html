@@ -64,7 +64,12 @@
         <p class="about__role">{{ 'about.role' | translate }}</p>
       </div>
       @if (mode() === 'teaser') {
-        <a data-testid="about-section-link-about" app-button variant="outline" routerLink="/about">
+        <a
+          data-testid="about-section-link-about"
+          app-button
+          variant="outline"
+          [routerLink]="'/about' | localize"
+        >
           {{ 'about.more' | translate }}
           <app-icon name="arrow-right" [size]="16" />
         </a>
@@ -73,7 +78,7 @@
           data-testid="about-section-link-booking"
           app-button
           variant="outline"
-          routerLink="/booking"
+          [routerLink]="'/booking' | localize"
         >
           <app-icon name="calendar" [size]="16" />
           {{ 'about.cta' | translate }}

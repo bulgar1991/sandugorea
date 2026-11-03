@@ -1,3 +1,4 @@
+import { LocalizePipe } from '@pipes/localize.pipe';
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -12,7 +13,14 @@ import { EyebrowComponent, TextComponent } from '@ui/typography/typography.compo
  */
 @Component({
   selector: 'app-page-banner',
-  imports: [RouterLink, TranslatePipe, IconComponent, EyebrowComponent, TextComponent],
+  imports: [
+    LocalizePipe,
+    RouterLink,
+    TranslatePipe,
+    IconComponent,
+    EyebrowComponent,
+    TextComponent,
+  ],
   templateUrl: './page-banner.component.html',
   styleUrl: './page-banner.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

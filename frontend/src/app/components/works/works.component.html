@@ -40,7 +40,12 @@
 
   <div class="works__footer">
     @if (mode() === 'teaser') {
-      <a data-testid="works-link-portfolio" app-button variant="outline" routerLink="/portfolio">
+      <a
+        data-testid="works-link-portfolio"
+        app-button
+        variant="outline"
+        [routerLink]="'/portfolio' | localize"
+      >
         {{ 'works.viewAll' | translate }}
         <app-icon name="arrow-right" [size]="16" />
       </a>

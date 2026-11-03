@@ -1,3 +1,4 @@
+import { LocalizePipe } from '@pipes/localize.pipe';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -42,6 +43,7 @@ const SPECKS = Array.from({ length: 14 }, (_, i) => ({
 @Component({
   selector: 'app-hero',
   imports: [
+    LocalizePipe,
     RouterLink,
     TranslatePipe,
     IconComponent,

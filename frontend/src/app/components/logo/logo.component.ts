@@ -1,3 +1,4 @@
+import { LocalizePipe } from '@pipes/localize.pipe';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -9,11 +10,11 @@ import { BRAND } from '@/data/portfolio.data';
  */
 @Component({
   selector: 'app-logo',
-  imports: [RouterLink, TranslatePipe],
+  imports: [LocalizePipe, RouterLink, TranslatePipe],
   template: `
     <a
       data-testid="logo-link-home"
-      routerLink="/"
+      [routerLink]="'/' | localize"
       class="logo__link"
       [attr.aria-label]="'nav.home' | translate"
     >

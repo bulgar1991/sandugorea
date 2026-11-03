@@ -1,3 +1,4 @@
+import { LocalizePipe } from '@pipes/localize.pipe';
 import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
@@ -20,6 +21,7 @@ const PAGE_SIZE = 8;
 @Component({
   selector: 'app-works',
   imports: [
+    LocalizePipe,
     RouterLink,
     ButtonComponent,
     TitleComponent,

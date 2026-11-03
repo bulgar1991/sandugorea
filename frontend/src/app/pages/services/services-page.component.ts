@@ -1,3 +1,4 @@
+import { LocalizePipe } from '@pipes/localize.pipe';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -18,6 +19,7 @@ import { BANNER_IMAGES, SERVICES } from '@/data/portfolio.data';
 @Component({
   selector: 'app-services-page',
   imports: [
+    LocalizePipe,
     RouterLink,
     TranslatePipe,
     CtaBandComponent,
