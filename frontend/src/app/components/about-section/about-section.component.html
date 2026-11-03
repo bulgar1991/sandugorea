@@ -1,4 +1,4 @@
-<div app-container class="about">
+<div app-container class="about" [class.about--lead]="lead()">
   <div class="about__visual" (mousemove)="onMove($event)" (mouseleave)="onLeave()">
     <!-- Thin gold frame drifting behind the portrait -->
     <span class="about__outline" aria-hidden="true"></span>
@@ -41,9 +41,15 @@
 
   <div class="about__body">
     <p app-eyebrow appReveal>{{ 'about.eyebrow' | translate }}</p>
-    <h2 app-title size="lg" class="about__title" appReveal [revealDelay]="100">
-      {{ 'about.titleStart' | translate }} <em>{{ 'about.titleAccent' | translate }}</em>
-    </h2>
+    @if (lead()) {
+      <h1 app-title size="lg" class="about__title" appReveal [revealDelay]="100">
+        {{ 'about.titleStart' | translate }} <em>{{ 'about.titleAccent' | translate }}</em>
+      </h1>
+    } @else {
+      <h2 app-title size="lg" class="about__title" appReveal [revealDelay]="100">
+        {{ 'about.titleStart' | translate }} <em>{{ 'about.titleAccent' | translate }}</em>
+      </h2>
+    }
     <div app-text class="about__text" appReveal [revealDelay]="200">
       <p>{{ 'about.p1' | translate }}</p>
       <p>{{ 'about.p2' | translate }}</p>
@@ -57,6 +63,26 @@
         </li>
       }
     </ul>
+
+    <div
+      data-testid="about-section-languages"
+      class="about__languages"
+      appReveal
+      [revealDelay]="350"
+    >
+      <p class="about__languages-label">
+        <span class="about__languages-icon"><app-icon name="speaking-head" [size]="18" /></span>
+        {{ 'about.languages' | translate }}
+      </p>
+      <ul class="about__language-list">
+        @for (l of languages; track l.flag) {
+          <li [attr.data-testid]="'about-section-language-' + l.flag" class="about__language">
+            <span class="about__flag" [class]="'about__flag--' + l.flag" aria-hidden="true"></span>
+            <span [attr.lang]="l.flag">{{ l.name }}</span>
+          </li>
+        }
+      </ul>
+    </div>
 
     <div class="about__footer" appReveal [revealDelay]="400">
       <div>

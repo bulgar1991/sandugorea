@@ -38,6 +38,8 @@ const MAX_TILT = 8;
 export class AboutSectionComponent {
   /** On the home page the button leads to the About page, on the About page to booking. */
   readonly mode = input<'teaser' | 'full'>('teaser');
+  /** First section of the page (home): the title becomes the page's h1 and clears the fixed header. */
+  readonly lead = input(false);
 
   protected readonly portrait = imageUrl('sg-portrait', 1000, 1300);
   protected readonly detail = imageUrl('sg-detail', 700, 900);
@@ -45,6 +47,12 @@ export class AboutSectionComponent {
     'about.highlights.h1',
     'about.highlights.h2',
     'about.highlights.h3',
+  ];
+  /** Languages spoken, written in their own language; `flag` picks the stripes in the SCSS. */
+  protected readonly languages = [
+    { flag: 'de', name: 'Deutsch' },
+    { flag: 'ro', name: 'Română' },
+    { flag: 'ru', name: 'Русский' },
   ];
   /** Text running around the rotating badge (repeated to fill the circle). */
   protected readonly ringText = `${BRAND.owner} • Photography • `.repeat(2).toUpperCase();

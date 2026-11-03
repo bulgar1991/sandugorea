@@ -7,6 +7,11 @@
 
   @apply grid items-center gap-16 lg:grid-cols-12 lg:gap-12;
 
+  // Top of the page: room for the fixed header instead of the usual section spacing.
+  &--lead {
+    @apply pt-32 lg:pt-40;
+  }
+
   &__visual {
     @apply relative pb-16 pl-6 pr-10 pt-6 lg:col-span-6 lg:pb-20 lg:pr-16;
     perspective: 1200px;
@@ -107,6 +112,44 @@
 
   &__check {
     @apply flex h-7 w-7 items-center justify-center rounded-full border border-accent/40 text-accent;
+  }
+
+  // ---------- Languages spoken ----------
+  &__languages {
+    @apply mt-10;
+  }
+
+  &__languages-label {
+    @apply flex items-center gap-3 text-xs uppercase tracking-caps text-ink-muted;
+  }
+
+  &__languages-icon {
+    @apply flex h-9 w-9 items-center justify-center rounded-full border border-accent/40 text-accent;
+  }
+
+  &__language-list {
+    @apply mt-4 flex flex-wrap gap-3;
+  }
+
+  &__language {
+    @apply flex items-center gap-2.5 rounded-full border border-line px-4 py-2 text-sm text-ink;
+  }
+
+  // Flags drawn with gradients (emoji flags don't show on Windows).
+  &__flag {
+    @apply block h-3.5 w-5 shrink-0 rounded-[3px] ring-1 ring-white/15;
+
+    &--de {
+      background: linear-gradient(#000 33.34%, #dd0000 33.34% 66.67%, #ffce00 66.67%);
+    }
+
+    &--ro {
+      background: linear-gradient(90deg, #002b7f 33.34%, #fcd116 33.34% 66.67%, #ce1126 66.67%);
+    }
+
+    &--ru {
+      background: linear-gradient(#fff 33.34%, #0039a6 33.34% 66.67%, #d52b1e 66.67%);
+    }
   }
 
   &__footer {

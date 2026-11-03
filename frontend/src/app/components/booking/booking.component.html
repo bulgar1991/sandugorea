@@ -169,5 +169,30 @@
         </form>
       }
     </div>
+
+    <!-- Studio location: OpenStreetMap embed (no cookies, no API key). -->
+    <figure data-testid="booking-map" class="booking__map" appReveal="up">
+      <iframe
+        class="booking__map-frame"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=9.3836%2C47.0279%2C9.5036%2C47.0695&layer=mapnik&marker=47.0487%2C9.4436"
+        [title]="'booking.map.title' | translate"
+        loading="lazy"
+        referrerpolicy="no-referrer"
+      ></iframe>
+      <figcaption class="booking__map-caption">
+        <span class="booking__map-place">
+          <app-icon name="map-pin" [size]="16" /> {{ 'booking.map.place' | translate }}
+        </span>
+        <a
+          data-testid="booking-map-link"
+          class="booking__map-link"
+          href="https://www.openstreetmap.org/?mlat=47.0487&mlon=9.4436#map=13/47.0487/9.4436"
+          target="_blank"
+          rel="noopener"
+        >
+          {{ 'booking.map.open' | translate }} <app-icon name="arrow-up-right" [size]="14" />
+        </a>
+      </figcaption>
+    </figure>
   </div>
 </div>

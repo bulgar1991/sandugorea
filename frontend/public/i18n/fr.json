@@ -1,7 +1,7 @@
 {
   "brand": {
     "tagline": "Photographie",
-    "location": "Bucarest · Disponible dans le monde entier"
+    "location": "Sargans, Suisse · Disponible dans le monde entier"
   },
   "common": {
     "language": "Langue",
@@ -76,20 +76,16 @@
       "h2": "Couleurs intemporelles, retouchées à la main",
       "h3": "Livraison en ligne privée"
     },
-    "more": "En savoir plus sur moi"
+    "more": "En savoir plus sur moi",
+    "languages": "Je parle"
   },
   "showcase": {
-    "eyebrow": "Ce que je photographie",
-    "titleStart": "Chaque histoire mérite",
-    "titleAccent": "sa propre lumière",
-    "explore": "Découvrir",
     "stats": {
       "years": "Années derrière l'objectif",
       "sessions": "Séances photo",
       "weddings": "Mariages",
       "countries": "Pays"
-    },
-    "all": "Tous les services"
+    }
   },
   "works": {
     "eyebrow": "Portfolio",
@@ -162,7 +158,12 @@
     "successTitle": "Merci !",
     "successText": "Votre demande est en route. Je vous réponds très bientôt.",
     "again": "Envoyer une autre demande",
-    "pickDate": "Choisissez un jour dans le calendrier"
+    "pickDate": "Choisissez un jour dans le calendrier",
+    "map": {
+      "title": "Emplacement du studio sur la carte",
+      "place": "Sargans, Suisse",
+      "open": "Ouvrir la carte"
+    }
   },
   "footer": {
     "about": "Photographie fine art, portrait et mariage : calme, cinématographique et faite pour durer.",

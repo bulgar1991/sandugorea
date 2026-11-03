@@ -43,6 +43,8 @@ public static class SecurityMiddleware
                     "font-src 'self' data: https://fonts.gstatic.com; " +   // data: = the icon font embedded in the CSS
                     // picsum.photos: placeholder images until the real portfolio is added.
                     "img-src 'self' data: blob: https://picsum.photos https://fastly.picsum.photos; " +
+                    // OpenStreetMap: the studio map on the booking page.
+                    "frame-src https://www.openstreetmap.org; " +
                     "connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'";
                 if (ctx.Request.Path.StartsWithSegments("/api"))
                 {

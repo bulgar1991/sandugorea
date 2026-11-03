@@ -71,6 +71,33 @@
     @apply mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-accent;
   }
 
+  // ---------- Map ----------
+  &__map {
+    @apply overflow-hidden rounded-3xl border border-line bg-surface lg:col-span-12;
+  }
+
+  // Dark map to match the page: invert the light OSM tiles, then turn the hues back.
+  &__map-frame {
+    @apply block h-80 w-full border-0 lg:h-[26rem];
+    filter: invert(0.92) hue-rotate(180deg) grayscale(0.6) contrast(0.9);
+  }
+
+  &__map-caption {
+    @apply flex flex-wrap items-center justify-between gap-4 border-t border-line px-6 py-4 text-sm;
+  }
+
+  &__map-place {
+    @apply flex items-center gap-2 text-ink;
+
+    app-icon {
+      @apply text-accent;
+    }
+  }
+
+  &__map-link {
+    @apply flex items-center gap-1.5 text-xs uppercase tracking-caps text-ink-muted transition-colors hover:text-accent;
+  }
+
   &__trap {
     @apply absolute -left-[9999px] h-px w-px opacity-0;
   }

@@ -81,7 +81,17 @@ else
 app.UseDefaultFiles();
 var contentTypes = new Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider();
 contentTypes.Mappings[".webmanifest"] = "application/manifest+json";
-app.UseStaticFiles(new StaticFileOptions { ContentTypeProvider = contentTypes });
+app.UseStaticFiles(new StaticFileOptions
+{
+    ContentTypeProvider = contentTypes,
+    OnPrepareResponse = ctx =>
+    {
+        // Translations keep their file names between deploys: make browsers check for a new
+        // version (a cheap 304 when unchanged) instead of showing raw keys from a stale copy.
+        if (ctx.Context.Request.Path.StartsWithSegments("/i18n"))
+            ctx.Context.Response.Headers.CacheControl = "no-cache";
+    },
+});
 
 app.UseCsrfHeaderCheck();
 app.UseRateLimiter();

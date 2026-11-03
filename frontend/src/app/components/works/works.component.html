@@ -1,16 +1,10 @@
-<div app-container class="works" [class.works--lead]="lead()">
+<div app-container class="works">
   <div class="works__head">
     <div>
       <p app-eyebrow appReveal>{{ 'works.eyebrow' | translate }}</p>
-      @if (lead()) {
-        <h1 app-title size="lg" class="works__title" appReveal [revealDelay]="100">
-          {{ 'works.title' | translate }}
-        </h1>
-      } @else {
-        <h2 app-title size="lg" class="works__title" appReveal [revealDelay]="100">
-          {{ 'works.title' | translate }}
-        </h2>
-      }
+      <h2 app-title size="lg" class="works__title" appReveal [revealDelay]="100">
+        {{ 'works.title' | translate }}
+      </h2>
     </div>
     <p app-text class="works__subtitle" appReveal [revealDelay]="200">
       {{ 'works.subtitle' | translate }}

@@ -6,6 +6,7 @@ export type IconName =
   | 'trash'
   | 'tiktok'
   | 'star'
+  | 'speaking-head'
   | 'sparkle'
   | 'shield'
   | 'send'

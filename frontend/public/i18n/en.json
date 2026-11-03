@@ -1,7 +1,7 @@
 {
   "brand": {
     "tagline": "Photography",
-    "location": "Bucharest · Available worldwide"
+    "location": "Sargans, Switzerland · Available worldwide"
   },
   "common": {
     "language": "Language",
@@ -76,20 +76,16 @@
       "h2": "Hand-edited, timeless colour",
       "h3": "Private online delivery"
     },
-    "more": "More about me"
+    "more": "More about me",
+    "languages": "I speak"
   },
   "showcase": {
-    "eyebrow": "What I capture",
-    "titleStart": "Every story deserves",
-    "titleAccent": "its own light",
-    "explore": "Explore",
     "stats": {
       "years": "Years behind the camera",
       "sessions": "Sessions photographed",
       "weddings": "Weddings",
       "countries": "Countries"
-    },
-    "all": "All services"
+    }
   },
   "works": {
     "eyebrow": "Portfolio",
@@ -162,7 +158,12 @@
     "successTitle": "Thank you!",
     "successText": "Your request is on its way. I'll be in touch very soon.",
     "again": "Send another request",
-    "pickDate": "Pick a date in the calendar"
+    "pickDate": "Pick a date in the calendar",
+    "map": {
+      "title": "Studio location on the map",
+      "place": "Sargans, Switzerland",
+      "open": "Open map"
+    }
   },
   "footer": {
     "about": "Fine art, portrait and wedding photography - calm, cinematic and made to last.",

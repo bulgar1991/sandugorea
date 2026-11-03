@@ -1,7 +1,7 @@
 {
   "brand": {
     "tagline": "Fotografie",
-    "location": "București · Disponibil în toată lumea"
+    "location": "Sargans, Elveția · Disponibil în toată lumea"
   },
   "common": {
     "language": "Limbă",
@@ -76,20 +76,16 @@
       "h2": "Culori atemporale, editate manual",
       "h3": "Livrare online privată"
     },
-    "more": "Mai multe despre mine"
+    "more": "Mai multe despre mine",
+    "languages": "Vorbesc"
   },
   "showcase": {
-    "eyebrow": "Ce fotografiez",
-    "titleStart": "Fiecare poveste merită",
-    "titleAccent": "propria lumină",
-    "explore": "Descoperă",
     "stats": {
       "years": "Ani în spatele aparatului",
       "sessions": "Ședințe foto",
       "weddings": "Nunți",
       "countries": "Țări"
-    },
-    "all": "Toate serviciile"
+    }
   },
   "works": {
     "eyebrow": "Portofoliu",
@@ -162,7 +158,12 @@
     "successTitle": "Mulțumesc!",
     "successText": "Cererea ta a fost trimisă. Revin foarte curând.",
     "again": "Trimite altă cerere",
-    "pickDate": "Alege o zi în calendar"
+    "pickDate": "Alege o zi în calendar",
+    "map": {
+      "title": "Locația studioului pe hartă",
+      "place": "Sargans, Elveția",
+      "open": "Deschide harta"
+    }
   },
   "footer": {
     "about": "Fotografie fine art, de portret și de nuntă: calmă, cinematică și făcută să dureze.",
