@@ -13,6 +13,7 @@ import { filter } from 'rxjs';
 import { IconComponent } from '@components/icon/icon.component';
 import { LanguageSwitcherComponent } from '@components/language-switcher/language-switcher.component';
 import { BRAND } from '@/data/portfolio.data';
+import { LogoComponent } from '@components/logo/logo.component';
 import { ButtonComponent } from '@ui/button/button.component';
 import { LinkComponent } from '@ui/link/link.component';
 import { ContainerComponent } from '@ui/container/container.component';
@@ -29,6 +30,7 @@ export const NAV_LINKS = [
 @Component({
   selector: 'app-header',
   imports: [
+    LogoComponent,
     RouterLinkActive,
     ButtonComponent,
     LinkComponent,

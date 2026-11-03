@@ -17,17 +17,6 @@
     @apply flex h-header items-center justify-between;
   }
 
-  &__logo {
-    @apply flex flex-col leading-none;
-  }
-
-  &__name {
-    @apply font-script text-4xl leading-none text-ink;
-  }
-
-  &__tagline {
-    @apply mt-1.5 pl-1 text-2xs uppercase tracking-caps-2xl text-accent;
-  }
 
   &__nav {
     @apply hidden items-center gap-10 lg:flex;

@@ -4,10 +4,7 @@
   [class.header--hidden]="hidden() && !menuOpen()"
 >
   <div app-container class="header__bar">
-    <a routerLink="/" class="header__logo" [attr.aria-label]="'nav.home' | translate">
-      <span class="header__name">{{ brand.owner }}</span>
-      <span class="header__tagline">{{ 'brand.tagline' | translate }}</span>
-    </a>
+    <app-logo />
 
     <nav class="header__nav" [attr.aria-label]="'nav.main' | translate">
       @for (link of links; track link.path) {

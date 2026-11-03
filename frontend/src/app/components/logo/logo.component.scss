@@ -1,0 +1,35 @@
+.logo {
+  @apply inline-block;
+
+  &__link {
+    @apply inline-flex flex-col items-center leading-none;
+  }
+
+  // Name with a bottom border; the gold line grows a little on hover.
+  &__name {
+    @apply relative whitespace-nowrap pb-2 font-logo text-xl font-medium tracking-[0.08em] text-ink;
+
+    &::after {
+      @apply absolute bottom-0 left-1/2 h-px w-full -translate-x-1/2 bg-accent transition-[width] duration-500 ease-out-expo content-[''];
+    }
+  }
+
+  &__link:hover &__name::after,
+  &__link:focus-visible &__name::after {
+    @apply w-[115%];
+  }
+
+  &__tagline {
+    @apply mt-2 font-logo text-2xs font-light uppercase tracking-caps-2xl text-accent;
+    // Letter spacing adds space after the last letter too; this keeps the word optically centred.
+    margin-right: -0.55em;
+  }
+
+  &--lg &__name {
+    @apply text-3xl;
+  }
+
+  &--lg &__tagline {
+    @apply mt-2.5 text-xs;
+  }
+}

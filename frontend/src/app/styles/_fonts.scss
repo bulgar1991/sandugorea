@@ -1,0 +1,17 @@
+// Self-hosted logo font: Arita Dotum (Amorepacific, free incl. commercial use - see public/fonts/ARITA-LICENSE.md).
+// Subset to Latin (incl. Romanian ș/ț), ~13 KB per weight instead of ~800 KB.
+@font-face {
+  font-family: 'Arita Dotum';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/fonts/arita-dotum-light.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Arita Dotum';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/arita-dotum-medium.woff2') format('woff2');
+}

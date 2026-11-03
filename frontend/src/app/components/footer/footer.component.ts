@@ -7,12 +7,14 @@ import { NAV_LINKS } from '@components/header/header.component';
 import { RevealDirective } from '@directives/reveal.directive';
 import { SocialLinksComponent } from '@components/social-links/social-links.component';
 import { BRAND } from '@/data/portfolio.data';
+import { LogoComponent } from '@components/logo/logo.component';
 import { TextComponent } from '@ui/typography/typography.component';
 import { ContainerComponent } from '@ui/container/container.component';
 
 @Component({
   selector: 'app-footer',
   imports: [
+    LogoComponent,
     SocialLinksComponent,
     TextComponent,
     ContainerComponent,

@@ -8,6 +8,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
+        logo: ['"Arita Dotum"', 'Manrope', 'sans-serif'],
         sans: [
           'Manrope',
           '-apple-system',

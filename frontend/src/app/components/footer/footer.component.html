@@ -1,10 +1,7 @@
 <footer class="footer">
   <div app-container class="footer__grid">
     <div class="footer__about" appReveal>
-      <a routerLink="/" class="footer__logo">
-        <span class="footer__name">{{ brand.owner }}</span>
-        <span class="footer__tagline">{{ 'brand.tagline' | translate }}</span>
-      </a>
+      <app-logo size="lg" />
       <p app-text size="small" class="footer__text">{{ 'footer.about' | translate }}</p>
       <app-language-switcher variant="inline" />
     </div>
