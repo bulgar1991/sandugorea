@@ -208,6 +208,9 @@ module.exports = {
         'zoom-in': 'zoom-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) both',
         'panel-in': 'panel-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both',
         'ken-burns': 'ken-burns 9s ease-out forwards',
+        // Client gallery cover: one slide's zoom and the matching story-style progress bar.
+        'slide-zoom': 'ken-burns 9s cubic-bezier(0.25, 0.1, 0.25, 1) both',
+        'slide-timer': 'progress 6s linear both',
         marquee: 'marquee 40s linear infinite',
         progress: 'progress 6.5s linear forwards',
         'curtain-up': 'curtain-up 0.9s cubic-bezier(0.76, 0, 0.24, 1) forwards',

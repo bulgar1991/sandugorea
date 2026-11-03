@@ -1,37 +1,19 @@
 @if (project(); as p) {
-  <section data-testid="client-project-project-cover" class="project-cover">
-    @if (cover()) {
-      <img [src]="cover()" alt="" class="project-cover__image" decoding="async" />
-    }
-    <div class="project-cover__shade"></div>
-    <div app-container class="project-cover__content">
-      <p app-eyebrow class="project-cover__appear" style="--d: 0ms">
-        {{ 'client.project.for' | translate: { name: p.customerName } }}
-      </p>
-      <h1 app-title size="xl" class="project-cover__title">
-        <span class="project-cover__mask"
-          ><span class="project-cover__word" style="--d: 100ms">{{ p.title }}</span></span
-        >
-      </h1>
-      <p class="project-cover__meta project-cover__appear" style="--d: 400ms">
-        {{ p.date | localDate: 'd MMMM y' }} ·
-        {{ 'client.project.meta' | translate: { count: p.photos.length, size: totalSize() } }}
-      </p>
-      <a
-        data-testid="client-project-download-all"
-        app-button
-        [href]="zipUrl"
-        download
-        class="project-cover__button project-cover__appear"
-        style="--d: 600ms"
-      >
-        <app-icon name="download" [size]="16" />
-        {{ 'client.project.downloadAll' | translate }}
-      </a>
-    </div>
-  </section>
+  <app-gallery-cover
+    data-testid="client-project-cover"
+    [images]="coverImages()"
+    [title]="p.title"
+    [customerName]="p.customerName"
+    [meta]="
+      (p.date | localDate: 'd MMMM y') +
+      ' · ' +
+      ('client.project.meta' | translate: { count: p.photos.length, size: totalSize() })
+    "
+    [downloadUrl]="p.photos.length ? zipUrl : ''"
+    (explore)="showPhotos()"
+  />
 
-  <section data-testid="client-project-project-photos" app-container class="project-photos">
+  <section #photos data-testid="client-project-project-photos" app-container class="project-photos">
     @for (photo of p.photos; track photo.id; let i = $index) {
       <figure class="project-photos__item" appReveal="fade" [revealDelay]="(i % 4) * 80">
         <button

@@ -1,0 +1,85 @@
+<div class="gallery-cover__slides" aria-hidden="true">
+  @for (src of slides(); track $index; let i = $index) {
+    @if (decoded().has(i)) {
+      <img
+        [src]="src"
+        alt=""
+        decoding="async"
+        class="gallery-cover__slide"
+        [class.gallery-cover__slide--active]="i === active()"
+        [class.gallery-cover__slide--leaving]="i === leaving()"
+        [style.--origin]="origins[i % origins.length]"
+        (transitionend)="faded(i)"
+      />
+    }
+  }
+</div>
+<div class="gallery-cover__shade" aria-hidden="true"></div>
+<div class="gallery-cover__grain" aria-hidden="true"></div>
+
+<div app-container class="gallery-cover__content">
+  @if (customerName()) {
+    <p app-eyebrow class="gallery-cover__appear" style="--d: 150ms">
+      {{ 'client.project.for' | translate: { name: customerName() } }}
+    </p>
+  }
+  <h1 app-title size="xl" class="gallery-cover__title">
+    @for (word of titleWords(); track $index) {
+      <span class="gallery-cover__mask"
+        ><span class="gallery-cover__word" [style.--d]="250 + $index * 110 + 'ms'">{{
+          word
+        }}</span></span
+      >{{ ' ' }}
+    }
+  </h1>
+  @if (meta()) {
+    <p class="gallery-cover__meta gallery-cover__appear" style="--d: 650ms">{{ meta() }}</p>
+  }
+
+  <div class="gallery-cover__actions gallery-cover__appear" style="--d: 850ms">
+    @if (downloadUrl()) {
+      <a data-testid="gallery-cover-download-all" app-button [href]="downloadUrl()" download>
+        <app-icon name="download" [size]="16" />
+        {{ 'client.project.downloadAll' | translate }}
+      </a>
+    }
+    <button
+      data-testid="gallery-cover-explore"
+      app-button
+      variant="outline"
+      type="button"
+      (click)="explore.emit()"
+    >
+      {{ 'client.project.explore' | translate }}
+      <app-icon name="chevron-down" [size]="16" />
+    </button>
+  </div>
+
+  @if (autoplay()) {
+    <div class="gallery-cover__progress gallery-cover__appear" style="--d: 1100ms">
+      <span class="gallery-cover__counter" aria-hidden="true"
+        >{{ (active() + 1).toString().padStart(2, '0') }} /
+        {{ slides().length.toString().padStart(2, '0') }}</span
+      >
+      <div class="gallery-cover__bars">
+        @for (src of slides(); track $index; let i = $index) {
+          <button
+            data-testid="gallery-cover-slide"
+            type="button"
+            class="gallery-cover__bar"
+            [attr.aria-label]="'client.project.slide' | translate: { n: i + 1 }"
+            [attr.aria-current]="i === active() ? 'true' : null"
+            (click)="goTo(i)"
+          >
+            <span
+              class="gallery-cover__fill"
+              [class.gallery-cover__fill--done]="i < active()"
+              [class.gallery-cover__fill--active]="i === active()"
+              (animationend)="i === active() && next()"
+            ></span>
+          </button>
+        }
+      </div>
+    </div>
+  }
+</div>

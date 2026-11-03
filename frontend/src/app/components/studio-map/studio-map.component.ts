@@ -38,13 +38,17 @@ export class StudioMapComponent {
     afterNextRender(async () => {
       // Leaflet is CommonJS: its API sits on the default export once bundled.
       const L = (await import('leaflet')).default;
-      const touch = matchMedia('(pointer: coarse)').matches;
       this.map = L.map(this.canvas().nativeElement, {
         center: [STUDIO.lat, STUDIO.lng],
         zoom: 13,
-        // Let the page scroll past the map; on phones one finger scrolls, zoom with the buttons.
+        // A fixed picture: no zoom, no dragging, no touch gestures - the page scrolls over it.
+        zoomControl: false,
         scrollWheelZoom: false,
-        dragging: !touch,
+        doubleClickZoom: false,
+        touchZoom: false,
+        boxZoom: false,
+        keyboard: false,
+        dragging: false,
         attributionControl: true,
       });
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {

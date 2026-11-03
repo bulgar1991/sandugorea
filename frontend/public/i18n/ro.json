@@ -193,7 +193,9 @@
       "meta": "{{count}} fotografii · {{size}}",
       "downloadAll": "Descarcă tot",
       "emptyTitle": "Fotografiile tale sunt în pregătire",
-      "emptyText": "Vei primi un email imediat ce sunt gata."
+      "emptyText": "Vei primi un email imediat ce sunt gata.",
+      "explore": "Vezi fotografiile",
+      "slide": "Arată fotografia {{n}}"
     }
   },
   "auth": {

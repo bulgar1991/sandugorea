@@ -1,0 +1,135 @@
+// Only opacity and transform are animated, so everything runs on the GPU.
+:host {
+  @apply relative isolate flex h-[calc(100svh-5rem)] min-h-[32rem] items-end overflow-hidden bg-black;
+}
+
+.gallery-cover {
+  &__slides {
+    @apply absolute inset-0 -z-10;
+  }
+
+  &__slide {
+    @apply absolute inset-0 block h-full w-full object-cover opacity-0;
+    transform-origin: var(--origin, 50% 50%);
+    transform: scale(1.12);
+    transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+    backface-visibility: hidden;
+
+    // The leaving slide keeps the same animation, so its zoom continues while it fades out.
+    &--active,
+    &--leaving {
+      @apply animate-slide-zoom;
+      will-change: transform, opacity;
+    }
+
+    // The new photo fades in over the previous one, which stays fully visible underneath -
+    // so the picture never dips to black between two photos.
+    &--active,
+    &--leaving {
+      @apply opacity-100;
+    }
+
+    &--active {
+      @apply z-10;
+
+      // First appearance (inserted already active) also fades in.
+      @starting-style {
+        opacity: 0;
+      }
+    }
+  }
+
+  &__shade {
+    @apply absolute inset-0 -z-10 bg-hero-shade;
+  }
+
+  // Soft vignette on top of the photo for depth (static, no cost per frame).
+  &__grain {
+    @apply pointer-events-none absolute inset-0 -z-10;
+    background: radial-gradient(ellipse at 50% 40%, transparent 40%, rgb(0 0 0 / 0.55) 100%);
+  }
+
+  &__content {
+    @apply relative w-full pb-10 lg:pb-14;
+  }
+
+  &__title {
+    @apply mt-4 max-w-4xl;
+  }
+
+  &__mask {
+    @apply inline-block overflow-hidden pb-[0.08em] align-bottom;
+  }
+
+  &__word {
+    @apply inline-block animate-rise;
+    animation-delay: var(--d);
+  }
+
+  &__meta {
+    @apply mt-4 text-sm text-ink-muted;
+  }
+
+  &__actions {
+    @apply mt-8 flex flex-wrap items-center gap-4;
+  }
+
+  &__appear {
+    @apply animate-fade-up;
+    animation-delay: var(--d);
+  }
+
+  &__progress {
+    @apply mt-10 flex items-center gap-5 lg:mt-14;
+  }
+
+  &__counter {
+    @apply shrink-0 font-mono text-2xs tabular-nums tracking-caps text-ink-muted;
+  }
+
+  &__bars {
+    @apply flex w-full max-w-md gap-2;
+  }
+
+  // Tall invisible hit area around a thin line.
+  &__bar {
+    @apply relative h-6 flex-1 cursor-pointer;
+
+    &::before {
+      @apply absolute inset-x-0 top-1/2 h-px bg-white/25 content-[''];
+    }
+
+    &:focus-visible {
+      @apply outline-none ring-1 ring-accent;
+    }
+  }
+
+  &__fill {
+    // No translate here: the timer animation owns `transform`.
+    @apply absolute inset-x-0 top-1/2 h-px origin-left scale-x-0 bg-accent;
+
+    &--done {
+      @apply scale-x-100;
+    }
+
+    &--active {
+      @apply animate-slide-timer;
+    }
+  }
+}
+
+// Off-screen or hidden tab: freeze the zoom and the timer exactly where they are.
+:host(.gallery-cover--paused) {
+  .gallery-cover__slide,
+  .gallery-cover__fill {
+    animation-play-state: paused;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-cover__slide {
+    @apply transition-none;
+    animation: none;
+    transform: none;
+  }
+}

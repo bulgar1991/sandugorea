@@ -193,7 +193,9 @@
       "meta": "{{count}} photographs · {{size}}",
       "downloadAll": "Download all",
       "emptyTitle": "Your photographs are being prepared",
-      "emptyText": "You'll receive an email as soon as they are ready."
+      "emptyText": "You'll receive an email as soon as they are ready.",
+      "explore": "View the photos",
+      "slide": "Show photo {{n}}"
     }
   },
   "auth": {

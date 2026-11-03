@@ -10,16 +10,10 @@
     filter: invert(0.92) hue-rotate(180deg) grayscale(0.6) contrast(0.9);
   }
 
+  // Static map: normal cursor, and touches go straight to the page so it scrolls.
   .leaflet-container {
-    @apply bg-surface font-sans;
-  }
-
-  .leaflet-control-zoom {
-    @apply overflow-hidden rounded-xl border border-line;
-
-    a {
-      @apply bg-black/80 text-ink transition-colors hover:bg-black hover:text-accent;
-    }
+    @apply cursor-default bg-surface font-sans;
+    touch-action: auto;
   }
 
   .leaflet-control-attribution {

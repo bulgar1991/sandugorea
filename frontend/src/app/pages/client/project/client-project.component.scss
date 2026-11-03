@@ -1,48 +1,5 @@
-.project-cover {
-  @apply relative flex h-[70vh] min-h-[28rem] items-end overflow-hidden;
-
-  &__image {
-    @apply absolute inset-0 block h-full w-full animate-ken-burns object-cover;
-  }
-
-  &__shade {
-    @apply absolute inset-0 bg-hero-shade;
-  }
-
-  &__content {
-    @apply relative pb-14;
-  }
-
-  &__title {
-    @apply mt-4;
-  }
-
-  &__mask {
-    @apply block overflow-hidden pb-[0.08em];
-  }
-
-  &__word {
-    @apply inline-block animate-rise;
-    animation-delay: var(--d);
-  }
-
-  &__meta {
-    @apply mt-4 text-sm text-ink-muted;
-  }
-
-  &__button {
-    @apply mt-8;
-  }
-
-  &__appear {
-    @apply animate-fade-in;
-    animation-duration: 1s;
-    animation-delay: var(--d);
-  }
-}
-
 .project-photos {
-  @apply columns-2 gap-3 py-12 sm:gap-4 lg:columns-3 xl:columns-4;
+  @apply scroll-mt-24 columns-2 gap-3 py-12 sm:gap-4 lg:columns-3 xl:columns-4;
 
   &__item {
     @apply relative mb-3 break-inside-avoid overflow-hidden bg-surface sm:mb-4;
