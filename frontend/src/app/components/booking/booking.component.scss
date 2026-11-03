@@ -76,10 +76,8 @@
     @apply overflow-hidden rounded-3xl border border-line bg-surface lg:col-span-12;
   }
 
-  // Dark map to match the page: invert the light OSM tiles, then turn the hues back.
-  &__map-frame {
-    @apply block h-80 w-full border-0 lg:h-[26rem];
-    filter: invert(0.92) hue-rotate(180deg) grayscale(0.6) contrast(0.9);
+  &__map-canvas {
+    @apply h-80 lg:h-[26rem];
   }
 
   &__map-caption {

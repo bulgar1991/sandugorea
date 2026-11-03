@@ -1,0 +1,74 @@
+.studio-map {
+  @apply block;
+
+  &__canvas {
+    @apply h-full w-full bg-surface;
+  }
+
+  // Dark map to match the page: only the tiles are inverted, so the gold pin keeps its colours.
+  .leaflet-tile-pane {
+    filter: invert(0.92) hue-rotate(180deg) grayscale(0.6) contrast(0.9);
+  }
+
+  .leaflet-container {
+    @apply bg-surface font-sans;
+  }
+
+  .leaflet-control-zoom {
+    @apply overflow-hidden rounded-xl border border-line;
+
+    a {
+      @apply bg-black/80 text-ink transition-colors hover:bg-black hover:text-accent;
+    }
+  }
+
+  .leaflet-control-attribution {
+    @apply rounded-tl-lg bg-black/70 text-ink-muted;
+
+    a {
+      @apply text-ink-muted hover:text-accent;
+    }
+  }
+
+  // ---------- SG pin ----------
+  &__marker {
+    @apply relative;
+  }
+
+  // Round badge with the SG monogram and a point underneath.
+  &__pin {
+    @apply absolute left-0 top-0 flex h-[52px] w-[52px] items-center justify-center rounded-full border-2 border-accent bg-black shadow-xl;
+
+    &::after {
+      content: '';
+      @apply absolute left-1/2 top-full h-0 w-0 -translate-x-1/2 border-x-[7px] border-t-[11px] border-x-transparent border-t-accent;
+    }
+  }
+
+  &__logo {
+    @apply h-10 w-10 rounded-full;
+  }
+
+  // Soft gold ring pulsing on the spot.
+  &__pulse {
+    @apply absolute bottom-0 left-1/2 h-4 w-4 -translate-x-1/2 translate-y-1/2 rounded-full bg-accent/60;
+    animation: studio-map-pulse 2.4s ease-out infinite;
+  }
+}
+
+@keyframes studio-map-pulse {
+  from {
+    opacity: 0.8;
+    transform: translate(-50%, 50%) scale(0.6);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, 50%) scale(3.2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .studio-map__pulse {
+    animation: none;
+  }
+}

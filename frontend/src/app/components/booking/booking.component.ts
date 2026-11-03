@@ -6,6 +6,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { IconComponent, IconName } from '@components/icon/icon.component';
 import { RevealDirective } from '@directives/reveal.directive';
 import { LanguageService } from '@services/language.service';
+import { StudioMapComponent } from '@components/studio-map/studio-map.component';
 import { DatePickerComponent } from '@components/date-picker/date-picker.component';
 import { BRAND, CATEGORY_IDS } from '@/data/portfolio.data';
 import { ButtonComponent } from '@ui/button/button.component';
@@ -20,6 +21,7 @@ import { ContainerComponent } from '@ui/container/container.component';
   selector: 'app-booking',
   imports: [
     DatePickerComponent,
+    StudioMapComponent,
     ButtonComponent,
     TextComponent,
     TitleComponent,

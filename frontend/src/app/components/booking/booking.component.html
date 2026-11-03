@@ -170,15 +170,9 @@
       }
     </div>
 
-    <!-- Studio location: OpenStreetMap embed (no cookies, no API key). -->
+    <!-- Studio location: OpenStreetMap with the SG pin. -->
     <figure data-testid="booking-map" class="booking__map" appReveal="up">
-      <iframe
-        class="booking__map-frame"
-        src="https://www.openstreetmap.org/export/embed.html?bbox=9.3836%2C47.0279%2C9.5036%2C47.0695&layer=mapnik&marker=47.0487%2C9.4436"
-        [title]="'booking.map.title' | translate"
-        loading="lazy"
-        referrerpolicy="no-referrer"
-      ></iframe>
+      <app-studio-map class="booking__map-canvas" [label]="'booking.map.title' | translate" />
       <figcaption class="booking__map-caption">
         <span class="booking__map-place">
           <app-icon name="map-pin" [size]="16" /> {{ 'booking.map.place' | translate }}
