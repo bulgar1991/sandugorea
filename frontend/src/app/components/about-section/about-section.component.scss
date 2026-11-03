@@ -3,7 +3,7 @@
 }
 
 .about {
-  @apply py-28 lg:py-40;
+  @apply pb-16 pt-28 lg:pb-24 lg:pt-40;
 
   @apply grid items-center gap-16 lg:grid-cols-12 lg:gap-12;
 
