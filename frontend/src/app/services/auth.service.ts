@@ -30,6 +30,12 @@ export interface AdminLoginStep {
  * Sign-in for the admin (password + authenticator code) and customers (project credentials).
  * Sessions live in HttpOnly cookies set by the API - nothing secret is ever stored in JS.
  */
+/** Answer of the API's "/me" checks (200 either way, so no 401 in the console). */
+interface SessionCheck {
+  signedIn: boolean;
+  name: string | null;
+}
+
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private readonly http = inject(HttpClient);
@@ -44,8 +50,9 @@ export class AuthService {
   async checkAdmin(): Promise<boolean> {
     if (this.isAdmin()) return true;
     try {
-      const me = await firstValueFrom(this.http.get<{ username: string }>('/api/admin/auth/me'));
-      this._session.set({ role: 'admin', displayName: me.username });
+      const me = await firstValueFrom(this.http.get<SessionCheck>('/api/admin/auth/me'));
+      if (!me.signedIn) return false;
+      this._session.set({ role: 'admin', displayName: me.name ?? '' });
       return true;
     } catch {
       return false;
@@ -55,8 +62,9 @@ export class AuthService {
   async checkCustomer(): Promise<boolean> {
     if (this.isCustomer()) return true;
     try {
-      const me = await firstValueFrom(this.http.get<{ name: string }>('/api/customer/auth/me'));
-      this._session.set({ role: 'customer', displayName: me.name });
+      const me = await firstValueFrom(this.http.get<SessionCheck>('/api/customer/auth/me'));
+      if (!me.signedIn) return false;
+      this._session.set({ role: 'customer', displayName: me.name ?? '' });
       return true;
     } catch {
       return false;

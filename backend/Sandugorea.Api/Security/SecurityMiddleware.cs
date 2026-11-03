@@ -40,7 +40,7 @@ public static class SecurityMiddleware
                     "default-src 'self'; " +
                     "script-src 'self'; " +
                     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
-                    "font-src 'self' https://fonts.gstatic.com; " +
+                    "font-src 'self' data: https://fonts.gstatic.com; " +   // data: = the icon font embedded in the CSS
                     // picsum.photos: placeholder images until the real portfolio is added.
                     "img-src 'self' data: blob: https://picsum.photos https://fastly.picsum.photos; " +
                     "connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'";

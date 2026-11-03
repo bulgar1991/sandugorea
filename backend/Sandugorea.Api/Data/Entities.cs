@@ -62,7 +62,7 @@ public sealed class Project
     public required string CustomerEmail { get; set; }
 
     /// <summary>Language for emails to the customer (en, de, it, fr, ro).</summary>
-    public string Language { get; set; } = "en";
+    public string Language { get; set; } = "de";
 
     public required string Username { get; set; }
     public required string PasswordHash { get; set; }

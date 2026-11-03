@@ -6,7 +6,8 @@ public sealed record VerifyRequest(string Code);
 
 /// <summary>Step 1 result. "totp" = enter code; "enroll" = scan the QR first, then enter code.</summary>
 public sealed record AdminLoginResponse(string Next, string? Secret = null, string? OtpAuthUri = null, string? QrPng = null);
-public sealed record AdminMe(string Username);
+/// <summary>Answer of the "/me" checks: whether that cookie holds a valid session, and for whom.</summary>
+public sealed record SessionCheckDto(bool SignedIn, string? Name);
 public sealed record AdminVerifyResponse(string Username, string[]? RecoveryCodes);
 public sealed record ErrorResponse(string Error, int? RetryAfterSeconds = null);
 
@@ -40,9 +41,10 @@ public sealed record UsernameAvailableDto(bool Available);
 
 // ---- Customer
 public sealed record CustomerProjectDto(string Title, DateOnly Date, string CustomerName, long TotalBytes, PhotoDto[] Photos);
-public sealed record CustomerMe(string Name);
 
 // ---- Booking
 public sealed record BookingRequest(
     string Name, string Email, string? Phone, string? Type, string? Date, string? Location, string Message,
     bool Consent, string? Language, string? Website);
+
+public sealed record CustomerMe(string Name);

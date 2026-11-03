@@ -18,7 +18,7 @@ import { ToastService } from '@components/toast/toast.service';
 import { RevealDirective } from '@directives/reveal.directive';
 import { ProjectStatus, ProjectSummary, STATUS_BADGE, projectStatus } from '@models/project.models';
 import { LocalDatePipe } from '@pipes/local-date.pipe';
-import { LANGUAGES, LanguageService } from '@services/language.service';
+import { DEFAULT_LANGUAGE, LANGUAGES } from '@services/language.service';
 import { ProjectsApi } from '@services/projects-api.service';
 import { generatePassword, slugifyUsername } from '@/utils/format';
 import { ButtonComponent } from '@ui/button/button.component';
@@ -101,7 +101,7 @@ export class ProjectsComponent {
     date: [today(), Validators.required],
     customerName: ['', [Validators.required, Validators.maxLength(100)]],
     customerEmail: ['', [Validators.required, Validators.email]],
-    language: [inject(LanguageService).current() as string],
+    language: [DEFAULT_LANGUAGE as string],
     username: ['', [Validators.required, Validators.pattern(/^[a-z0-9._-]{3,40}$/)]],
     password: [generatePassword(), [Validators.required, Validators.minLength(10)]],
   });

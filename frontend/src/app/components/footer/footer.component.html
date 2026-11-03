@@ -12,7 +12,6 @@
         @for (link of links; track link.path) {
           <a [routerLink]="link.path" class="footer__link">{{ link.key | translate }}</a>
         }
-        <a routerLink="/client/login" class="footer__link">{{ 'nav.clientArea' | translate }}</a>
       </nav>
     </div>
 

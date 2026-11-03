@@ -19,7 +19,7 @@ public static class EmailTemplates
     public static EmailMessage ProjectInvitation(
         string language, string to, string customerName, string title, string loginUrl, string username, string? password, string signature)
     {
-        var t = Invitation.GetValueOrDefault(language) ?? Invitation["en"];
+        var t = Invitation.GetValueOrDefault(language) ?? Invitation["de"];
         static string e(string value) => WebUtility.HtmlEncode(value);
         var passwordLine = password is null ? t.NoPassword : $"{t.Password}: {password}";
         var passwordHtml = password is null

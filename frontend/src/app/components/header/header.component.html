@@ -7,7 +7,8 @@
     <app-logo />
 
     <nav class="header__nav" [attr.aria-label]="'nav.main' | translate">
-      @for (link of links; track link.path) {
+      <!-- Booking is the button on the right, so it isn't repeated here. -->
+      @for (link of barLinks; track link.path) {
         <a
           app-link
           underline
@@ -23,9 +24,9 @@
 
     <div class="header__actions">
       <app-language-switcher class="header__lang" />
-      <a app-button variant="outline" size="sm" routerLink="/client/login" class="header__client">
-        <app-icon name="lock" [size]="14" />
-        {{ 'nav.clientArea' | translate }}
+      <a app-button size="sm" routerLink="/booking" class="header__cta">
+        <app-icon name="calendar" [size]="14" />
+        {{ 'nav.booking' | translate }}
       </a>
       <button
         type="button"
@@ -58,14 +59,6 @@
           {{ link.key | translate }}
         </a>
       }
-      <a
-        routerLink="/client/login"
-        class="menu__link menu__link--active"
-        [style.animation-delay.ms]="150 + links.length * 70"
-      >
-        <span class="menu__index">0{{ links.length + 1 }}</span>
-        {{ 'nav.clientArea' | translate }}
-      </a>
     </nav>
     <div app-container class="menu__footer">
       <app-language-switcher variant="inline" />

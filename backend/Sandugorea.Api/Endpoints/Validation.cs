@@ -5,7 +5,7 @@ namespace Sandugorea.Api.Endpoints;
 
 public static partial class Validation
 {
-    public static readonly string[] Languages = ["en", "de", "it", "fr", "ro"];
+    public static readonly string[] Languages = ["de", "en", "it", "fr", "ro"];
 
     [GeneratedRegex("^[a-z0-9._-]{3,40}$")]
     public static partial Regex UsernameRegex();

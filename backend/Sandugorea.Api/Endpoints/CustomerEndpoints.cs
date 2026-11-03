@@ -25,8 +25,14 @@ public static class CustomerEndpoints
             await ctx.SignOutAsync(AuthSchemes.Customer);
             return Results.NoContent();
         });
-        auth.MapGet("/me", (HttpContext ctx) => Results.Ok(new CustomerMe(ctx.User.Identity!.Name!)))
-            .RequireAuthorization(Policies.Customer);
+        // Anonymous on purpose: answers "not signed in" with 200 instead of a 401 in every visitor's console.
+        auth.MapGet("/me", async (HttpContext ctx) =>
+        {
+            var result = await ctx.AuthenticateAsync(AuthSchemes.Customer);
+            return Results.Ok(result.Succeeded
+                ? new SessionCheckDto(true, result.Principal!.Identity!.Name)
+                : new SessionCheckDto(false, null));
+        });
 
         var g = app.MapGroup("/api/customer").RequireAuthorization(Policies.Customer);
 

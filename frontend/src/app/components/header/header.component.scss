@@ -34,6 +34,11 @@
     @apply flex items-center gap-4;
   }
 
+  // On phones the menu holds the booking link; the bar keeps only logo + burger.
+  &__cta {
+    @apply hidden sm:inline-flex;
+  }
+
   &__client {
     @apply hidden sm:inline-flex;
   }

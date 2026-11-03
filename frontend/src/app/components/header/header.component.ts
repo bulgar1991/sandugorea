@@ -48,6 +48,7 @@ export const NAV_LINKS = [
 export class HeaderComponent {
   protected readonly links = NAV_LINKS;
   protected readonly brand = BRAND;
+  protected readonly barLinks = NAV_LINKS.filter((l) => l.path !== '/booking');
   protected readonly scrolled = signal(false);
   protected readonly hidden = signal(false);
   protected readonly menuOpen = signal(false);

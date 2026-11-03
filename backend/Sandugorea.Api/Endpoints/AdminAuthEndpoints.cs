@@ -25,8 +25,14 @@ public static class AdminAuthEndpoints
         g.MapPost("/login", Login).RequireRateLimiting(RateLimits.Auth);
         g.MapPost("/verify", Verify).RequireRateLimiting(RateLimits.Auth);
         g.MapPost("/logout", Logout);
-        g.MapGet("/me", (HttpContext ctx) => Results.Ok(new AdminMe(ctx.User.Identity!.Name!)))
-            .RequireAuthorization(Policies.Admin);
+        // Anonymous on purpose: answers "not signed in" with 200 instead of a 401 in the console.
+        g.MapGet("/me", async (HttpContext ctx) =>
+        {
+            var result = await ctx.AuthenticateAsync(AuthSchemes.Admin);
+            return Results.Ok(result.Succeeded
+                ? new SessionCheckDto(true, result.Principal!.Identity!.Name)
+                : new SessionCheckDto(false, null));
+        });
     }
 
     private static async Task<IResult> Login(
