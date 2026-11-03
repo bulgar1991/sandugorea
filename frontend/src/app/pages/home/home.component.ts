@@ -8,7 +8,7 @@ import { TestimonialsComponent } from '@components/testimonials/testimonials.com
 import { WorksComponent } from '@components/works/works.component';
 import { CATEGORIES } from '@/data/portfolio.data';
 
-/** Home: portfolio grid, about teaser, services showcase, testimonials, social, booking CTA. */
+/** Home: portfolio grid, about teaser, marquee, social, services showcase, testimonials, booking CTA. */
 @Component({
   selector: 'app-home',
   imports: [
@@ -24,9 +24,9 @@ import { CATEGORIES } from '@/data/portfolio.data';
     <app-works mode="teaser" [lead]="true" />
     <app-about-section mode="teaser" />
     <app-marquee [items]="marqueeKeys" />
+    <app-social-links />
     <app-showcase />
     <app-testimonials />
-    <app-social-links />
     <app-cta-band />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
