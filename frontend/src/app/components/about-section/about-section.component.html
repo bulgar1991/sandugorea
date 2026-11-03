@@ -75,10 +75,10 @@
         {{ 'about.languages' | translate }}
       </p>
       <ul class="about__language-list">
-        @for (l of languages; track l.flag) {
-          <li [attr.data-testid]="'about-section-language-' + l.flag" class="about__language">
-            <span class="about__flag" [class]="'about__flag--' + l.flag" aria-hidden="true"></span>
-            <span [attr.lang]="l.flag">{{ l.name }}</span>
+        @for (l of languages; track l.code) {
+          <li [attr.data-testid]="'about-section-language-' + l.code" class="about__language">
+            <span class="about__flag" [class]="'about__flag--' + l.code" aria-hidden="true"></span>
+            <abbr class="about__code" [title]="l.name" [attr.lang]="l.code">{{ l.code }}</abbr>
           </li>
         }
       </ul>

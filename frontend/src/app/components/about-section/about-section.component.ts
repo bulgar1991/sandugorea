@@ -48,11 +48,11 @@ export class AboutSectionComponent {
     'about.highlights.h2',
     'about.highlights.h3',
   ];
-  /** Languages spoken, written in their own language; `flag` picks the stripes in the SCSS. */
+  /** Languages spoken, shown as short codes; `name` is read out by screen readers. */
   protected readonly languages = [
-    { flag: 'de', name: 'Deutsch' },
-    { flag: 'ro', name: 'Română' },
-    { flag: 'ru', name: 'Русский' },
+    { code: 'de', name: 'Deutsch' },
+    { code: 'ro', name: 'Română' },
+    { code: 'ru', name: 'Русский' },
   ];
   /** Text running around the rotating badge (repeated to fill the circle). */
   protected readonly ringText = `${BRAND.owner} • Photography • `.repeat(2).toUpperCase();
