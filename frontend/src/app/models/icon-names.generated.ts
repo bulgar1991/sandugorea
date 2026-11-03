@@ -1,5 +1,4 @@
 export type IconName =
-  | 'youtube'
   | 'whatsapp'
   | 'users'
   | 'user'
@@ -14,7 +13,6 @@ export type IconName =
   | 'refresh'
   | 'quote'
   | 'plus'
-  | 'pinterest'
   | 'phone'
   | 'monitor'
   | 'menu'
@@ -26,12 +24,14 @@ export type IconName =
   | 'key'
   | 'instagram'
   | 'image'
+  | 'house-solid-full'
   | 'heart'
   | 'grid'
   | 'folder'
   | 'facebook'
   | 'eye'
   | 'eye-off'
+  | 'envelope'
   | 'download'
   | 'copy'
   | 'close'
@@ -44,4 +44,6 @@ export type IconName =
   | 'calendar'
   | 'arrow-up-right'
   | 'arrow-right'
-  | 'arrow-left';
+  | 'arrow-right-solid-full'
+  | 'arrow-left'
+  | 'arrow-left-solid-full';

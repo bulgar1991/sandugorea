@@ -88,8 +88,6 @@ export const SOCIAL_LINKS: { id: IconName; label: string; url: string }[] = [
   { id: 'instagram', label: 'Instagram', url: 'https://instagram.com/sandugorea' },
   { id: 'facebook', label: 'Facebook', url: 'https://facebook.com/sandugorea' },
   { id: 'tiktok', label: 'TikTok', url: 'https://tiktok.com/@sandugorea' },
-  { id: 'youtube', label: 'YouTube', url: 'https://youtube.com/@sandugorea' },
-  { id: 'pinterest', label: 'Pinterest', url: 'https://pinterest.com/sandugorea' },
   { id: 'whatsapp', label: 'WhatsApp', url: 'https://wa.me/41000000000' },
 ];
 

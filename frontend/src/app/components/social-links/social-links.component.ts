@@ -32,6 +32,6 @@ export class SocialLinksComponent {
   readonly variant = input<'block' | 'inline'>('block');
   protected readonly links = [
     ...SOCIAL_LINKS,
-    { id: 'mail' as const, label: 'E-Mail', url: `mailto:${BRAND.email}` },
+    { id: 'envelope' as const, label: 'E-Mail', url: `mailto:${BRAND.email}` },
   ];
 }
