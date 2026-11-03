@@ -20,6 +20,7 @@
         [revealDelay]="(i % 4) * 90"
       >
         <button
+          data-testid="works-open-index"
           type="button"
           class="work__button"
           (click)="openIndex.set(i)"
@@ -39,7 +40,7 @@
 
   <div class="works__footer">
     @if (mode() === 'teaser') {
-      <a app-button variant="outline" routerLink="/portfolio">
+      <a data-testid="works-link-portfolio" app-button variant="outline" routerLink="/portfolio">
         {{ 'works.viewAll' | translate }}
         <app-icon name="arrow-right" [size]="16" />
       </a>
@@ -54,7 +55,13 @@
         ></span>
       </div>
       @if (hasMore()) {
-        <button app-button variant="outline" type="button" (click)="loadMore()">
+        <button
+          data-testid="works-load-more"
+          app-button
+          variant="outline"
+          type="button"
+          (click)="loadMore()"
+        >
           {{ 'works.loadMore' | translate }}
           <app-icon name="plus" [size]="16" />
         </button>

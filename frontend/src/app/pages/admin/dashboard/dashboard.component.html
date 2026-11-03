@@ -6,6 +6,7 @@
     </h1>
   </div>
   <a
+    data-testid="dashboard-new-project"
     app-button
     routerLink="/admin/projects"
     [queryParams]="{ new: 1 }"
@@ -32,12 +33,14 @@
 <div app-card class="recent" appReveal [revealDelay]="200">
   <div class="recent__head">
     <h2 app-title size="sm">{{ 'admin.dashboard.recent' | translate }}</h2>
-    <a app-link caps routerLink="/admin/projects">{{ 'admin.dashboard.all' | translate }}</a>
+    <a data-testid="dashboard-all-projects" app-link caps routerLink="/admin/projects">{{
+      'admin.dashboard.all' | translate
+    }}</a>
   </div>
   <ul class="recent__list">
     @for (p of recent(); track p.id) {
       <li>
-        <a [routerLink]="['/admin/projects', p.id]" class="recent__row">
+        <a data-testid="dashboard-row" [routerLink]="['/admin/projects', p.id]" class="recent__row">
           @if (p.coverUrls[0]; as cover) {
             <img [src]="cover" alt="" class="recent__thumb" loading="lazy" />
           } @else {

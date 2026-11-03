@@ -1,11 +1,11 @@
 @if (project(); as p) {
-  <a routerLink="/admin/projects" class="back-link">
+  <a data-testid="project-detail-back" routerLink="/admin/projects" class="back-link">
     <app-icon name="arrow-left" [size]="14" /> {{ 'admin.project.back' | translate }}
   </a>
 
   <div class="detail">
     <!-- Main: upload + photos -->
-    <section class="detail__main">
+    <section data-testid="project-detail" class="detail__main">
       <div class="detail__head">
         <p app-eyebrow>{{ p.date | localDate: 'd MMMM y' }}</p>
         <h1 class="page-head__title">{{ p.title }}</h1>
@@ -25,6 +25,7 @@
         <span class="dropzone__title">{{ 'admin.project.drop' | translate }}</span>
         <span class="dropzone__hint">{{ 'admin.project.dropHint' | translate }}</span>
         <input
+          data-testid="project-detail-file-input"
           type="file"
           class="dropzone__input"
           [accept]="accept"
@@ -59,6 +60,7 @@
           @for (photo of p.photos; track photo.id; let i = $index) {
             <figure class="thumbs__item">
               <button
+                data-testid="project-detail-open-index"
                 type="button"
                 class="thumbs__open"
                 (click)="openIndex.set(i)"
@@ -74,6 +76,7 @@
               </button>
               <figcaption class="thumbs__caption">{{ photo.name }}</figcaption>
               <button
+                data-testid="project-detail-delete-photo"
                 type="button"
                 class="thumbs__delete"
                 (click)="deletePhoto(photo.id)"
@@ -95,9 +98,13 @@
           <span app-avatar size="lg">{{ p.customerName.charAt(0) }}</span>
           <div class="panel__customer-info">
             <p class="panel__name">{{ p.customerName }}</p>
-            <a app-link [href]="'mailto:' + p.customerEmail" class="panel__email">{{
-              p.customerEmail
-            }}</a>
+            <a
+              data-testid="project-detail-email"
+              app-link
+              [href]="'mailto:' + p.customerEmail"
+              class="panel__email"
+              >{{ p.customerEmail }}</a
+            >
           </div>
         </div>
       </div>
@@ -119,6 +126,7 @@
           }
         </p>
         <button
+          data-testid="project-detail-send-open"
           app-button
           block
           type="button"
@@ -138,6 +146,7 @@
             <dd class="panel__mono">
               {{ p.username }}
               <button
+                data-testid="project-detail-copy-username"
                 type="button"
                 class="panel__copy"
                 (click)="copy(p.username)"
@@ -163,10 +172,24 @@
           </div>
         </dl>
         <div class="panel__actions">
-          <button app-button variant="ghost" size="sm" type="button" (click)="resetPassword()">
+          <button
+            data-testid="project-detail-reset-password"
+            app-button
+            variant="ghost"
+            size="sm"
+            type="button"
+            (click)="resetPassword()"
+          >
             <app-icon name="key" [size]="14" /> {{ 'admin.project.newPassword' | translate }}
           </button>
-          <button app-button variant="ghost" size="sm" type="button" (click)="toggleAccess()">
+          <button
+            data-testid="project-detail-toggle-access"
+            app-button
+            variant="ghost"
+            size="sm"
+            type="button"
+            (click)="toggleAccess()"
+          >
             <app-icon [name]="p.active ? 'lock' : 'check'" [size]="14" />
             {{ (p.active ? 'admin.project.disable' : 'admin.project.enable') | translate }}
           </button>
@@ -174,6 +197,7 @@
       </div>
 
       <button
+        data-testid="project-detail-delete-text"
         app-button
         variant="danger"
         block
@@ -202,6 +226,7 @@
     </p>
     <label class="send-option">
       <input
+        data-testid="project-detail-include-password"
         type="checkbox"
         class="send-option__checkbox"
         [checked]="includePassword()"
@@ -213,7 +238,13 @@
       </span>
     </label>
     <div class="modal-actions">
-      <button app-button type="button" (click)="send()" [disabled]="sending()">
+      <button
+        data-testid="project-detail-send"
+        app-button
+        type="button"
+        (click)="send()"
+        [disabled]="sending()"
+      >
         @if (sending()) {
           <app-spinner />
         } @else {
@@ -221,7 +252,13 @@
         }
         {{ 'admin.project.sendButton' | translate }}
       </button>
-      <button app-button variant="ghost" type="button" (click)="confirmSend.set(false)">
+      <button
+        data-testid="project-detail-send-cancel"
+        app-button
+        variant="ghost"
+        type="button"
+        (click)="confirmSend.set(false)"
+      >
         {{ 'common.cancel' | translate }}
       </button>
     </div>
@@ -241,6 +278,7 @@
         <div class="credentials__row">
           <span class="credentials__value">{{ newPassword() }}</span>
           <button
+            data-testid="project-detail-copy-new-password"
             type="button"
             class="credentials__copy"
             (click)="copy(newPassword() ?? '')"
@@ -251,7 +289,12 @@
         </div>
       </div>
       <div class="credentials__actions">
-        <button app-button type="button" (click)="newPassword.set(null)">
+        <button
+          data-testid="project-detail-new-password"
+          app-button
+          type="button"
+          (click)="newPassword.set(null)"
+        >
           {{ 'common.done' | translate }}
         </button>
       </div>
@@ -267,6 +310,7 @@
     </p>
     <div app-field class="modal-input">
       <input
+        data-testid="project-detail-delete-confirm-input"
         appInput
         boxed
         mono
@@ -277,6 +321,7 @@
     </div>
     <div class="modal-actions">
       <button
+        data-testid="project-detail-delete-project"
         app-button
         variant="danger"
         type="button"
@@ -285,7 +330,13 @@
       >
         {{ 'admin.project.deleteForever' | translate }}
       </button>
-      <button app-button variant="ghost" type="button" (click)="confirmDelete.set(false)">
+      <button
+        data-testid="project-detail-confirm-delete"
+        app-button
+        variant="ghost"
+        type="button"
+        (click)="confirmDelete.set(false)"
+      >
         {{ 'common.cancel' | translate }}
       </button>
     </div>
@@ -293,8 +344,12 @@
 } @else if (notFound()) {
   <div class="not-found-block">
     <h1 app-title size="md">{{ 'admin.project.notFound' | translate }}</h1>
-    <a app-button variant="outline" routerLink="/admin/projects">{{
-      'admin.project.backToProjects' | translate
-    }}</a>
+    <a
+      data-testid="project-detail-not-found-back"
+      app-button
+      variant="outline"
+      routerLink="/admin/projects"
+      >{{ 'admin.project.backToProjects' | translate }}</a
+    >
   </div>
 }

@@ -1,6 +1,6 @@
 // Site-wide constants used for SEO tags and the page loader.
 
-export const SITE_NAME = 'Sandugorea';
+export const SITE_NAME = 'Sandu Gorea';
 export const SITE_URL = 'https://sandugorea.ch';
 
 /** Open Graph locale per site language (Swiss variants for the Swiss domain). */
@@ -14,7 +14,7 @@ export const OG_LOCALES: Record<string, string> = {
 
 /**
  * Default image for link previews (WhatsApp, Facebook, LinkedIn…): 1200×630 JPG in /public.
- * Set to null until a real one exists - then no og:image is sent.
+ * Keep in sync with the og:image tags in src/index.html.
  */
 export const SITE_SHARE_IMAGE: {
   path: string;
@@ -22,4 +22,10 @@ export const SITE_SHARE_IMAGE: {
   type: string;
   width: number;
   height: number;
-} | null = null;
+} | null = {
+  path: 'og-image.jpg',
+  alt: 'seo.shareImageAlt',
+  type: 'image/jpeg',
+  width: 1200,
+  height: 630,
+};

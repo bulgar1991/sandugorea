@@ -8,7 +8,13 @@
       <ul class="booking__contacts">
         @for (c of contacts; track c.icon; let i = $index) {
           <li appReveal [revealDelay]="250 + i * 80">
-            <a [href]="c.href" target="_blank" rel="noopener" class="booking__contact">
+            <a
+              [attr.data-testid]="'booking-contact-' + c.icon"
+              [href]="c.href"
+              target="_blank"
+              rel="noopener"
+              class="booking__contact"
+            >
               <span class="booking__contact-icon"><app-icon [name]="c.icon" [size]="18" /></span>
               {{ c.value }}
             </a>
@@ -31,12 +37,24 @@
           <span class="booking__success-icon"><app-icon name="check" [size]="26" /></span>
           <h3 app-title size="md">{{ 'booking.successTitle' | translate }}</h3>
           <p app-text>{{ 'booking.successText' | translate }}</p>
-          <button app-button variant="ghost" type="button" (click)="state.set('idle')">
+          <button
+            data-testid="booking-send-again"
+            app-button
+            variant="ghost"
+            type="button"
+            (click)="state.set('idle')"
+          >
             {{ 'booking.again' | translate }}
           </button>
         </div>
       } @else {
-        <form [formGroup]="form" (ngSubmit)="submit()" class="booking__form" novalidate>
+        <form
+          data-testid="booking-form"
+          [formGroup]="form"
+          (ngSubmit)="submit()"
+          class="booking__form"
+          novalidate
+        >
           <div app-field class="booking__wide">
             <span class="field__label">{{ 'booking.fields.date' | translate }} *</span>
             <app-date-picker formControlName="date" />
@@ -46,25 +64,37 @@
           </div>
           <label app-field>
             <span class="field__label">{{ 'booking.fields.name' | translate }} *</span>
-            <input appInput formControlName="name" autocomplete="name" />
+            <input data-testid="booking-name" appInput formControlName="name" autocomplete="name" />
             @if (invalid('name')) {
               <small class="field__error">{{ 'booking.errors.name' | translate }}</small>
             }
           </label>
           <label app-field>
             <span class="field__label">{{ 'booking.fields.email' | translate }} *</span>
-            <input appInput type="email" formControlName="email" autocomplete="email" />
+            <input
+              data-testid="booking-email"
+              appInput
+              type="email"
+              formControlName="email"
+              autocomplete="email"
+            />
             @if (invalid('email')) {
               <small class="field__error">{{ 'booking.errors.email' | translate }}</small>
             }
           </label>
           <label app-field>
             <span class="field__label">{{ 'booking.fields.phone' | translate }}</span>
-            <input appInput type="tel" formControlName="phone" autocomplete="tel" />
+            <input
+              data-testid="booking-phone"
+              appInput
+              type="tel"
+              formControlName="phone"
+              autocomplete="tel"
+            />
           </label>
           <label app-field>
             <span class="field__label">{{ 'booking.fields.type' | translate }}</span>
-            <select appInput formControlName="type">
+            <select data-testid="booking-type" appInput formControlName="type">
               @for (t of types; track t) {
                 <option [value]="t">{{ 'categories.' + t + '.label' | translate }}</option>
               }
@@ -73,6 +103,7 @@
           <label app-field>
             <span class="field__label">{{ 'booking.fields.location' | translate }}</span>
             <input
+              data-testid="booking-location"
               appInput
               formControlName="location"
               [placeholder]="'booking.fields.locationPlaceholder' | translate"
@@ -81,6 +112,7 @@
           <label app-field class="booking__wide">
             <span class="field__label">{{ 'booking.fields.message' | translate }} *</span>
             <textarea
+              data-testid="booking-message"
               appInput
               class="booking__message"
               formControlName="message"
@@ -91,7 +123,12 @@
             }
           </label>
           <label class="booking__consent booking__wide">
-            <input type="checkbox" class="booking__checkbox" formControlName="consent" />
+            <input
+              data-testid="booking-consent"
+              type="checkbox"
+              class="booking__checkbox"
+              formControlName="consent"
+            />
             <span>{{ 'booking.fields.consent' | translate }}</span>
           </label>
           @if (invalid('consent')) {
@@ -101,6 +138,7 @@
           }
           <!-- Honeypot for spam bots: invisible and skipped by keyboard/screen readers. -->
           <input
+            data-testid="booking-honeypot"
             class="booking__trap"
             formControlName="website"
             tabindex="-1"
@@ -113,7 +151,12 @@
             </p>
           }
           <div class="booking__wide">
-            <button app-button type="submit" [disabled]="state() === 'sending'">
+            <button
+              data-testid="booking-submit"
+              app-button
+              type="submit"
+              [disabled]="state() === 'sending'"
+            >
               @if (state() === 'sending') {
                 <app-spinner />
                 {{ 'booking.sending' | translate }}

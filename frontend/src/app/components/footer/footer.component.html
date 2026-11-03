@@ -10,7 +10,14 @@
       <p class="footer__heading">{{ 'footer.explore' | translate }}</p>
       <nav class="footer__list" [attr.aria-label]="'footer.explore' | translate">
         @for (link of links; track link.path) {
-          <a [routerLink]="link.path" class="footer__link">{{ link.key | translate }}</a>
+          <a
+            [attr.data-testid]="
+              'footer-link' + (link.path === '/' ? '-home' : link.path.replace('/', '-'))
+            "
+            [routerLink]="link.path"
+            class="footer__link"
+            >{{ link.key | translate }}</a
+          >
         }
       </nav>
     </div>
@@ -18,8 +25,12 @@
     <div class="footer__column" appReveal [revealDelay]="200">
       <p class="footer__heading">{{ 'footer.contact' | translate }}</p>
       <div class="footer__list">
-        <a [href]="'mailto:' + brand.email" class="footer__link">{{ brand.email }}</a>
-        <a [href]="'tel:' + brand.phone" class="footer__link">{{ brand.phone }}</a>
+        <a data-testid="footer-email" [href]="'mailto:' + brand.email" class="footer__link">{{
+          brand.email
+        }}</a>
+        <a data-testid="footer-phone" [href]="'tel:' + brand.phone" class="footer__link">{{
+          brand.phone
+        }}</a>
         <span class="footer__plain">{{ 'brand.location' | translate }}</span>
       </div>
     </div>
@@ -37,7 +48,7 @@
 
   <div app-container class="footer__bottom">
     <span>© {{ year }} {{ brand.name }}. {{ 'footer.rights' | translate }}</span>
-    <button type="button" class="footer__top" (click)="toTop()">
+    <button data-testid="footer-to-top" type="button" class="footer__top" (click)="toTop()">
       {{ 'footer.backToTop' | translate }}
       <span class="footer__top-icon"><app-icon name="arrow-up-right" [size]="14" /></span>
     </button>

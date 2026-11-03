@@ -2,6 +2,7 @@
   <div class="lang lang--inline" role="group" [attr.aria-label]="'common.language' | translate">
     @for (l of language.languages; track l.code) {
       <button
+        [attr.data-testid]="'language-' + l.code"
         type="button"
         class="lang__code"
         [class.lang__code--active]="language.current() === l.code"
@@ -16,6 +17,7 @@
 } @else {
   <div class="lang">
     <button
+      data-testid="language-toggle"
       type="button"
       class="lang__toggle"
       [attr.aria-expanded]="open()"
@@ -36,6 +38,7 @@
         @for (l of language.languages; track l.code) {
           <li>
             <button
+              [attr.data-testid]="'language-option-' + l.code"
               type="button"
               role="option"
               class="lang__option"

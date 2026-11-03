@@ -11,6 +11,7 @@
     <nav class="admin__nav" aria-label="Admin">
       @for (item of nav; track item.path) {
         <a
+          [attr.data-testid]="'admin-nav-' + item.path.split('/').pop()"
           [routerLink]="item.path"
           routerLinkActive="admin__link--active"
           [routerLinkActiveOptions]="{ exact: item.exact }"
@@ -35,6 +36,7 @@
           <p class="admin__user-login">Admin</p>
         </div>
         <button
+          data-testid="admin-layout-logout"
           type="button"
           class="admin__logout"
           (click)="auth.logout()"
@@ -53,6 +55,7 @@
 
   <header class="admin__topbar">
     <button
+      data-testid="admin-layout-menu"
       type="button"
       class="admin__menu"
       (click)="navOpen.set(true)"

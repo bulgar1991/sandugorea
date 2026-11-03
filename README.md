@@ -81,6 +81,20 @@ Icon font generated like driver-platform: SVG sources (24×24, stroke 1.5) in
 `src/assets/fonts/icons.css` (font embedded) + `src/app/models/icon-names.generated.ts`.
 Use `<app-icon name="calendar" [size]="16" />`; a wrong name is a compile error.
 
+## SEO, icons & test ids
+
+- **Per page:** title, description, canonical, Open Graph/Twitter and schema.org JSON-LD are set by
+  `SeoService` from each route's `data.seo` (translation keys under `seo.*`). Private pages
+  (`/admin`, `/client`) get `noindex` and no structured data.
+- **Link previews:** WhatsApp/Facebook don't run JavaScript, so `src/index.html` carries the German
+  home-page tags and `og-image.jpg` (1200×630) statically.
+- **`public/`:** `robots.txt`, `sitemap.xml` (add new public pages there), `manifest.webmanifest`,
+  favicons (`favicon.svg` "SG" monogram in the logo font, `favicon.ico`, `apple-touch-icon.png`,
+  `icon-192/512.png`, `icon-maskable-512.png`).
+- **`data-testid`:** every interactive element has one, named `<component>-<what>`
+  (e.g. `booking-email`, `booking-submit`, `header-cta-booking`). Items in loops get the item in the
+  id: `nav-link-services`, `social-tile-instagram`, `language-de`. Add one to every new button/link/field.
+
 ## Production — sandugorea.ch (VPS 66.29.142.5, Ubuntu 24.04, 1 GB RAM)
 
 1. **DNS** (at your domain registrar): `A  sandugorea.ch → 66.29.142.5` and `A  www → 66.29.142.5`.

@@ -11,7 +11,12 @@ import { BRAND } from '@/data/portfolio.data';
   selector: 'app-logo',
   imports: [RouterLink, TranslatePipe],
   template: `
-    <a routerLink="/" class="logo__link" [attr.aria-label]="'nav.home' | translate">
+    <a
+      data-testid="logo-link-home"
+      routerLink="/"
+      class="logo__link"
+      [attr.aria-label]="'nav.home' | translate"
+    >
       <span class="logo__name">{{ owner }}</span>
       <span class="logo__tagline">{{ 'brand.tagline' | translate }}</span>
     </a>

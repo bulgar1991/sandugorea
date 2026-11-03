@@ -404,18 +404,18 @@
   },
   "seo": {
     "home": {
-      "title": "Sandugorea — Wedding, portrait & family photographer",
+      "title": "Sandu Gorea — Wedding, portrait & family photographer",
       "description": "Calm, cinematic wedding, portrait and family photography. Private online delivery of every photograph. Based in Switzerland, available worldwide."
     },
     "notFound": {
-      "title": "Page not found — Sandugorea",
+      "title": "Page not found — Sandu Gorea",
       "description": "The page you're looking for doesn't exist or has moved."
     },
     "clientLogin": {
-      "title": "Your private project — Sandugorea"
+      "title": "Your private project — Sandu Gorea"
     },
     "client": {
-      "title": "Your photos — Sandugorea"
+      "title": "Your photos — Sandu Gorea"
     },
     "adminLogin": {
       "title": "Sign in"
@@ -431,17 +431,18 @@
       "description": "Meet Sandu Gorea: calm, cinematic wedding, portrait and family photography."
     },
     "services": {
-      "title": "Services — Sandugorea",
+      "title": "Services — Sandu Gorea",
       "description": "Weddings, portraits, family, events and fine-art landscapes - what's included in every session."
     },
     "portfolio": {
-      "title": "Portfolio — Sandugorea",
+      "title": "Portfolio — Sandu Gorea",
       "description": "A selection of recent weddings, portraits, families and places by Sandu Gorea."
     },
     "booking": {
-      "title": "Book a date — Sandugorea",
+      "title": "Book a date — Sandu Gorea",
       "description": "Pick a date and tell me about your plans - I reply within 48 hours."
-    }
+    },
+    "shareImageAlt": "Sandu Gorea – Photography: weddings, portraits, families"
   },
   "social": {
     "eyebrow": "Follow me",

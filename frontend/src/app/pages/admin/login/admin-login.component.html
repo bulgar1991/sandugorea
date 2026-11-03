@@ -34,6 +34,7 @@
 
       @if (step() === 'credentials') {
         <form
+          data-testid="admin-login-form"
           [formGroup]="credentials"
           (ngSubmit)="submitCredentials()"
           class="admin-login__form"
@@ -42,6 +43,7 @@
           <label app-field>
             <span class="field__label">{{ 'common.username' | translate }}</span>
             <input
+              data-testid="admin-login-username"
               appInput
               boxed
               formControlName="username"
@@ -54,6 +56,7 @@
             <span class="field__label">{{ 'common.password' | translate }}</span>
             <div class="field__wrap">
               <input
+                data-testid="admin-login-password"
                 appInput
                 boxed
                 [type]="showPassword() ? 'text' : 'password'"
@@ -61,6 +64,7 @@
                 autocomplete="current-password"
               />
               <button
+                data-testid="admin-login-show-password"
                 type="button"
                 class="field__toggle"
                 (click)="showPassword.update((v) => !v)"
@@ -82,7 +86,13 @@
             </p>
           }
 
-          <button app-button block type="submit" [disabled]="loading() || lockSeconds() > 0">
+          <button
+            data-testid="admin-login-submit"
+            app-button
+            block
+            type="submit"
+            [disabled]="loading() || lockSeconds() > 0"
+          >
             @if (loading()) {
               <app-spinner /> {{ 'admin.login.verifying' | translate }}
             } @else {
@@ -91,7 +101,12 @@
           </button>
         </form>
       } @else if (step() === 'code') {
-        <form (ngSubmit)="submitCode()" class="admin-login__form" novalidate>
+        <form
+          data-testid="admin-login-code-form"
+          (ngSubmit)="submitCode()"
+          class="admin-login__form"
+          novalidate
+        >
           @if (enrollment(); as e) {
             <div class="enroll">
               <p class="enroll__title">{{ 'admin.login.enrollTitle' | translate }}</p>
@@ -114,6 +129,7 @@
               (useRecoveryCode() ? 'admin.login.recoveryCode' : 'admin.login.code') | translate
             }}</span>
             <input
+              data-testid="admin-login-code"
               appInput
               boxed
               #codeInput
@@ -139,6 +155,7 @@
           }
 
           <button
+            data-testid="admin-login-code-submit"
             app-button
             block
             type="submit"
@@ -151,13 +168,23 @@
             }
           </button>
           @if (!enrollment()) {
-            <button type="button" class="admin-login__back" (click)="toggleRecovery()">
+            <button
+              data-testid="admin-login-toggle-recovery"
+              type="button"
+              class="admin-login__back"
+              (click)="toggleRecovery()"
+            >
               {{
                 (useRecoveryCode() ? 'admin.login.useApp' : 'admin.login.useRecovery') | translate
               }}
             </button>
           }
-          <button type="button" class="admin-login__back" (click)="back()">
+          <button
+            data-testid="admin-login-back"
+            type="button"
+            class="admin-login__back"
+            (click)="back()"
+          >
             {{ 'admin.login.back' | translate }}
           </button>
         </form>
@@ -172,10 +199,23 @@
               <li class="recovery-codes__item">{{ c }}</li>
             }
           </ul>
-          <button app-button variant="ghost" block type="button" (click)="copyCodes()">
+          <button
+            data-testid="admin-login-copy-codes"
+            app-button
+            variant="ghost"
+            block
+            type="button"
+            (click)="copyCodes()"
+          >
             <app-icon name="copy" [size]="14" /> {{ 'common.copy' | translate }}
           </button>
-          <button app-button block type="button" (click)="finish()">
+          <button
+            data-testid="admin-login-finish"
+            app-button
+            block
+            type="button"
+            (click)="finish()"
+          >
             {{ 'admin.login.saved' | translate }} <app-icon name="arrow-right" [size]="16" />
           </button>
         </div>

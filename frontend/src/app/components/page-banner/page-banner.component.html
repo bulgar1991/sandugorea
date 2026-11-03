@@ -1,4 +1,4 @@
-<section class="page-banner">
+<section data-testid="page-banner" class="page-banner">
   <div class="page-banner__media" aria-hidden="true">
     <img [src]="image()" alt="" class="page-banner__image" fetchpriority="high" decoding="async" />
   </div>
@@ -6,7 +6,9 @@
 
   <div class="page-banner__content">
     <nav class="page-banner__crumbs page-banner__appear" style="--d: 0ms" aria-label="Breadcrumb">
-      <a routerLink="/" class="page-banner__crumb">{{ 'nav.home' | translate }}</a>
+      <a data-testid="page-banner-crumb-home" routerLink="/" class="page-banner__crumb">{{
+        'nav.home' | translate
+      }}</a>
       <app-icon name="chevron-right" [size]="12" />
       <span class="page-banner__crumb page-banner__crumb--current" aria-current="page">{{
         crumb() | translate

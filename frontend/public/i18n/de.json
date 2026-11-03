@@ -404,18 +404,18 @@
   },
   "seo": {
     "home": {
-      "title": "Sandugorea — Hochzeits-, Porträt- & Familienfotograf",
+      "title": "Sandu Gorea — Hochzeits-, Porträt- & Familienfotograf",
       "description": "Ruhige, filmische Hochzeits-, Porträt- und Familienfotografie. Private Online-Übergabe aller Fotos. Aus der Schweiz, weltweit verfügbar."
     },
     "notFound": {
-      "title": "Seite nicht gefunden — Sandugorea",
+      "title": "Seite nicht gefunden — Sandu Gorea",
       "description": "Die gesuchte Seite existiert nicht oder wurde verschoben."
     },
     "clientLogin": {
-      "title": "Dein privates Projekt — Sandugorea"
+      "title": "Dein privates Projekt — Sandu Gorea"
     },
     "client": {
-      "title": "Deine Fotos — Sandugorea"
+      "title": "Deine Fotos — Sandu Gorea"
     },
     "adminLogin": {
       "title": "Anmelden"
@@ -431,17 +431,18 @@
       "description": "Lerne Sandu Gorea kennen: ruhige, filmische Hochzeits-, Porträt- und Familienfotografie."
     },
     "services": {
-      "title": "Leistungen — Sandugorea",
+      "title": "Leistungen — Sandu Gorea",
       "description": "Hochzeiten, Porträts, Familie, Events und Fine-Art-Landschaften – was in jedem Shooting enthalten ist."
     },
     "portfolio": {
-      "title": "Portfolio — Sandugorea",
+      "title": "Portfolio — Sandu Gorea",
       "description": "Eine Auswahl aktueller Hochzeiten, Porträts, Familien und Orte von Sandu Gorea."
     },
     "booking": {
-      "title": "Termin buchen — Sandugorea",
+      "title": "Termin buchen — Sandu Gorea",
       "description": "Wähle ein Datum und erzähl mir von deinen Plänen – ich antworte innerhalb von 48 Stunden."
-    }
+    },
+    "shareImageAlt": "Sandu Gorea – Fotografie: Hochzeit, Porträt, Familie"
   },
   "social": {
     "eyebrow": "Folge mir",

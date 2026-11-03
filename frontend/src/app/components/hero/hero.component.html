@@ -1,4 +1,4 @@
-<section class="hero">
+<section data-testid="hero" class="hero">
   <!-- Back layer: soft gold glow (no photo - plain black background) -->
   <div class="hero__glow" aria-hidden="true"></div>
   <div class="hero__sweep" aria-hidden="true"></div>
@@ -47,11 +47,11 @@
         </p>
 
         <div class="hero__actions hero__appear" style="--d: 640ms">
-          <a app-button routerLink="/booking">
+          <a data-testid="hero-link-booking" app-button routerLink="/booking">
             <app-icon name="calendar" [size]="16" />
             {{ 'hero.cta' | translate }}
           </a>
-          <a app-link caps underline routerLink="/portfolio">
+          <a data-testid="hero-link-portfolio" app-link caps underline routerLink="/portfolio">
             {{ 'hero.works' | translate }}
             <app-icon name="arrow-right" [size]="14" />
           </a>

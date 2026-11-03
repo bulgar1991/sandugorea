@@ -8,6 +8,7 @@
     </div>
     <div class="testimonials__arrows" appReveal [revealDelay]="200">
       <button
+        data-testid="testimonials-prev"
         #prevEl
         type="button"
         class="testimonials__arrow"
@@ -16,6 +17,7 @@
         <app-icon name="arrow-left" [size]="18" />
       </button>
       <button
+        data-testid="testimonials-next"
         #nextEl
         type="button"
         class="testimonials__arrow"

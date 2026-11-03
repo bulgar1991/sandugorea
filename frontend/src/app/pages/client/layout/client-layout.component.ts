@@ -22,7 +22,7 @@ import { ContainerComponent } from '@ui/container/container.component';
   template: `
     <header class="portal-bar">
       <div app-container class="portal-bar__inner">
-        <a routerLink="/client" class="portal-bar__logo">
+        <a data-testid="client-layout-home" routerLink="/client" class="portal-bar__logo">
           <span class="portal-bar__name">{{ brand.owner }}</span>
           <span class="portal-bar__tagline">{{ 'client.layout.tagline' | translate }}</span>
         </a>
@@ -32,7 +32,14 @@ import { ContainerComponent } from '@ui/container/container.component';
             <app-icon name="user" [size]="16" />
             {{ auth.session()?.displayName }}
           </span>
-          <button app-button variant="ghost" size="sm" type="button" (click)="auth.logout()">
+          <button
+            data-testid="client-layout-logout"
+            app-button
+            variant="ghost"
+            size="sm"
+            type="button"
+            (click)="auth.logout()"
+          >
             <app-icon name="logout" [size]="14" />
             <span class="portal-bar__signout">{{ 'common.signOut' | translate }}</span>
           </button>

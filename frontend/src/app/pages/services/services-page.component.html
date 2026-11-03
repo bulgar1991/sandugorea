@@ -39,6 +39,7 @@
           }
         </ul>
         <a
+          data-testid="services-page-link-booking"
           app-button
           variant="outline"
           routerLink="/booking"
@@ -55,7 +56,7 @@
   }
 </div>
 
-<section class="process">
+<section data-testid="services-page-process" class="process">
   <div app-container>
     <p app-eyebrow appReveal>{{ 'services.process.eyebrow' | translate }}</p>
     <h2 app-title size="lg" class="process__title" appReveal [revealDelay]="100">

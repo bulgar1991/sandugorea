@@ -1,6 +1,7 @@
 <div class="date-picker">
   <div class="date-picker__head">
     <button
+      data-testid="date-picker-prev"
       type="button"
       class="date-picker__nav"
       (click)="step(-1)"
@@ -11,6 +12,7 @@
     </button>
     <p class="date-picker__month" aria-live="polite">{{ monthLabel() }}</p>
     <button
+      data-testid="date-picker-next"
       type="button"
       class="date-picker__nav"
       (click)="step(1)"
@@ -29,6 +31,7 @@
   <div class="date-picker__grid" role="grid">
     @for (d of days(); track d.iso; let i = $index) {
       <button
+        data-testid="date-picker-day"
         type="button"
         class="date-picker__day"
         [class.date-picker__day--outside]="!d.inMonth"

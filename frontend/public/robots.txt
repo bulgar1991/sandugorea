@@ -1,4 +1,8 @@
+# Public pages are open to all search engines; private areas and the API are not.
 User-agent: *
+Allow: /
 Disallow: /admin
 Disallow: /client
-Disallow: /api
+Disallow: /api/
+
+Sitemap: https://sandugorea.ch/sitemap.xml

@@ -20,7 +20,7 @@ import { BANNER_IMAGES } from '@/data/portfolio.data';
     TitleComponent,
   ],
   template: `
-    <section class="cta">
+    <section data-testid="cta-band-cta" class="cta">
       <img [src]="image" alt="" class="cta__image" loading="lazy" decoding="async" />
       <div class="cta__shade"></div>
       <div class="cta__content">
@@ -28,7 +28,14 @@ import { BANNER_IMAGES } from '@/data/portfolio.data';
         <h2 app-title size="xl" class="cta__title" appReveal [revealDelay]="100">
           {{ 'cta.titleStart' | translate }} <em>{{ 'cta.titleAccent' | translate }}</em>
         </h2>
-        <a app-button routerLink="/booking" class="cta__button" appReveal [revealDelay]="200">
+        <a
+          data-testid="cta-band-link-booking"
+          app-button
+          routerLink="/booking"
+          class="cta__button"
+          appReveal
+          [revealDelay]="200"
+        >
           <app-icon name="calendar" [size]="16" />
           {{ 'cta.button' | translate }}
         </a>

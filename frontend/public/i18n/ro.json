@@ -404,18 +404,18 @@
   },
   "seo": {
     "home": {
-      "title": "Sandugorea — Fotograf de nunți, portrete și familie",
+      "title": "Sandu Gorea — Fotograf de nunți, portrete și familie",
       "description": "Fotografie de nuntă, portret și familie, calmă și cinematică. Livrare online privată a fiecărei fotografii. Din Elveția, disponibil în toată lumea."
     },
     "notFound": {
-      "title": "Pagina nu a fost găsită — Sandugorea",
+      "title": "Pagina nu a fost găsită — Sandu Gorea",
       "description": "Pagina pe care o cauți nu există sau a fost mutată."
     },
     "clientLogin": {
-      "title": "Proiectul tău privat — Sandugorea"
+      "title": "Proiectul tău privat — Sandu Gorea"
     },
     "client": {
-      "title": "Fotografiile tale — Sandugorea"
+      "title": "Fotografiile tale — Sandu Gorea"
     },
     "adminLogin": {
       "title": "Autentificare"
@@ -431,17 +431,18 @@
       "description": "Cunoaște-l pe Sandu Gorea: fotografie de nuntă, portret și familie, calmă și cinematică."
     },
     "services": {
-      "title": "Servicii — Sandugorea",
+      "title": "Servicii — Sandu Gorea",
       "description": "Nunți, portrete, familie, evenimente și peisaje fine art – ce include fiecare ședință."
     },
     "portfolio": {
-      "title": "Portofoliu — Sandugorea",
+      "title": "Portofoliu — Sandu Gorea",
       "description": "O selecție de nunți, portrete, familii și locuri recente de Sandu Gorea."
     },
     "booking": {
-      "title": "Rezervă o dată — Sandugorea",
+      "title": "Rezervă o dată — Sandu Gorea",
       "description": "Alege o dată și spune-mi despre planurile tale – răspund în 48 de ore."
-    }
+    },
+    "shareImageAlt": "Sandu Gorea – Fotografie: nunți, portrete, familii"
   },
   "social": {
     "eyebrow": "Urmărește-mă",

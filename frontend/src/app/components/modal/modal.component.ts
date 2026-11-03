@@ -20,6 +20,7 @@ import { TitleComponent } from '@ui/typography/typography.component';
           <div class="modal__head">
             <h2 app-title size="md">{{ title() }}</h2>
             <button
+              data-testid="modal-close"
               type="button"
               class="modal__close"
               (click)="close()"

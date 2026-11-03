@@ -10,6 +10,9 @@
       <!-- Booking is the button on the right, so it isn't repeated here. -->
       @for (link of barLinks; track link.path) {
         <a
+          [attr.data-testid]="
+            'nav-link' + (link.path === '/' ? '-home' : link.path.replace('/', '-'))
+          "
           app-link
           underline
           [routerLink]="link.path"
@@ -24,11 +27,18 @@
 
     <div class="header__actions">
       <app-language-switcher class="header__lang" />
-      <a app-button size="sm" routerLink="/booking" class="header__cta">
+      <a
+        data-testid="header-cta-booking"
+        app-button
+        size="sm"
+        routerLink="/booking"
+        class="header__cta"
+      >
         <app-icon name="calendar" [size]="14" />
         {{ 'nav.booking' | translate }}
       </a>
       <button
+        data-testid="header-burger"
         type="button"
         class="header__burger"
         [class.header__burger--open]="menuOpen()"
@@ -48,6 +58,9 @@
     <nav app-container class="menu__nav" [attr.aria-label]="'nav.main' | translate">
       @for (link of links; track link.path; let i = $index) {
         <a
+          [attr.data-testid]="
+            'menu-link' + (link.path === '/' ? '-home' : link.path.replace('/', '-'))
+          "
           [routerLink]="link.path"
           routerLinkActive="menu__link--active"
           [routerLinkActiveOptions]="{ exact: link.exact }"
@@ -62,7 +75,7 @@
     </nav>
     <div app-container class="menu__footer">
       <app-language-switcher variant="inline" />
-      <a app-link [href]="'mailto:' + brand.email">{{ brand.email }}</a>
+      <a data-testid="menu-email" app-link [href]="'mailto:' + brand.email">{{ brand.email }}</a>
     </div>
   </div>
 }

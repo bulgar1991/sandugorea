@@ -5,7 +5,14 @@
       {{ 'admin.projects.title' | translate }}
     </h1>
   </div>
-  <button app-button type="button" (click)="openNew()" appReveal [revealDelay]="160">
+  <button
+    data-testid="projects-open-new"
+    app-button
+    type="button"
+    (click)="openNew()"
+    appReveal
+    [revealDelay]="160"
+  >
     <app-icon name="plus" [size]="16" /> {{ 'admin.projects.new' | translate }}
   </button>
 </div>
@@ -14,6 +21,7 @@
   <div app-field class="toolbar__search">
     <span class="toolbar__search-icon"><app-icon name="search" [size]="16" /></span>
     <input
+      data-testid="projects-search"
       appInput
       boxed
       class="toolbar__input"
@@ -25,6 +33,7 @@
   <div class="toolbar__tabs" role="tablist">
     @for (f of filters; track f) {
       <button
+        data-testid="projects-filter"
         type="button"
         role="tab"
         class="toolbar__tab"
@@ -41,6 +50,7 @@
 <div class="project-grid">
   @for (p of projects(); track p.id; let i = $index) {
     <a
+      data-testid="projects-project-card"
       [routerLink]="['/admin/projects', p.id]"
       class="project-card"
       appReveal="up"
@@ -100,6 +110,7 @@
           <span class="credentials__value"
             >{{ c.username }}
             <button
+              data-testid="projects-copy-username"
               type="button"
               class="credentials__copy"
               (click)="copy(c.username, 'common.username')"
@@ -114,6 +125,7 @@
           <span class="credentials__value"
             >{{ c.password }}
             <button
+              data-testid="projects-copy-password"
               type="button"
               class="credentials__copy"
               (click)="copy(c.password, 'common.password')"
@@ -125,10 +137,16 @@
         </div>
       </div>
       <div class="credentials__actions">
-        <button app-button type="button" (click)="openCreated()">
+        <button
+          data-testid="projects-open-created"
+          app-button
+          type="button"
+          (click)="openCreated()"
+        >
           <app-icon name="upload" [size]="14" /> {{ 'admin.projects.upload' | translate }}
         </button>
         <button
+          data-testid="projects-copy-invitation"
           app-button
           variant="ghost"
           type="button"
@@ -139,11 +157,18 @@
       </div>
     </div>
   } @else {
-    <form [formGroup]="form" (ngSubmit)="create()" class="project-form" novalidate>
+    <form
+      data-testid="projects-form"
+      [formGroup]="form"
+      (ngSubmit)="create()"
+      class="project-form"
+      novalidate
+    >
       <p class="project-form__section">{{ 'admin.projects.form.project' | translate }}</p>
       <label app-field>
         <span class="field__label">{{ 'admin.projects.form.title' | translate }}</span>
         <input
+          data-testid="projects-title"
           appInput
           boxed
           formControlName="title"
@@ -156,13 +181,14 @@
       </label>
       <label app-field>
         <span class="field__label">{{ 'admin.projects.form.date' | translate }}</span>
-        <input appInput boxed date type="date" formControlName="date" />
+        <input data-testid="projects-date" appInput boxed date type="date" formControlName="date" />
       </label>
 
       <p class="project-form__section">{{ 'admin.projects.form.customer' | translate }}</p>
       <label app-field>
         <span class="field__label">{{ 'admin.projects.form.name' | translate }}</span>
         <input
+          data-testid="projects-customer-name"
           appInput
           boxed
           formControlName="customerName"
@@ -176,6 +202,7 @@
       <label app-field>
         <span class="field__label">{{ 'admin.projects.form.email' | translate }}</span>
         <input
+          data-testid="projects-customer-email"
           appInput
           boxed
           type="email"
@@ -189,7 +216,7 @@
 
       <label app-field>
         <span class="field__label">{{ 'admin.projects.form.language' | translate }}</span>
-        <select appInput boxed formControlName="language">
+        <select data-testid="projects-language" appInput boxed formControlName="language">
           @for (l of languages; track l.code) {
             <option [value]="l.code">{{ l.name }}</option>
           }
@@ -200,6 +227,7 @@
       <label app-field>
         <span class="field__label">{{ 'common.username' | translate }}</span>
         <input
+          data-testid="projects-username"
           appInput
           boxed
           mono
@@ -221,8 +249,16 @@
       <label app-field>
         <span class="field__label">{{ 'common.password' | translate }}</span>
         <div class="field__wrap">
-          <input appInput boxed mono formControlName="password" autocomplete="new-password" />
+          <input
+            data-testid="projects-password"
+            appInput
+            boxed
+            mono
+            formControlName="password"
+            autocomplete="new-password"
+          />
           <button
+            data-testid="projects-regenerate"
             app-button
             variant="ghost"
             size="icon"
@@ -242,13 +278,19 @@
       </label>
 
       <div class="project-form__actions">
-        <button app-button type="submit" [disabled]="saving()">
+        <button data-testid="projects-submit" app-button type="submit" [disabled]="saving()">
           @if (saving()) {
             <app-spinner />
           }
           {{ 'admin.projects.form.create' | translate }}
         </button>
-        <button app-button variant="ghost" type="button" (click)="modalOpen.set(false)">
+        <button
+          data-testid="projects-cancel"
+          app-button
+          variant="ghost"
+          type="button"
+          (click)="modalOpen.set(false)"
+        >
           {{ 'common.cancel' | translate }}
         </button>
       </div>

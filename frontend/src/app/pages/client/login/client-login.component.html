@@ -7,7 +7,7 @@
 
   <div class="sign-in__side">
     <div class="sign-in__top">
-      <a routerLink="/" class="sign-in__back">
+      <a data-testid="client-login-link-home" routerLink="/" class="sign-in__back">
         <app-icon name="arrow-left" [size]="14" />
         {{ brand.name }}
       </a>
@@ -25,10 +25,17 @@
         {{ 'client.login.text' | translate }}
       </p>
 
-      <form [formGroup]="form" (ngSubmit)="submit()" class="sign-in__form" novalidate>
+      <form
+        data-testid="client-login-form"
+        [formGroup]="form"
+        (ngSubmit)="submit()"
+        class="sign-in__form"
+        novalidate
+      >
         <label app-field class="sign-in__step" style="--i: 3">
           <span class="field__label">{{ 'common.username' | translate }}</span>
           <input
+            data-testid="client-login-username"
             appInput
             formControlName="username"
             autocomplete="username"
@@ -41,12 +48,14 @@
           <span class="field__label">{{ 'common.password' | translate }}</span>
           <div class="field__wrap">
             <input
+              data-testid="client-login-password"
               appInput
               [type]="showPassword() ? 'text' : 'password'"
               formControlName="password"
               autocomplete="current-password"
             />
             <button
+              data-testid="client-login-show-password"
               type="button"
               class="field__toggle"
               (click)="showPassword.update((v) => !v)"
@@ -64,6 +73,7 @@
         }
 
         <button
+          data-testid="client-login-submit"
           app-button
           block
           type="submit"
@@ -83,7 +93,9 @@
 
       <p class="sign-in__help sign-in__step" style="--i: 6">
         {{ 'client.login.lost' | translate }}
-        <a app-link routerLink="/booking">{{ 'client.login.contact' | translate }}</a
+        <a data-testid="client-login-link-booking" app-link routerLink="/booking">{{
+          'client.login.contact' | translate
+        }}</a
         >.
       </p>
     </div>

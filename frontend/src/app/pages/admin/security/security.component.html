@@ -4,14 +4,27 @@
 </h1>
 
 <div class="security">
-  <section app-card class="security__card" appReveal [revealDelay]="120">
+  <section
+    data-testid="security-password"
+    app-card
+    class="security__card"
+    appReveal
+    [revealDelay]="120"
+  >
     <h2 class="security__title">
       <app-icon name="key" [size]="18" /> {{ 'admin.security.changePassword' | translate }}
     </h2>
-    <form [formGroup]="form" (ngSubmit)="changePassword()" class="security__form" novalidate>
+    <form
+      data-testid="security-form"
+      [formGroup]="form"
+      (ngSubmit)="changePassword()"
+      class="security__form"
+      novalidate
+    >
       <label app-field>
         <span class="field__label">{{ 'admin.security.current' | translate }}</span>
         <input
+          data-testid="security-current"
           appInput
           boxed
           type="password"
@@ -21,7 +34,14 @@
       </label>
       <label app-field>
         <span class="field__label">{{ 'admin.security.new' | translate }}</span>
-        <input appInput boxed type="password" formControlName="next" autocomplete="new-password" />
+        <input
+          data-testid="security-next"
+          appInput
+          boxed
+          type="password"
+          formControlName="next"
+          autocomplete="new-password"
+        />
         <div class="strength">
           @for (i of [0, 1, 2, 3]; track i) {
             <span
@@ -38,6 +58,7 @@
       <label app-field>
         <span class="field__label">{{ 'admin.security.confirm' | translate }}</span>
         <input
+          data-testid="security-confirm"
           appInput
           boxed
           type="password"
@@ -51,7 +72,13 @@
       @if (passwordError(); as err) {
         <p app-alert role="alert">{{ err | translate }}</p>
       }
-      <button app-button type="submit" class="security__submit" [disabled]="saving()">
+      <button
+        data-testid="security-submit"
+        app-button
+        type="submit"
+        class="security__submit"
+        [disabled]="saving()"
+      >
         @if (saving()) {
           <app-spinner />
         }
@@ -60,7 +87,13 @@
     </form>
   </section>
 
-  <section app-card class="security__card" appReveal [revealDelay]="180">
+  <section
+    data-testid="security-two-factor"
+    app-card
+    class="security__card"
+    appReveal
+    [revealDelay]="180"
+  >
     <h2 class="security__title">
       <app-icon name="shield" [size]="18" /> {{ 'admin.security.twoFactor' | translate }}
     </h2>
@@ -82,6 +115,7 @@
       }
     </ul>
     <button
+      data-testid="security-regenerate-codes"
       app-button
       variant="ghost"
       type="button"
@@ -92,13 +126,24 @@
     </button>
   </section>
 
-  <section app-card class="security__card" appReveal [revealDelay]="120">
+  <section
+    data-testid="security-sessions"
+    app-card
+    class="security__card"
+    appReveal
+    [revealDelay]="120"
+  >
     <div class="security__row">
       <h2 class="security__title">
         <app-icon name="monitor" [size]="18" /> {{ 'admin.security.sessions' | translate }}
       </h2>
       @if (sessions().length > 1) {
-        <button type="button" class="security__revoke" (click)="revokeOthers()">
+        <button
+          data-testid="security-revoke-others"
+          type="button"
+          class="security__revoke"
+          (click)="revokeOthers()"
+        >
           {{ 'admin.security.signOutOthers' | translate }}
         </button>
       }
@@ -123,7 +168,13 @@
     </ul>
   </section>
 
-  <section app-card class="security__card" appReveal [revealDelay]="180">
+  <section
+    data-testid="security-history"
+    app-card
+    class="security__card"
+    appReveal
+    [revealDelay]="180"
+  >
     <h2 class="security__title">
       <app-icon name="clock" [size]="18" /> {{ 'admin.security.history' | translate }}
     </h2>
@@ -159,10 +210,21 @@
       }
     </ul>
     <div class="credentials__actions">
-      <button app-button variant="ghost" type="button" (click)="copyCodes()">
+      <button
+        data-testid="security-copy-codes"
+        app-button
+        variant="ghost"
+        type="button"
+        (click)="copyCodes()"
+      >
         <app-icon name="copy" [size]="14" /> {{ 'common.copy' | translate }}
       </button>
-      <button app-button type="button" (click)="newCodes.set(null)">
+      <button
+        data-testid="security-codes-done"
+        app-button
+        type="button"
+        (click)="newCodes.set(null)"
+      >
         {{ 'common.done' | translate }}
       </button>
     </div>

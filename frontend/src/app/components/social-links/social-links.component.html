@@ -3,6 +3,7 @@
     @for (l of links; track l.id) {
       <li>
         <a
+          [attr.data-testid]="'social-icon-' + l.id"
           [href]="l.url"
           target="_blank"
           rel="noopener"
@@ -15,7 +16,7 @@
     }
   </ul>
 } @else {
-  <section class="social">
+  <section data-testid="social-block" class="social">
     <div class="social__inner">
       <div class="social__head">
         <p app-eyebrow appReveal>{{ 'social.eyebrow' | translate }}</p>
@@ -29,7 +30,13 @@
       <ul class="social__grid">
         @for (l of links; track l.id; let i = $index) {
           <li appReveal="up" [revealDelay]="i * 70">
-            <a [href]="l.url" target="_blank" rel="noopener" class="social__tile">
+            <a
+              [attr.data-testid]="'social-tile-' + l.id"
+              [href]="l.url"
+              target="_blank"
+              rel="noopener"
+              class="social__tile"
+            >
               <span class="social__glyph"><app-icon [name]="l.id" [size]="28" /></span>
               <span class="social__label">{{ l.label }}</span>
               <app-icon name="arrow-up-right" [size]="14" class="social__arrow" />

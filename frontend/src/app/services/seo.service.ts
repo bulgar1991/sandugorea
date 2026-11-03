@@ -4,7 +4,8 @@ import { Meta, Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { OG_LOCALES, SITE_NAME, SITE_SHARE_IMAGE, SITE_URL } from '@/config/site';
 import { SeoData } from '@models/seo.model';
-import { DEFAULT_LANGUAGE } from './language.service';
+import { BRAND, SOCIAL_LINKS } from '@/data/portfolio.data';
+import { DEFAULT_LANGUAGE, LANGUAGES } from './language.service';
 
 /**
  * Sets the page title, description, canonical link, Open Graph and Twitter tags for the
@@ -68,6 +69,11 @@ export class SeoService {
 
     this.setCanonical(url);
 
+    const noindex = (seo.metaTags ?? []).some((t) => t.name === 'robots');
+    this.setStructuredData(
+      noindex ? null : this.structuredData(cleanPath, url, title, description, lang),
+    );
+
     // Extra per-route tags (e.g. robots: noindex) - these win over the defaults above.
     for (const tag of seo.metaTags ?? []) {
       const content = this.text(tag.content);
@@ -108,6 +114,83 @@ export class SeoService {
         content: String(SITE_SHARE_IMAGE.height),
       });
     }
+  }
+
+  /**
+   * schema.org data for search engines: on the home page the business (photographer) and the
+   * website; on other pages the page itself with a breadcrumb back to the home page.
+   */
+  private structuredData(
+    path: string,
+    url: string,
+    title: string,
+    description: string,
+    lang: string,
+  ) {
+    const business = {
+      '@type': 'ProfessionalService',
+      '@id': `${SITE_URL}/#business`,
+      name: `${BRAND.owner} – ${this.text('brand.tagline')}`,
+      url: `${SITE_URL}/`,
+      logo: `${SITE_URL}/icon-512.png`,
+      image: `${SITE_URL}/og-image.jpg`,
+      description: this.text('seo.home.description'),
+      email: BRAND.email,
+      // The phone number is still a placeholder (+41 00 000 00 00) - only published once it's real.
+      ...(/0{3}/.test(BRAND.phone) ? {} : { telephone: BRAND.phone.replace(/\s/g, '') }),
+      founder: { '@type': 'Person', name: BRAND.owner, jobTitle: this.text('brand.tagline') },
+      knowsLanguage: LANGUAGES.map((l) => l.code),
+      sameAs: SOCIAL_LINKS.filter((l) => l.id !== 'whatsapp').map((l) => l.url),
+    };
+    const website = {
+      '@type': 'WebSite',
+      '@id': `${SITE_URL}/#website`,
+      url: `${SITE_URL}/`,
+      name: SITE_NAME,
+      inLanguage: lang,
+      publisher: { '@id': `${SITE_URL}/#business` },
+    };
+    if (path === '/') return { '@context': 'https://schema.org', '@graph': [business, website] };
+
+    return {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'WebPage',
+          '@id': url,
+          url,
+          name: title,
+          description,
+          inLanguage: lang,
+          isPartOf: { '@id': `${SITE_URL}/#website` },
+        },
+        {
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: this.text('nav.home'), item: `${SITE_URL}/` },
+            // "Leistungen — Sandu Gorea" -> "Leistungen"
+            { '@type': 'ListItem', position: 2, name: title.split(' — ')[0], item: url },
+          ],
+        },
+      ],
+    };
+  }
+
+  /** One <script type="application/ld+json"> (a data block: not executed, so the CSP allows it). */
+  private setStructuredData(data: object | null): void {
+    const id = 'structured-data';
+    let script = this.document.getElementById(id);
+    if (!data) {
+      script?.remove();
+      return;
+    }
+    if (!script) {
+      script = this.document.createElement('script');
+      script.id = id;
+      script.setAttribute('type', 'application/ld+json');
+      this.document.head.appendChild(script);
+    }
+    script.textContent = JSON.stringify(data);
   }
 
   private text(key: string, params?: Record<string, string>): string {

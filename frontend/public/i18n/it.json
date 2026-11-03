@@ -404,18 +404,18 @@
   },
   "seo": {
     "home": {
-      "title": "Sandugorea — Fotografo di matrimoni, ritratti e famiglie",
+      "title": "Sandu Gorea — Fotografo di matrimoni, ritratti e famiglie",
       "description": "Fotografia di matrimonio, ritratto e famiglia, calma e cinematografica. Consegna online privata di ogni foto. Dalla Svizzera, disponibile in tutto il mondo."
     },
     "notFound": {
-      "title": "Pagina non trovata — Sandugorea",
+      "title": "Pagina non trovata — Sandu Gorea",
       "description": "La pagina che cerchi non esiste o è stata spostata."
     },
     "clientLogin": {
-      "title": "Il tuo progetto privato — Sandugorea"
+      "title": "Il tuo progetto privato — Sandu Gorea"
     },
     "client": {
-      "title": "Le tue foto — Sandugorea"
+      "title": "Le tue foto — Sandu Gorea"
     },
     "adminLogin": {
       "title": "Accedi"
@@ -431,17 +431,18 @@
       "description": "Conosci Sandu Gorea: fotografia di matrimonio, ritratto e famiglia, calma e cinematografica."
     },
     "services": {
-      "title": "Servizi — Sandugorea",
+      "title": "Servizi — Sandu Gorea",
       "description": "Matrimoni, ritratti, famiglie, eventi e paesaggi fine art: cosa è incluso in ogni sessione."
     },
     "portfolio": {
-      "title": "Portfolio — Sandugorea",
+      "title": "Portfolio — Sandu Gorea",
       "description": "Una selezione di matrimoni, ritratti, famiglie e luoghi recenti di Sandu Gorea."
     },
     "booking": {
-      "title": "Prenota una data — Sandugorea",
+      "title": "Prenota una data — Sandu Gorea",
       "description": "Scegli una data e raccontami i tuoi progetti: rispondo entro 48 ore."
-    }
+    },
+    "shareImageAlt": "Sandu Gorea – Fotografia: matrimoni, ritratti, famiglie"
   },
   "social": {
     "eyebrow": "Seguimi",

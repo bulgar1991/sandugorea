@@ -79,7 +79,9 @@ else
 
 // Angular build output (wwwroot) - only present after `dotnet publish`.
 app.UseDefaultFiles();
-app.UseStaticFiles();
+var contentTypes = new Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider();
+contentTypes.Mappings[".webmanifest"] = "application/manifest+json";
+app.UseStaticFiles(new StaticFileOptions { ContentTypeProvider = contentTypes });
 
 app.UseCsrfHeaderCheck();
 app.UseRateLimiter();

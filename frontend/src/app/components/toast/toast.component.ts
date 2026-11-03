@@ -22,6 +22,7 @@ import { ToastService } from './toast.service';
           />
           <span class="toasts__message">{{ t.message | translate: t.params }}</span>
           <button
+            data-testid="toast-dismiss"
             type="button"
             class="toasts__close"
             (click)="toasts.dismiss(t.id)"
