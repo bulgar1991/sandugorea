@@ -145,8 +145,7 @@ export class SeoService {
       image: `${SITE_URL}/og-image.jpg`,
       description: this.text('seo.home.description'),
       email: BRAND.email,
-      // The phone number is still a placeholder (+41 00 000 00 00) - only published once it's real.
-      ...(/0{3}/.test(BRAND.phone) ? {} : { telephone: BRAND.phone.replace(/\s/g, '') }),
+      telephone: BRAND.phone.replace(/\s/g, ''),
       founder: { '@type': 'Person', name: BRAND.owner, jobTitle: this.text('brand.tagline') },
       knowsLanguage: LANGUAGES.map((l) => l.code),
       sameAs: SOCIAL_LINKS.filter((l) => l.id !== 'whatsapp').map((l) => l.url),

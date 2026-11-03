@@ -62,17 +62,17 @@ export const BRAND = {
   name: 'Sandugorea',
   /** Shown in the logo, loader and structured data. */
   owner: 'Sandu Gorea',
-  email: 'hello@sandugorea.ch',
-  phone: '+41 00 000 00 00',
-  instagram: 'https://instagram.com/sandugorea',
+  email: 'sandugorea.photo@gmail.com',
+  phone: '+41 78 232 62 98',
+  instagram: 'https://www.instagram.com/sandugorea.photo',
 };
 
-/** Social profiles shown in the social block and footer. Replace the placeholder URLs. */
+/** Social profiles shown in the social block and footer. */
 export const SOCIAL_LINKS: { id: IconName; label: string; url: string }[] = [
-  { id: 'instagram', label: 'Instagram', url: 'https://instagram.com/sandugorea' },
-  { id: 'facebook', label: 'Facebook', url: 'https://facebook.com/sandugorea' },
-  { id: 'tiktok', label: 'TikTok', url: 'https://tiktok.com/@sandugorea' },
-  { id: 'whatsapp', label: 'WhatsApp', url: 'https://wa.me/41000000000' },
+  { id: 'instagram', label: 'Instagram', url: 'https://www.instagram.com/sandugorea.photo' },
+  { id: 'facebook', label: 'Facebook', url: 'https://www.facebook.com/SanderlSGl' },
+  { id: 'tiktok', label: 'TikTok', url: 'https://www.tiktok.com/@sandugorea.photo' },
+  { id: 'whatsapp', label: 'WhatsApp', url: 'https://wa.me/41782326298' },
 ];
 
 /** Full-width banner images (placeholders - replace with the photographer's own work). */

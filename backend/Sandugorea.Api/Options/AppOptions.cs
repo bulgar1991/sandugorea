@@ -61,7 +61,7 @@ public sealed class EmailOptions
     public string FromName { get; set; } = "Sandugorea Photography";
 
     /// <summary>Where booking requests are sent.</summary>
-    public string OwnerAddress { get; set; } = "hello@sandugorea.ch";
+    public string OwnerAddress { get; set; } = "sandugorea.photo@gmail.com";
 }
 
 public sealed class SiteOptions

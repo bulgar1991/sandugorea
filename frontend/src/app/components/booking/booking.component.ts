@@ -51,7 +51,7 @@ export class BookingComponent {
   protected readonly contacts: { icon: IconName; value: string; href: string }[] = [
     { icon: 'mail', value: BRAND.email, href: `mailto:${BRAND.email}` },
     { icon: 'phone', value: BRAND.phone, href: `tel:${BRAND.phone.replace(/\s/g, '')}` },
-    { icon: 'instagram', value: '@sandugorea', href: BRAND.instagram },
+    { icon: 'instagram', value: '@sandugorea.photo', href: BRAND.instagram },
   ];
 
   protected readonly form = inject(NonNullableFormBuilder).group({
