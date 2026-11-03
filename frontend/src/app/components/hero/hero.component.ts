@@ -16,7 +16,7 @@ import { PageLoaderState } from '@services/page-loader.service';
 import { ButtonComponent } from '@ui/button/button.component';
 import { LinkComponent } from '@ui/link/link.component';
 import { EyebrowComponent, TextComponent } from '@ui/typography/typography.component';
-import { BANNER_IMAGES, BRAND } from '@/data/portfolio.data';
+import { BRAND, HERO_PORTRAIT } from '@/data/portfolio.data';
 
 const ROLE_KEYS = ['hero.roles.r1', 'hero.roles.r2', 'hero.roles.r3'];
 const TYPE_MS = 70;
@@ -33,8 +33,8 @@ const SPECKS = Array.from({ length: 14 }, (_, i) => ({
 }));
 
 /**
- * Full-width home banner with layered parallax:
- *  - the photo drifts with the scroll (CSS scroll timeline - no JS) and with the mouse,
+ * Full-width home banner on a black background with layered parallax:
+ *  - the portrait on the right moves with the mouse and drifts with the scroll (CSS scroll timeline - no JS),
  *  - gold light specks float on a nearer layer (moves more with the mouse = depth),
  *  - a soft light sweep passes over it, and the text lifts away as you scroll.
  * Only transform / opacity are animated, so it stays on the GPU.
@@ -61,7 +61,7 @@ export class HeroComponent {
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
   protected readonly owner = BRAND.owner;
-  protected readonly image = BANNER_IMAGES.home;
+  protected readonly portrait = HERO_PORTRAIT;
   protected readonly specks = SPECKS;
   protected readonly roleKeys = ROLE_KEYS;
   /** Intro animations stay paused until the page loader has gone. */

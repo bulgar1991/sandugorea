@@ -95,7 +95,6 @@ export const SOCIAL_LINKS: { id: IconName; label: string; url: string }[] = [
 
 /** Full-width banner images (placeholders - replace with the photographer's own work). */
 export const BANNER_IMAGES = {
-  home: img('sg-banner-home', 2400, 1500),
   about: img('sg-banner-about', 2400, 1200),
   services: img('sg-banner-services', 2400, 1200),
   portfolio: img('sg-banner-portfolio', 2400, 1200),
