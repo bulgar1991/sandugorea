@@ -73,6 +73,14 @@ var app = builder.Build();
 
 await AdminBootstrap.InitialiseAsync(app.Services);
 
+// Maintenance command instead of the web server, e.g. on the VPS (as the service user):
+//   dotnet Sandugorea.Api.dll admins reset igor sandu > /root/admins.txt
+if (args is ["admins", ..])
+{
+    Environment.ExitCode = await AdminCommands.RunAsync(app.Services, args[1..], Console.Out);
+    return;
+}
+
 app.UseForwardedHeaders();
 app.UseSecurityHeaders();
 
