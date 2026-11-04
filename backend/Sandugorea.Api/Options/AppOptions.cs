@@ -8,7 +8,11 @@ public sealed class StorageOptions
     /// <summary>Absolute or relative directory. Must NOT be inside wwwroot.</summary>
     public string Root { get; set; } = "data";
 
-    public long MaxUploadBytes { get; set; } = 50 * 1024 * 1024;
+    /// <summary>Largest single photo accepted.</summary>
+    public long MaxUploadBytes { get; set; } = 200 * 1024 * 1024;
+
+    /// <summary>Uploads are refused when the disk would have less than this left (originals wait here until they're in Drive).</summary>
+    public long MinFreeDiskBytes { get; set; } = 2L * 1024 * 1024 * 1024;
 
     /// <summary>Rejects images above this many megapixels (decompression-bomb guard).</summary>
     public int MaxMegapixels { get; set; } = 120;
@@ -62,6 +66,24 @@ public sealed class EmailOptions
 
     /// <summary>Where booking requests are sent.</summary>
     public string OwnerAddress { get; set; } = "sandugorea.photo@gmail.com";
+}
+
+/// <summary>
+/// Google Drive as the store for original photos. Empty ClientId = Drive off: originals stay on
+/// the server's disk. The OAuth client is a "Web application" in Google Cloud Console with the
+/// redirect URI {Site:BaseUrl}/api/drive/callback.
+/// </summary>
+public sealed class GoogleDriveOptions
+{
+    public const string Section = "GoogleDrive";
+
+    public string ClientId { get; set; } = "";
+    public string ClientSecret { get; set; } = "";
+
+    /// <summary>Name of the top folder in the connected Drive.</summary>
+    public string RootFolderName { get; set; } = "Sandugorea Fotos";
+
+    public bool Configured => !string.IsNullOrWhiteSpace(ClientId) && !string.IsNullOrWhiteSpace(ClientSecret);
 }
 
 public sealed class SiteOptions

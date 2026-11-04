@@ -39,6 +39,12 @@ public sealed record SendProjectResponse(DateTimeOffset SentAt, string? Password
 public sealed record StatsDto(int Projects, int Drafts, int Delivered, int Photos, long Bytes);
 public sealed record UsernameAvailableDto(bool Available);
 
+// ---- Google Drive
+public sealed record DriveStatusDto(
+    bool Configured, bool Connected, string? Email, long? UsedBytes, long? LimitBytes,
+    int PhotosInDrive, int PendingPhotos, long PendingBytes, long FreeDiskBytes);
+public sealed record DriveConnectDto(string Url);
+
 // ---- Customer
 public sealed record CustomerProjectDto(string Title, DateOnly Date, string CustomerName, long TotalBytes, PhotoDto[] Photos);
 

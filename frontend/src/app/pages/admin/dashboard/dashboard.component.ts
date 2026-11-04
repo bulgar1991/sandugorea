@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { DriveCardComponent } from '@components/drive-card/drive-card.component';
 import { IconComponent, IconName } from '@components/icon/icon.component';
+import { ToastService } from '@components/toast/toast.service';
 import { RevealDirective } from '@directives/reveal.directive';
 import { ProjectSummary, STATUS_BADGE, Stats, projectStatus } from '@models/project.models';
 import { LocalDatePipe } from '@pipes/local-date.pipe';
@@ -29,6 +31,7 @@ import { PageHeadComponent } from '@ui/page-head/page-head.component';
     TranslatePipe,
     IconComponent,
     RevealDirective,
+    DriveCardComponent,
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
@@ -75,5 +78,16 @@ export class DashboardComponent {
   constructor() {
     this.api.stats().then((s) => this.stats.set(s));
     this.api.list().then((p) => this.projects.set(p));
+    this.showDriveResult();
+  }
+
+  /** Back from Google's consent screen: /admin?drive=connected|error|cancelled. */
+  private showDriveResult() {
+    const result = inject(ActivatedRoute).snapshot.queryParamMap.get('drive');
+    if (!result) return;
+    const tone = result === 'connected' ? 'success' : result === 'cancelled' ? 'info' : 'error';
+    const key = ['connected', 'cancelled'].includes(result) ? result : 'error';
+    inject(ToastService).show(`admin.drive.toasts.${key}`, undefined, tone, 6000);
+    inject(Router).navigate([], { queryParams: {}, replaceUrl: true });
   }
 }

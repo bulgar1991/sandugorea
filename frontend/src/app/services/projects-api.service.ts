@@ -4,6 +4,7 @@ import { Observable, firstValueFrom } from 'rxjs';
 import {
   AdminSessionInfo,
   CustomerProject,
+  DriveStatus,
   LoginEventInfo,
   NewProject,
   ProjectDetail,
@@ -103,6 +104,20 @@ export class ProjectsApi {
     return firstValueFrom(
       this.http.post<{ codes: string[] }>('/api/admin/account/recovery-codes', null),
     );
+  }
+
+  // ---- Google Drive
+  driveStatus() {
+    return firstValueFrom(this.http.get<DriveStatus>('/api/admin/drive'));
+  }
+
+  /** URL of Google's consent screen to send the browser to. */
+  driveConnect() {
+    return firstValueFrom(this.http.post<{ url: string }>('/api/admin/drive/connect', null));
+  }
+
+  driveDisconnect() {
+    return firstValueFrom(this.http.delete<void>('/api/admin/drive'));
   }
 
   // ---- Customer

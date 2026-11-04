@@ -10,6 +10,7 @@ public sealed class AppDbContext(DbContextOptions<AppDbContext> options) : DbCon
     public DbSet<LoginEvent> LoginEvents => Set<LoginEvent>();
     public DbSet<Project> Projects => Set<Project>();
     public DbSet<Photo> Photos => Set<Photo>();
+    public DbSet<DriveAccount> DriveAccounts => Set<DriveAccount>();
 
     protected override void OnModelCreating(ModelBuilder b)
     {
@@ -53,6 +54,17 @@ public sealed class AppDbContext(DbContextOptions<AppDbContext> options) : DbCon
             e.Property(x => x.FileName).HasMaxLength(200);
             e.Property(x => x.Extension).HasMaxLength(8);
             e.Property(x => x.ContentType).HasMaxLength(64);
+            e.Property(x => x.DriveFileId).HasMaxLength(128);
+            e.HasIndex(x => x.DriveFileId);
+        });
+
+        b.Entity<Project>().Property(x => x.DriveFolderId).HasMaxLength(128);
+
+        b.Entity<DriveAccount>(e =>
+        {
+            e.Property(x => x.Id).ValueGeneratedNever();
+            e.Property(x => x.Email).HasMaxLength(254);
+            e.Property(x => x.RootFolderId).HasMaxLength(128);
         });
     }
 

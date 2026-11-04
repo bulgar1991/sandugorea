@@ -91,6 +91,31 @@ namespace Sandugorea.Api.Data.Migrations
                     b.ToTable("Admins");
                 });
 
+            modelBuilder.Entity("Sandugorea.Api.Data.DriveAccount", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<long>("ConnectedAt")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(254)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProtectedRefreshToken")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RootFolderId")
+                        .HasMaxLength(128)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DriveAccounts");
+                });
+
             modelBuilder.Entity("Sandugorea.Api.Data.LoginEvent", b =>
                 {
                     b.Property<long>("Id")
@@ -139,6 +164,10 @@ namespace Sandugorea.Api.Data.Migrations
                         .HasMaxLength(64)
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("DriveFileId")
+                        .HasMaxLength(128)
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Extension")
                         .IsRequired()
                         .HasMaxLength(8)
@@ -165,6 +194,8 @@ namespace Sandugorea.Api.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DriveFileId");
 
                     b.HasIndex("ProjectId", "UploadedAt");
 
@@ -197,6 +228,10 @@ namespace Sandugorea.Api.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateOnly>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("DriveFolderId")
+                        .HasMaxLength(128)
                         .HasColumnType("TEXT");
 
                     b.Property<int>("FailedAttempts")

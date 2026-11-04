@@ -1,0 +1,94 @@
+@if (status(); as s) {
+  <section app-card class="drive" data-testid="drive-card">
+    <div class="drive__head">
+      <span class="drive__icon" [class.drive__icon--on]="s.connected && !broken()">
+        <app-icon name="folder" [size]="18" />
+      </span>
+      <div class="drive__heading">
+        <h2 app-title size="sm">{{ 'admin.drive.title' | translate }}</h2>
+        <p class="drive__subtitle">
+          @if (!s.configured) {
+            {{ 'admin.drive.notConfigured' | translate }}
+          } @else if (broken()) {
+            {{ 'admin.drive.broken' | translate: { email: s.email } }}
+          } @else if (s.connected) {
+            {{ 'admin.drive.connectedAs' | translate: { email: s.email } }}
+          } @else {
+            {{ 'admin.drive.intro' | translate }}
+          }
+        </p>
+      </div>
+
+      @if (s.configured) {
+        <div class="drive__actions">
+          @if (!s.connected || broken()) {
+            <button
+              data-testid="drive-card-connect"
+              app-button
+              size="sm"
+              type="button"
+              [disabled]="busy()"
+              (click)="connect()"
+            >
+              {{ (broken() ? 'admin.drive.reconnect' : 'admin.drive.connect') | translate }}
+              <app-icon name="arrow-up-right" [size]="14" />
+            </button>
+          }
+          @if (s.connected && s.photosInDrive === 0) {
+            <button
+              data-testid="drive-card-disconnect"
+              app-button
+              variant="ghost"
+              size="sm"
+              type="button"
+              [disabled]="busy()"
+              (click)="disconnect()"
+            >
+              {{ 'admin.drive.disconnect' | translate }}
+            </button>
+          }
+        </div>
+      }
+    </div>
+
+    @if (s.connected && !broken()) {
+      <div class="drive__body">
+        @if (s.limitBytes) {
+          <div class="drive__quota">
+            <div class="drive__track">
+              <span class="drive__bar" [style.transform]="'scaleX(' + usedShare() + ')'"></span>
+            </div>
+            <p class="drive__line">
+              {{
+                'admin.drive.used'
+                  | translate
+                    : { used: formatBytes(s.usedBytes ?? 0), limit: formatBytes(s.limitBytes) }
+              }}
+            </p>
+          </div>
+        } @else if (s.usedBytes !== null) {
+          <p class="drive__line">
+            {{ 'admin.drive.usedNoLimit' | translate: { used: formatBytes(s.usedBytes) } }}
+          </p>
+        }
+
+        <p class="drive__sync" [class.drive__sync--busy]="s.pendingPhotos > 0">
+          @if (s.pendingPhotos > 0) {
+            <app-spinner class="drive__spinner" />
+            {{
+              'admin.drive.syncing'
+                | translate: { n: s.pendingPhotos, size: formatBytes(s.pendingBytes) }
+            }}
+          } @else {
+            <app-icon name="check" [size]="14" />
+            {{ 'admin.drive.synced' | translate: { n: s.photosInDrive } }}
+          }
+        </p>
+      </div>
+    }
+
+    <p class="drive__server">
+      {{ 'admin.drive.serverFree' | translate: { size: formatBytes(s.freeDiskBytes) } }}
+    </p>
+  </section>
+}

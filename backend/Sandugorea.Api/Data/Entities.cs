@@ -78,6 +78,9 @@ public sealed class Project
     public int FailedAttempts { get; set; }
     public DateTimeOffset? LockoutEndUtc { get; set; }
 
+    /// <summary>This project's folder in Google Drive (created with the first photo moved there).</summary>
+    public string? DriveFolderId { get; set; }
+
     public List<Photo> Photos { get; set; } = [];
 }
 
@@ -97,4 +100,24 @@ public sealed class Photo
     public int Width { get; set; }
     public int Height { get; set; }
     public DateTimeOffset UploadedAt { get; set; } = DateTimeOffset.UtcNow;
+
+    /// <summary>
+    /// Set once the original has been moved to Google Drive (the local copy is then deleted).
+    /// Null = the original is still on the server's disk. Thumb + preview always stay local.
+    /// </summary>
+    public string? DriveFileId { get; set; }
+}
+
+/// <summary>The connected Google account whose Drive stores the originals (at most one row).</summary>
+public sealed class DriveAccount
+{
+    public int Id { get; set; } = 1;
+
+    /// <summary>OAuth refresh token, encrypted with ASP.NET Data Protection.</summary>
+    public required string ProtectedRefreshToken { get; set; }
+    public string? Email { get; set; }
+
+    /// <summary>The "Sandugorea" folder all project folders live in.</summary>
+    public string? RootFolderId { get; set; }
+    public DateTimeOffset ConnectedAt { get; set; } = DateTimeOffset.UtcNow;
 }

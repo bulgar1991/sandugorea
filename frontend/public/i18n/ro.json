@@ -255,7 +255,7 @@
         "photos": "Fotografii",
         "photosHint": "în toate proiectele",
         "storage": "Spațiu",
-        "storageHint": "originale pe server"
+        "storageHint": "Toate originalele"
       }
     },
     "projects": {
@@ -304,7 +304,7 @@
       "back": "Proiecte",
       "summary": "{{count}} fotografii · {{size}}",
       "drop": "Trage fotografiile aici",
-      "dropHint": "sau apasă pentru a alege · JPG, PNG, WEBP până la 50 MB",
+      "dropHint": "sau dă clic pentru a alege · JPG, PNG, WEBP până la 200 MB pe fotografie",
       "preview": "Previzualizare {{name}}",
       "delete": "Șterge {{name}}",
       "customer": "Client",
@@ -331,9 +331,10 @@
       "deleteForever": "Șterge definitiv",
       "rejected": {
         "type": "{{name}} nu este o imagine acceptată (JPG, PNG sau WEBP).",
-        "size": "{{name}} depășește 50 MB.",
+        "size": "{{name}} depășește 200 MB.",
         "dimensions": "{{name}} are prea mulți pixeli.",
-        "failed": "Încărcarea {{name}} a eșuat. Încearcă din nou."
+        "failed": "Încărcarea {{name}} a eșuat. Încearcă din nou.",
+        "diskFull": "Nu mai este spațiu pe server pentru {{name}}. Așteaptă până se transferă fotografiile în Google Drive."
       },
       "includePassword": "Generează o parolă nouă și include-o în email",
       "includePasswordHint": "Lasă nebifat dacă i-ai dat deja parola clientului."
@@ -379,7 +380,7 @@
     "toasts": {
       "projectCreated": "Proiectul „{{title}}” a fost creat",
       "copied": "{{what}} copiat",
-      "skipped": "{{n}} fișier(e) ignorat(e) (doar imagini de până la 50 MB)",
+      "skipped": "{{n}} fișier(e) omis(e) (doar imagini de până la 200 MB)",
       "sent": "Datele de acces au fost trimise la {{email}}",
       "accessDisabled": "Accesul clientului a fost dezactivat",
       "accessEnabled": "Accesul clientului a fost activat",
@@ -387,6 +388,28 @@
       "passwordUpdated": "Parola a fost actualizată. Celelalte sesiuni au fost deconectate.",
       "codesRegenerated": "Coduri de recuperare noi generate",
       "sessionsRevoked": "Deconectat de pe toate celelalte sesiuni"
+    },
+    "drive": {
+      "title": "Google Drive",
+      "intro": "Conectează-ți contul Google: fotografiile originale vor fi păstrate în Google Drive, eliberând spațiu pe server. Previzualizările rămân pe site.",
+      "notConfigured": "Încă nu este configurat: pe server lipsesc datele de acces Google (GoogleDrive__ClientId / ClientSecret).",
+      "connectedAs": "Conectat la {{email}}. Originalele noi sunt transferate acolo automat.",
+      "broken": "Google refuză accesul la {{email}}. Te rugăm să te reconectezi – până atunci originalele noi rămân pe server.",
+      "connect": "Conectează Google Drive",
+      "reconnect": "Reconectează",
+      "disconnect": "Deconectează",
+      "used": "{{used}} din {{limit}} folosiți",
+      "usedNoLimit": "{{used}} folosiți",
+      "syncing": "Se transferă {{n}} fotografii · {{size}} în Google Drive …",
+      "synced": "Toate originalele sunt în Google Drive ({{n}})",
+      "serverFree": "Server: {{size}} liberi",
+      "toasts": {
+        "connected": "Google Drive este conectat. Originalele se transferă acum.",
+        "error": "Google Drive nu a putut fi conectat. Încearcă din nou.",
+        "cancelled": "Conectarea la Google Drive a fost anulată.",
+        "disconnected": "Google Drive deconectat.",
+        "inUse": "Nu se poate deconecta cât timp există fotografii în Google Drive."
+      }
     }
   },
   "seo": {

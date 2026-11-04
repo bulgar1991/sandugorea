@@ -41,7 +41,8 @@ interface UploadItem {
   state: 'queued' | 'uploading';
 }
 
-const MAX_FILE_BYTES = 50 * 1024 * 1024;
+/** Per photo; originals then move on to Google Drive. Same limit as the server. */
+const MAX_FILE_BYTES = 200 * 1024 * 1024;
 const ACCEPTED = ['image/jpeg', 'image/png', 'image/webp'];
 const PARALLEL_UPLOADS = 2;
 

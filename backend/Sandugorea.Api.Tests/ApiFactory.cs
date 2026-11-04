@@ -2,6 +2,9 @@ using System.Net.Http.Json;
 using System.Text.Json;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.DependencyInjection;
+using Sandugorea.Api.Services;
 using Sandugorea.Api.Security;
 using SkiaSharp;
 
@@ -19,6 +22,9 @@ public sealed class ApiFactory : WebApplicationFactory<Program>
 
     public string Root { get; } = Path.Combine(Path.GetTempPath(), "sg-tests-" + Guid.NewGuid().ToString("N"));
 
+    /// <summary>Set to turn Google Drive on, talking to this fake instead of Google.</summary>
+    public FakeGoogle? Google { get; init; }
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseEnvironment("Production");
@@ -28,6 +34,13 @@ public sealed class ApiFactory : WebApplicationFactory<Program>
         builder.UseSetting("Security:AuthRequestsPerMinute", "1000");
         builder.UseSetting("Security:BookingRequestsPer10Minutes", "1000");
         builder.UseSetting("Site:BaseUrl", "https://sandugorea.test");
+        if (Google is { } google)
+        {
+            builder.UseSetting("GoogleDrive:ClientId", FakeGoogle.ClientId);
+            builder.UseSetting("GoogleDrive:ClientSecret", FakeGoogle.ClientSecret);
+            builder.ConfigureTestServices(s =>
+                s.AddHttpClient(GoogleDrive.HttpClientName).ConfigurePrimaryHttpMessageHandler(() => google));
+        }
     }
 
     public HttpClient NewClient()

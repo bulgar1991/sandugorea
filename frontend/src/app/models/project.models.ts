@@ -99,3 +99,20 @@ export interface Session {
   role: Role;
   displayName: string;
 }
+
+/** Google Drive, where the original photos are kept (GET /api/admin/drive). */
+export interface DriveStatus {
+  /** OAuth client set up on the server. */
+  configured: boolean;
+  connected: boolean;
+  email: string | null;
+  /** Null when Google refused access (reconnect needed). */
+  usedBytes: number | null;
+  /** Null = unlimited, or unknown when access was refused. */
+  limitBytes: number | null;
+  photosInDrive: number;
+  /** Originals still waiting on the server to be moved. */
+  pendingPhotos: number;
+  pendingBytes: number;
+  freeDiskBytes: number;
+}

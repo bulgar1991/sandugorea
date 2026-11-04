@@ -17,7 +17,7 @@ public enum PhotoVariant
 
 public sealed class PhotoRejectedException(string reason) : Exception(reason)
 {
-    /// <summary>"type", "size" or "dimensions".</summary>
+    /// <summary>"type", "size", "dimensions" or "diskFull".</summary>
     public string Reason { get; } = reason;
 }
 
@@ -66,6 +66,7 @@ public sealed class PhotoStorage(IOptions<StorageOptions> options, ILogger<Photo
     public async Task<Photo> SaveAsync(Guid projectId, IFormFile file, CancellationToken ct)
     {
         if (file.Length <= 0 || file.Length > _options.MaxUploadBytes) throw new PhotoRejectedException("size");
+        if (FreeDiskBytes() - file.Length < _options.MinFreeDiskBytes) throw new PhotoRejectedException("diskFull");
 
         var photo = new Photo
         {
@@ -178,6 +179,23 @@ public sealed class PhotoStorage(IOptions<StorageOptions> options, ILogger<Photo
         canvas.DrawBitmap(src, 0, 0);
         return dst;
     }
+
+    /// <summary>Free space on the disk holding the photos (long.MaxValue if it can't be read).</summary>
+    public long FreeDiskBytes()
+    {
+        try
+        {
+            Directory.CreateDirectory(_options.Root);
+            return new DriveInfo(Path.GetFullPath(_options.Root)).AvailableFreeSpace;
+        }
+        catch (Exception ex) when (ex is IOException or ArgumentException or UnauthorizedAccessException)
+        {
+            return long.MaxValue;
+        }
+    }
+
+    /// <summary>After the original was moved to Google Drive.</summary>
+    public void DeleteOriginal(Photo photo) => TryDelete(PathFor(photo, PhotoVariant.Original));
 
     public void Delete(Photo photo)
     {

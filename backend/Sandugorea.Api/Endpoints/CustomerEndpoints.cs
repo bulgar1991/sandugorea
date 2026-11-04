@@ -46,16 +46,16 @@ public static class CustomerEndpoints
         });
 
         g.MapGet("/photos/{photoId:guid}/{variant}", async (
-            Guid photoId, string variant, bool? download, HttpContext ctx, AppDbContext db, PhotoStorage storage) =>
+            Guid photoId, string variant, bool? download, HttpContext ctx, AppDbContext db, PhotoStorage storage, GoogleDrive drive) =>
         {
             if (!PhotoDtos.TryParseVariant(variant, out var v)) return Results.NotFound();
             var projectId = ctx.ClaimGuid(Claims.ProjectId);
             // The ownership check: a photo of another project is simply "not found".
             var photo = await db.Photos.AsNoTracking().FirstOrDefaultAsync(p => p.Id == photoId && p.ProjectId == projectId);
-            return photo is null ? Results.NotFound() : PhotoFiles.Serve(photo, v, storage, download == true);
+            return photo is null ? Results.NotFound() : PhotoFiles.Serve(photo, v, storage, drive, download == true);
         });
 
-        g.MapGet("/project/zip", async (HttpContext ctx, AppDbContext db, PhotoStorage storage, CancellationToken ct) =>
+        g.MapGet("/project/zip", async (HttpContext ctx, AppDbContext db, PhotoStorage storage, GoogleDrive drive, CancellationToken ct) =>
         {
             var id = ctx.ClaimGuid(Claims.ProjectId);
             var p = await db.Projects.AsNoTracking().Include(x => x.Photos).FirstOrDefaultAsync(x => x.Id == id, ct);
@@ -68,18 +68,22 @@ public static class CustomerEndpoints
             }.ToString();
             ctx.Response.Headers.CacheControl = "private, no-store";
 
-            // ZipArchive writes synchronously; allow it for this streaming response only.
+            // Originals come from disk or Google Drive and are streamed straight into the ZIP,
+            // so even a project of many GB never sits in memory or on disk here. ZipArchive still
+            // writes its headers synchronously on a non-seekable stream: allow that here only.
             ctx.Features.Get<IHttpBodyControlFeature>()!.AllowSynchronousIO = true;
-            using (var zip = new ZipArchive(ctx.Response.Body, ZipArchiveMode.Create, leaveOpen: true))
+            await using (var zip = new ZipArchive(ctx.Response.Body, ZipArchiveMode.Create, leaveOpen: true))
             {
                 var used = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
                 foreach (var photo in p.Photos.OrderBy(x => x.UploadedAt))
                 {
-                    var path = storage.PathFor(photo, PhotoVariant.Original);
-                    if (!File.Exists(path)) continue;
+                    await using var source = await PhotoFiles.OpenOriginalAsync(photo, storage, drive, ct);
+                    if (source is null) continue;
                     // JPEGs are already compressed - storing them is faster and just as small.
-                    zip.CreateEntryFromFile(path, UniqueName(photo.FileName, used), CompressionLevel.NoCompression);
-                    ct.ThrowIfCancellationRequested();
+                    var entry = zip.CreateEntry(UniqueName(photo.FileName, used), CompressionLevel.NoCompression);
+                    entry.LastWriteTime = photo.UploadedAt;
+                    await using var target = await entry.OpenAsync(ct);
+                    await source.CopyToAsync(target, 1 << 20, ct);
                 }
             }
             return Results.Empty;

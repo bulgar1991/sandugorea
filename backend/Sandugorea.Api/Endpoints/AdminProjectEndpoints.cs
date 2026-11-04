@@ -92,17 +92,22 @@ public static class AdminProjectEndpoints
             return Results.Ok(new NewPasswordResponse(password));
         });
 
-        g.MapDelete("/projects/{id:guid}", async (Guid id, AppDbContext db, PhotoStorage storage) =>
+        g.MapDelete("/projects/{id:guid}", async (Guid id, AppDbContext db, PhotoStorage storage, GoogleDrive drive, ILoggerFactory loggers) =>
         {
-            var deleted = await db.Projects.Where(p => p.Id == id).ExecuteDeleteAsync();
-            if (deleted == 0) return Results.NotFound();
+            var folder = await db.Projects.Where(p => p.Id == id).Select(p => new { p.DriveFolderId }).FirstOrDefaultAsync();
+            if (folder is null) return Results.NotFound();
             await db.Photos.Where(p => p.ProjectId == id).ExecuteDeleteAsync();
+            await db.Projects.Where(p => p.Id == id).ExecuteDeleteAsync();
             storage.DeleteProject(id);
+            // The whole folder goes to the Drive trash (recoverable there for 30 days).
+            if (folder.DriveFolderId is { } folderId)
+                await TrashQuietly(drive, folderId, loggers);
             return Results.NoContent();
         });
 
         // One file per request, so the browser can show progress per photo.
-        g.MapPost("/projects/{id:guid}/photos", async (Guid id, IFormFile file, AppDbContext db, PhotoStorage storage, CancellationToken ct) =>
+        // The original waits on disk until DriveSync has moved it to Google Drive.
+        g.MapPost("/projects/{id:guid}/photos", async (Guid id, IFormFile file, AppDbContext db, PhotoStorage storage, DriveSync sync, CancellationToken ct) =>
         {
             if (!await db.Projects.AnyAsync(p => p.Id == id, ct)) return Results.NotFound();
             try
@@ -110,6 +115,7 @@ public static class AdminProjectEndpoints
                 var photo = await storage.SaveAsync(id, file, ct);
                 db.Photos.Add(photo);
                 await db.SaveChangesAsync(ct);
+                sync.Wake();
                 return Results.Ok(photo.ToDto("admin"));
             }
             catch (PhotoRejectedException ex)
@@ -118,16 +124,18 @@ public static class AdminProjectEndpoints
             }
         })
         .DisableAntiforgery() // protected by the global CSRF header check + SameSite=Strict
-        .WithMetadata(new RequestSizeLimitAttribute(60 * 1024 * 1024))
-        .WithMetadata(new RequestFormLimitsAttribute { MultipartBodyLengthLimit = 60 * 1024 * 1024 });
+        .WithMetadata(new RequestSizeLimitAttribute(UploadRequestLimit))
+        .WithMetadata(new RequestFormLimitsAttribute { MultipartBodyLengthLimit = UploadRequestLimit });
 
-        g.MapDelete("/projects/{id:guid}/photos/{photoId:guid}", async (Guid id, Guid photoId, AppDbContext db, PhotoStorage storage) =>
+        g.MapDelete("/projects/{id:guid}/photos/{photoId:guid}", async (Guid id, Guid photoId, AppDbContext db, PhotoStorage storage, GoogleDrive drive, ILoggerFactory loggers) =>
         {
             var photo = await db.Photos.FirstOrDefaultAsync(p => p.Id == photoId && p.ProjectId == id);
             if (photo is null) return Results.NotFound();
             db.Photos.Remove(photo);
             await db.SaveChangesAsync();
             storage.Delete(photo);
+            if (photo.DriveFileId is { } fileId && fileId != DriveSync.Missing)
+                await TrashQuietly(drive, fileId, loggers);
             return Results.NoContent();
         });
 
@@ -158,12 +166,28 @@ public static class AdminProjectEndpoints
             return Results.Ok(new SendProjectResponse(project.SentAt.Value, password));
         });
 
-        g.MapGet("/photos/{photoId:guid}/{variant}", async (Guid photoId, string variant, AppDbContext db, PhotoStorage storage) =>
+        g.MapGet("/photos/{photoId:guid}/{variant}", async (Guid photoId, string variant, AppDbContext db, PhotoStorage storage, GoogleDrive drive) =>
         {
             if (!PhotoDtos.TryParseVariant(variant, out var v)) return Results.NotFound();
             var photo = await db.Photos.AsNoTracking().FirstOrDefaultAsync(p => p.Id == photoId);
-            return photo is null ? Results.NotFound() : PhotoFiles.Serve(photo, v, storage, download: false);
+            return photo is null ? Results.NotFound() : PhotoFiles.Serve(photo, v, storage, drive, download: false);
         });
+    }
+
+    /// <summary>Multipart overhead on top of the largest photo.</summary>
+    private const long UploadRequestLimit = 210L * 1024 * 1024;
+
+    /// <summary>Drive clean-up must never fail the delete the admin asked for; leftovers are only in their own Drive.</summary>
+    private static async Task TrashQuietly(GoogleDrive drive, string fileId, ILoggerFactory loggers)
+    {
+        try
+        {
+            await drive.TrashAsync(fileId, CancellationToken.None);
+        }
+        catch (Exception ex) when (ex is DriveUnavailableException or HttpRequestException)
+        {
+            loggers.CreateLogger("Drive").LogWarning(ex, "Could not move {FileId} to the Drive trash", fileId);
+        }
     }
 
     private static ProjectSummaryDto ToSummary(Project p) => new(
@@ -179,13 +203,113 @@ public static class AdminProjectEndpoints
 
 internal static class PhotoFiles
 {
-    /// <summary>Streams a stored file. Private caching only - photos must never sit in shared caches.</summary>
-    public static IResult Serve(Photo photo, PhotoVariant variant, PhotoStorage storage, bool download)
+    /// <summary>
+    /// Streams a stored file: from disk, or - for an original already moved there - from Google
+    /// Drive through this server (the browser never gets a Drive link). Private caching only -
+    /// photos must never sit in shared caches.
+    /// </summary>
+    public static IResult Serve(Photo photo, PhotoVariant variant, PhotoStorage storage, GoogleDrive drive, bool download)
     {
+        var contentType = PhotoStorage.ContentTypeFor(photo, variant);
+        var name = download ? photo.FileName : null;
         var path = storage.PathFor(photo, variant);
-        if (!File.Exists(path)) return Results.NotFound();
-        return new PrivateFileResult(path, PhotoStorage.ContentTypeFor(photo, variant),
-            download ? photo.FileName : null);
+        if (File.Exists(path)) return new PrivateFileResult(path, contentType, name);
+        if (variant == PhotoVariant.Original && photo.DriveFileId is { } fileId && fileId != DriveSync.Missing)
+            return new DriveFileResult(drive, fileId, contentType, name);
+        return Results.NotFound();
+    }
+
+    /// <summary>Opens an original for reading (disk or Drive) - used by the ZIP download.</summary>
+    public static async Task<Stream?> OpenOriginalAsync(Photo photo, PhotoStorage storage, GoogleDrive drive, CancellationToken ct)
+    {
+        var path = storage.PathFor(photo, PhotoVariant.Original);
+        if (File.Exists(path)) return new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 1 << 16, useAsync: true);
+        if (photo.DriveFileId is not { } fileId || fileId == DriveSync.Missing) return null;
+        var response = await drive.DownloadAsync(fileId, null, ct);
+        if (!response.IsSuccessStatusCode)
+        {
+            response.Dispose();
+            return null;
+        }
+        return new ResponseStream(response, await response.Content.ReadAsStreamAsync(ct));
+    }
+
+    private sealed class DriveFileResult(GoogleDrive drive, string fileId, string contentType, string? downloadName) : IResult
+    {
+        public async Task ExecuteAsync(HttpContext ctx)
+        {
+            System.Net.Http.Headers.RangeHeaderValue? range = null;
+            var requested = ctx.Request.Headers.Range.ToString();
+            if (!string.IsNullOrEmpty(requested) && System.Net.Http.Headers.RangeHeaderValue.TryParse(requested, out var parsed))
+                range = parsed;
+
+            HttpResponseMessage response;
+            try
+            {
+                response = await drive.DownloadAsync(fileId, range, ctx.RequestAborted);
+            }
+            catch (Exception ex) when (ex is DriveUnavailableException or HttpRequestException)
+            {
+                ctx.Response.StatusCode = StatusCodes.Status503ServiceUnavailable;
+                return;
+            }
+
+            using (response)
+            {
+                if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                {
+                    ctx.Response.StatusCode = StatusCodes.Status404NotFound;
+                    return;
+                }
+                if (!response.IsSuccessStatusCode && response.StatusCode != System.Net.HttpStatusCode.RequestedRangeNotSatisfiable)
+                {
+                    ctx.Response.StatusCode = StatusCodes.Status502BadGateway;
+                    return;
+                }
+
+                ctx.Response.StatusCode = (int)response.StatusCode; // 200, 206 or 416
+                ctx.Response.ContentType = contentType;
+                ctx.Response.ContentLength = response.Content.Headers.ContentLength;
+                if (response.Content.Headers.ContentRange is { } contentRange)
+                    ctx.Response.Headers.ContentRange = contentRange.ToString();
+                ctx.Response.Headers.AcceptRanges = "bytes";
+                ctx.Response.Headers.CacheControl = "private, max-age=86400";
+                if (downloadName is not null)
+                {
+                    var disposition = new Microsoft.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
+                    disposition.SetHttpFileName(downloadName);
+                    ctx.Response.Headers.ContentDisposition = disposition.ToString();
+                }
+                await response.Content.CopyToAsync(ctx.Response.Body, ctx.RequestAborted);
+            }
+        }
+    }
+
+    /// <summary>A Drive download stream that also disposes its HTTP response.</summary>
+    private sealed class ResponseStream(HttpResponseMessage response, Stream inner) : Stream
+    {
+        public override bool CanRead => true;
+        public override bool CanSeek => false;
+        public override bool CanWrite => false;
+        public override long Length => throw new NotSupportedException();
+        public override long Position { get => throw new NotSupportedException(); set => throw new NotSupportedException(); }
+        public override int Read(byte[] buffer, int offset, int count) => inner.Read(buffer, offset, count);
+        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken ct = default) => inner.ReadAsync(buffer, ct);
+        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken ct) => inner.ReadAsync(buffer, offset, count, ct);
+        public override void Flush() { }
+        public override long Seek(long offset, SeekOrigin origin) => throw new NotSupportedException();
+        public override void SetLength(long value) => throw new NotSupportedException();
+        public override void Write(byte[] buffer, int offset, int count) => throw new NotSupportedException();
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                inner.Dispose();
+                response.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 
     private sealed class PrivateFileResult(string path, string contentType, string? downloadName) : IResult

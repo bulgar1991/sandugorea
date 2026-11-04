@@ -255,7 +255,7 @@
         "photos": "Foto",
         "photosHint": "in tutti i progetti",
         "storage": "Spazio",
-        "storageHint": "originali sul server"
+        "storageHint": "Tutti gli originali"
       }
     },
     "projects": {
@@ -304,7 +304,7 @@
       "back": "Progetti",
       "summary": "{{count}} foto · {{size}}",
       "drop": "Trascina qui le foto",
-      "dropHint": "o clicca per sfogliare · JPG, PNG, WEBP fino a 50 MB",
+      "dropHint": "o clicca per scegliere · JPG, PNG, WEBP fino a 200 MB per foto",
       "preview": "Anteprima {{name}}",
       "delete": "Elimina {{name}}",
       "customer": "Cliente",
@@ -331,9 +331,10 @@
       "deleteForever": "Elimina definitivamente",
       "rejected": {
         "type": "{{name}} non è un'immagine supportata (JPG, PNG o WEBP).",
-        "size": "{{name}} supera i 50 MB.",
+        "size": "{{name}} supera i 200 MB.",
         "dimensions": "{{name}} ha troppi pixel.",
-        "failed": "Caricamento di {{name}} non riuscito. Riprova."
+        "failed": "Caricamento di {{name}} non riuscito. Riprova.",
+        "diskFull": "Spazio esaurito sul server per {{name}}. Attendi che le foto siano trasferite su Google Drive."
       },
       "includePassword": "Genera una nuova password e includila nell'email",
       "includePasswordHint": "Lascia deselezionato se hai già dato la password al cliente."
@@ -379,7 +380,7 @@
     "toasts": {
       "projectCreated": "Progetto «{{title}}» creato",
       "copied": "{{what}} copiato",
-      "skipped": "{{n}} file ignorati (solo immagini fino a 50 MB)",
+      "skipped": "{{n}} file ignorati (solo immagini fino a 200 MB)",
       "sent": "Dati di accesso inviati a {{email}}",
       "accessDisabled": "Accesso cliente disattivato",
       "accessEnabled": "Accesso cliente attivato",
@@ -387,6 +388,28 @@
       "passwordUpdated": "Password aggiornata. Le altre sessioni sono state disconnesse.",
       "codesRegenerated": "Nuovi codici di recupero generati",
       "sessionsRevoked": "Disconnesso da tutte le altre sessioni"
+    },
+    "drive": {
+      "title": "Google Drive",
+      "intro": "Collega il tuo account Google: le foto originali verranno salvate nel tuo Google Drive, liberando spazio sul server. Le anteprime restano sul sito.",
+      "notConfigured": "Non ancora configurato: sul server mancano le credenziali Google (GoogleDrive__ClientId / ClientSecret).",
+      "connectedAs": "Collegato a {{email}}. I nuovi originali vengono trasferiti lì automaticamente.",
+      "broken": "Google nega l'accesso a {{email}}. Ricollega l'account – fino ad allora i nuovi originali restano sul server.",
+      "connect": "Collega Google Drive",
+      "reconnect": "Ricollega",
+      "disconnect": "Scollega",
+      "used": "{{used}} di {{limit}} utilizzati",
+      "usedNoLimit": "{{used}} utilizzati",
+      "syncing": "Trasferimento di {{n}} foto · {{size}} su Google Drive …",
+      "synced": "Tutti gli originali sono su Google Drive ({{n}})",
+      "serverFree": "Server: {{size}} liberi",
+      "toasts": {
+        "connected": "Google Drive è collegato. Gli originali vengono trasferiti ora.",
+        "error": "Impossibile collegare Google Drive. Riprova.",
+        "cancelled": "Collegamento a Google Drive annullato.",
+        "disconnected": "Google Drive scollegato.",
+        "inUse": "Impossibile scollegare finché ci sono foto su Google Drive."
+      }
     }
   },
   "seo": {

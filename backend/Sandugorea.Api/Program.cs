@@ -18,6 +18,7 @@ builder.Services.Configure<AdminBootstrapOptions>(config.GetSection(AdminBootstr
 builder.Services.Configure<SecurityOptions>(config.GetSection(SecurityOptions.Section));
 builder.Services.Configure<EmailOptions>(config.GetSection(EmailOptions.Section));
 builder.Services.Configure<SiteOptions>(config.GetSection(SiteOptions.Section));
+builder.Services.Configure<GoogleDriveOptions>(config.GetSection(GoogleDriveOptions.Section));
 
 var storage = config.GetSection(StorageOptions.Section).Get<StorageOptions>() ?? new();
 var storageRoot = Path.GetFullPath(storage.Root);
@@ -36,6 +37,14 @@ builder.Services.AddDataProtection()
 builder.Services.AddSingleton<Passwords>();
 builder.Services.AddSingleton<PhotoStorage>();
 builder.Services.AddSingleton<IEmailSender, EmailSender>();
+
+// Google Drive keeps the original photos (see GoogleDrive / DriveSync). Long timeout: uploads
+// of big originals; downloads are streamed and aren't bound by it once the headers arrive.
+builder.Services.AddMemoryCache();
+builder.Services.AddHttpClient(GoogleDrive.HttpClientName, c => c.Timeout = TimeSpan.FromMinutes(30));
+builder.Services.AddSingleton<GoogleDrive>();
+builder.Services.AddSingleton<DriveSync>();
+builder.Services.AddHostedService(sp => sp.GetRequiredService<DriveSync>());
 builder.Services.AddOpenApi();
 builder.Services.AddProblemDetails();
 builder.Services.AddSandugoreaAuth(config, builder.Environment);
@@ -103,6 +112,7 @@ app.MapAdminAuth();
 app.MapAdminAccount();
 app.MapAdminProjects();
 app.MapCustomer();
+app.MapDrive();
 app.MapBooking();
 
 // Unknown /api routes are real 404s; everything else falls through to the Angular router.

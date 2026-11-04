@@ -255,7 +255,7 @@
         "photos": "Fotos",
         "photosHint": "in allen Projekten",
         "storage": "Speicher",
-        "storageHint": "Originale auf dem Server"
+        "storageHint": "Originale insgesamt"
       }
     },
     "projects": {
@@ -304,7 +304,7 @@
       "back": "Projekte",
       "summary": "{{count}} Fotos · {{size}}",
       "drop": "Fotos hier ablegen",
-      "dropHint": "oder klicken zum Auswählen · JPG, PNG, WEBP bis 50 MB",
+      "dropHint": "oder klicken zum Auswählen · JPG, PNG, WEBP bis 200 MB pro Foto",
       "preview": "Vorschau {{name}}",
       "delete": "{{name}} löschen",
       "customer": "Kunde",
@@ -331,9 +331,10 @@
       "deleteForever": "Endgültig löschen",
       "rejected": {
         "type": "{{name}} ist kein unterstütztes Bild (JPG, PNG oder WEBP).",
-        "size": "{{name}} ist größer als 50 MB.",
+        "size": "{{name}} ist größer als 200 MB.",
         "dimensions": "{{name}} hat zu viele Pixel.",
-        "failed": "Hochladen von {{name}} fehlgeschlagen. Bitte erneut versuchen."
+        "failed": "Hochladen von {{name}} fehlgeschlagen. Bitte erneut versuchen.",
+        "diskFull": "Kein Platz mehr auf dem Server für {{name}}. Warte, bis die Fotos nach Google Drive übertragen sind."
       },
       "includePassword": "Neues Passwort erzeugen und in die E-Mail aufnehmen",
       "includePasswordHint": "Nicht ankreuzen, wenn der Kunde sein Passwort schon hat."
@@ -379,7 +380,7 @@
     "toasts": {
       "projectCreated": "Projekt „{{title}}“ erstellt",
       "copied": "{{what}} kopiert",
-      "skipped": "{{n}} Datei(en) übersprungen (nur Bilder bis 50 MB)",
+      "skipped": "{{n}} Datei(en) übersprungen (nur Bilder bis 200 MB)",
       "sent": "Zugangsdaten an {{email}} gesendet",
       "accessDisabled": "Kundenzugang deaktiviert",
       "accessEnabled": "Kundenzugang aktiviert",
@@ -387,6 +388,28 @@
       "passwordUpdated": "Passwort aktualisiert. Andere Sitzungen wurden abgemeldet.",
       "codesRegenerated": "Neue Wiederherstellungscodes erzeugt",
       "sessionsRevoked": "Von allen anderen Sitzungen abgemeldet"
+    },
+    "drive": {
+      "title": "Google Drive",
+      "intro": "Verbinde dein Google-Konto: Die Originalfotos werden dann in deinem Google Drive gespeichert – so bleibt auf dem Server Platz. Vorschaubilder bleiben auf der Website.",
+      "notConfigured": "Noch nicht eingerichtet: Auf dem Server fehlen die Google-Zugangsdaten (GoogleDrive__ClientId / ClientSecret).",
+      "connectedAs": "Verbunden mit {{email}}. Neue Originale werden automatisch dorthin übertragen.",
+      "broken": "Google verweigert den Zugriff auf {{email}}. Bitte neu verbinden – bis dahin bleiben neue Originale auf dem Server.",
+      "connect": "Google Drive verbinden",
+      "reconnect": "Neu verbinden",
+      "disconnect": "Trennen",
+      "used": "{{used}} von {{limit}} belegt",
+      "usedNoLimit": "{{used}} belegt",
+      "syncing": "{{n}} Foto(s) · {{size}} werden nach Google Drive übertragen …",
+      "synced": "Alle Originale sind in Google Drive ({{n}})",
+      "serverFree": "Server: {{size}} frei",
+      "toasts": {
+        "connected": "Google Drive ist verbunden. Die Originale werden jetzt übertragen.",
+        "error": "Google Drive konnte nicht verbunden werden. Bitte erneut versuchen.",
+        "cancelled": "Verbindung mit Google Drive abgebrochen.",
+        "disconnected": "Google Drive getrennt.",
+        "inUse": "Trennen nicht möglich, solange Fotos in Google Drive liegen."
+      }
     }
   },
   "seo": {
