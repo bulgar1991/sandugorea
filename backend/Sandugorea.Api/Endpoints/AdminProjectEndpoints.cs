@@ -41,7 +41,7 @@ public static class AdminProjectEndpoints
                 ? Results.Ok(ToDetail(p))
                 : Results.NotFound());
 
-        g.MapPost("/projects", async (CreateProjectRequest req, AppDbContext db, Passwords passwords) =>
+        g.MapPost("/projects", async (CreateProjectRequest req, AppDbContext db, Passwords passwords, DriveSync sync) =>
         {
             var errors = new List<string>();
             if (!Validation.Length(req.Title, 1, 80)) errors.Add("title");
@@ -66,6 +66,7 @@ public static class AdminProjectEndpoints
             };
             db.Projects.Add(project);
             await db.SaveChangesAsync();
+            sync.Wake(); // creates its Google Drive folder
             return Results.Created($"/api/admin/projects/{project.Id}", ToDetail(project));
         });
 

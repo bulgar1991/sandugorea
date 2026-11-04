@@ -4,7 +4,7 @@ using Sandugorea.Api.Data;
 namespace Sandugorea.Api.Services;
 
 /// <summary>
-/// Moves original photos from the server's disk to Google Drive, one at a time, in the
+/// Creates each project's folder in Google Drive and moves original photos from the server's disk to Google Drive, one at a time, in the
 /// background. An upload lands on disk first (thumb + preview are made there and stay there);
 /// this then copies the original to the project's Drive folder and deletes the local copy.
 /// Until that has happened the original is simply served from disk, so nothing waits on it.
@@ -65,13 +65,24 @@ public sealed class DriveSync(
         }
     }
 
-    /// <summary>Moves one photo. False when there's nothing (left) to move.</summary>
+    /// <summary>Creates one missing project folder or moves one photo. False when there's nothing left to do.</summary>
     internal async Task<bool> MoveNextAsync(CancellationToken ct)
     {
         if (!await drive.IsConnectedAsync(ct)) return false;
 
         using var scope = scopes.CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+        // Every project gets its Drive folder right away, even before it has photos.
+        var withoutFolder = await db.Projects.Where(p => p.DriveFolderId == null)
+            .OrderBy(p => p.CreatedAt).FirstOrDefaultAsync(ct);
+        if (withoutFolder is not null)
+        {
+            await drive.EnsureProjectFolderAsync(db, withoutFolder, ct);
+            logger.LogInformation("Created Drive folder for project {Title}", withoutFolder.Title);
+            return true;
+        }
+
         var photo = await db.Photos.Include(p => p.Project)
             .Where(p => p.DriveFileId == null)
             .OrderBy(p => p.UploadedAt)

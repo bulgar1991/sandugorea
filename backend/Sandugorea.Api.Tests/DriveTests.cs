@@ -110,8 +110,17 @@ public sealed class DriveTests : IDisposable
         var local = Directory.GetFiles(Path.Combine(_factory.Root, "projects", Guid.Parse(projectId).ToString("N"), "original")).Single();
         Assert.Equal(1, (await Json(await admin.GetAsync("/api/admin/drive"))).GetProperty("pendingPhotos").GetInt32());
 
+        // A project without photos still gets its folder.
+        await Json(await admin.PostAsJsonAsync("/api/admin/projects", new
+        {
+            title = "Empty Shoot", date = "2026-11-01", customerName = "Max",
+            customerEmail = "max@example.com", language = "de", username = "max.empty", password = "Customer-Pass-1",
+        }));
+
         await Connect(admin);
         var status = await WaitUntilMoved(admin);
+        for (var i = 0; i < 50 && !_google.Items.Values.Any(f => f.Name == "Empty Shoot · 2026-11-01"); i++) await Task.Delay(100);
+        Assert.Contains(_google.Items.Values, f => f.Folder && f.Name == "Empty Shoot · 2026-11-01");
         Assert.Equal(1, status.GetProperty("photosInDrive").GetInt32());
 
         // In Drive: Sandugorea Fotos / Family Day · 2026-10-04 / IMG_0001.jpg - and gone from disk.
